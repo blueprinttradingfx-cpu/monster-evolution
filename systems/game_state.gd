@@ -12,7 +12,8 @@ enum Screen {
 	COLLECTION,
 	CREATURE_DETAIL,
 	SHOP,
-	SETTINGS
+	SETTINGS,
+	DAILY_REWARD
 }
 
 signal screen_changed(new_screen: Screen, extra: Dictionary)

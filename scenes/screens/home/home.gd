@@ -26,6 +26,8 @@ func _ready() -> void:
 	collection_tab.pressed.connect(func(): _on_tab_pressed("collection"))
 	shop_tab.pressed.connect(func(): _on_tab_pressed("shop"))
 	settings_tab.pressed.connect(func(): _on_tab_pressed("settings"))
+	if SaveSystem.check_daily_reward():
+		GameState.go_to(GameState.Screen.DAILY_REWARD)
 
 func set_coins(amount: int) -> void:
 	coins_label.text = str(amount)

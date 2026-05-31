@@ -205,6 +205,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
+groups = ["home_screen"]
 
 [node name="Background" type="ColorRect" parent="." unique_id=854192006]
 layout_mode = 1

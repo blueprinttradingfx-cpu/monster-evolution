@@ -16,7 +16,8 @@ func _ready() -> void:
 		GameState.Screen.COLLECTION: "res://scenes/screens/collection/collection.tscn",
 		GameState.Screen.CREATURE_DETAIL: "res://scenes/screens/creature-detail/creature-detail.tscn",
 		GameState.Screen.SHOP: "res://scenes/screens/shop/shop.tscn",
-		GameState.Screen.SETTINGS: "res://scenes/screens/settings/settings.tscn"
+		GameState.Screen.SETTINGS: "res://scenes/screens/settings/settings.tscn",
+		GameState.Screen.DAILY_REWARD: "res://scenes/overlays/daily-reward/daily-reward.tscn"
 	}
 	GameState.screen_changed.connect(_on_screen_changed)
 
@@ -24,7 +25,7 @@ func _on_screen_changed(screen: GameState.Screen, extra: Dictionary) -> void:
 	go_to(screen, extra)
 
 func go_to(screen: GameState.Screen, extra: Dictionary = {}) -> void:
-	if screen in [GameState.Screen.RESULTS]:
+	if screen in [GameState.Screen.RESULTS, GameState.Screen.DAILY_REWARD]:
 		var overlay_path: String = SCENE_MAP.get(screen, "")
 		if overlay_path != "":
 			push_overlay(load(overlay_path))
