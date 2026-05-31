@@ -1,0 +1,161 @@
+[gd_scene format=3 uid="uid://c07bgwue2hhqe"]
+
+[ext_resource type="Script" uid="uid://7j6b2b8rpjlc" path="res://scenes/screens/splash/splash.gd" id="1_splash_script"]
+[ext_resource type="Texture2D" uid="uid://rjwelh2didqw" path="res://assets/sprites/merge_memory_monsters_game_logo.png" id="2_logo_texture"]
+
+[node name="SplashScene" type="Control" unique_id=1264121477]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_splash_script")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1751979962]
+
+[node name="Background" type="ColorRect" parent="CanvasLayer" unique_id=343762016]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.972549, 0.976471, 0.980392, 1)
+
+[node name="Atmosphere" type="CanvasLayer" parent="CanvasLayer" unique_id=677824367]
+
+[node name="PurpleBlob" type="ColorRect" parent="CanvasLayer/Atmosphere" unique_id=1443754874]
+offset_left = -160.0
+offset_top = -160.0
+offset_right = 480.0
+offset_bottom = 480.0
+color = Color(0.654902, 0.545098, 0.980392, 0.1)
+
+[node name="GreenBlob" type="ColorRect" parent="CanvasLayer/Atmosphere" unique_id=510343636]
+offset_left = 640.0
+offset_top = 400.0
+offset_right = 1280.0
+offset_bottom = 1040.0
+color = Color(0.203922, 0.827451, 0.596078, 0.1)
+
+[node name="YellowBlob" type="ColorRect" parent="CanvasLayer/Atmosphere" unique_id=1568288729]
+offset_left = 160.0
+offset_top = 800.0
+offset_right = 480.0
+offset_bottom = 1120.0
+color = Color(0.992157, 0.878431, 0.278431, 0.15)
+
+[node name="MainContent" type="VBoxContainer" parent="CanvasLayer" unique_id=1908484945]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -350.0
+offset_right = 250.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LogoArea" type="CenterContainer" parent="CanvasLayer/MainContent" unique_id=450715495]
+custom_minimum_size = Vector2(0, 440)
+layout_mode = 2
+
+[node name="Logo" type="TextureRect" parent="CanvasLayer/MainContent/LogoArea" unique_id=1771748368]
+layout_mode = 2
+texture = ExtResource("2_logo_texture")
+
+[node name="TitleArea" type="VBoxContainer" parent="CanvasLayer/MainContent" unique_id=67237754]
+custom_minimum_size = Vector2(400, 80)
+layout_mode = 2
+
+[node name="Subtitle" type="Label" parent="CanvasLayer/MainContent/TitleArea" unique_id=1154271857]
+modulate = Color(0.286275, 0.266667, 0.329412, 0.7)
+custom_minimum_size = Vector2(400, 54)
+layout_mode = 2
+theme_type_variation = &"BodyMedium"
+text = "A World of Tiny Wonders Awaits"
+horizontal_alignment = 1
+autowrap_trim_flags = 0
+
+[node name="LoadingArea" type="VBoxContainer" parent="CanvasLayer/MainContent" unique_id=320578169]
+layout_mode = 2
+
+[node name="ProgressBarContainer" type="PanelContainer" parent="CanvasLayer/MainContent/LoadingArea" unique_id=397159794]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+
+[node name="ProgressBarBg" type="ColorRect" parent="CanvasLayer/MainContent/LoadingArea/ProgressBarContainer" unique_id=1995928590]
+layout_mode = 2
+color = Color(0.952941, 0.956863, 0.960784, 1)
+
+[node name="ProgressBarFill" type="ColorRect" parent="CanvasLayer/MainContent/LoadingArea/ProgressBarContainer/ProgressBarBg" unique_id=1446008585]
+layout_mode = 0
+offset_right = 120.0
+color = Color(0.203922, 0.827451, 0.596078, 1)
+
+[node name="ProgressSparkle" type="ColorRect" parent="CanvasLayer/MainContent/LoadingArea/ProgressBarContainer/ProgressBarBg/ProgressBarFill" unique_id=1386833338]
+layout_mode = 0
+offset_left = -16.0
+offset_top = -4.0
+offset_bottom = 4.0
+color = Color(1, 1, 1, 0.5)
+
+[node name="LoadingInfo" type="HBoxContainer" parent="CanvasLayer/MainContent/LoadingArea" unique_id=1043374188]
+layout_mode = 2
+
+[node name="SpinIcon" type="Label" parent="CanvasLayer/MainContent/LoadingArea/LoadingInfo" unique_id=1240684324]
+custom_minimum_size = Vector2(20, 20)
+layout_direction = 1
+layout_mode = 2
+theme_type_variation = &"BodyMedium"
+text = "🔄"
+horizontal_alignment = 1
+
+[node name="LoadingText" type="Label" parent="CanvasLayer/MainContent/LoadingArea/LoadingInfo" unique_id=111283390]
+layout_mode = 2
+theme_type_variation = &"LabelBold"
+text = "Loading..."
+
+[node name="FooterIcons" type="HBoxContainer" parent="CanvasLayer" unique_id=554032414]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -140.0
+offset_right = 100.0
+offset_bottom = -48.0
+grow_horizontal = 2
+
+[node name="Icon1" type="PanelContainer" parent="CanvasLayer/FooterIcons" unique_id=1265121623]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Icon1Label" type="Label" parent="CanvasLayer/FooterIcons/Icon1" unique_id=1361092025]
+layout_mode = 2
+text = "🥚"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon2" type="PanelContainer" parent="CanvasLayer/FooterIcons" unique_id=1437662998]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Icon2Label" type="Label" parent="CanvasLayer/FooterIcons/Icon2" unique_id=2034509207]
+layout_mode = 2
+text = "🧩"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon3" type="PanelContainer" parent="CanvasLayer/FooterIcons" unique_id=1207477704]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Icon3Label" type="Label" parent="CanvasLayer/FooterIcons/Icon3" unique_id=1969605492]
+layout_mode = 2
+text = "🐾"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,32 @@
+{
+  "egg": {
+    "name": "Egg",
+    "tier": 1,
+    "next": "baby_dino"
+  },
+  "baby_dino": {
+    "name": "Baby Dino",
+    "tier": 2,
+    "next": "raptor"
+  },
+  "raptor": {
+    "name": "Raptor",
+    "tier": 3,
+    "next": "t_rex"
+  },
+  "t_rex": {
+    "name": "T-Rex",
+    "tier": 4,
+    "next": "dragon"
+  },
+  "dragon": {
+    "name": "Dragon",
+    "tier": 5,
+    "next": "lava_dragon"
+  },
+  "lava_dragon": {
+    "name": "Lava Dragon",
+    "tier": 6,
+    "next": null
+  }
+}

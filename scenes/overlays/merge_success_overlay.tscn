@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=3 uid="uid://sc_merge_success_overlay"]
+
+[ext_resource type="Script" path="res://scenes/overlays/merge_success_overlay.gd" id="1_script"]
+
+[node name="MergeSuccessOverlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DimBackground" type="ColorRect" parent="CanvasLayer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7)
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -200.0
+offset_right = 150.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Merge Complete!"
+horizontal_alignment = 1
+theme_type_variation = "HeaderMedium"
+
+[node name="CreatureReveal" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_type_variation = "HeaderMedium"
+
+[node name="NameLabel" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+text = ""
+horizontal_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+custom_minimum_size = Vector2(0, 60)

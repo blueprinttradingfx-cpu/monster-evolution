@@ -1,0 +1,137 @@
+[gd_scene format=3 uid="uid://c12m13m1cwdcf"]
+
+[ext_resource type="Script" uid="uid://dwqyms5dvnde0" path="res://scenes/screens/tap-to-start/tap-to-start.gd" id="1_tap_script"]
+[ext_resource type="Texture2D" uid="uid://brujbmxxuukfx" path="res://assets/sprites/dino.png" id="2_dino"]
+[ext_resource type="Texture2D" uid="uid://rjwelh2didqw" path="res://assets/sprites/merge_memory_monsters_game_logo.png" id="3_logo"]
+
+[node name="TitleScreen" type="Control" unique_id=62147707]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tap_script")
+
+[node name="BackgroundLayer" type="Control" parent="." unique_id=760333987]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PurpleBlob" type="ColorRect" parent="BackgroundLayer" unique_id=1866755224]
+layout_mode = 0
+offset_left = -80.0
+offset_top = 300.0
+offset_right = 180.0
+offset_bottom = 620.0
+color = Color(0.655, 0.545, 0.98, 0.2)
+
+[node name="GreenBlob" type="ColorRect" parent="BackgroundLayer" unique_id=1594111471]
+layout_mode = 0
+offset_left = 900.0
+offset_top = 1000.0
+offset_right = 1200.0
+offset_bottom = 1300.0
+color = Color(0.204, 0.827, 0.6, 0.2)
+
+[node name="YellowBlob" type="ColorRect" parent="BackgroundLayer" unique_id=258362877]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 1500.0
+offset_right = 500.0
+offset_bottom = 1700.0
+color = Color(0.992, 0.878, 0.278, 0.2)
+
+[node name="MainContainer" type="MarginContainer" parent="." unique_id=768798801]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 64.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RootVBox" type="VBoxContainer" parent="MainContainer" unique_id=1336319739]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HeaderSection" type="VBoxContainer" parent="MainContainer/RootVBox" unique_id=214062834]
+layout_mode = 2
+alignment = 1
+
+[node name="Logo" type="TextureRect" parent="MainContainer/RootVBox/HeaderSection" unique_id=898056081]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+texture = ExtResource("3_logo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CenterSection" type="CenterContainer" parent="MainContainer/RootVBox" unique_id=1033651310]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CreatureContainer" type="Control" parent="MainContainer/RootVBox/CenterSection" unique_id=426294204]
+custom_minimum_size = Vector2(320, 320)
+layout_mode = 2
+
+[node name="SparkleLeft" type="TextureRect" parent="MainContainer/RootVBox/CenterSection/CreatureContainer" unique_id=1792367985]
+layout_mode = 0
+
+[node name="SparkleRight" type="TextureRect" parent="MainContainer/RootVBox/CenterSection/CreatureContainer" unique_id=1981444908]
+layout_mode = 0
+
+[node name="MonsterImage" type="TextureRect" parent="MainContainer/RootVBox/CenterSection/CreatureContainer" unique_id=118118615]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("2_dino")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FloorShadow" type="ColorRect" parent="MainContainer/RootVBox/CenterSection/CreatureContainer" unique_id=1875494922]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 280.0
+offset_right = 270.0
+offset_bottom = 304.0
+color = Color(0, 0, 0, 0.05)
+
+[node name="FooterSection" type="VBoxContainer" parent="MainContainer/RootVBox" unique_id=182925888]
+layout_mode = 2
+alignment = 1
+
+[node name="PlayButton" type="Button" parent="MainContainer/RootVBox/FooterSection" unique_id=108581381]
+custom_minimum_size = Vector2(280, 64)
+layout_mode = 2
+text = "PLAY"
+
+[node name="TapLabel" type="Label" parent="MainContainer/RootVBox/FooterSection" unique_id=1322875894]
+layout_mode = 2
+text = "Tap to begin"
+horizontal_alignment = 1
+
+[node name="BottomButtons" type="HBoxContainer" parent="MainContainer/RootVBox/FooterSection" unique_id=1437041195]
+layout_mode = 2
+alignment = 1
+
+[node name="SettingsButton" type="Button" parent="MainContainer/RootVBox/FooterSection/BottomButtons" unique_id=61051174]
+layout_mode = 2
+text = "⚙"
+
+[node name="AudioButton" type="Button" parent="MainContainer/RootVBox/FooterSection/BottomButtons" unique_id=285696380]
+layout_mode = 2
+text = "🔊"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1584302689]

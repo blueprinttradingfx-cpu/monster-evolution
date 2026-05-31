@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://sc_shop"]
+
+[ext_resource type="Script" path="res://scenes/screens/shop/shop.gd" id="1_shop_script"]
+
+[node name="ShopScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_shop_script")
+
+[node name="SafeArea" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SafeArea"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="SafeArea/VBoxContainer"]
+layout_mode = 2
+text = "Shop"
+theme_type_variation = "HeaderMedium"
+horizontal_alignment = 1
+
+[node name="CoinsLabel" type="Label" parent="SafeArea/VBoxContainer"]
+layout_mode = 2
+text = "Your Coins: 0"
+horizontal_alignment = 1
+
+[node name="BuyEggButton" type="Button" parent="SafeArea/VBoxContainer"]
+layout_mode = 2
+text = "Buy 1 Egg for 20 Coins"
+custom_minimum_size = Vector2(0, 80)
+
+[node name="BuyCoinsButton" type="Button" parent="SafeArea/VBoxContainer"]
+layout_mode = 2
+text = "Watch Ad for 50 Coins"
+custom_minimum_size = Vector2(0, 80)
+
+[node name="BackButton" type="Button" parent="SafeArea/VBoxContainer"]
+layout_mode = 2
+text = "Back"
+custom_minimum_size = Vector2(0, 80)
