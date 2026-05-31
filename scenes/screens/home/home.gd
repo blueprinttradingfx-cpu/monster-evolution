@@ -6,34 +6,28 @@ extends Control
 @onready var play_button: Button = $SafeArea/Main/ActionButtons/PlayButton
 @onready var merge_button: Button = $SafeArea/Main/ActionButtons/GridButtons/MergeButton
 @onready var collection_button: Button = $SafeArea/Main/ActionButtons/GridButtons/CollectionButton
-@onready var coins_label: Label = $SafeArea/Main/TopAppBar/TopBarContent/CurrencyContainer/CurrencyContent/Coins/CoinsLabel
-@onready var eggs_label: Label = $SafeArea/Main/TopAppBar/TopBarContent/CurrencyContainer/CurrencyContent/Eggs/EggsLabel
+@onready var top_appbar: TopAppBar = $TopAppBar
 @onready var progress_title: Label = $SafeArea/Main/CreatureSection/ProgressSection/ProgressHeader/ProgressTitle
 @onready var progress_value: Label = $SafeArea/Main/CreatureSection/ProgressSection/ProgressHeader/ProgressValue
-@onready var play_tab: Button = $SafeArea/Main/BottomNav/BottomNavContent/PlayTab
-@onready var merge_tab: Button = $SafeArea/Main/BottomNav/BottomNavContent/MergeTab
-@onready var collection_tab: Button = $SafeArea/Main/BottomNav/BottomNavContent/CollectionTab
-@onready var shop_tab: Button = $SafeArea/Main/BottomNav/BottomNavContent/ShopTab
-@onready var settings_tab: Button = $SafeArea/Main/BottomNav/BottomNavContent/SettingsTab
+@onready var bottom_nav: BottomNav = $BottomNav
 
 func _ready() -> void:
 	_play_intro_animation()
 	play_button.pressed.connect(_on_play_pressed)
 	merge_button.pressed.connect(_on_merge_pressed)
 	collection_button.pressed.connect(_on_collection_pressed)
-	play_tab.pressed.connect(func(): _on_tab_pressed("play"))
-	merge_tab.pressed.connect(func(): _on_tab_pressed("merge"))
-	collection_tab.pressed.connect(func(): _on_tab_pressed("collection"))
-	shop_tab.pressed.connect(func(): _on_tab_pressed("shop"))
-	settings_tab.pressed.connect(func(): _on_tab_pressed("settings"))
+	bottom_nav.tab_changed.connect(_on_tab_pressed)
+	bottom_nav.start_pressed.connect(_on_play_pressed)
+	bottom_nav.set_active("play")
+	bottom_nav.start_button.visible = true
 	if SaveSystem.check_daily_reward():
 		GameState.go_to(GameState.Screen.DAILY_REWARD)
 
 func set_coins(amount: int) -> void:
-	coins_label.text = str(amount)
+	top_appbar.set_coins(amount)
 
 func set_eggs(amount: int) -> void:
-	eggs_label.text = str(amount)
+	top_appbar.set_eggs(amount)
 
 func set_evolution_progress(current: int, max: int, level: int) -> void:
 	progress_value.text = "LVL " + str(level) + " · " + str(current) + "/" + str(max)
@@ -41,7 +35,7 @@ func set_evolution_progress(current: int, max: int, level: int) -> void:
 	bar_fill.custom_minimum_size.x = bar_fill.get_parent().size.x * progress_percent
 
 func _on_tab_pressed(tab_name: String) -> void:
-	set_active_tab(tab_name)
+	bottom_nav.set_active(tab_name)
 	match tab_name:
 		"play":
 			GameState.go_to(GameState.Screen.MENU)
@@ -55,11 +49,7 @@ func _on_tab_pressed(tab_name: String) -> void:
 			GameState.go_to(GameState.Screen.SETTINGS)
 
 func set_active_tab(tab_name: String) -> void:
-	play_tab.button_pressed = tab_name == "play"
-	merge_tab.button_pressed = tab_name == "merge"
-	collection_tab.button_pressed = tab_name == "collection"
-	shop_tab.button_pressed = tab_name == "shop"
-	settings_tab.button_pressed = tab_name == "settings"
+	bottom_nav.set_active(tab_name)
 
 func _play_intro_animation() -> void:
 	var creature_tween = create_tween()

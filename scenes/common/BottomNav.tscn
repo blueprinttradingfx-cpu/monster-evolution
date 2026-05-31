@@ -2,157 +2,208 @@
 
 [ext_resource type="Script" path="res://scenes/common/BottomNav.gd" id="1_script"]
 
-[sub_resource type="StyleBoxFlat" id="BottomNavPanelStyle"]
+[sub_resource type="StyleBoxFlat" id="start_btn_normal"]
+content_margin_left = 24.0
+content_margin_top = 18.0
+content_margin_right = 24.0
+content_margin_bottom = 18.0
+bg_color = Color(0.42, 0.22, 0.831, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.176, 0.176, 0.176, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.333, 0.086, 0.745, 1)
+shadow_size = 4
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="start_btn_pressed"]
+content_margin_left = 24.0
+content_margin_top = 22.0
+content_margin_right = 24.0
+content_margin_bottom = 14.0
+bg_color = Color(0.42, 0.22, 0.831, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.176, 0.176, 0.176, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="start_btn_hover"]
+content_margin_left = 24.0
+content_margin_top = 18.0
+content_margin_right = 24.0
+content_margin_bottom = 18.0
+bg_color = Color(0.49, 0.27, 0.9, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.176, 0.176, 0.176, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.333, 0.086, 0.745, 1)
+shadow_size = 4
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="bottomnav_style"]
 content_margin_left = 16.0
 content_margin_top = 8.0
 content_margin_right = 16.0
-content_margin_bottom = 24.0
+content_margin_bottom = 16.0
 bg_color = Color(1, 1, 1, 1)
 border_width_top = 4
-border_color = Color(0.176471, 0.176471, 0.176471, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
+border_color = Color(0.176, 0.176, 0.176, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
 
-[sub_resource type="StyleBoxFlat" id="ActiveTabStyle"]
-content_margin_left = 16.0
-content_margin_top = 4.0
-content_margin_right = 16.0
-content_margin_bottom = 4.0
-bg_color = Color(0.517647, 0.333333, 0.937255, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
-[node name="BottomNav" type="PanelContainer"]
-layout_mode = 3
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-custom_minimum_size = Vector2(0, 96)
+[node name="BottomNav" type="Control"]
 script = ExtResource("1_script")
-theme_override_styles/panel = SubResource("BottomNavPanelStyle")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 2
+[node name="StartButton" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 65)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -44.0
+offset_bottom = 24.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("start_btn_normal")
+theme_override_styles/pressed = SubResource("start_btn_pressed")
+theme_override_styles/hover = SubResource("start_btn_hover")
+text = "▶  START"
+
+[node name="BottomNavPanel" type="PanelContainer" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 28.0
+offset_bottom = -11.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 2
+theme_override_styles/panel = SubResource("bottomnav_style")
 
-[node name="PlayTab" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
+[node name="NavHBox" type="HBoxContainer" parent="BottomNavPanel"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/normal = SubResource("ActiveTabStyle")
-toggle_mode = true
-button_pressed = true
-text = "Play"
+theme_override_constants/separation = 0
 
-[node name="PlayTabContent" type="VBoxContainer" parent="HBoxContainer/PlayTab"]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PlayTabIcon" type="Label" parent="HBoxContainer/PlayTab/PlayTabContent"]
+[node name="PlayNav" type="PanelContainer" parent="BottomNavPanel/NavHBox"]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayVBox" type="VBoxContainer" parent="BottomNavPanel/NavHBox/PlayNav"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlayIcon" type="Label" parent="BottomNavPanel/NavHBox/PlayNav/PlayVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
 text = "🎮"
+horizontal_alignment = 1
 
-[node name="PlayTabLabel" type="Label" parent="HBoxContainer/PlayTab/PlayTabContent"]
+[node name="PlayLabel" type="Label" parent="BottomNavPanel/NavHBox/PlayNav/PlayVBox"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "Play"
 horizontal_alignment = 1
 
-[node name="MergeTab" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
+[node name="MergeNav" type="PanelContainer" parent="BottomNavPanel/NavHBox"]
+modulate = Color(1, 1, 1, 0.55)
 layout_mode = 2
-toggle_mode = true
-text = "Merge"
+size_flags_horizontal = 3
 
-[node name="MergeTabContent" type="VBoxContainer" parent="HBoxContainer/MergeTab"]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MergeTabIcon" type="Label" parent="HBoxContainer/MergeTab/MergeTabContent"]
+[node name="MergeVBox" type="VBoxContainer" parent="BottomNavPanel/NavHBox/MergeNav"]
 layout_mode = 2
+alignment = 1
+
+[node name="MergeIcon" type="Label" parent="BottomNavPanel/NavHBox/MergeNav/MergeVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
 text = "🧩"
+horizontal_alignment = 1
 
-[node name="MergeTabLabel" type="Label" parent="HBoxContainer/MergeTab/MergeTabContent"]
+[node name="MergeLabel" type="Label" parent="BottomNavPanel/NavHBox/MergeNav/MergeVBox"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.022979883, 0.022979883, 0.022979883, 1)
+theme_override_font_sizes/font_size = 30
 text = "Merge"
 horizontal_alignment = 1
 
-[node name="CollectionTab" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
+[node name="CollectionNav" type="PanelContainer" parent="BottomNavPanel/NavHBox"]
+modulate = Color(1, 1, 1, 0.55)
 layout_mode = 2
-toggle_mode = true
-text = "Collection"
+size_flags_horizontal = 3
 
-[node name="CollectionTabContent" type="VBoxContainer" parent="HBoxContainer/CollectionTab"]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CollectionTabIcon" type="Label" parent="HBoxContainer/CollectionTab/CollectionTabContent"]
+[node name="CollectionVBox" type="VBoxContainer" parent="BottomNavPanel/NavHBox/CollectionNav"]
 layout_mode = 2
+alignment = 1
+
+[node name="CollectionIcon" type="Label" parent="BottomNavPanel/NavHBox/CollectionNav/CollectionVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
 text = "📚"
+horizontal_alignment = 1
 
-[node name="CollectionTabLabel" type="Label" parent="HBoxContainer/CollectionTab/CollectionTabContent"]
+[node name="CollectionLabel" type="Label" parent="BottomNavPanel/NavHBox/CollectionNav/CollectionVBox"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.04395193, 0.04395193, 0.04395192, 1)
+theme_override_font_sizes/font_size = 30
 text = "Collection"
 horizontal_alignment = 1
 
-[node name="ShopTab" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
+[node name="ShopNav" type="PanelContainer" parent="BottomNavPanel/NavHBox"]
+modulate = Color(1, 1, 1, 0.55)
 layout_mode = 2
-toggle_mode = true
-text = "Shop"
+size_flags_horizontal = 3
 
-[node name="ShopTabContent" type="VBoxContainer" parent="HBoxContainer/ShopTab"]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ShopTabIcon" type="Label" parent="HBoxContainer/ShopTab/ShopTabContent"]
+[node name="ShopVBox" type="VBoxContainer" parent="BottomNavPanel/NavHBox/ShopNav"]
 layout_mode = 2
+alignment = 1
+
+[node name="ShopIcon" type="Label" parent="BottomNavPanel/NavHBox/ShopNav/ShopVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
 text = "🛒"
+horizontal_alignment = 1
 
-[node name="ShopTabLabel" type="Label" parent="HBoxContainer/ShopTab/ShopTabContent"]
+[node name="ShopLabel" type="Label" parent="BottomNavPanel/NavHBox/ShopNav/ShopVBox"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.002136234, 0.002136234, 0.0021362337, 1)
+theme_override_font_sizes/font_size = 30
 text = "Shop"
 horizontal_alignment = 1
 
-[node name="SettingsTab" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
+[node name="SettingsNav" type="PanelContainer" parent="BottomNavPanel/NavHBox"]
+modulate = Color(1, 1, 1, 0.55)
 layout_mode = 2
-toggle_mode = true
-text = "Settings"
+size_flags_horizontal = 3
 
-[node name="SettingsTabContent" type="VBoxContainer" parent="HBoxContainer/SettingsTab"]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SettingsTabIcon" type="Label" parent="HBoxContainer/SettingsTab/SettingsTabContent"]
+[node name="SettingsVBox" type="VBoxContainer" parent="BottomNavPanel/NavHBox/SettingsNav"]
 layout_mode = 2
+alignment = 1
+
+[node name="SettingsIcon" type="Label" parent="BottomNavPanel/NavHBox/SettingsNav/SettingsVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
 text = "⚙️"
+horizontal_alignment = 1
 
-[node name="SettingsTabLabel" type="Label" parent="HBoxContainer/SettingsTab/SettingsTabContent"]
+[node name="SettingsLabel" type="Label" parent="BottomNavPanel/NavHBox/SettingsNav/SettingsVBox"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.032967977, 0.032967992, 0.03296798, 1)
+theme_override_font_sizes/font_size = 30
 text = "Settings"
 horizontal_alignment = 1

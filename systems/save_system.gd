@@ -118,9 +118,6 @@ func get_data() -> Dictionary:
 	return _save_data.duplicate()
 
 func add_coins(amount: int) -> void:
-	if amount < 0:
-		push_warning("Tried to add negative coins: %d" % amount)
-		return
 	_save_data["economy"]["coins"] += amount
 
 func add_eggs(amount: int) -> void:

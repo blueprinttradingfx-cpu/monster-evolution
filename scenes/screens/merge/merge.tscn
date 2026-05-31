@@ -1,91 +1,485 @@
-[gd_scene load_steps=2 format=3 uid="uid://sc_merge"]
+[gd_scene load_steps=4 format=3 uid="uid://merge_screen_scene"]
 
-[ext_resource type="Script" path="res://scenes/screens/merge/merge.gd" id="1_script"]
+[ext_resource type="Script" path="res://scenes/screens/merge/merge.gd" id="3_script"]
+[ext_resource type="PackedScene" uid="uid://common_bottomnav" path="res://scenes/common/BottomNav.tscn" id="4_bottomnav"]
+[ext_resource type="PackedScene" uid="uid://common_topappbar" path="res://scenes/common/TopAppBar.tscn" id="5_topappbar"]
 
-[node name="MergeScene" type="Control"]
+
+
+[sub_resource type="StyleBoxFlat" id="merge_card_style"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.952941, 0.956863, 0.960784, 1.0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.176471, 0.176471, 0.176471, 1.0)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+shadow_color = Color(0.176471, 0.176471, 0.176471, 0.2)
+shadow_size = 4
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="slot_filled_style"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1.0, 1.0, 1.0, 1.0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.796078, 0.764706, 0.843137, 1.0)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="slot_empty_style"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1.0, 1.0, 1.0, 1.0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.796078, 0.764706, 0.843137, 1.0)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="preview_box_style"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(1.0, 1.0, 1.0, 0.4)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.419608, 0.219608, 0.831373, 0.2)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="merge_btn_normal"]
+content_margin_left = 48.0
+content_margin_top = 16.0
+content_margin_right = 48.0
+content_margin_bottom = 16.0
+bg_color = Color(0.419608, 0.219608, 0.831373, 1.0)
+border_width_bottom = 4
+border_color = Color(0.333333, 0.0862745, 0.745098, 1.0)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+shadow_color = Color(0.333333, 0.0862745, 0.745098, 1.0)
+shadow_size = 4
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="merge_btn_hover"]
+content_margin_left = 48.0
+content_margin_top = 16.0
+content_margin_right = 48.0
+content_margin_bottom = 16.0
+bg_color = Color(0.490196, 0.270588, 0.901961, 1.0)
+border_width_bottom = 4
+border_color = Color(0.333333, 0.0862745, 0.745098, 1.0)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+shadow_color = Color(0.333333, 0.0862745, 0.745098, 1.0)
+shadow_size = 4
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="merge_btn_pressed"]
+content_margin_left = 48.0
+content_margin_top = 20.0
+content_margin_right = 48.0
+content_margin_bottom = 12.0
+bg_color = Color(0.419608, 0.219608, 0.831373, 1.0)
+border_width_bottom = 0
+border_color = Color(0.333333, 0.0862745, 0.745098, 1.0)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+shadow_size = 0
+
+[sub_resource type="StyleBoxFlat" id="slots_badge_style"]
+content_margin_left = 12.0
+content_margin_top = 4.0
+content_margin_right = 12.0
+content_margin_bottom = 4.0
+bg_color = Color(0.882353, 0.886275, 0.890196, 1.0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.176471, 0.176471, 0.176471, 1.0)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="inv_slot_style"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1.0, 1.0, 1.0, 1.0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.176471, 0.176471, 0.176471, 1.0)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.176471, 0.176471, 0.176471, 0.25)
+shadow_size = 4
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="inv_slot_selected_style"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1.0, 1.0, 1.0, 1.0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.419608, 0.219608, 0.831373, 1.0)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.419608, 0.219608, 0.831373, 0.5)
+shadow_size = 6
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="StyleBoxFlat" id="inv_slot_empty_style"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.905882, 0.909804, 0.913725, 1.0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.796078, 0.764706, 0.843137, 1.0)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="MergeScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_script")
+script = ExtResource("3_script")
 
-[node name="SafeArea" type="MarginContainer" parent="."]
+[node name="TopAppBar" parent="." instance=ExtResource("5_topappbar")]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_top = 72
+offset_bottom = -148
+horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SafeArea"]
-layout_mode = 2
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TopBar" type="HBoxContainer" parent="SafeArea/VBoxContainer"]
-layout_mode = 2
-
-[node name="CoinsLabel" type="Label" parent="SafeArea/VBoxContainer/TopBar"]
+[node name="ContentVBox" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Coins: 0"
+theme_override_constants/separation = 24
+custom_minimum_size = Vector2(360, 0)
 
-[node name="BackButton" type="Button" parent="SafeArea/VBoxContainer/TopBar"]
+[node name="MergeAreaCard" type="PanelContainer" parent="ScrollContainer/ContentVBox"]
 layout_mode = 2
-text = "Back"
-custom_minimum_size = Vector2(80, 40)
+theme_override_styles/panel = SubResource("merge_card_style")
 
-[node name="InventoryGrid" type="GridContainer" parent="SafeArea/VBoxContainer"]
+[node name="MergeAreaVBox" type="VBoxContainer" parent="ScrollContainer/ContentVBox/MergeAreaCard"]
 layout_mode = 2
+theme_override_constants/separation = 20
+size_flags_horizontal = 3
+
+[node name="DragHint" type="Label" parent="ScrollContainer/ContentVBox/MergeAreaCard/MergeAreaVBox"]
+layout_mode = 2
+text = "DRAG TO MERGE"
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.286275, 0.266667, 0.329412, 0.7)
+horizontal_alignment = 1
+
+[node name="SlotsRow" type="HBoxContainer" parent="ScrollContainer/ContentVBox/MergeAreaCard/MergeAreaVBox"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 16
+size_flags_horizontal = 3
+
+[node name="Slot1" type="PanelContainer" parent="ScrollContainer/ContentVBox/MergeAreaCard/MergeAreaVBox/SlotsRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(96, 96)
+theme_override_styles/panel = SubResource("slot_filled_style")
+
+[node name="Slot1Monster" type="Label" parent="ScrollContainer/ContentVBox/MergeAreaCard/MergeAreaVBox/SlotsRow/Slot1"]
+layout_mode = 2
+text = "🟢"
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+vertical_alignment = 1
+size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="PlusCol" type="VBoxContainer" parent="ScrollContainer/ContentVBox/MergeAreaCard/MergeAreaVBox/SlotsRow"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 4
+size_flags_vertical = 4
+
+[node name="PlusIcon" type="Label" parent="ScrollContainer/ContentVBox/MergeAreaCard/MergeAreaVBox/SlotsRow/PlusCol"]
+layout_mode = 2
+text = "+"
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(0.482353, 0.454902, 0.52549, 1.0)
+horizontal_alignment = 1
+
+[node name="PlusLine" type="ColorRect" parent="ScrollContainer/ContentVBox/MergeAreaCard/MergeAreaVBox/SlotsRow/PlusCol"]
+layout_mode = 2
+custom_minimum_size = Vector2(32, 4)
+color = Color(0.796078, 0.764706, 0.843137, 1.0)
+size_flags_horizontal = 4
+
+[node name="Slot2" type="PanelContainer" parent="ScrollContainer/ContentVBox/MergeAreaCard/MergeAreaVBox/SlotsRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(96, 96)
+theme_override_styles/panel = SubResource("slot_empty_style")
+
+[node name="Slot2Empty" type="Label" parent="ScrollContainer/ContentVBox/MergeAreaCard/MergeAreaVBox/SlotsRow/Slot2"]
+layout_mode = 2
+text = "🧩"
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(0.482353, 0.454902, 0.52549, 0.4)
+horizontal_alignment = 1
+vertical_alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PreviewBox" type="PanelContainer" parent="ScrollContainer/ContentVBox/MergeAreaCard/MergeAreaVBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("preview_box_style")
+
+[node name="PreviewVBox" type="VBoxContainer" parent="ScrollContainer/ContentVBox/MergeAreaCard/MergeAreaVBox/PreviewBox"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 8
+size_flags_horizontal = 3
+
+[node name="PreviewIcon" type="Label" parent="ScrollContainer/ContentVBox/MergeAreaCard/MergeAreaVBox/PreviewBox/PreviewVBox"]
+layout_mode = 2
+text = "🐾"
+theme_override_font_sizes/font_size = 72
+theme_override_colors/font_color = Color(0.419608, 0.219608, 0.831373, 0.2)
+horizontal_alignment = 1
+custom_minimum_size = Vector2(128, 128)
+vertical_alignment = 1
+
+[node name="PreviewLabel" type="Label" parent="ScrollContainer/ContentVBox/MergeAreaCard/MergeAreaVBox/PreviewBox/PreviewVBox"]
+layout_mode = 2
+text = "Next: Sparkle Blob"
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.419608, 0.219608, 0.831373, 1.0)
+horizontal_alignment = 1
+
+[node name="MergeButton" type="Button" parent="ScrollContainer/ContentVBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+custom_minimum_size = Vector2(220, 60)
+text = "✨  MERGE"
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("merge_btn_normal")
+theme_override_styles/hover = SubResource("merge_btn_hover")
+theme_override_styles/pressed = SubResource("merge_btn_pressed")
+
+[node name="InventorySection" type="VBoxContainer" parent="ScrollContainer/ContentVBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="InventoryHeader" type="HBoxContainer" parent="ScrollContainer/ContentVBox/InventorySection"]
+layout_mode = 2
+
+[node name="InventoryTitle" type="Label" parent="ScrollContainer/ContentVBox/InventorySection/InventoryHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Your Monsters"
+theme_override_font_sizes/font_size = 24
+
+[node name="SlotsBadge" type="PanelContainer" parent="ScrollContainer/ContentVBox/InventorySection/InventoryHeader"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("slots_badge_style")
+
+[node name="SlotsLabel" type="Label" parent="ScrollContainer/ContentVBox/InventorySection/InventoryHeader/SlotsBadge"]
+layout_mode = 2
+text = "8 / 24 SLOTS"
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.286275, 0.266667, 0.329412, 1.0)
+vertical_alignment = 1
+
+[node name="InventoryGrid" type="GridContainer" parent="ScrollContainer/ContentVBox/InventorySection"]
+layout_mode = 2
 columns = 4
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
 
-[node name="MergeArea" type="HBoxContainer" parent="SafeArea/VBoxContainer"]
+[node name="MonsterSlot0" type="PanelContainer" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid"]
 layout_mode = 2
+custom_minimum_size = Vector2(72, 72)
+theme_override_styles/panel = SubResource("inv_slot_style")
 
-[node name="SlotA" type="Panel" parent="SafeArea/VBoxContainer/MergeArea"]
+[node name="Slot0Label" type="Label" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid/MonsterSlot0"]
 layout_mode = 2
-size_flags_horizontal = 3
-custom_minimum_size = Vector2(0, 80)
-
-[node name="SlotALabel" type="Label" parent="SafeArea/VBoxContainer/MergeArea/SlotA"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Slot A"
+text = "🟢"
+theme_override_font_sizes/font_size = 36
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="MergeButton" type="Button" parent="SafeArea/VBoxContainer/MergeArea"]
-layout_mode = 2
-text = "Merge"
-custom_minimum_size = Vector2(0, 80)
-
-[node name="SlotB" type="Panel" parent="SafeArea/VBoxContainer/MergeArea"]
-layout_mode = 2
 size_flags_horizontal = 3
-custom_minimum_size = Vector2(0, 80)
+size_flags_vertical = 3
 
-[node name="SlotBLabel" type="Label" parent="SafeArea/VBoxContainer/MergeArea/SlotB"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Slot B"
+[node name="MonsterSlot1" type="PanelContainer" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(72, 72)
+theme_override_styles/panel = SubResource("inv_slot_selected_style")
+
+[node name="Slot1Label" type="Label" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid/MonsterSlot1"]
+layout_mode = 2
+text = "🟢"
+theme_override_font_sizes/font_size = 36
 horizontal_alignment = 1
 vertical_alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="PreviewLabel" type="Label" parent="SafeArea/VBoxContainer"]
+[node name="MonsterSlot2" type="PanelContainer" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid"]
 layout_mode = 2
-text = ""
+custom_minimum_size = Vector2(72, 72)
+theme_override_styles/panel = SubResource("inv_slot_style")
+
+[node name="Slot2Label" type="Label" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid/MonsterSlot2"]
+layout_mode = 2
+text = "🥚"
+theme_override_font_sizes/font_size = 36
 horizontal_alignment = 1
+vertical_alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MonsterSlot3" type="PanelContainer" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(72, 72)
+theme_override_styles/panel = SubResource("inv_slot_empty_style")
+
+[node name="Slot3Label" type="Label" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid/MonsterSlot3"]
+layout_mode = 2
+text = "+"
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(0.796078, 0.764706, 0.843137, 1.0)
+horizontal_alignment = 1
+vertical_alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MonsterSlot4" type="PanelContainer" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(72, 72)
+modulate = Color(0.6, 0.6, 0.6, 0.6)
+theme_override_styles/panel = SubResource("inv_slot_style")
+
+[node name="Slot4Label" type="Label" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid/MonsterSlot4"]
+layout_mode = 2
+text = "🟢"
+theme_override_font_sizes/font_size = 36
+horizontal_alignment = 1
+vertical_alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MonsterSlot5" type="PanelContainer" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(72, 72)
+theme_override_styles/panel = SubResource("inv_slot_empty_style")
+
+[node name="Slot5Label" type="Label" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid/MonsterSlot5"]
+layout_mode = 2
+text = "+"
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(0.796078, 0.764706, 0.843137, 1.0)
+horizontal_alignment = 1
+vertical_alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MonsterSlot6" type="PanelContainer" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(72, 72)
+theme_override_styles/panel = SubResource("inv_slot_empty_style")
+
+[node name="Slot6Label" type="Label" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid/MonsterSlot6"]
+layout_mode = 2
+text = "+"
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(0.796078, 0.764706, 0.843137, 1.0)
+horizontal_alignment = 1
+vertical_alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MonsterSlot7" type="PanelContainer" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(72, 72)
+theme_override_styles/panel = SubResource("inv_slot_empty_style")
+
+[node name="Slot7Label" type="Label" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid/MonsterSlot7"]
+layout_mode = 2
+text = "+"
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(0.796078, 0.764706, 0.843137, 1.0)
+horizontal_alignment = 1
+vertical_alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BottomNav" parent="." instance=ExtResource("4_bottomnav")]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -148
+grow_horizontal = 2
+grow_vertical = 0

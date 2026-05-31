@@ -1,54 +1,631 @@
-[gd_scene load_steps=2 format=3 uid="uid://sc_shop"]
+[gd_scene load_steps=3 format=3 uid="uid://shop_screen"]
 
-[ext_resource type="Script" path="res://scenes/screens/shop/shop.gd" id="1_shop_script"]
+[ext_resource type="Script" path="res://scenes/screens/shop/shop.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://common_topappbar" path="res://scenes/common/TopAppBar.tscn" id="2_topappbar"]
+[ext_resource type="PackedScene" uid="uid://common_bottomnav" path="res://scenes/common/BottomNav.tscn" id="3_bottomnav"]
 
-[node name="ShopScene" type="Control"]
+[node name="ShopScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_shop_script")
+script = ExtResource("1_script")
 
-[node name="SafeArea" type="MarginContainer" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+color = Color(0.973, 0.976, 0.980, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SafeArea"]
-layout_mode = 2
+[node name="TopAppBar" parent="." instance=ExtResource("2_topappbar")]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="MainLayout" type="VBoxContainer" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 72
+offset_bottom = -148
 grow_horizontal = 2
 grow_vertical = 2
+add_theme_constant_override "separation" = 0
 
-[node name="TitleLabel" type="Label" parent="SafeArea/VBoxContainer"]
+; ── SCROLL CONTAINER ─────────────────────────────────────────────────────────
+[node name="ScrollContainer" type="ScrollContainer" parent="MainLayout"]
 layout_mode = 2
-text = "Shop"
-theme_type_variation = "HeaderMedium"
+size_flags_vertical = 3
+
+[node name="ContentVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+add_theme_constant_override "separation" = 0
+
+[node name="TopPad" type="Control" parent="MainLayout/ScrollContainer/ContentVBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 8)
+
+; ── FREE BONUS BANNER ────────────────────────────────────────────────────────
+[node name="FreeBonusSection" type="MarginContainer" parent="MainLayout/ScrollContainer/ContentVBox"]
+layout_mode = 2
+add_theme_constant_override "margin_left" = 24
+add_theme_constant_override "margin_right" = 24
+add_theme_constant_override "margin_top" = 8
+add_theme_constant_override "margin_bottom" = 0
+
+[node name="FreeBonusCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/FreeBonusSection"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 110)
+name = "FreeBonusCard"
+
+[node name="FreeBonusHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/FreeBonusSection/FreeBonusCard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24
+offset_top = 16
+offset_right = -24
+offset_bottom = -16
+alignment = 1
+
+[node name="FreeBonusTextVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/FreeBonusSection/FreeBonusCard/FreeBonusHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+add_theme_constant_override "separation" = 4
+
+[node name="FreeBonusTitle" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/FreeBonusSection/FreeBonusCard/FreeBonusHBox/FreeBonusTextVBox"]
+layout_mode = 2
+text = "FREE BONUS!"
+add_theme_color_override "font_color" = Color(1, 1, 1, 1)
+add_theme_font_size_override "font_size" = 20
+
+[node name="FreeBonusSubtitle" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/FreeBonusSection/FreeBonusCard/FreeBonusHBox/FreeBonusTextVBox"]
+layout_mode = 2
+text = "Watch an ad for 50 Coins"
+add_theme_color_override "font_color" = Color(1, 1, 1, 0.9)
+add_theme_font_size_override "font_size" = 14
+
+[node name="WatchNowBtn" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/FreeBonusSection/FreeBonusCard/FreeBonusHBox/FreeBonusTextVBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(140, 36)
+text = "▶  WATCH NOW"
+name = "WatchNowBtn"
+add_theme_font_size_override "font_size" = 13
+
+[node name="BonusIconLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/FreeBonusSection/FreeBonusCard/FreeBonusHBox"]
+layout_mode = 2
+text = "🎁"
+add_theme_font_size_override "font_size" = 52
+modulate = Color(1, 1, 1, 0.35)
+
+; ── CARD THEMES SECTION ───────────────────────────────────────────────────────
+[node name="CardThemesSection" type="MarginContainer" parent="MainLayout/ScrollContainer/ContentVBox"]
+layout_mode = 2
+add_theme_constant_override "margin_left" = 24
+add_theme_constant_override "margin_right" = 24
+add_theme_constant_override "margin_top" = 32
+add_theme_constant_override "margin_bottom" = 0
+
+[node name="CardThemesVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection"]
+layout_mode = 2
+add_theme_constant_override "separation" = 12
+
+[node name="CardThemesHeaderHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox"]
+layout_mode = 2
+
+[node name="CardThemesTitle" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/CardThemesHeaderHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CARD THEMES"
+add_theme_color_override "font_color" = Color(0.098, 0.110, 0.114, 1)
+add_theme_font_size_override "font_size" = 20
+
+[node name="SeeAllBtn" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/CardThemesHeaderHBox"]
+layout_mode = 2
+text = "SEE ALL"
+name = "SeeAllBtn"
+add_theme_color_override "font_color" = Color(0.420, 0.220, 0.831, 1)
+add_theme_font_size_override "font_size" = 13
+flat = true
+
+; Horizontal scroll for theme cards
+[node name="ThemeScroll" type="ScrollContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 180)
+horizontal_scroll_mode = 1
+vertical_scroll_mode = 0
+
+[node name="ThemeHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll"]
+layout_mode = 2
+add_theme_constant_override "separation" = 16
+
+; Theme Card 1 – Dino Pack
+[node name="DinoCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(200, 170)
+name = "DinoCard"
+
+[node name="DinoCardVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/DinoCard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12
+offset_top = 12
+offset_right = -12
+offset_bottom = -12
+add_theme_constant_override "separation" = 8
+
+[node name="DinoPreview" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/DinoCard/DinoCardVBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 90)
+name = "DinoPreview"
+
+[node name="DinoLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/DinoCard/DinoCardVBox/DinoPreview"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "🦕  Dino Pack"
+vertical_alignment = 2
+offset_left = 8
+offset_bottom = -8
+add_theme_color_override "font_color" = Color(1, 1, 1, 1)
+add_theme_font_size_override "font_size" = 12
+
+[node name="DinoPriceHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/DinoCard/DinoCardVBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="DinoPriceLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/DinoCard/DinoCardVBox/DinoPriceHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🪙 500"
+add_theme_font_size_override "font_size" = 13
+
+[node name="DinoBuyBtn" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/DinoCard/DinoCardVBox/DinoPriceHBox"]
+layout_mode = 2
+text = "🛒"
+name = "DinoBuyBtn"
+custom_minimum_size = Vector2(40, 36)
+
+; Theme Card 2 – Space Pack
+[node name="SpaceCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(200, 170)
+name = "SpaceCard"
+
+[node name="SpaceCardVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/SpaceCard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12
+offset_top = 12
+offset_right = -12
+offset_bottom = -12
+add_theme_constant_override "separation" = 8
+
+[node name="SpacePreview" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/SpaceCard/SpaceCardVBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 90)
+name = "SpacePreview"
+
+[node name="SpaceLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/SpaceCard/SpaceCardVBox/SpacePreview"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "🚀  Space Pack"
+vertical_alignment = 2
+offset_left = 8
+offset_bottom = -8
+add_theme_color_override "font_color" = Color(1, 1, 1, 1)
+add_theme_font_size_override "font_size" = 12
+
+[node name="SpacePriceHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/SpaceCard/SpaceCardVBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="SpacePriceLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/SpaceCard/SpaceCardVBox/SpacePriceHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🪙 800"
+add_theme_font_size_override "font_size" = 13
+
+[node name="SpaceBuyBtn" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/SpaceCard/SpaceCardVBox/SpacePriceHBox"]
+layout_mode = 2
+text = "🛒"
+name = "SpaceBuyBtn"
+custom_minimum_size = Vector2(40, 36)
+
+; Theme Card 3 – Jungle Pack
+[node name="JungleCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(200, 170)
+name = "JungleCard"
+
+[node name="JungleCardVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/JungleCard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12
+offset_top = 12
+offset_right = -12
+offset_bottom = -12
+add_theme_constant_override "separation" = 8
+
+[node name="JunglePreview" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/JungleCard/JungleCardVBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 90)
+name = "JunglePreview"
+
+[node name="JungleLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/JungleCard/JungleCardVBox/JunglePreview"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "🌿  Jungle Pack"
+vertical_alignment = 2
+offset_left = 8
+offset_bottom = -8
+add_theme_color_override "font_color" = Color(1, 1, 1, 1)
+add_theme_font_size_override "font_size" = 12
+
+[node name="JunglePriceHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/JungleCard/JungleCardVBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="JunglePriceLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/JungleCard/JungleCardVBox/JunglePriceHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🪙 650"
+add_theme_font_size_override "font_size" = 13
+
+[node name="JungleBuyBtn" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/JungleCard/JungleCardVBox/JunglePriceHBox"]
+layout_mode = 2
+text = "🛒"
+name = "JungleBuyBtn"
+custom_minimum_size = Vector2(40, 36)
+
+; ── CREATURE SKINS SECTION ────────────────────────────────────────────────────
+[node name="SkinsSection" type="MarginContainer" parent="MainLayout/ScrollContainer/ContentVBox"]
+layout_mode = 2
+add_theme_constant_override "margin_left" = 24
+add_theme_constant_override "margin_right" = 24
+add_theme_constant_override "margin_top" = 32
+add_theme_constant_override "margin_bottom" = 0
+
+[node name="SkinsVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection"]
+layout_mode = 2
+add_theme_constant_override "separation" = 12
+
+[node name="SkinsTitle" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox"]
+layout_mode = 2
+text = "CREATURE SKINS"
+add_theme_color_override "font_color" = Color(0.098, 0.110, 0.114, 1)
+add_theme_font_size_override "font_size" = 20
+
+[node name="SkinsGrid" type="GridContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox"]
+layout_mode = 2
+columns = 2
+add_theme_constant_override "h_separation" = 16
+add_theme_constant_override "v_separation" = 16
+
+; Skin 1 – Fire Dragon
+[node name="FireDragonCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 180)
+name = "FireDragonCard"
+
+[node name="FireDragonVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FireDragonCard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12
+offset_top = 12
+offset_right = -12
+offset_bottom = -12
+add_theme_constant_override "separation" = 8
+alignment = 1
+
+[node name="FireDragonPreview" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FireDragonCard/FireDragonVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+name = "FireDragonPreview"
+
+[node name="FireDragonEmoji" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FireDragonCard/FireDragonVBox/FireDragonPreview"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "🐉"
 horizontal_alignment = 1
+vertical_alignment = 1
+add_theme_font_size_override "font_size" = 48
 
-[node name="CoinsLabel" type="Label" parent="SafeArea/VBoxContainer"]
+[node name="RareBadge1" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FireDragonCard/FireDragonVBox/FireDragonPreview"]
+layout_mode = 0
+offset_right = 44
+offset_bottom = 22
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -48
+offset_top = -2
+text = "RARE"
+add_theme_color_override "font_color" = Color(1, 1, 1, 1)
+add_theme_font_size_override "font_size" = 9
+
+[node name="FireDragonName" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FireDragonCard/FireDragonVBox"]
 layout_mode = 2
-text = "Your Coins: 0"
+text = "Fire Dragon"
 horizontal_alignment = 1
+add_theme_font_size_override "font_size" = 13
 
-[node name="BuyEggButton" type="Button" parent="SafeArea/VBoxContainer"]
+[node name="FireDragonBuyBtn" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FireDragonCard/FireDragonVBox"]
 layout_mode = 2
-text = "Buy 1 Egg for 20 Coins"
-custom_minimum_size = Vector2(0, 80)
+text = "🪙 1.5K"
+name = "FireDragonBuyBtn"
+add_theme_font_size_override "font_size" = 13
 
-[node name="BuyCoinsButton" type="Button" parent="SafeArea/VBoxContainer"]
+; Skin 2 – Frost Blob
+[node name="FrostBlobCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid"]
 layout_mode = 2
-text = "Watch Ad for 50 Coins"
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 180)
+name = "FrostBlobCard"
 
-[node name="BackButton" type="Button" parent="SafeArea/VBoxContainer"]
+[node name="FrostBlobVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FrostBlobCard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12
+offset_top = 12
+offset_right = -12
+offset_bottom = -12
+add_theme_constant_override "separation" = 8
+alignment = 1
+
+[node name="FrostBlobPreview" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FrostBlobCard/FrostBlobVBox"]
 layout_mode = 2
-text = "Back"
+size_flags_vertical = 3
+name = "FrostBlobPreview"
+
+[node name="FrostBlobEmoji" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FrostBlobCard/FrostBlobVBox/FrostBlobPreview"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "🧊"
+horizontal_alignment = 1
+vertical_alignment = 1
+add_theme_font_size_override "font_size" = 48
+
+[node name="EpicBadge" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FrostBlobCard/FrostBlobVBox/FrostBlobPreview"]
+layout_mode = 0
+offset_right = 44
+offset_bottom = 22
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -52
+offset_top = -2
+text = "EPIC"
+add_theme_color_override "font_color" = Color(1, 1, 1, 1)
+add_theme_font_size_override "font_size" = 9
+
+[node name="FrostBlobName" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FrostBlobCard/FrostBlobVBox"]
+layout_mode = 2
+text = "Frost Blob"
+horizontal_alignment = 1
+add_theme_font_size_override "font_size" = 13
+
+[node name="FrostBlobBuyBtn" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FrostBlobCard/FrostBlobVBox"]
+layout_mode = 2
+text = "🪙 2.2K"
+name = "FrostBlobBuyBtn"
+add_theme_font_size_override "font_size" = 13
+
+; Skin 3 – Zapling
+[node name="ZaplingCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 180)
+name = "ZaplingCard"
+
+[node name="ZaplingVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/ZaplingCard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12
+offset_top = 12
+offset_right = -12
+offset_bottom = -12
+add_theme_constant_override "separation" = 8
+alignment = 1
+
+[node name="ZaplingPreview" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/ZaplingCard/ZaplingVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+name = "ZaplingPreview"
+
+[node name="ZaplingEmoji" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/ZaplingCard/ZaplingVBox/ZaplingPreview"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "⚡"
+horizontal_alignment = 1
+vertical_alignment = 1
+add_theme_font_size_override "font_size" = 48
+
+[node name="ZaplingName" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/ZaplingCard/ZaplingVBox"]
+layout_mode = 2
+text = "Zapling"
+horizontal_alignment = 1
+add_theme_font_size_override "font_size" = 13
+
+[node name="ZaplingBuyBtn" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/ZaplingCard/ZaplingVBox"]
+layout_mode = 2
+text = "🪙 1.2K"
+name = "ZaplingBuyBtn"
+add_theme_font_size_override "font_size" = 13
+
+; Skin 4 – Gloom Spirit
+[node name="GloomSpiritCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 180)
+name = "GloomSpiritCard"
+
+[node name="GloomSpiritVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/GloomSpiritCard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12
+offset_top = 12
+offset_right = -12
+offset_bottom = -12
+add_theme_constant_override "separation" = 8
+alignment = 1
+
+[node name="GloomSpiritPreview" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/GloomSpiritCard/GloomSpiritVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+name = "GloomSpiritPreview"
+
+[node name="GloomSpiritEmoji" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/GloomSpiritCard/GloomSpiritVBox/GloomSpiritPreview"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "👻"
+horizontal_alignment = 1
+vertical_alignment = 1
+add_theme_font_size_override "font_size" = 48
+
+[node name="RareBadge2" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/GloomSpiritCard/GloomSpiritVBox/GloomSpiritPreview"]
+layout_mode = 0
+offset_right = 44
+offset_bottom = 22
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -48
+offset_top = -2
+text = "RARE"
+add_theme_color_override "font_color" = Color(1, 1, 1, 1)
+add_theme_font_size_override "font_size" = 9
+
+[node name="GloomSpiritName" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/GloomSpiritCard/GloomSpiritVBox"]
+layout_mode = 2
+text = "Gloom Spirit"
+horizontal_alignment = 1
+add_theme_font_size_override "font_size" = 13
+
+[node name="GloomSpiritBuyBtn" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/GloomSpiritCard/GloomSpiritVBox"]
+layout_mode = 2
+text = "🪙 1.8K"
+name = "GloomSpiritBuyBtn"
+add_theme_font_size_override "font_size" = 13
+
+; ── PREMIUM DEALS SECTION ─────────────────────────────────────────────────────
+[node name="PremiumSection" type="MarginContainer" parent="MainLayout/ScrollContainer/ContentVBox"]
+layout_mode = 2
+add_theme_constant_override "margin_left" = 24
+add_theme_constant_override "margin_right" = 24
+add_theme_constant_override "margin_top" = 32
+add_theme_constant_override "margin_bottom" = 0
+
+[node name="PremiumVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/PremiumSection"]
+layout_mode = 2
+add_theme_constant_override "separation" = 12
+
+[node name="PremiumTitle" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/PremiumSection/PremiumVBox"]
+layout_mode = 2
+text = "PREMIUM DEALS"
+add_theme_color_override "font_color" = Color(0.098, 0.110, 0.114, 1)
+add_theme_font_size_override "font_size" = 20
+
+[node name="GoldenPassCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/PremiumSection/PremiumVBox"]
+layout_mode = 2
 custom_minimum_size = Vector2(0, 80)
+name = "GoldenPassCard"
+
+[node name="GoldenPassHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/PremiumSection/PremiumVBox/GoldenPassCard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16
+offset_top = 12
+offset_right = -16
+offset_bottom = -12
+alignment = 1
+
+[node name="GoldenPassIcon" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/PremiumSection/PremiumVBox/GoldenPassCard/GoldenPassHBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(56, 56)
+name = "GoldenPassIcon"
+
+[node name="GoldenPassEmoji" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/PremiumSection/PremiumVBox/GoldenPassCard/GoldenPassHBox/GoldenPassIcon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "✨"
+horizontal_alignment = 1
+vertical_alignment = 1
+add_theme_font_size_override "font_size" = 28
+
+[node name="GoldenPassTextVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/PremiumSection/PremiumVBox/GoldenPassCard/GoldenPassHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+offset_left = 12
+add_theme_constant_override "separation" = 2
+
+[node name="GoldenPassName" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/PremiumSection/PremiumVBox/GoldenPassCard/GoldenPassHBox/GoldenPassTextVBox"]
+layout_mode = 2
+text = "Golden Pass"
+add_theme_color_override "font_color" = Color(0.098, 0.110, 0.114, 1)
+add_theme_font_size_override "font_size" = 14
+
+[node name="GoldenPassDesc" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/PremiumSection/PremiumVBox/GoldenPassCard/GoldenPassHBox/GoldenPassTextVBox"]
+layout_mode = 2
+text = "Unlock exclusive monsters and skins daily!"
+autowrap_mode = 3
+add_theme_color_override "font_color" = Color(0.286, 0.267, 0.329, 1)
+add_theme_font_size_override "font_size" = 11
+
+[node name="GoldenPassBuyBtn" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/PremiumSection/PremiumVBox/GoldenPassCard/GoldenPassHBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(72, 40)
+text = "$4.99"
+name = "GoldenPassBuyBtn"
+add_theme_font_size_override "font_size" = 14
+
+[node name="BottomPad" type="Control" parent="MainLayout/ScrollContainer/ContentVBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 96)
+
+[node name="PurchasePopup" type="AcceptDialog" parent="."]
+title = "Purchase"
+dialog_text = ""
+ok_button_text = "OK"
+
+[node name="BottomNav" parent="." instance=ExtResource("3_bottomnav")]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -148
+grow_horizontal = 2
+grow_vertical = 0

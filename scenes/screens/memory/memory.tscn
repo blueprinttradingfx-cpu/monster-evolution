@@ -1,51 +1,188 @@
-[gd_scene load_steps=2 format=3 uid="uid://sc_memory"]
+[gd_scene load_steps=3 format=3 uid="uid://merge_memory_monsters"]
 
 [ext_resource type="Script" path="res://scenes/screens/memory/memory.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://common_topappbar" path="res://scenes/common/TopAppBar.tscn" id="2_topappbar"]
+[ext_resource type="PackedScene" uid="uid://common_bottomnav" path="res://scenes/common/BottomNav.tscn" id="3_bottomnav"]
 
-[node name="MemoryScene" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_primary_container"]
+bg_color = Color(0.518, 0.333, 0.937, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_left = 12
+corner_radius_bottom_right = 12
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.176, 0.176, 0.176, 1)
+
+[node name="MergeMemoryMonsters" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="SafeArea" type="MarginContainer" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+color = Color(0.973, 0.976, 0.98, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SafeArea"]
-layout_mode = 2
+[node name="TopAppBar" parent="." instance=ExtResource("2_topappbar")]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="MainLayout" type="VBoxContainer" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 72
+offset_bottom = -148
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
-[node name="TopBar" type="HBoxContainer" parent="SafeArea/VBoxContainer"]
-layout_mode = 2
-
-[node name="MatchCounter" type="Label" parent="SafeArea/VBoxContainer/TopBar"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Matches: 0/2"
-
-[node name="PauseButton" type="Button" parent="SafeArea/VBoxContainer/TopBar"]
-layout_mode = 2
-text = "Pause"
-custom_minimum_size = Vector2(80, 40)
-
-[node name="BackButton" type="Button" parent="SafeArea/VBoxContainer/TopBar"]
-layout_mode = 2
-text = "Back"
-custom_minimum_size = Vector2(80, 40)
-
-[node name="GridContainer" type="GridContainer" parent="SafeArea/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainLayout"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="ContentArea" type="VBoxContainer" parent="MainLayout/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+offset_left = 24
+offset_right = -24
+offset_top = 16
+
+[node name="StatusRow" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentArea"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MatchesPanel" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentArea/StatusRow"]
+layout_mode = 2
+
+[node name="MatchesContent" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentArea/StatusRow/MatchesPanel"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="MatchesTitle" type="Label" parent="MainLayout/ScrollContainer/ContentArea/StatusRow/MatchesPanel/MatchesContent"]
+layout_mode = 2
+text = "MATCHES"
+add_theme_font_size_override("font_size", 10)
+add_theme_color_override("font_color", Color(1, 1, 1, 0.8))
+horizontal_alignment = 1
+
+[node name="MatchesValue" type="Label" parent="MainLayout/ScrollContainer/ContentArea/StatusRow/MatchesPanel/MatchesContent"]
+name = "MatchesValue"
+layout_mode = 2
+text = "2 / 8"
+add_theme_font_size_override("font_size", 24)
+add_theme_color_override("font_color", Color(1, 1, 1, 1))
+horizontal_alignment = 1
+
+[node name="TimerTurns" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentArea/StatusRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+theme_override_constants/separation = 4
+
+[node name="TimerLabel" type="Label" parent="MainLayout/ScrollContainer/ContentArea/StatusRow/TimerTurns"]
+name = "TimerLabel"
+layout_mode = 2
+text = "⏱ 01:42"
+add_theme_font_size_override("font_size", 14)
+add_theme_color_override("font_color", Color(0.286, 0.267, 0.329, 1))
+horizontal_alignment = 2
+
+[node name="TurnsLabel" type="Label" parent="MainLayout/ScrollContainer/ContentArea/StatusRow/TimerTurns"]
+name = "TurnsLabel"
+layout_mode = 2
+text = "⇄ 12 Turns"
+add_theme_font_size_override("font_size", 14)
+add_theme_color_override("font_color", Color(0.286, 0.267, 0.329, 1))
+horizontal_alignment = 2
+
+[node name="CardGrid" type="GridContainer" parent="MainLayout/ScrollContainer/ContentArea"]
+name = "CardGrid"
+layout_mode = 2
 columns = 4
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+
+[node name="InstructionLabel" type="Label" parent="MainLayout/ScrollContainer/ContentArea"]
+layout_mode = 2
+text = "Find all matching pairs!"
+add_theme_font_size_override("font_size", 20)
+add_theme_color_override("font_color", Color(0.286, 0.267, 0.329, 1))
+horizontal_alignment = 1
+
+[node name="InstructionSub" type="Label" parent="MainLayout/ScrollContainer/ContentArea"]
+layout_mode = 2
+text = "Tap a card to reveal its monster"
+add_theme_font_size_override("font_size", 12)
+add_theme_color_override("font_color", Color(0.482, 0.451, 0.565, 1))
+horizontal_alignment = 1
+
+[node name="BonusProgressBg" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentArea"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 24)
+
+[node name="BonusProgressFill" type="ColorRect" parent="MainLayout/ScrollContainer/ContentArea/BonusProgressBg"]
+name = "BonusProgressFill"
+layout_mode = 1
+anchor_right = 0.25
+anchor_bottom = 1.0
+color = Color(0.204, 0.827, 0.6, 1)
+
+[node name="BottomNav" parent="." instance=ExtResource("3_bottomnav")]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -148
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="WinOverlay" type="CanvasLayer" parent="."]
+name = "WinOverlay"
+visible = false
+
+[node name="WinPanel" type="PanelContainer" parent="WinOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160
+offset_top = -100
+offset_right = 160
+offset_bottom = 100
+
+[node name="WinContent" type="VBoxContainer" parent="WinOverlay/WinPanel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="WinTitle" type="Label" parent="WinOverlay/WinPanel/WinContent"]
+layout_mode = 2
+text = "🎉 You Win!"
+add_theme_font_size_override("font_size", 32)
+horizontal_alignment = 1
+
+[node name="WinStats" type="Label" parent="WinOverlay/WinPanel/WinContent"]
+name = "WinStats"
+layout_mode = 2
+text = ""
+horizontal_alignment = 1
+
+[node name="PlayAgainBtn" type="Button" parent="WinOverlay/WinPanel/WinContent"]
+name = "PlayAgainBtn"
+layout_mode = 2
+text = "Play Again"
+add_theme_font_size_override("font_size", 16)

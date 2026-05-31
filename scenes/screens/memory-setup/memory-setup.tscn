@@ -1,106 +1,111 @@
-[gd_scene load_steps=2 format=3 uid="uid://memory_challenge_scene"]
+[gd_scene load_steps=4 format=3 uid="uid://calnhq8hiky5b"]
 
-[ext_resource type="Script" path="res://scenes/screens/memory-setup/memory-setup.gd" id="3_script"]
+[ext_resource type="Script" uid="uid://bwbdamu4hb823" path="res://scenes/screens/memory-setup/memory-setup.gd" id="3_script"]
+[ext_resource type="PackedScene" uid="uid://common_bottomnav" path="res://scenes/common/BottomNav.tscn" id="4_bottomnav"]
 
 [sub_resource type="StyleBoxFlat" id="topbar_style"]
-bg_color = Color(0.973, 0.976, 0.980, 1.0)
+content_margin_left = 24.0
+content_margin_top = 0.0
+content_margin_right = 24.0
+content_margin_bottom = 0.0
+bg_color = Color(0.973, 0.976, 0.98, 1)
 border_width_bottom = 4
-border_color = Color(0.176, 0.176, 0.176, 1.0)
-content_margin_left = 24
-content_margin_right = 24
-content_margin_top = 0
-content_margin_bottom = 0
+border_color = Color(0.176, 0.176, 0.176, 1)
 
 [sub_resource type="StyleBoxFlat" id="badge_style"]
-bg_color = Color(0.906, 0.910, 0.914, 1.0)
+content_margin_left = 12.0
+content_margin_top = 4.0
+content_margin_right = 12.0
+content_margin_bottom = 4.0
+bg_color = Color(0.906, 0.91, 0.914, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.176, 0.176, 0.176, 1.0)
+border_color = Color(0.176, 0.176, 0.176, 1)
 corner_radius_top_left = 999
 corner_radius_top_right = 999
 corner_radius_bottom_right = 999
 corner_radius_bottom_left = 999
-content_margin_left = 12
-content_margin_top = 4
-content_margin_right = 12
-content_margin_bottom = 4
 
 [sub_resource type="StyleBoxFlat" id="level_card_style"]
-bg_color = Color(1.0, 1.0, 1.0, 1.0)
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(1, 1, 1, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
-border_color = Color(0.176, 0.176, 0.176, 1.0)
+border_color = Color(0.176, 0.176, 0.176, 1)
 corner_radius_top_left = 32
 corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
-shadow_color = Color(0.176, 0.176, 0.176, 1.0)
+shadow_color = Color(0.176, 0.176, 0.176, 1)
 shadow_size = 4
 shadow_offset = Vector2(0, 4)
-content_margin_left = 24
-content_margin_top = 24
-content_margin_right = 24
-content_margin_bottom = 24
 
 [sub_resource type="StyleBoxFlat" id="theme_icon_style"]
-bg_color = Color(0.424, 0.973, 0.733, 1.0)
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.424, 0.973, 0.733, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.176, 0.176, 0.176, 1.0)
+border_color = Color(0.176, 0.176, 0.176, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
-content_margin_left = 8
-content_margin_top = 8
-content_margin_right = 8
-content_margin_bottom = 8
 
 [sub_resource type="StyleBoxFlat" id="stat_card_style"]
-bg_color = Color(0.953, 0.957, 0.961, 1.0)
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.953, 0.957, 0.961, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.176, 0.176, 0.176, 1.0)
+border_color = Color(0.176, 0.176, 0.176, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
-content_margin_left = 16
-content_margin_top = 16
-content_margin_right = 16
-content_margin_bottom = 16
 
 [sub_resource type="StyleBoxFlat" id="board_bg_style"]
-bg_color = Color(0.929, 0.933, 0.937, 1.0)
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.929, 0.933, 0.937, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
-border_color = Color(0.796, 0.765, 0.843, 1.0)
+border_color = Color(0.796, 0.765, 0.843, 1)
 corner_radius_top_left = 32
 corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
-content_margin_left = 24
-content_margin_top = 24
-content_margin_right = 24
-content_margin_bottom = 24
 
 [sub_resource type="StyleBoxFlat" id="card_faceup_style"]
-bg_color = Color(1.0, 1.0, 1.0, 1.0)
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(1, 1, 1, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.176, 0.176, 0.176, 1.0)
+border_color = Color(0.176, 0.176, 0.176, 1)
 corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
@@ -108,18 +113,18 @@ corner_radius_bottom_left = 24
 shadow_color = Color(0.176, 0.176, 0.176, 0.3)
 shadow_size = 4
 shadow_offset = Vector2(0, 4)
-content_margin_left = 12
-content_margin_top = 12
-content_margin_right = 12
-content_margin_bottom = 12
 
 [sub_resource type="StyleBoxFlat" id="card_facedown_style"]
-bg_color = Color(0.914, 0.867, 1.0, 1.0)
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.914, 0.867, 1, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.176, 0.176, 0.176, 1.0)
+border_color = Color(0.176, 0.176, 0.176, 1)
 corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
@@ -127,105 +132,80 @@ corner_radius_bottom_left = 24
 shadow_color = Color(0.176, 0.176, 0.176, 0.3)
 shadow_size = 4
 shadow_offset = Vector2(0, 4)
-content_margin_left = 12
-content_margin_top = 12
-content_margin_right = 12
-content_margin_bottom = 12
 
 [sub_resource type="StyleBoxFlat" id="card_question_circle"]
-bg_color = Color(1.0, 1.0, 1.0, 1.0)
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 1, 1, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.176, 0.176, 0.176, 1.0)
+border_color = Color(0.176, 0.176, 0.176, 1)
 corner_radius_top_left = 999
 corner_radius_top_right = 999
 corner_radius_bottom_right = 999
 corner_radius_bottom_left = 999
-content_margin_left = 12
-content_margin_top = 8
-content_margin_right = 12
-content_margin_bottom = 8
 
 [sub_resource type="StyleBoxFlat" id="start_btn_normal"]
-bg_color = Color(0.420, 0.220, 0.831, 1.0)
+content_margin_left = 24.0
+content_margin_top = 18.0
+content_margin_right = 24.0
+content_margin_bottom = 18.0
+bg_color = Color(0.42, 0.22, 0.831, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
-border_color = Color(0.176, 0.176, 0.176, 1.0)
+border_color = Color(0.176, 0.176, 0.176, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
-shadow_color = Color(0.333, 0.086, 0.745, 1.0)
+shadow_color = Color(0.333, 0.086, 0.745, 1)
 shadow_size = 4
 shadow_offset = Vector2(0, 4)
-content_margin_left = 24
-content_margin_top = 18
-content_margin_right = 24
-content_margin_bottom = 18
-
-[sub_resource type="StyleBoxFlat" id="start_btn_hover"]
-bg_color = Color(0.490, 0.270, 0.900, 1.0)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.176, 0.176, 0.176, 1.0)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-shadow_color = Color(0.333, 0.086, 0.745, 1.0)
-shadow_size = 4
-shadow_offset = Vector2(0, 4)
-content_margin_left = 24
-content_margin_top = 18
-content_margin_right = 24
-content_margin_bottom = 18
 
 [sub_resource type="StyleBoxFlat" id="start_btn_pressed"]
-bg_color = Color(0.420, 0.220, 0.831, 1.0)
+content_margin_left = 24.0
+content_margin_top = 22.0
+content_margin_right = 24.0
+content_margin_bottom = 14.0
+bg_color = Color(0.42, 0.22, 0.831, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
-border_color = Color(0.176, 0.176, 0.176, 1.0)
+border_color = Color(0.176, 0.176, 0.176, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
-shadow_size = 0
-content_margin_left = 24
-content_margin_top = 22
-content_margin_right = 24
-content_margin_bottom = 14
 
-[sub_resource type="StyleBoxFlat" id="nav_active_style"]
-bg_color = Color(0.518, 0.333, 0.937, 1.0)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-content_margin_left = 16
-content_margin_top = 4
-content_margin_right = 16
-content_margin_bottom = 4
-
-[sub_resource type="StyleBoxFlat" id="bottomnav_style"]
-bg_color = Color(1.0, 1.0, 1.0, 1.0)
+[sub_resource type="StyleBoxFlat" id="start_btn_hover"]
+content_margin_left = 24.0
+content_margin_top = 18.0
+content_margin_right = 24.0
+content_margin_bottom = 18.0
+bg_color = Color(0.49, 0.27, 0.9, 1)
+border_width_left = 4
 border_width_top = 4
-border_color = Color(0.176, 0.176, 0.176, 1.0)
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.176, 0.176, 0.176, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
-content_margin_left = 16
-content_margin_top = 8
-content_margin_right = 16
-content_margin_bottom = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.333, 0.086, 0.745, 1)
+shadow_size = 4
+shadow_offset = Vector2(0, 4)
 
-[node name="MemoryChallengeScreen" type="Control"]
+
+
+[node name="MemoryChallengeScreen" type="Control" unique_id=1100399990]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -234,381 +214,287 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_script")
 
-[node name="TopBar" type="PanelContainer" parent="."]
+[node name="TopBar" type="PanelContainer" parent="." unique_id=311213813]
+z_index = 10
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 56
+offset_bottom = 56.0
+grow_horizontal = 2
 theme_override_styles/panel = SubResource("topbar_style")
-z_index = 10
 
-[node name="TopBarHBox" type="HBoxContainer" parent="TopBar"]
+[node name="TopBarHBox" type="HBoxContainer" parent="TopBar" unique_id=1497645861]
+custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 theme_override_constants/separation = 8
-custom_minimum_size = Vector2(0, 48)
 
-[node name="AppIcon" type="Label" parent="TopBar/TopBarHBox"]
+[node name="AppIcon" type="Label" parent="TopBar/TopBarHBox" unique_id=872109994]
 layout_mode = 2
-text = "🐾"
 theme_override_font_sizes/font_size = 24
+text = "🐾"
 vertical_alignment = 1
 
-[node name="AppTitle" type="Label" parent="TopBar/TopBarHBox"]
+[node name="AppTitle" type="Label" parent="TopBar/TopBarHBox" unique_id=1052665180]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Memory Challenge"
+theme_override_colors/font_color = Color(0.42, 0.22, 0.831, 1)
 theme_override_font_sizes/font_size = 20
-theme_override_colors/font_color = Color(0.420, 0.220, 0.831, 1.0)
+text = "Memory Challenge"
 vertical_alignment = 1
 
-[node name="TopBarSpacer" type="Control" parent="TopBar/TopBarHBox"]
+[node name="TopBarSpacer" type="Control" parent="TopBar/TopBarHBox" unique_id=348775542]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CurrencyBadge" type="PanelContainer" parent="TopBar/TopBarHBox"]
+[node name="CurrencyBadge" type="PanelContainer" parent="TopBar/TopBarHBox" unique_id=1718464906]
 layout_mode = 2
 theme_override_styles/panel = SubResource("badge_style")
 
-[node name="CurrencyLabel" type="Label" parent="TopBar/TopBarHBox/CurrencyBadge"]
+[node name="CurrencyLabel" type="Label" parent="TopBar/TopBarHBox/CurrencyBadge" unique_id=1485265049]
 layout_mode = 2
-text = "0 🪙  0 🥚"
+theme_override_colors/font_color = Color(0.098, 0.11, 0.114, 1)
 theme_override_font_sizes/font_size = 13
-theme_override_colors/font_color = Color(0.098, 0.110, 0.114, 1.0)
+text = "0 🪙  0 🥚"
 vertical_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1057205916]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 56
-offset_bottom = -148
+offset_top = 56.0
+offset_bottom = -148.0
+grow_horizontal = 2
+grow_vertical = 2
 horizontal_scroll_mode = 0
 
-[node name="ContentVBox" type="VBoxContainer" parent="ScrollContainer"]
+[node name="ContentVBox" type="VBoxContainer" parent="ScrollContainer" unique_id=1885816086]
+custom_minimum_size = Vector2(400, 443)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 32
-custom_minimum_size = Vector2(360, 0)
 
-[node name="HeroSection" type="VBoxContainer" parent="ScrollContainer/ContentVBox"]
+[node name="HeroSection" type="VBoxContainer" parent="ScrollContainer/ContentVBox" unique_id=1115902596]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="HeroTitle" type="Label" parent="ScrollContainer/ContentVBox/HeroSection"]
+[node name="HeroTitle" type="Label" parent="ScrollContainer/ContentVBox/HeroSection" unique_id=243527616]
+modulate = Color(0.78521717, 0.7852172, 0.78521717, 1)
 layout_mode = 2
-text = "READY FOR A\nCHALLENGE?"
+theme_override_colors/font_color = Color(0.42, 0.22, 0.831, 1)
 theme_override_font_sizes/font_size = 36
-theme_override_colors/font_color = Color(0.420, 0.220, 0.831, 1.0)
+text = "READY FOR A
+CHALLENGE?"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="HeroSubtitle" type="Label" parent="ScrollContainer/ContentVBox/HeroSection"]
+[node name="HeroSubtitle" type="Label" parent="ScrollContainer/ContentVBox/HeroSection" unique_id=185144721]
 layout_mode = 2
-text = "Unlock new monsters by proving your memory skills!"
+theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
 theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1.0)
+text = "Unlock new monsters by proving your memory skills!"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="LevelCard" type="PanelContainer" parent="ScrollContainer/ContentVBox"]
+[node name="LevelCard" type="PanelContainer" parent="ScrollContainer/ContentVBox" unique_id=1027007527]
 layout_mode = 2
 theme_override_styles/panel = SubResource("level_card_style")
 
-[node name="LevelCardVBox" type="VBoxContainer" parent="ScrollContainer/ContentVBox/LevelCard"]
+[node name="LevelCardVBox" type="VBoxContainer" parent="ScrollContainer/ContentVBox/LevelCard" unique_id=2134657261]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="ThemeRow" type="HBoxContainer" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox"]
+[node name="ThemeRow" type="HBoxContainer" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox" unique_id=129887458]
 layout_mode = 2
 
-[node name="ThemeInfo" type="VBoxContainer" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/ThemeRow"]
+[node name="ThemeInfo" type="VBoxContainer" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/ThemeRow" unique_id=708349811]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ThemeLabel" type="Label" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/ThemeRow/ThemeInfo"]
+[node name="ThemeLabel" type="Label" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/ThemeRow/ThemeInfo" unique_id=1716550117]
 layout_mode = 2
-text = "THEME"
+theme_override_colors/font_color = Color(0.482, 0.455, 0.525, 1)
 theme_override_font_sizes/font_size = 13
-theme_override_colors/font_color = Color(0.482, 0.455, 0.525, 1.0)
+text = "THEME"
 
-[node name="ThemeValue" type="Label" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/ThemeRow/ThemeInfo"]
+[node name="ThemeValue" type="Label" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/ThemeRow/ThemeInfo" unique_id=1571268737]
 layout_mode = 2
-text = "Dinosaurs"
 theme_override_font_sizes/font_size = 24
+text = "Dinosaurs"
 
-[node name="ThemeIconBox" type="PanelContainer" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/ThemeRow"]
-layout_mode = 2
+[node name="ThemeIconBox" type="PanelContainer" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/ThemeRow" unique_id=1795785611]
 custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
 theme_override_styles/panel = SubResource("theme_icon_style")
 
-[node name="ThemeIconLabel" type="Label" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/ThemeRow/ThemeIconBox"]
+[node name="ThemeIconLabel" type="Label" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/ThemeRow/ThemeIconBox" unique_id=657526230]
 layout_mode = 2
-text = "🌿"
 theme_override_font_sizes/font_size = 26
+text = "🌿"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ThemeSep" type="HSeparator" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox"]
+[node name="ThemeSep" type="HSeparator" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox" unique_id=824080353]
 layout_mode = 2
-theme_override_colors/separator_color = Color(0.882, 0.886, 0.890, 1.0)
 theme_override_constants/separation = 2
 
-[node name="StatsGrid" type="GridContainer" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox"]
+[node name="StatsGrid" type="GridContainer" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox" unique_id=1746769940]
 layout_mode = 2
-columns = 2
 theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
+columns = 2
 
-[node name="GridSizeCard" type="PanelContainer" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid"]
+[node name="GridSizeCard" type="PanelContainer" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid" unique_id=459729828]
 layout_mode = 2
 theme_override_styles/panel = SubResource("stat_card_style")
 
-[node name="GridSizeVBox" type="VBoxContainer" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid/GridSizeCard"]
+[node name="GridSizeVBox" type="VBoxContainer" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid/GridSizeCard" unique_id=434340788]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="GridSizeLabel" type="Label" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid/GridSizeCard/GridSizeVBox"]
+[node name="GridSizeLabel" type="Label" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid/GridSizeCard/GridSizeVBox" unique_id=1736794227]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.482, 0.455, 0.525, 1)
+theme_override_font_sizes/font_size = 12
 text = "GRID SIZE"
-theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.482, 0.455, 0.525, 1.0)
 
-[node name="GridSizeValue" type="Label" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid/GridSizeCard/GridSizeVBox"]
+[node name="GridSizeValue" type="Label" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid/GridSizeCard/GridSizeVBox" unique_id=12349992]
 layout_mode = 2
-text = "2x2"
 theme_override_font_sizes/font_size = 22
+text = "2x2"
 
-[node name="DifficultyCard" type="PanelContainer" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid"]
+[node name="DifficultyCard" type="PanelContainer" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid" unique_id=500493568]
 layout_mode = 2
 theme_override_styles/panel = SubResource("stat_card_style")
 
-[node name="DifficultyVBox" type="VBoxContainer" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid/DifficultyCard"]
+[node name="DifficultyVBox" type="VBoxContainer" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid/DifficultyCard" unique_id=1154883016]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="DiffLabel" type="Label" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid/DifficultyCard/DifficultyVBox"]
+[node name="DiffLabel" type="Label" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid/DifficultyCard/DifficultyVBox" unique_id=2039407216]
 layout_mode = 2
-text = "DIFFICULTY"
+theme_override_colors/font_color = Color(0.482, 0.455, 0.525, 1)
 theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.482, 0.455, 0.525, 1.0)
+text = "DIFFICULTY"
 
-[node name="DiffHBox" type="HBoxContainer" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid/DifficultyCard/DifficultyVBox"]
+[node name="DiffHBox" type="HBoxContainer" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid/DifficultyCard/DifficultyVBox" unique_id=536996747]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="DiffDot" type="ColorRect" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid/DifficultyCard/DifficultyVBox/DiffHBox"]
-layout_mode = 2
+[node name="DiffDot" type="ColorRect" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid/DifficultyCard/DifficultyVBox/DiffHBox" unique_id=406068939]
 custom_minimum_size = Vector2(12, 12)
-color = Color(0.204, 0.831, 0.600, 1.0)
-size_flags_vertical = 4
-
-[node name="DiffValue" type="Label" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid/DifficultyCard/DifficultyVBox/DiffHBox"]
 layout_mode = 2
-text = "Easy"
-theme_override_font_sizes/font_size = 22
+size_flags_vertical = 4
+color = Color(0.204, 0.831, 0.6, 1)
 
-[node name="PreviewSection" type="VBoxContainer" parent="ScrollContainer/ContentVBox"]
+[node name="DiffValue" type="Label" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid/DifficultyCard/DifficultyVBox/DiffHBox" unique_id=70567550]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Easy"
+
+[node name="PreviewSection" type="VBoxContainer" parent="ScrollContainer/ContentVBox" unique_id=257517776]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="PreviewHeader" type="HBoxContainer" parent="ScrollContainer/ContentVBox/PreviewSection"]
+[node name="PreviewHeader" type="HBoxContainer" parent="ScrollContainer/ContentVBox/PreviewSection" unique_id=1061089560]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="PreviewIcon" type="Label" parent="ScrollContainer/ContentVBox/PreviewSection/PreviewHeader"]
+[node name="PreviewIcon" type="Label" parent="ScrollContainer/ContentVBox/PreviewSection/PreviewHeader" unique_id=1357594172]
 layout_mode = 2
-text = "👁"
 theme_override_font_sizes/font_size = 20
+text = "👁"
 
-[node name="PreviewLabel" type="Label" parent="ScrollContainer/ContentVBox/PreviewSection/PreviewHeader"]
+[node name="PreviewLabel" type="Label" parent="ScrollContainer/ContentVBox/PreviewSection/PreviewHeader" unique_id=1012759979]
 layout_mode = 2
-text = "BOARD PREVIEW"
+theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
 theme_override_font_sizes/font_size = 13
-theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1.0)
+text = "BOARD PREVIEW"
 vertical_alignment = 1
 
-[node name="BoardGridContainer" type="PanelContainer" parent="ScrollContainer/ContentVBox/PreviewSection"]
+[node name="BoardGridContainer" type="PanelContainer" parent="ScrollContainer/ContentVBox/PreviewSection" unique_id=416813402]
 layout_mode = 2
 theme_override_styles/panel = SubResource("board_bg_style")
 
-[node name="BoardGrid" type="GridContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer"]
+[node name="BoardGrid" type="GridContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer" unique_id=1254499910]
 layout_mode = 2
-columns = 2
 theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
+columns = 2
 
-[node name="PreviewCard1" type="PanelContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid"]
-layout_mode = 2
+[node name="PreviewCard1" type="PanelContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid" unique_id=1386044040]
 custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
 theme_override_styles/panel = SubResource("card_faceup_style")
 
-[node name="Card1Label" type="Label" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid/PreviewCard1"]
+[node name="Card1Label" type="Label" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid/PreviewCard1" unique_id=1531891406]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 52
 text = "🟢"
-theme_override_font_sizes/font_size = 52
 horizontal_alignment = 1
 vertical_alignment = 1
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
-[node name="PreviewCard2" type="PanelContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid"]
-layout_mode = 2
+[node name="PreviewCard2" type="PanelContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid" unique_id=1956362878]
 custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
 theme_override_styles/panel = SubResource("card_facedown_style")
 
-[node name="Card2Center" type="PanelContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid/PreviewCard2"]
+[node name="Card2Center" type="PanelContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid/PreviewCard2" unique_id=2004979296]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("card_question_circle")
 
-[node name="Card2Icon" type="Label" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid/PreviewCard2/Card2Center"]
+[node name="Card2Icon" type="Label" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid/PreviewCard2/Card2Center" unique_id=1802940410]
 layout_mode = 2
-text = "?"
+theme_override_colors/font_color = Color(0.42, 0.22, 0.831, 1)
 theme_override_font_sizes/font_size = 28
-theme_override_colors/font_color = Color(0.420, 0.220, 0.831, 1.0)
+text = "?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PreviewCard3" type="PanelContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid"]
-layout_mode = 2
+[node name="PreviewCard3" type="PanelContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid" unique_id=1148599886]
 custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
 theme_override_styles/panel = SubResource("card_facedown_style")
 
-[node name="Card3Center" type="PanelContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid/PreviewCard3"]
+[node name="Card3Center" type="PanelContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid/PreviewCard3" unique_id=1311027111]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("card_question_circle")
 
-[node name="Card3Icon" type="Label" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid/PreviewCard3/Card3Center"]
+[node name="Card3Icon" type="Label" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid/PreviewCard3/Card3Center" unique_id=1095225852]
 layout_mode = 2
-text = "?"
+theme_override_colors/font_color = Color(0.42, 0.22, 0.831, 1)
 theme_override_font_sizes/font_size = 28
-theme_override_colors/font_color = Color(0.420, 0.220, 0.831, 1.0)
+text = "?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PreviewCard4" type="PanelContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid"]
-layout_mode = 2
+[node name="PreviewCard4" type="PanelContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid" unique_id=1635897970]
 custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
 theme_override_styles/panel = SubResource("card_faceup_style")
 
-[node name="Card4Label" type="Label" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid/PreviewCard4"]
+[node name="Card4Label" type="Label" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid/PreviewCard4" unique_id=1878347362]
 layout_mode = 2
-text = "🦕"
-theme_override_font_sizes/font_size = 52
-horizontal_alignment = 1
-vertical_alignment = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 52
+text = "🦕"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="BottomArea" type="Control" parent="."]
+[node name="BottomNav" parent="." instance=ExtResource("4_bottomnav")]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -148
+offset_top = -148.0
+grow_horizontal = 2
 grow_vertical = 0
-z_index = 10
-
-[node name="StartButton" type="Button" parent="BottomArea"]
-layout_mode = 1
-anchor_right = 1.0
-offset_top = 0
-offset_bottom = 68
-custom_minimum_size = Vector2(0, 64)
-text = "▶  START"
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/normal  = SubResource("start_btn_normal")
-theme_override_styles/hover   = SubResource("start_btn_hover")
-theme_override_styles/pressed = SubResource("start_btn_pressed")
-
-[node name="BottomNav" type="PanelContainer" parent="BottomArea"]
-layout_mode = 1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 72
-theme_override_styles/panel = SubResource("bottomnav_style")
-
-[node name="NavHBox" type="HBoxContainer" parent="BottomArea/BottomNav"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-
-[node name="PlayNavActive" type="PanelContainer" parent="BottomArea/BottomNav/NavHBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("nav_active_style")
-
-[node name="PlayVBox" type="VBoxContainer" parent="BottomArea/BottomNav/NavHBox/PlayNavActive"]
-layout_mode = 2
-alignment = 1
-
-[node name="PlayIcon" type="Label" parent="BottomArea/BottomNav/NavHBox/PlayNavActive/PlayVBox"]
-layout_mode = 2
-text = "🎮"
-theme_override_font_sizes/font_size = 22
-horizontal_alignment = 1
-
-[node name="PlayLabel" type="Label" parent="BottomArea/BottomNav/NavHBox/PlayNavActive/PlayVBox"]
-layout_mode = 2
-text = "Play"
-theme_override_font_sizes/font_size = 11
-horizontal_alignment = 1
-
-[node name="MergeNav" type="VBoxContainer" parent="BottomArea/BottomNav/NavHBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-modulate = Color(1, 1, 1, 0.55)
-
-[node name="MergeIcon" type="Label" parent="BottomArea/BottomNav/NavHBox/MergeNav"]
-layout_mode = 2
-text = "🧩"
-theme_override_font_sizes/font_size = 22
-horizontal_alignment = 1
-
-[node name="MergeLabel" type="Label" parent="BottomArea/BottomNav/NavHBox/MergeNav"]
-layout_mode = 2
-text = "Merge"
-theme_override_font_sizes/font_size = 11
-horizontal_alignment = 1
-
-[node name="CollectionNav" type="VBoxContainer" parent="BottomArea/BottomNav/NavHBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-modulate = Color(1, 1, 1, 0.55)
-
-[node name="CollectionIcon" type="Label" parent="BottomArea/BottomNav/NavHBox/CollectionNav"]
-layout_mode = 2
-text = "📚"
-theme_override_font_sizes/font_size = 22
-horizontal_alignment = 1
-
-[node name="CollectionLabel" type="Label" parent="BottomArea/BottomNav/NavHBox/CollectionNav"]
-layout_mode = 2
-text = "Collection"
-theme_override_font_sizes/font_size = 11
-horizontal_alignment = 1
-
-[node name="ShopNav" type="VBoxContainer" parent="BottomArea/BottomNav/NavHBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-modulate = Color(1, 1, 1, 0.55)
-
-[node name="ShopIcon" type="Label" parent="BottomArea/BottomNav/NavHBox/ShopNav"]
-layout_mode = 2
-text = "🛒"
-theme_override_font_sizes/font_size = 22
-horizontal_alignment = 1
-
-[node name="ShopLabel" type="Label" parent="BottomArea/BottomNav/NavHBox/ShopNav"]
-layout_mode = 2
-text = "Shop"
-theme_override_font_sizes/font_size = 11
-horizontal_alignment = 1

@@ -4,6 +4,52 @@
 [ext_resource type="Texture2D" uid="uid://brujbmxxuukfx" path="res://assets/sprites/dino.png" id="2_dino"]
 [ext_resource type="Texture2D" uid="uid://rjwelh2didqw" path="res://assets/sprites/merge_memory_monsters_game_logo.png" id="3_logo"]
 
+[sub_resource type="StyleBoxFlat" id="merge_btn_normal"]
+content_margin_left = 48.0
+content_margin_top = 16.0
+content_margin_right = 48.0
+content_margin_bottom = 16.0
+bg_color = Color(0.419608, 0.219608, 0.831373, 1.0)
+border_width_bottom = 4
+border_color = Color(0.333333, 0.0862745, 0.745098, 1.0)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+shadow_color = Color(0.333333, 0.0862745, 0.745098, 1.0)
+shadow_size = 4
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="merge_btn_hover"]
+content_margin_left = 48.0
+content_margin_top = 16.0
+content_margin_right = 48.0
+content_margin_bottom = 16.0
+bg_color = Color(0.490196, 0.270588, 0.901961, 1.0)
+border_width_bottom = 4
+border_color = Color(0.333333, 0.0862745, 0.745098, 1.0)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+shadow_color = Color(0.333333, 0.0862745, 0.745098, 1.0)
+shadow_size = 4
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="merge_btn_pressed"]
+content_margin_left = 48.0
+content_margin_top = 20.0
+content_margin_right = 48.0
+content_margin_bottom = 12.0
+bg_color = Color(0.419608, 0.219608, 0.831373, 1.0)
+border_width_bottom = 0
+border_color = Color(0.333333, 0.0862745, 0.745098, 1.0)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+shadow_size = 0
+
 [node name="TitleScreen" type="Control" unique_id=62147707]
 layout_mode = 3
 anchors_preset = 15
@@ -113,9 +159,13 @@ layout_mode = 2
 alignment = 1
 
 [node name="PlayButton" type="Button" parent="MainContainer/RootVBox/FooterSection" unique_id=108581381]
-custom_minimum_size = Vector2(280, 64)
+custom_minimum_size = Vector2(280, 60)
 layout_mode = 2
 text = "PLAY"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("merge_btn_normal")
+theme_override_styles/hover = SubResource("merge_btn_hover")
+theme_override_styles/pressed = SubResource("merge_btn_pressed")
 
 [node name="TapLabel" type="Label" parent="MainContainer/RootVBox/FooterSection" unique_id=1322875894]
 layout_mode = 2

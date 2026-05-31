@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://k0vk8rrrqx11" path="res://scenes/screens/home/home.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://brujbmxxuukfx" path="res://assets/sprites/dino.png" id="2_dino"]
 [ext_resource type="Texture2D" uid="uid://rjwelh2didqw" path="res://assets/sprites/merge_memory_monsters_game_logo.png" id="3_logo"]
+[ext_resource type="PackedScene" uid="uid://common_bottomnav" path="res://scenes/common/BottomNav.tscn" id="4_bottomnav"]
+[ext_resource type="PackedScene" uid="uid://common_topappbar" path="res://scenes/common/TopAppBar.tscn" id="5_topappbar"]
 
 [sub_resource type="StyleBoxFlat" id="TopAppBarStyle"]
 content_margin_left = 24.0
@@ -205,7 +207,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
-groups = ["home_screen"]
 
 [node name="Background" type="ColorRect" parent="." unique_id=854192006]
 layout_mode = 1
@@ -228,70 +229,16 @@ grow_vertical = 2
 custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 theme_override_constants/separation = 32
+offset_top = 72
 
-[node name="TopAppBar" type="PanelContainer" parent="SafeArea/Main" unique_id=1797373217]
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
-theme_override_styles/panel = SubResource("TopAppBarStyle")
-
-[node name="TopBarContent" type="HBoxContainer" parent="SafeArea/Main/TopAppBar" unique_id=1831896477]
-layout_mode = 2
-
-[node name="LeftGroup" type="HBoxContainer" parent="SafeArea/Main/TopAppBar/TopBarContent" unique_id=1277365154]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Logo" type="TextureRect" parent="SafeArea/Main/TopAppBar/TopBarContent/LeftGroup" unique_id=1647057899]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-texture = ExtResource("3_logo")
-expand_mode = 1
-stretch_mode = 7
-
-[node name="Title" type="Label" parent="SafeArea/Main/TopAppBar/TopBarContent/LeftGroup" unique_id=418478467]
-modulate = Color(0.019925633, 0.019925632, 0.019925632, 1)
-layout_mode = 2
-text = "Merge Memory Monsters"
-
-[node name="CurrencyContainer" type="PanelContainer" parent="SafeArea/Main/TopAppBar/TopBarContent" unique_id=915738003]
-layout_mode = 2
-theme_override_styles/panel = SubResource("CurrencyPanelStyle")
-
-[node name="CurrencyContent" type="HBoxContainer" parent="SafeArea/Main/TopAppBar/TopBarContent/CurrencyContainer" unique_id=1225969435]
-layout_mode = 2
-
-[node name="Coins" type="HBoxContainer" parent="SafeArea/Main/TopAppBar/TopBarContent/CurrencyContainer/CurrencyContent" unique_id=745376441]
-modulate = Color(0.029506557, 0.029506557, 0.029506557, 1)
-layout_mode = 2
-
-[node name="CoinsLabel" type="Label" parent="SafeArea/Main/TopAppBar/TopBarContent/CurrencyContainer/CurrencyContent/Coins" unique_id=2043936824]
-layout_mode = 2
-text = "0"
-
-[node name="CoinIcon" type="Label" parent="SafeArea/Main/TopAppBar/TopBarContent/CurrencyContainer/CurrencyContent/Coins" unique_id=1996331786]
-layout_mode = 2
-text = "🪙"
-
-[node name="Separator" type="ColorRect" parent="SafeArea/Main/TopAppBar/TopBarContent/CurrencyContainer/CurrencyContent" unique_id=122639629]
-custom_minimum_size = Vector2(1, 16)
-layout_mode = 2
-color = Color(0.796078, 0.764706, 0.843137, 1)
-
-[node name="Eggs" type="HBoxContainer" parent="SafeArea/Main/TopAppBar/TopBarContent/CurrencyContainer/CurrencyContent" unique_id=68893620]
-layout_mode = 2
-
-[node name="EggsLabel" type="Label" parent="SafeArea/Main/TopAppBar/TopBarContent/CurrencyContainer/CurrencyContent/Eggs" unique_id=1069317375]
-modulate = Color(0.0142752165, 0.014275218, 0.014275218, 1)
-layout_mode = 2
-text = "0"
-
-[node name="EggIcon" type="Label" parent="SafeArea/Main/TopAppBar/TopBarContent/CurrencyContainer/CurrencyContent/Eggs" unique_id=1158279494]
-layout_mode = 2
-text = "🥚"
+[node name="TopAppBar" parent="." instance=ExtResource("5_topappbar")]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
 
 [node name="CreatureSection" type="VBoxContainer" parent="SafeArea/Main" unique_id=1650775178]
 layout_mode = 2
-size_flags_vertical = 3
 theme_override_constants/separation = 24
 
 [node name="CreatureWrapper" type="Control" parent="SafeArea/Main/CreatureSection" unique_id=1586181232]
@@ -364,7 +311,6 @@ offset_bottom = 18.0
 
 [node name="ActionButtons" type="VBoxContainer" parent="SafeArea/Main" unique_id=835448449]
 layout_mode = 2
-size_flags_vertical = 0
 theme_override_constants/separation = 16
 
 [node name="PlayButton" type="Button" parent="SafeArea/Main/ActionButtons" unique_id=362789857]
@@ -457,7 +403,6 @@ horizontal_alignment = 1
 
 [node name="DailyQuest" type="PanelContainer" parent="SafeArea/Main" unique_id=554021186]
 layout_mode = 2
-size_flags_vertical = 0
 theme_override_styles/panel = SubResource("QuestPanelStyle")
 
 [node name="QuestContent" type="HBoxContainer" parent="SafeArea/Main/DailyQuest" unique_id=592612384]
@@ -487,80 +432,12 @@ modulate = Color(0.0142752165, 0.014275218, 0.014275218, 1)
 layout_mode = 2
 text = "Merge 5 slime monsters today to earn a Rare Egg!"
 
-[node name="BottomNav" type="PanelContainer" parent="SafeArea/Main" unique_id=2135673487]
-custom_minimum_size = Vector2(0, 96)
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_styles/panel = SubResource("BottomNavPanelStyle")
-
-[node name="BottomNavContent" type="HBoxContainer" parent="SafeArea/Main/BottomNav" unique_id=424823647]
-layout_mode = 2
-alignment = 2
-
-[node name="PlayTab" type="Button" parent="SafeArea/Main/BottomNav/BottomNavContent" unique_id=422278224]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/normal = SubResource("ActiveTabStyle")
-toggle_mode = true
-button_pressed = true
-text = "Play"
-
-[node name="PlayTabContent" type="VBoxContainer" parent="SafeArea/Main/BottomNav/BottomNavContent/PlayTab" unique_id=864047271]
-layout_mode = 0
+[node name="BottomNav" parent="." instance=ExtResource("4_bottomnav")]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -148
 grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MergeTab" type="Button" parent="SafeArea/Main/BottomNav/BottomNavContent" unique_id=1544247330]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-toggle_mode = true
-text = "Merge"
-
-[node name="MergeTabContent" type="VBoxContainer" parent="SafeArea/Main/BottomNav/BottomNavContent/MergeTab" unique_id=586068900]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CollectionTab" type="Button" parent="SafeArea/Main/BottomNav/BottomNavContent" unique_id=401829251]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-toggle_mode = true
-text = "Collection"
-
-[node name="CollectionTabContent" type="VBoxContainer" parent="SafeArea/Main/BottomNav/BottomNavContent/CollectionTab" unique_id=204094078]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ShopTab" type="Button" parent="SafeArea/Main/BottomNav/BottomNavContent" unique_id=1084571313]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-toggle_mode = true
-text = "Shop"
-
-[node name="ShopTabContent" type="VBoxContainer" parent="SafeArea/Main/BottomNav/BottomNavContent/ShopTab" unique_id=1190400270]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SettingsTab" type="Button" parent="SafeArea/Main/BottomNav/BottomNavContent" unique_id=1608589581]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-toggle_mode = true
-text = "Settings"
-
-[node name="SettingsTabContent" type="VBoxContainer" parent="SafeArea/Main/BottomNav/BottomNavContent/SettingsTab" unique_id=322746701]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
