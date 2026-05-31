@@ -27,22 +27,30 @@ var flipped_now  : Array[int]  = []   # indices of currently face-up (unmatched)
 var is_locked    : bool = false       # prevent clicks during flip-back animation
 
 # Node references (resolved in _ready)
-@onready var top_appbar     : TopAppBar     = $TopAppBar
-@onready var bottom_nav     : BottomNav     = $BottomNav
-@onready var card_grid      : GridContainer = $MainLayout/ScrollContainer/ContentArea/CardGrid
-@onready var matches_label  : Label         = $MainLayout/ScrollContainer/ContentArea/StatusRow/MatchesPanel/MatchesContent/MatchesValue
-@onready var timer_label    : Label         = $MainLayout/ScrollContainer/ContentArea/StatusRow/TimerTurns/TimerLabel
-@onready var turns_label    : Label         = $MainLayout/ScrollContainer/ContentArea/StatusRow/TimerTurns/TurnsLabel
-@onready var progress_fill  : ColorRect     = $MainLayout/ScrollContainer/ContentArea/BonusProgressBg/BonusProgressFill
-@onready var win_overlay    : CanvasLayer   = $WinOverlay
-@onready var win_stats      : Label         = $WinOverlay/WinPanel/WinContent/WinStats
-@onready var play_again_btn : Button        = $WinOverlay/WinPanel/WinContent/PlayAgainBtn
+@onready var top_appbar        : TopAppBar     = $TopAppBar
+@onready var bottom_nav        : BottomNav     = $BottomNav
+@onready var card_grid         : GridContainer = $MainLayout/ScrollContainer/ContentArea/CardGrid
+@onready var matches_label     : Label         = $MainLayout/ScrollContainer/ContentArea/StatusRow/MatchesPanel/MatchesContent/MatchesValue
+@onready var timer_label       : Label         = $MainLayout/ScrollContainer/ContentArea/StatusRow/TimerTurns/TimerLabel
+@onready var turns_label       : Label         = $MainLayout/ScrollContainer/ContentArea/StatusRow/TimerTurns/TurnsLabel
+@onready var progress_fill     : ColorRect     = $MainLayout/ScrollContainer/ContentArea/BonusProgressBg/BonusProgressFill
+@onready var win_overlay       : CanvasLayer   = $WinOverlay
+@onready var win_control       : Control       = $WinOverlay/WinControl
+@onready var confetti_layer    : Node2D        = $WinOverlay/WinControl/ConfettiLayer
+@onready var confetti_timer    : Timer         = $WinOverlay/WinControl/ConfettiTimer
+@onready var next_button       : Button        = $WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/NextButtonContainer/NextButton
+@onready var egg_value_label   : Label         = $WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/EggCard/EggHBox/EggTextVBox/EggValueLabel
+@onready var coin_value_label  : Label         = $WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/CoinCard/CoinHBox/CoinTextVBox/CoinValueLabel
+@onready var progress_pct      : Label         = $WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/EvolutionSection/ProgressHeader/ProgressPct
+@onready var progress_bar_fill : ColorRect     = $WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/EvolutionSection/ProgressBarBG/ProgressBarFill
 
 # ── Lifecycle ─────────────────────────────────
 
 func _ready() -> void:
+	_apply_overlay_styles()
 	_setup_game()
-	play_again_btn.pressed.connect(_setup_game)
+	next_button.pressed.connect(_setup_game)
+	confetti_timer.timeout.connect(_spawn_confetti_burst)
 	_update_hud()
 	_connect_bottom_nav()
 	bottom_nav.set_active("play")
@@ -83,6 +91,11 @@ func _setup_game() -> void:
 	is_locked    = false
 	flipped_now.clear()
 	win_overlay.visible = false
+	confetti_timer.stop()
+
+	# Clear any remaining confetti
+	for child in confetti_layer.get_children():
+		child.queue_free()
 
 	# Build & shuffle card values
 	card_values.clear()
@@ -221,10 +234,151 @@ func _on_win() -> void:
 	_add_egg()
 	_add_coins(400)
 	_update_hud()
-	win_stats.text = "Time: %s\nTurns: %d\n+1 🥚  +400 🪙" % [
-		_format_time(elapsed_time), turn_count
-	]
+
+	# Update overlay reward labels
+	egg_value_label.text = "+1 Egg"
+	coin_value_label.text = "+400 Coins"
+
+	# Animate progress bar
+	var progress_target := 0.6
+	progress_bar_fill.size.x = 0.0
+	progress_pct.text = "60%"
+	var tween := create_tween()
+	tween.tween_method(
+		func(v: float) -> void:
+			var parent_w: float = progress_bar_fill.get_parent().size.x
+			progress_bar_fill.size.x = parent_w * v
+			progress_bar_fill.size.y = progress_bar_fill.get_parent().size.y,
+		0.0,
+		progress_target,
+		1.2
+	).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+
+	# Start confetti
+	_spawn_confetti_burst()
+	confetti_timer.start()
+
 	win_overlay.visible = true
+
+# ── Confetti ───────────────────────────────────
+
+const CONFETTI_COLORS := [
+	Color(0.420, 0.220, 0.831, 1),
+	Color(0.204, 0.831, 0.600, 1),
+	Color(0.992, 0.878, 0.278, 1),
+	Color(0.925, 0.286, 0.600, 1),
+	Color(0.655, 0.545, 0.980, 1),
+]
+
+func _spawn_confetti_burst() -> void:
+	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
+
+	for i in range(40):
+		var c := ColorRect.new()
+		c.size = Vector2(8, 8)
+		c.color = CONFETTI_COLORS[randi() % CONFETTI_COLORS.size()]
+		c.position = Vector2(randf() * viewport_size.x, -20.0)
+		confetti_layer.add_child(c)
+
+		var duration := randf_range(2.0, 4.0)
+		var rot_deg := randf_range(0.0, 720.0)
+		var tween := create_tween()
+		tween.set_parallel(true)
+		tween.tween_property(c, "position:y", viewport_size.y + 20.0, duration).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+		tween.tween_property(c, "rotation_degrees", rot_deg, duration)
+		tween.tween_property(c, "modulate:a", 0.0, duration).set_ease(Tween.EASE_IN)
+		tween.chain().tween_callback(c.queue_free)
+
+# ── Overlay Styling ───────────────────────────
+
+const COLOR_PRIMARY        := Color(0.420, 0.220, 0.831, 1.0)
+const COLOR_PRIMARY_DARK   := Color(0.333, 0.086, 0.745, 1.0)
+const COLOR_PRIMARY_CTR    := Color(0.518, 0.333, 0.937, 1.0)
+const COLOR_SURFACE        := Color(1.000, 1.000, 1.000, 1.0)
+const COLOR_OUTLINE        := Color(0.176, 0.176, 0.176, 1.0)
+const COLOR_ON_SURF_VAR    := Color(0.286, 0.267, 0.329, 1.0)
+const COLOR_ON_SURFACE     := Color(0.098, 0.110, 0.114, 1.0)
+const COLOR_EGG_YELLOW     := Color(0.992, 0.878, 0.278, 1.0)
+const COLOR_COIN_GOLD      := Color(0.973, 0.741, 0.133, 1.0)
+const COLOR_GREEN          := Color(0.204, 0.831, 0.600, 1.0)
+const COLOR_SURF_SOFT      := Color(0.953, 0.957, 0.965, 1.0)
+
+func _apply_overlay_styles() -> void:
+	# Reward cards
+	var egg_card := win_control.get_node("WinMainLayout/WinCenterContainer/WinContent/RewardCards/EggCard")
+	var coin_card := win_control.get_node("WinMainLayout/WinCenterContainer/WinContent/RewardCards/CoinCard")
+	_style_reward_card(egg_card, COLOR_EGG_YELLOW)
+	_style_reward_card(coin_card, COLOR_COIN_GOLD)
+
+	# Progress bar background
+	var prog_bg := win_control.get_node("WinMainLayout/WinCenterContainer/WinContent/EvolutionSection/ProgressBarBG")
+	var prog_bg_style := StyleBoxFlat.new()
+	prog_bg_style.bg_color = COLOR_SURF_SOFT
+	prog_bg_style.border_color = COLOR_OUTLINE
+	prog_bg_style.set_border_width_all(4)
+	prog_bg_style.corner_radius_top_left = 32
+	prog_bg_style.corner_radius_top_right = 32
+	prog_bg_style.corner_radius_bottom_left = 32
+	prog_bg_style.corner_radius_bottom_right = 32
+	prog_bg.add_theme_stylebox_override("panel", prog_bg_style)
+
+	# Progress bar fill color
+	progress_bar_fill.color = COLOR_GREEN
+
+	# Next button
+	_style_next_button()
+
+func _style_reward_card(card: PanelContainer, icon_bg: Color) -> void:
+	var style := StyleBoxFlat.new()
+	style.bg_color = COLOR_SURFACE
+	style.border_color = COLOR_OUTLINE
+	style.set_border_width_all(4)
+	style.corner_radius_top_left = 12
+	style.corner_radius_top_right = 12
+	style.corner_radius_bottom_left = 12
+	style.corner_radius_bottom_right = 12
+	style.shadow_color = COLOR_OUTLINE
+	style.shadow_offset = Vector2(0, 4)
+	style.shadow_size = 0
+	card.add_theme_stylebox_override("panel", style)
+
+	# Color the icon box inside
+	var icon_panel: PanelContainer = card.get_child(0).get_child(0)
+	var icon_style := StyleBoxFlat.new()
+	icon_style.bg_color = icon_bg
+	icon_style.border_color = COLOR_OUTLINE
+	icon_style.set_border_width_all(2)
+	icon_style.corner_radius_top_left = 8
+	icon_style.corner_radius_top_right = 8
+	icon_style.corner_radius_bottom_left = 8
+	icon_style.corner_radius_bottom_right = 8
+	icon_panel.add_theme_stylebox_override("panel", icon_style)
+
+func _style_next_button() -> void:
+	var normal := StyleBoxFlat.new()
+	normal.bg_color = COLOR_PRIMARY
+	normal.border_color = COLOR_OUTLINE
+	normal.set_border_width_all(4)
+	normal.corner_radius_top_left = 999
+	normal.corner_radius_top_right = 999
+	normal.corner_radius_bottom_left = 999
+	normal.corner_radius_bottom_right = 999
+	normal.shadow_color = COLOR_PRIMARY_DARK
+	normal.shadow_offset = Vector2(0, 4)
+	normal.shadow_size = 0
+
+	var pressed_style := normal.duplicate() as StyleBoxFlat
+	pressed_style.shadow_offset = Vector2(0, 0)
+
+	var hover_style := normal.duplicate() as StyleBoxFlat
+	hover_style.bg_color = COLOR_PRIMARY_CTR
+
+	next_button.add_theme_stylebox_override("normal", normal)
+	next_button.add_theme_stylebox_override("pressed", pressed_style)
+	next_button.add_theme_stylebox_override("hover", hover_style)
+	next_button.add_theme_color_override("font_color", Color.WHITE)
+	next_button.add_theme_color_override("font_hover_color", Color.WHITE)
+	next_button.add_theme_color_override("font_pressed_color", Color.WHITE)
 
 # ── Save/Load Helpers ──────────────────────────
 

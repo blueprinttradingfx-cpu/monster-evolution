@@ -1,0 +1,391 @@
+[gd_scene load_steps=3 format=3 uid="uid://level_complete"]
+
+[ext_resource type="Script" path="res://scenes/overlays/level-complete.gd" id="1"]
+[ext_resource type="Script" path="res://scenes/overlays/confetti.gd" id="2"]
+
+[node name="LevelComplete" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.973, 0.976, 0.980, 1)
+
+[node name="ConfettiLayer" type="Node2D" parent="."]
+z_index = 10
+
+[node name="ConfettiTimer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="MainLayout" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -80.0
+theme_override_constants/separation = 0
+
+[node name="TopBar" type="PanelContainer" parent="MainLayout"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_override_styles/panel = StyleBoxFlat.new()
+
+[node name="TopBarHBox" type="HBoxContainer" parent="MainLayout/TopBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/separation = 8
+offset_left = 24.0
+offset_right = -24.0
+offset_top = 8.0
+offset_bottom = -8.0
+alignment = 2
+
+[node name="PetsIcon" type="Label" parent="MainLayout/TopBar/TopBarHBox"]
+layout_mode = 2
+text = "🐾"
+theme_override_font_sizes/font_size = 20
+
+[node name="AppTitle" type="Label" parent="MainLayout/TopBar/TopBarHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Merge Memory Monsters"
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.420, 0.220, 0.831, 1)
+
+[node name="CurrencyLabel" type="Label" parent="MainLayout/TopBar/TopBarHBox"]
+layout_mode = 2
+text = "1,250 🪙  5 🥚"
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.420, 0.220, 0.831, 1)
+
+[node name="ScrollContent" type="ScrollContainer" parent="MainLayout"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ContentVBox" type="VBoxContainer" parent="MainLayout/ScrollContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 24
+offset_left = 24.0
+offset_right = -24.0
+offset_top = 32.0
+
+[node name="VictoryHeader" type="VBoxContainer" parent="MainLayout/ScrollContent/ContentVBox"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 8
+
+[node name="LevelCompleteLabel" type="Label" parent="MainLayout/ScrollContent/ContentVBox/VictoryHeader"]
+layout_mode = 2
+horizontal_alignment = 1
+text = "LEVEL COMPLETE!"
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(0.420, 0.220, 0.831, 1)
+
+[node name="StarsHBox" type="HBoxContainer" parent="MainLayout/ScrollContent/ContentVBox/VictoryHeader"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 4
+
+[node name="Star1" type="Label" parent="MainLayout/ScrollContent/ContentVBox/VictoryHeader/StarsHBox"]
+layout_mode = 2
+text = "⭐"
+theme_override_font_sizes/font_size = 28
+
+[node name="Star2" type="Label" parent="MainLayout/ScrollContent/ContentVBox/VictoryHeader/StarsHBox"]
+layout_mode = 2
+text = "⭐"
+theme_override_font_sizes/font_size = 28
+
+[node name="Star3" type="Label" parent="MainLayout/ScrollContent/ContentVBox/VictoryHeader/StarsHBox"]
+layout_mode = 2
+text = "⭐"
+theme_override_font_sizes/font_size = 28
+
+[node name="RewardCards" type="VBoxContainer" parent="MainLayout/ScrollContent/ContentVBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="EggCard" type="PanelContainer" parent="MainLayout/ScrollContent/ContentVBox/RewardCards"]
+layout_mode = 2
+theme_override_styles/panel = StyleBoxFlat.new()
+
+[node name="EggHBox" type="HBoxContainer" parent="MainLayout/ScrollContent/ContentVBox/RewardCards/EggCard"]
+layout_mode = 2
+theme_override_constants/separation = 16
+offset_left = 16.0
+offset_right = -16.0
+offset_top = 16.0
+offset_bottom = -16.0
+
+[node name="EggIcon" type="PanelContainer" parent="MainLayout/ScrollContent/ContentVBox/RewardCards/EggCard/EggHBox"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="EggEmoji" type="Label" parent="MainLayout/ScrollContent/ContentVBox/RewardCards/EggCard/EggHBox/EggIcon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+text = "🥚"
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EggTextVBox" type="VBoxContainer" parent="MainLayout/ScrollContent/ContentVBox/RewardCards/EggCard/EggHBox"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="EggBonusLabel" type="Label" parent="MainLayout/ScrollContent/ContentVBox/RewardCards/EggCard/EggHBox/EggTextVBox"]
+layout_mode = 2
+text = "EGG BONUS"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+
+[node name="EggValueLabel" type="Label" parent="MainLayout/ScrollContent/ContentVBox/RewardCards/EggCard/EggHBox/EggTextVBox"]
+layout_mode = 2
+text = "+2 Eggs"
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.098, 0.110, 0.114, 1)
+
+[node name="CoinCard" type="PanelContainer" parent="MainLayout/ScrollContent/ContentVBox/RewardCards"]
+layout_mode = 2
+theme_override_styles/panel = StyleBoxFlat.new()
+
+[node name="CoinHBox" type="HBoxContainer" parent="MainLayout/ScrollContent/ContentVBox/RewardCards/CoinCard"]
+layout_mode = 2
+theme_override_constants/separation = 16
+offset_left = 16.0
+offset_right = -16.0
+offset_top = 16.0
+offset_bottom = -16.0
+
+[node name="CoinIcon" type="PanelContainer" parent="MainLayout/ScrollContent/ContentVBox/RewardCards/CoinCard/CoinHBox"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="CoinEmoji" type="Label" parent="MainLayout/ScrollContent/ContentVBox/RewardCards/CoinCard/CoinHBox/CoinIcon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+text = "🪙"
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CoinTextVBox" type="VBoxContainer" parent="MainLayout/ScrollContent/ContentVBox/RewardCards/CoinCard/CoinHBox"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="TreasureLabel" type="Label" parent="MainLayout/ScrollContent/ContentVBox/RewardCards/CoinCard/CoinHBox/CoinTextVBox"]
+layout_mode = 2
+text = "TREASURE"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+
+[node name="CoinValueLabel" type="Label" parent="MainLayout/ScrollContent/ContentVBox/RewardCards/CoinCard/CoinHBox/CoinTextVBox"]
+layout_mode = 2
+text = "+15 Coins"
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.098, 0.110, 0.114, 1)
+
+[node name="XpCard" type="PanelContainer" parent="MainLayout/ScrollContent/ContentVBox/RewardCards"]
+layout_mode = 2
+theme_override_styles/panel = StyleBoxFlat.new()
+
+[node name="XpHBox" type="HBoxContainer" parent="MainLayout/ScrollContent/ContentVBox/RewardCards/XpCard"]
+layout_mode = 2
+theme_override_constants/separation = 16
+offset_left = 16.0
+offset_right = -16.0
+offset_top = 16.0
+offset_bottom = -16.0
+
+[node name="XpIcon" type="PanelContainer" parent="MainLayout/ScrollContent/ContentVBox/RewardCards/XpCard/XpHBox"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="XpEmoji" type="Label" parent="MainLayout/ScrollContent/ContentVBox/RewardCards/XpCard/XpHBox/XpIcon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+text = "⚡"
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="XpTextVBox" type="VBoxContainer" parent="MainLayout/ScrollContent/ContentVBox/RewardCards/XpCard/XpHBox"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="EvolutionLabel" type="Label" parent="MainLayout/ScrollContent/ContentVBox/RewardCards/XpCard/XpHBox/XpTextVBox"]
+layout_mode = 2
+text = "EVOLUTION"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+
+[node name="XpValueLabel" type="Label" parent="MainLayout/ScrollContent/ContentVBox/RewardCards/XpCard/XpHBox/XpTextVBox"]
+layout_mode = 2
+text = "+5 Evolution XP"
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.098, 0.110, 0.114, 1)
+
+[node name="EvolutionSection" type="VBoxContainer" parent="MainLayout/ScrollContent/ContentVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ProgressHeader" type="HBoxContainer" parent="MainLayout/ScrollContent/ContentVBox/EvolutionSection"]
+layout_mode = 2
+
+[node name="ProgressTitle" type="Label" parent="MainLayout/ScrollContent/ContentVBox/EvolutionSection/ProgressHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "EVOLUTION PROGRESS"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.420, 0.220, 0.831, 1)
+
+[node name="ProgressPct" type="Label" parent="MainLayout/ScrollContent/ContentVBox/EvolutionSection/ProgressHeader"]
+layout_mode = 2
+text = "60%"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+
+[node name="ProgressBarBG" type="PanelContainer" parent="MainLayout/ScrollContent/ContentVBox/EvolutionSection"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="ProgressBarFill" type="ColorRect" parent="MainLayout/ScrollContent/ContentVBox/EvolutionSection/ProgressBarBG"]
+layout_mode = 1
+anchor_top = 0.0
+anchor_bottom = 1.0
+offset_right = 0.0
+color = Color(0.522, 0.827, 0.600, 1)
+name = "ProgressBarFill"
+
+[node name="ProgressHint" type="Label" parent="MainLayout/ScrollContent/ContentVBox/EvolutionSection"]
+layout_mode = 2
+horizontal_alignment = 1
+text = "Almost there! Your monster is starting to glow..."
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+
+[node name="NextButtonContainer" type="CenterContainer" parent="MainLayout/ScrollContent/ContentVBox"]
+layout_mode = 2
+
+[node name="NextButton" type="Button" parent="MainLayout/ScrollContent/ContentVBox/NextButtonContainer"]
+custom_minimum_size = Vector2(280, 56)
+layout_mode = 2
+text = "NEXT"
+theme_override_font_sizes/font_size = 20
+
+[node name="BottomNav" type="PanelContainer" parent="MainLayout"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="NavHBox" type="HBoxContainer" parent="MainLayout/BottomNav"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="PlayNav" type="VBoxContainer" parent="MainLayout/BottomNav/NavHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="PlayIcon" type="Label" parent="MainLayout/BottomNav/NavHBox/PlayNav"]
+layout_mode = 2
+horizontal_alignment = 1
+text = "🎮"
+theme_override_font_sizes/font_size = 22
+
+[node name="PlayLabel" type="Label" parent="MainLayout/BottomNav/NavHBox/PlayNav"]
+layout_mode = 2
+horizontal_alignment = 1
+text = "Play"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.420, 0.220, 0.831, 1)
+
+[node name="MergeNav" type="VBoxContainer" parent="MainLayout/BottomNav/NavHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="MergeIcon" type="Label" parent="MainLayout/BottomNav/NavHBox/MergeNav"]
+layout_mode = 2
+horizontal_alignment = 1
+text = "🧩"
+theme_override_font_sizes/font_size = 22
+
+[node name="MergeLabel" type="Label" parent="MainLayout/BottomNav/NavHBox/MergeNav"]
+layout_mode = 2
+horizontal_alignment = 1
+text = "Merge"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+
+[node name="CollectionNav" type="VBoxContainer" parent="MainLayout/BottomNav/NavHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="CollectionIcon" type="Label" parent="MainLayout/BottomNav/NavHBox/CollectionNav"]
+layout_mode = 2
+horizontal_alignment = 1
+text = "✨"
+theme_override_font_sizes/font_size = 22
+
+[node name="CollectionLabel" type="Label" parent="MainLayout/BottomNav/NavHBox/CollectionNav"]
+layout_mode = 2
+horizontal_alignment = 1
+text = "Collection"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+
+[node name="ShopNav" type="VBoxContainer" parent="MainLayout/BottomNav/NavHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="ShopIcon" type="Label" parent="MainLayout/BottomNav/NavHBox/ShopNav"]
+layout_mode = 2
+horizontal_alignment = 1
+text = "🛍️"
+theme_override_font_sizes/font_size = 22
+
+[node name="ShopLabel" type="Label" parent="MainLayout/BottomNav/NavHBox/ShopNav"]
+layout_mode = 2
+horizontal_alignment = 1
+text = "Shop"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)

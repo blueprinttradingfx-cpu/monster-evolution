@@ -153,36 +153,217 @@ grow_vertical = 0
 name = "WinOverlay"
 visible = false
 
-[node name="WinPanel" type="PanelContainer" parent="WinOverlay"]
+[node name="WinControl" type="Control" parent="WinOverlay"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="WinBackground" type="ColorRect" parent="WinOverlay/WinControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.973, 0.976, 0.98, 0.95)
+
+[node name="ConfettiLayer" type="Node2D" parent="WinOverlay/WinControl"]
+z_index = 10
+
+[node name="ConfettiTimer" type="Timer" parent="WinOverlay/WinControl"]
+wait_time = 4.0
+autostart = true
+
+[node name="WinMainLayout" type="VBoxContainer" parent="WinOverlay/WinControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/separation = 24
+
+[node name="WinCenterContainer" type="CenterContainer" parent="WinOverlay/WinControl/WinMainLayout"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="WinContent" type="VBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="VictoryHeader" type="VBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 8
+
+[node name="LevelCompleteLabel" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/VictoryHeader"]
+layout_mode = 2
+horizontal_alignment = 1
+text = "LEVEL COMPLETE!"
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(0.420, 0.220, 0.831, 1)
+
+[node name="StarsHBox" type="HBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/VictoryHeader"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 4
+
+[node name="Star1" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/VictoryHeader/StarsHBox"]
+layout_mode = 2
+text = "⭐"
+theme_override_font_sizes/font_size = 28
+
+[node name="Star2" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/VictoryHeader/StarsHBox"]
+layout_mode = 2
+text = "⭐"
+theme_override_font_sizes/font_size = 28
+
+[node name="Star3" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/VictoryHeader/StarsHBox"]
+layout_mode = 2
+text = "⭐"
+theme_override_font_sizes/font_size = 28
+
+[node name="RewardCards" type="VBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="EggCard" type="PanelContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards"]
+layout_mode = 2
+
+[node name="EggHBox" type="HBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/EggCard"]
+layout_mode = 2
+theme_override_constants/separation = 16
+offset_left = 16.0
+offset_right = -16.0
+offset_top = 16.0
+offset_bottom = -16.0
+
+[node name="EggIcon" type="PanelContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/EggCard/EggHBox"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="EggEmoji" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/EggCard/EggHBox/EggIcon"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -160
-offset_top = -100
-offset_right = 160
-offset_bottom = 100
-
-[node name="WinContent" type="VBoxContainer" parent="WinOverlay/WinPanel"]
-layout_mode = 2
-theme_override_constants/separation = 12
-
-[node name="WinTitle" type="Label" parent="WinOverlay/WinPanel/WinContent"]
-layout_mode = 2
-text = "🎉 You Win!"
-add_theme_font_size_override("font_size", 32)
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+text = "🥚"
+theme_override_font_sizes/font_size = 28
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="WinStats" type="Label" parent="WinOverlay/WinPanel/WinContent"]
-name = "WinStats"
+[node name="EggTextVBox" type="VBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/EggCard/EggHBox"]
 layout_mode = 2
-text = ""
+size_flags_vertical = 4
+
+[node name="EggBonusLabel" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/EggCard/EggHBox/EggTextVBox"]
+layout_mode = 2
+text = "EGG BONUS"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+
+[node name="EggValueLabel" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/EggCard/EggHBox/EggTextVBox"]
+layout_mode = 2
+text = "+2 Eggs"
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.098, 0.110, 0.114, 1)
+
+[node name="CoinCard" type="PanelContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards"]
+layout_mode = 2
+
+[node name="CoinHBox" type="HBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/CoinCard"]
+layout_mode = 2
+theme_override_constants/separation = 16
+offset_left = 16.0
+offset_right = -16.0
+offset_top = 16.0
+offset_bottom = -16.0
+
+[node name="CoinIcon" type="PanelContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/CoinCard/CoinHBox"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="CoinEmoji" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/CoinCard/CoinHBox/CoinIcon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+text = "🪙"
+theme_override_font_sizes/font_size = 28
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="PlayAgainBtn" type="Button" parent="WinOverlay/WinPanel/WinContent"]
-name = "PlayAgainBtn"
+[node name="CoinTextVBox" type="VBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/CoinCard/CoinHBox"]
 layout_mode = 2
-text = "Play Again"
-add_theme_font_size_override("font_size", 16)
+size_flags_vertical = 4
+
+[node name="TreasureLabel" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/CoinCard/CoinHBox/CoinTextVBox"]
+layout_mode = 2
+text = "TREASURE"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+
+[node name="CoinValueLabel" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/CoinCard/CoinHBox/CoinTextVBox"]
+layout_mode = 2
+text = "+15 Coins"
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.098, 0.110, 0.114, 1)
+
+[node name="EvolutionSection" type="VBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ProgressHeader" type="HBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/EvolutionSection"]
+layout_mode = 2
+
+[node name="ProgressTitle" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/EvolutionSection/ProgressHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "EVOLUTION PROGRESS"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.420, 0.220, 0.831, 1)
+
+[node name="ProgressPct" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/EvolutionSection/ProgressHeader"]
+layout_mode = 2
+text = "60%"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+
+[node name="ProgressBarBG" type="PanelContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/EvolutionSection"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="ProgressBarFill" type="ColorRect" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/EvolutionSection/ProgressBarBG"]
+layout_mode = 1
+anchor_top = 0.0
+anchor_bottom = 1.0
+offset_right = 0.0
+color = Color(0.522, 0.827, 0.600, 1)
+name = "ProgressBarFill"
+
+[node name="ProgressHint" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/EvolutionSection"]
+layout_mode = 2
+horizontal_alignment = 1
+text = "Almost there! Your monster is starting to glow..."
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+
+[node name="NextButtonContainer" type="CenterContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent"]
+layout_mode = 2
+
+[node name="NextButton" type="Button" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/NextButtonContainer"]
+name = "NextButton"
+custom_minimum_size = Vector2(280, 56)
+layout_mode = 2
+text = "NEXT"
+theme_override_font_sizes/font_size = 20
