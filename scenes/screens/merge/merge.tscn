@@ -353,13 +353,13 @@ vertical_alignment = 1
 
 [node name="InventoryGrid" type="GridContainer" parent="ScrollContainer/ContentVBox/InventorySection"]
 layout_mode = 2
-columns = 4
+columns = 3
 theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
 
 [node name="MonsterSlot0" type="PanelContainer" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid"]
 layout_mode = 2
-custom_minimum_size = Vector2(72, 72)
+custom_minimum_size = Vector2(96, 96)
 theme_override_styles/panel = SubResource("inv_slot_style")
 
 [node name="Slot0Label" type="Label" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid/MonsterSlot0"]
@@ -373,7 +373,7 @@ size_flags_vertical = 3
 
 [node name="MonsterSlot1" type="PanelContainer" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid"]
 layout_mode = 2
-custom_minimum_size = Vector2(72, 72)
+custom_minimum_size = Vector2(96, 96)
 theme_override_styles/panel = SubResource("inv_slot_selected_style")
 
 [node name="Slot1Label" type="Label" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid/MonsterSlot1"]
@@ -387,7 +387,7 @@ size_flags_vertical = 3
 
 [node name="MonsterSlot2" type="PanelContainer" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid"]
 layout_mode = 2
-custom_minimum_size = Vector2(72, 72)
+custom_minimum_size = Vector2(96, 96)
 theme_override_styles/panel = SubResource("inv_slot_style")
 
 [node name="Slot2Label" type="Label" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid/MonsterSlot2"]
@@ -401,7 +401,7 @@ size_flags_vertical = 3
 
 [node name="MonsterSlot3" type="PanelContainer" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid"]
 layout_mode = 2
-custom_minimum_size = Vector2(72, 72)
+custom_minimum_size = Vector2(96, 96)
 theme_override_styles/panel = SubResource("inv_slot_empty_style")
 
 [node name="Slot3Label" type="Label" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid/MonsterSlot3"]
@@ -416,7 +416,7 @@ size_flags_vertical = 3
 
 [node name="MonsterSlot4" type="PanelContainer" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid"]
 layout_mode = 2
-custom_minimum_size = Vector2(72, 72)
+custom_minimum_size = Vector2(96, 96)
 modulate = Color(0.6, 0.6, 0.6, 0.6)
 theme_override_styles/panel = SubResource("inv_slot_style")
 
@@ -431,7 +431,7 @@ size_flags_vertical = 3
 
 [node name="MonsterSlot5" type="PanelContainer" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid"]
 layout_mode = 2
-custom_minimum_size = Vector2(72, 72)
+custom_minimum_size = Vector2(96, 96)
 theme_override_styles/panel = SubResource("inv_slot_empty_style")
 
 [node name="Slot5Label" type="Label" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid/MonsterSlot5"]
@@ -446,7 +446,7 @@ size_flags_vertical = 3
 
 [node name="MonsterSlot6" type="PanelContainer" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid"]
 layout_mode = 2
-custom_minimum_size = Vector2(72, 72)
+custom_minimum_size = Vector2(96, 96)
 theme_override_styles/panel = SubResource("inv_slot_empty_style")
 
 [node name="Slot6Label" type="Label" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid/MonsterSlot6"]
@@ -461,7 +461,7 @@ size_flags_vertical = 3
 
 [node name="MonsterSlot7" type="PanelContainer" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid"]
 layout_mode = 2
-custom_minimum_size = Vector2(72, 72)
+custom_minimum_size = Vector2(96, 96)
 theme_override_styles/panel = SubResource("inv_slot_empty_style")
 
 [node name="Slot7Label" type="Label" parent="ScrollContainer/ContentVBox/InventorySection/InventoryGrid/MonsterSlot7"]

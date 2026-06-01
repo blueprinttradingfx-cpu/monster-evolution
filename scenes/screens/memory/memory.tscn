@@ -1,369 +1,309 @@
-[gd_scene load_steps=3 format=3 uid="uid://merge_memory_monsters"]
+[gd_scene format=3 uid="uid://ckgbka7qpsp5q"]
 
-[ext_resource type="Script" path="res://scenes/screens/memory/memory.gd" id="1_script"]
-[ext_resource type="PackedScene" uid="uid://common_topappbar" path="res://scenes/common/TopAppBar.tscn" id="2_topappbar"]
-[ext_resource type="PackedScene" uid="uid://common_bottomnav" path="res://scenes/common/BottomNav.tscn" id="3_bottomnav"]
+[ext_resource type="Script" uid="uid://jgu5y52n2l74" path="res://scenes/screens/memory/memory.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/common/TopAppBar.tscn" id="2_topappbar"]
+[ext_resource type="PackedScene" path="res://scenes/common/BottomNav.tscn" id="3_bottomnav"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_primary_container"]
-bg_color = Color(0.518, 0.333, 0.937, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_left = 12
-corner_radius_bottom_right = 12
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.176, 0.176, 0.176, 1)
-
-[node name="MergeMemoryMonsters" type="Control"]
+[node name="MergeMemoryMonsters" type="Control" unique_id=310139137]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=1060143225]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.973, 0.976, 0.98, 1)
 
-[node name="TopAppBar" parent="." instance=ExtResource("2_topappbar")]
+[node name="TopAppBar" parent="." unique_id=1148533656 instance=ExtResource("2_topappbar")]
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-grow_horizontal = 2
 
-[node name="MainLayout" type="VBoxContainer" parent="."]
+[node name="MainLayout" type="VBoxContainer" parent="." unique_id=2064620432]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 72
-offset_bottom = -148
+offset_top = 72.0
+offset_bottom = -148.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MainLayout"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainLayout" unique_id=338473728]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ContentArea" type="VBoxContainer" parent="MainLayout/ScrollContainer"]
+[node name="ContentArea" type="VBoxContainer" parent="MainLayout/ScrollContainer" unique_id=79350501]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 16
-offset_left = 24
-offset_right = -24
-offset_top = 16
 
-[node name="StatusRow" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentArea"]
+[node name="StatusRow" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentArea" unique_id=687216401]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="MatchesPanel" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentArea/StatusRow"]
+[node name="MatchesPanel" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentArea/StatusRow" unique_id=2124252903]
 layout_mode = 2
 
-[node name="MatchesContent" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentArea/StatusRow/MatchesPanel"]
+[node name="MatchesContent" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentArea/StatusRow/MatchesPanel" unique_id=545373995]
 layout_mode = 2
 theme_override_constants/separation = 2
+
+[node name="LevelLabel" type="Label" parent="MainLayout/ScrollContainer/ContentArea/StatusRow/MatchesPanel/MatchesContent" unique_id=1100037691]
+layout_mode = 2
+text = "LEVEL 1"
 
 [node name="MatchesTitle" type="Label" parent="MainLayout/ScrollContainer/ContentArea/StatusRow/MatchesPanel/MatchesContent"]
 layout_mode = 2
 text = "MATCHES"
-add_theme_font_size_override("font_size", 10)
-add_theme_color_override("font_color", Color(1, 1, 1, 0.8))
-horizontal_alignment = 1
 
-[node name="MatchesValue" type="Label" parent="MainLayout/ScrollContainer/ContentArea/StatusRow/MatchesPanel/MatchesContent"]
-name = "MatchesValue"
+[node name="MatchesValue" type="Label" parent="MainLayout/ScrollContainer/ContentArea/StatusRow/MatchesPanel/MatchesContent" unique_id=326842768]
 layout_mode = 2
-text = "2 / 8"
-add_theme_font_size_override("font_size", 24)
-add_theme_color_override("font_color", Color(1, 1, 1, 1))
-horizontal_alignment = 1
+text = "0 / 2"
 
-[node name="TimerTurns" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentArea/StatusRow"]
+[node name="TimerTurns" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentArea/StatusRow" unique_id=146657991]
 layout_mode = 2
 size_flags_horizontal = 3
-alignment = 2
 theme_override_constants/separation = 4
+alignment = 2
 
-[node name="TimerLabel" type="Label" parent="MainLayout/ScrollContainer/ContentArea/StatusRow/TimerTurns"]
-name = "TimerLabel"
+[node name="TimerLabel" type="Label" parent="MainLayout/ScrollContainer/ContentArea/StatusRow/TimerTurns" unique_id=856842124]
 layout_mode = 2
-text = "⏱ 01:42"
-add_theme_font_size_override("font_size", 14)
-add_theme_color_override("font_color", Color(0.286, 0.267, 0.329, 1))
-horizontal_alignment = 2
+text = "⏱ 00:00"
 
-[node name="TurnsLabel" type="Label" parent="MainLayout/ScrollContainer/ContentArea/StatusRow/TimerTurns"]
-name = "TurnsLabel"
+[node name="TurnsLabel" type="Label" parent="MainLayout/ScrollContainer/ContentArea/StatusRow/TimerTurns" unique_id=912732196]
 layout_mode = 2
-text = "⇄ 12 Turns"
-add_theme_font_size_override("font_size", 14)
-add_theme_color_override("font_color", Color(0.286, 0.267, 0.329, 1))
-horizontal_alignment = 2
+text = "⇄ 0 Turns"
 
-[node name="CardGrid" type="GridContainer" parent="MainLayout/ScrollContainer/ContentArea"]
-name = "CardGrid"
+[node name="CardGrid" type="GridContainer" parent="MainLayout/ScrollContainer/ContentArea" unique_id=87582944]
 layout_mode = 2
-columns = 4
-theme_override_constants/h_separation = 8
-theme_override_constants/v_separation = 8
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 2
 
-[node name="InstructionLabel" type="Label" parent="MainLayout/ScrollContainer/ContentArea"]
+[node name="InstructionLabel" type="Label" parent="MainLayout/ScrollContainer/ContentArea" unique_id=712441941]
 layout_mode = 2
 text = "Find all matching pairs!"
-add_theme_font_size_override("font_size", 20)
-add_theme_color_override("font_color", Color(0.286, 0.267, 0.329, 1))
-horizontal_alignment = 1
 
-[node name="InstructionSub" type="Label" parent="MainLayout/ScrollContainer/ContentArea"]
+[node name="InstructionSub" type="Label" parent="MainLayout/ScrollContainer/ContentArea" unique_id=30201263]
 layout_mode = 2
 text = "Tap a card to reveal its monster"
-add_theme_font_size_override("font_size", 12)
-add_theme_color_override("font_color", Color(0.482, 0.451, 0.565, 1))
-horizontal_alignment = 1
 
-[node name="BonusProgressBg" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentArea"]
-layout_mode = 2
+[node name="BonusProgressBg" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentArea" unique_id=1853384278]
 custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
 
-[node name="BonusProgressFill" type="ColorRect" parent="MainLayout/ScrollContainer/ContentArea/BonusProgressBg"]
-name = "BonusProgressFill"
-layout_mode = 1
-anchor_right = 0.25
-anchor_bottom = 1.0
+[node name="BonusProgressFill" type="ColorRect" parent="MainLayout/ScrollContainer/ContentArea/BonusProgressBg" unique_id=538301304]
+layout_mode = 2
 color = Color(0.204, 0.827, 0.6, 1)
+anchor_right = 0.0
 
-[node name="BottomNav" parent="." instance=ExtResource("3_bottomnav")]
+[node name="BottomNav" parent="." unique_id=791983171 instance=ExtResource("3_bottomnav")]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -148
+offset_top = -148.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="WinOverlay" type="CanvasLayer" parent="."]
-name = "WinOverlay"
+[node name="WinOverlay" type="CanvasLayer" parent="." unique_id=2088039919]
 visible = false
 
-[node name="WinControl" type="Control" parent="WinOverlay"]
+[node name="WinControl" type="Control" parent="WinOverlay" unique_id=1243142510]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="WinBackground" type="ColorRect" parent="WinOverlay/WinControl"]
+[node name="WinBackground" type="ColorRect" parent="WinOverlay/WinControl" unique_id=156621133]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.973, 0.976, 0.98, 0.95)
 
-[node name="ConfettiLayer" type="Node2D" parent="WinOverlay/WinControl"]
+[node name="ConfettiLayer" type="Node2D" parent="WinOverlay/WinControl" unique_id=255736061]
 z_index = 10
 
-[node name="ConfettiTimer" type="Timer" parent="WinOverlay/WinControl"]
+[node name="ConfettiTimer" type="Timer" parent="WinOverlay/WinControl" unique_id=162459292]
 wait_time = 4.0
 autostart = true
 
-[node name="WinMainLayout" type="VBoxContainer" parent="WinOverlay/WinControl"]
+[node name="WinMainLayout" type="VBoxContainer" parent="WinOverlay/WinControl" unique_id=17007475]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 24
 
-[node name="WinCenterContainer" type="CenterContainer" parent="WinOverlay/WinControl/WinMainLayout"]
+[node name="WinCenterContainer" type="CenterContainer" parent="WinOverlay/WinControl/WinMainLayout" unique_id=108145610]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="WinContent" type="VBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer"]
+[node name="WinContent" type="VBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer" unique_id=1483562836]
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="VictoryHeader" type="VBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent"]
+[node name="VictoryHeader" type="VBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent" unique_id=318952212]
 layout_mode = 2
-alignment = 1
 theme_override_constants/separation = 8
-
-[node name="LevelCompleteLabel" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/VictoryHeader"]
-layout_mode = 2
-horizontal_alignment = 1
-text = "LEVEL COMPLETE!"
-theme_override_font_sizes/font_size = 36
-theme_override_colors/font_color = Color(0.420, 0.220, 0.831, 1)
-
-[node name="StarsHBox" type="HBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/VictoryHeader"]
-layout_mode = 2
 alignment = 1
+
+[node name="LevelCompleteLabel" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/VictoryHeader" unique_id=90875929]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42, 0.22, 0.831, 1)
+theme_override_font_sizes/font_size = 36
+text = "LEVEL COMPLETE!"
+horizontal_alignment = 1
+
+[node name="StarsHBox" type="HBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/VictoryHeader" unique_id=551139220]
+layout_mode = 2
 theme_override_constants/separation = 4
+alignment = 1
 
-[node name="Star1" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/VictoryHeader/StarsHBox"]
+[node name="Star1" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/VictoryHeader/StarsHBox" unique_id=1261402285]
 layout_mode = 2
-text = "⭐"
 theme_override_font_sizes/font_size = 28
+text = "⭐"
 
-[node name="Star2" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/VictoryHeader/StarsHBox"]
+[node name="Star2" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/VictoryHeader/StarsHBox" unique_id=494123086]
 layout_mode = 2
-text = "⭐"
 theme_override_font_sizes/font_size = 28
+text = "⭐"
 
-[node name="Star3" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/VictoryHeader/StarsHBox"]
+[node name="Star3" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/VictoryHeader/StarsHBox" unique_id=870995587]
 layout_mode = 2
-text = "⭐"
 theme_override_font_sizes/font_size = 28
+text = "⭐"
 
-[node name="RewardCards" type="VBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent"]
+[node name="RewardCards" type="VBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent" unique_id=167175567]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="EggCard" type="PanelContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards"]
+[node name="EggCard" type="PanelContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards" unique_id=1699013873]
 layout_mode = 2
 
-[node name="EggHBox" type="HBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/EggCard"]
+[node name="EggHBox" type="HBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/EggCard" unique_id=887080998]
 layout_mode = 2
 theme_override_constants/separation = 16
-offset_left = 16.0
-offset_right = -16.0
-offset_top = 16.0
-offset_bottom = -16.0
 
-[node name="EggIcon" type="PanelContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/EggCard/EggHBox"]
+[node name="EggIcon" type="PanelContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/EggCard/EggHBox" unique_id=1342740813]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
-[node name="EggEmoji" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/EggCard/EggHBox/EggIcon"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -12.0
-offset_top = -12.0
-offset_right = 12.0
-offset_bottom = 12.0
+[node name="EggEmoji" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/EggCard/EggHBox/EggIcon" unique_id=1949377116]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
 text = "🥚"
-theme_override_font_sizes/font_size = 28
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EggTextVBox" type="VBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/EggCard/EggHBox"]
+[node name="EggTextVBox" type="VBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/EggCard/EggHBox" unique_id=1806461311]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="EggBonusLabel" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/EggCard/EggHBox/EggTextVBox"]
+[node name="EggBonusLabel" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/EggCard/EggHBox/EggTextVBox" unique_id=1382638311]
 layout_mode = 2
-text = "EGG BONUS"
-theme_override_font_sizes/font_size = 12
 theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+theme_override_font_sizes/font_size = 12
+text = "EGG BONUS"
 
-[node name="EggValueLabel" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/EggCard/EggHBox/EggTextVBox"]
+[node name="EggValueLabel" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/EggCard/EggHBox/EggTextVBox" unique_id=204841758]
 layout_mode = 2
-text = "+2 Eggs"
+theme_override_colors/font_color = Color(0.098, 0.11, 0.114, 1)
 theme_override_font_sizes/font_size = 22
-theme_override_colors/font_color = Color(0.098, 0.110, 0.114, 1)
+text = "+2 Eggs"
 
-[node name="CoinCard" type="PanelContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards"]
+[node name="CoinCard" type="PanelContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards" unique_id=2052603502]
 layout_mode = 2
 
-[node name="CoinHBox" type="HBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/CoinCard"]
+[node name="CoinHBox" type="HBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/CoinCard" unique_id=1721571675]
 layout_mode = 2
 theme_override_constants/separation = 16
-offset_left = 16.0
-offset_right = -16.0
-offset_top = 16.0
-offset_bottom = -16.0
 
-[node name="CoinIcon" type="PanelContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/CoinCard/CoinHBox"]
+[node name="CoinIcon" type="PanelContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/CoinCard/CoinHBox" unique_id=469637133]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
-[node name="CoinEmoji" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/CoinCard/CoinHBox/CoinIcon"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -12.0
-offset_top = -12.0
-offset_right = 12.0
-offset_bottom = 12.0
-text = "🪙"
+[node name="CoinEmoji" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/CoinCard/CoinHBox/CoinIcon" unique_id=701907308]
+layout_mode = 2
 theme_override_font_sizes/font_size = 28
+text = "🪙"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CoinTextVBox" type="VBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/CoinCard/CoinHBox"]
+[node name="CoinTextVBox" type="VBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/CoinCard/CoinHBox" unique_id=1716719140]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="TreasureLabel" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/CoinCard/CoinHBox/CoinTextVBox"]
+[node name="TreasureLabel" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/CoinCard/CoinHBox/CoinTextVBox" unique_id=983529217]
 layout_mode = 2
-text = "TREASURE"
-theme_override_font_sizes/font_size = 12
 theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+theme_override_font_sizes/font_size = 12
+text = "TREASURE"
 
-[node name="CoinValueLabel" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/CoinCard/CoinHBox/CoinTextVBox"]
+[node name="CoinValueLabel" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/RewardCards/CoinCard/CoinHBox/CoinTextVBox" unique_id=788051748]
 layout_mode = 2
-text = "+15 Coins"
+theme_override_colors/font_color = Color(0.098, 0.11, 0.114, 1)
 theme_override_font_sizes/font_size = 22
-theme_override_colors/font_color = Color(0.098, 0.110, 0.114, 1)
+text = "+200 Coins"
 
-[node name="EvolutionSection" type="VBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent"]
+[node name="EvolutionSection" type="VBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent" unique_id=49231163]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="ProgressHeader" type="HBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/EvolutionSection"]
+[node name="ProgressHeader" type="HBoxContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/EvolutionSection" unique_id=1256139274]
 layout_mode = 2
 
-[node name="ProgressTitle" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/EvolutionSection/ProgressHeader"]
+[node name="ProgressTitle" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/EvolutionSection/ProgressHeader" unique_id=101474636]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.42, 0.22, 0.831, 1)
+theme_override_font_sizes/font_size = 12
 text = "EVOLUTION PROGRESS"
-theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.420, 0.220, 0.831, 1)
 
-[node name="ProgressPct" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/EvolutionSection/ProgressHeader"]
+[node name="ProgressPct" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/EvolutionSection/ProgressHeader" unique_id=660680394]
 layout_mode = 2
-text = "60%"
-theme_override_font_sizes/font_size = 12
 theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+theme_override_font_sizes/font_size = 12
+text = "100%"
 
-[node name="ProgressBarBG" type="PanelContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/EvolutionSection"]
+[node name="ProgressBarBG" type="PanelContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/EvolutionSection" unique_id=550719890]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
-[node name="ProgressBarFill" type="ColorRect" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/EvolutionSection/ProgressBarBG"]
-layout_mode = 1
-anchor_top = 0.0
-anchor_bottom = 1.0
-offset_right = 0.0
-color = Color(0.522, 0.827, 0.600, 1)
-name = "ProgressBarFill"
-
-[node name="ProgressHint" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/EvolutionSection"]
+[node name="ProgressBarFill" type="ColorRect" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/EvolutionSection/ProgressBarBG" unique_id=1521277982]
 layout_mode = 2
-horizontal_alignment = 1
-text = "Almost there! Your monster is starting to glow..."
-theme_override_font_sizes/font_size = 13
+color = Color(0.522, 0.827, 0.6, 1)
+
+[node name="ProgressHint" type="Label" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/EvolutionSection" unique_id=2069343099]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+theme_override_font_sizes/font_size = 13
+text = "Great job! Your monster is fully evolved!"
+horizontal_alignment = 1
 
-[node name="NextButtonContainer" type="CenterContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent"]
+[node name="NextButtonContainer" type="CenterContainer" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent" unique_id=792283337]
 layout_mode = 2
 
-[node name="NextButton" type="Button" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/NextButtonContainer"]
-name = "NextButton"
+[node name="NextButton" type="Button" parent="WinOverlay/WinControl/WinMainLayout/WinCenterContainer/WinContent/NextButtonContainer" unique_id=565574558]
 custom_minimum_size = Vector2(280, 56)
 layout_mode = 2
-text = "NEXT"
 theme_override_font_sizes/font_size = 20
+text = "NEXT"

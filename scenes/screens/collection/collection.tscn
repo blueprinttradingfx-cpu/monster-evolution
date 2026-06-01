@@ -23,6 +23,22 @@ corner_radius_top_right = 999
 corner_radius_bottom_left = 999
 corner_radius_bottom_right = 999
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tag_bg"]
+bg_color = Color(0.204, 0.827, 0.600, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(0.176, 0.176, 0.176, 1)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_left = 999
+corner_radius_bottom_right = 999
+content_margin_left = 8
+content_margin_right = 8
+content_margin_top = 2
+content_margin_bottom = 2
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_completion_panel"]
 bg_color = Color(0.953, 0.957, 0.965, 1)
 border_width_left = 4
@@ -137,6 +153,53 @@ corner_radius_bottom_right = 12
 ; ============================================================
 ; ROOT
 ; ============================================================
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_discovered"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 4
+border_width_right = 4
+border_width_top = 4
+border_width_bottom = 4
+border_color = Color(0.176, 0.176, 0.176, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_left = 16
+corner_radius_bottom_right = 16
+content_margin_left = 12
+content_margin_right = 12
+content_margin_top = 12
+content_margin_bottom = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_locked"]
+bg_color = Color(0.882, 0.886, 0.894, 1)
+border_width_left = 4
+border_width_right = 4
+border_width_top = 4
+border_width_bottom = 4
+border_color = Color(0.176, 0.176, 0.176, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_left = 16
+corner_radius_bottom_right = 16
+content_margin_left = 12
+content_margin_right = 12
+content_margin_top = 12
+content_margin_bottom = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_img_bg"]
+bg_color = Color(0.953, 0.957, 0.965, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_left = 12
+corner_radius_bottom_right = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_img_locked_bg"]
+bg_color = Color(0.851, 0.855, 0.863, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_left = 12
+corner_radius_bottom_right = 12
+
 [node name="CollectionScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -144,6 +207,11 @@ layout_mode = 3
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("Script_collection")
+style_card_discovered = SubResource("StyleBoxFlat_card_discovered")
+style_card_locked = SubResource("StyleBoxFlat_card_locked")
+style_img_bg = SubResource("StyleBoxFlat_card_img_bg")
+style_img_locked_bg = SubResource("StyleBoxFlat_card_img_locked_bg")
+style_tag_bg = SubResource("StyleBoxFlat_tag_bg")
 
 ; ---- Background ----
 [node name="Background" type="ColorRect" parent="."]
@@ -267,260 +335,6 @@ layout_mode = 2
 columns = 2
 theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
-
-; ============================================================
-; CARD 1 — GREENIE (Discovered)
-; ============================================================
-[node name="CardGreenie" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_card_discovered")
-
-[node name="CardGreenieVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardGreenie"]
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="TagRowGreenie" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardGreenie/CardGreenieVBox"]
-layout_mode = 2
-
-[node name="TagGrass" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardGreenie/CardGreenieVBox/TagRowGreenie"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_tag_grass")
-
-[node name="TagGrassLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardGreenie/CardGreenieVBox/TagRowGreenie/TagGrass"]
-layout_mode = 2
-text = "GRASS"
-theme_override_font_sizes/font_size = 10
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-
-[node name="TagSpacerGreenie" type="Control" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardGreenie/CardGreenieVBox/TagRowGreenie"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="CardNumGreenie" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardGreenie/CardGreenieVBox/TagRowGreenie"]
-layout_mode = 2
-text = "#001"
-theme_override_font_sizes/font_size = 11
-theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
-
-[node name="ImgBgGreenie" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardGreenie/CardGreenieVBox"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 100)
-theme_override_styles/panel = SubResource("StyleBoxFlat_card_img_bg")
-
-[node name="ImgGreenie" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardGreenie/CardGreenieVBox/ImgBgGreenie"]
-layout_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-text = "🟢"
-theme_override_font_sizes/font_size = 40
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="NameGreenie" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardGreenie/CardGreenieVBox"]
-layout_mode = 2
-text = "GREENIE"
-theme_override_font_sizes/font_size = 12
-horizontal_alignment = 1
-
-[node name="StarsGreenie" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardGreenie/CardGreenieVBox"]
-layout_mode = 2
-text = "★★★☆☆"
-theme_override_font_sizes/font_size = 11
-theme_override_colors/font_color = Color(0.973, 0.741, 0.133, 1)
-horizontal_alignment = 1
-
-; ============================================================
-; CARD 2 — SPARKLES (Discovered)
-; ============================================================
-[node name="CardSparkles" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_card_discovered")
-
-[node name="CardSparklesVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardSparkles"]
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="TagRowSparkles" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardSparkles/CardSparklesVBox"]
-layout_mode = 2
-
-[node name="TagMagic" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardSparkles/CardSparklesVBox/TagRowSparkles"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_tag_magic")
-
-[node name="TagMagicLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardSparkles/CardSparklesVBox/TagRowSparkles/TagMagic"]
-layout_mode = 2
-text = "MAGIC"
-theme_override_font_sizes/font_size = 10
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-
-[node name="TagSpacerSparkles" type="Control" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardSparkles/CardSparklesVBox/TagRowSparkles"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="CardNumSparkles" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardSparkles/CardSparklesVBox/TagRowSparkles"]
-layout_mode = 2
-text = "#004"
-theme_override_font_sizes/font_size = 11
-theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
-
-[node name="ImgBgSparkles" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardSparkles/CardSparklesVBox"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 100)
-theme_override_styles/panel = SubResource("StyleBoxFlat_card_img_bg")
-
-[node name="ImgSparkles" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardSparkles/CardSparklesVBox/ImgBgSparkles"]
-layout_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-text = "✨"
-theme_override_font_sizes/font_size = 40
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="NameSparkles" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardSparkles/CardSparklesVBox"]
-layout_mode = 2
-text = "SPARKLES"
-theme_override_font_sizes/font_size = 12
-horizontal_alignment = 1
-
-[node name="StarsSparkles" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardSparkles/CardSparklesVBox"]
-layout_mode = 2
-text = "★★★★☆"
-theme_override_font_sizes/font_size = 11
-theme_override_colors/font_color = Color(0.973, 0.741, 0.133, 1)
-horizontal_alignment = 1
-
-; ============================================================
-; CARD 3 — LOCKED #005
-; ============================================================
-[node name="CardLocked005" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-modulate = Color(1, 1, 1, 0.8)
-theme_override_styles/panel = SubResource("StyleBoxFlat_card_locked")
-
-[node name="CardLocked005VBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardLocked005"]
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="TagRowLocked005" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardLocked005/CardLocked005VBox"]
-layout_mode = 2
-
-[node name="TagUnknown005" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardLocked005/CardLocked005VBox/TagRowLocked005"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_tag_locked")
-
-[node name="TagUnknown005Label" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardLocked005/CardLocked005VBox/TagRowLocked005/TagUnknown005"]
-layout_mode = 2
-text = "???"
-theme_override_font_sizes/font_size = 10
-theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
-
-[node name="TagSpacerLocked005" type="Control" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardLocked005/CardLocked005VBox/TagRowLocked005"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="CardNumLocked005" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardLocked005/CardLocked005VBox/TagRowLocked005"]
-layout_mode = 2
-text = "#005"
-theme_override_font_sizes/font_size = 11
-theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
-
-[node name="ImgBgLocked005" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardLocked005/CardLocked005VBox"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 100)
-theme_override_styles/panel = SubResource("StyleBoxFlat_card_img_locked_bg")
-
-[node name="LockIcon005" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardLocked005/CardLocked005VBox/ImgBgLocked005"]
-layout_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-text = "❓"
-theme_override_font_sizes/font_size = 40
-theme_override_colors/font_color = Color(0.176, 0.176, 0.176, 0.4)
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="NameLocked005" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardLocked005/CardLocked005VBox"]
-layout_mode = 2
-text = "LOCKED"
-theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
-horizontal_alignment = 1
-
-[node name="StarsLocked005" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardLocked005/CardLocked005VBox"]
-layout_mode = 2
-text = "☆☆☆☆☆"
-theme_override_font_sizes/font_size = 11
-theme_override_colors/font_color = Color(0.851, 0.855, 0.863, 1)
-horizontal_alignment = 1
-
-; ============================================================
-; CARD 4 — LOCKED #008
-; ============================================================
-[node name="CardLocked008" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-modulate = Color(1, 1, 1, 0.8)
-theme_override_styles/panel = SubResource("StyleBoxFlat_card_locked")
-
-[node name="CardLocked008VBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardLocked008"]
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="TagRowLocked008" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardLocked008/CardLocked008VBox"]
-layout_mode = 2
-
-[node name="TagUnknown008" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardLocked008/CardLocked008VBox/TagRowLocked008"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_tag_locked")
-
-[node name="TagUnknown008Label" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardLocked008/CardLocked008VBox/TagRowLocked008/TagUnknown008"]
-layout_mode = 2
-text = "???"
-theme_override_font_sizes/font_size = 10
-theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
-
-[node name="TagSpacerLocked008" type="Control" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardLocked008/CardLocked008VBox/TagRowLocked008"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="CardNumLocked008" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardLocked008/CardLocked008VBox/TagRowLocked008"]
-layout_mode = 2
-text = "#008"
-theme_override_font_sizes/font_size = 11
-theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
-
-[node name="ImgBgLocked008" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardLocked008/CardLocked008VBox"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 100)
-theme_override_styles/panel = SubResource("StyleBoxFlat_card_img_locked_bg")
-
-[node name="LockIcon008" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardLocked008/CardLocked008VBox/ImgBgLocked008"]
-layout_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-text = "❓"
-theme_override_font_sizes/font_size = 40
-theme_override_colors/font_color = Color(0.176, 0.176, 0.176, 0.4)
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="NameLocked008" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardLocked008/CardLocked008VBox"]
-layout_mode = 2
-text = "LOCKED"
-theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
-horizontal_alignment = 1
-
-[node name="StarsLocked008" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/CardGrid/CardLocked008/CardLocked008VBox"]
-layout_mode = 2
-text = "☆☆☆☆☆"
-theme_override_font_sizes/font_size = 11
-theme_override_colors/font_color = Color(0.851, 0.855, 0.863, 1)
-horizontal_alignment = 1
 
 ; ============================================================
 ; TAP HINT

@@ -202,8 +202,11 @@ func check_daily_reward() -> bool:
 
 func claim_daily_reward() -> void:
 	_save_data["daily"]["claimed"] = true
-	
+
 	var reward_coins: int = 10 + (_save_data["daily"]["streak"] * 5)
 	_save_data["economy"]["coins"] += reward_coins
 	add_eggs(1)
 	save_game()
+
+func reset_save() -> void:
+	_create_new_save()

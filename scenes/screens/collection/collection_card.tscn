@@ -1,0 +1,134 @@
+[gd_scene load_steps=7 format=3 uid="uid://collection_card"]
+
+[ext_resource type="Script" path="res://scenes/screens/collection/collection_card.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_discovered"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 4
+border_width_right = 4
+border_width_top = 4
+border_width_bottom = 4
+border_color = Color(0.176, 0.176, 0.176, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_left = 16
+corner_radius_bottom_right = 16
+content_margin_left = 12
+content_margin_right = 12
+content_margin_top = 12
+content_margin_bottom = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_locked"]
+bg_color = Color(0.882, 0.886, 0.894, 1)
+border_width_left = 4
+border_width_right = 4
+border_width_top = 4
+border_width_bottom = 4
+border_color = Color(0.176, 0.176, 0.176, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_left = 16
+corner_radius_bottom_right = 16
+content_margin_left = 12
+content_margin_right = 12
+content_margin_top = 12
+content_margin_bottom = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tag_bg"]
+bg_color = Color(0.204, 0.827, 0.600, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(0.176, 0.176, 0.176, 1)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_left = 999
+corner_radius_bottom_right = 999
+content_margin_left = 8
+content_margin_right = 8
+content_margin_top = 2
+content_margin_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_img_bg"]
+bg_color = Color(0.953, 0.957, 0.965, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_left = 12
+corner_radius_bottom_right = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_img_locked_bg"]
+bg_color = Color(0.851, 0.855, 0.863, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_left = 12
+corner_radius_bottom_right = 12
+
+[node name="CollectionCard" type="PanelContainer"]
+custom_minimum_size = Vector2(160, 200)
+offset_right = 160.0
+offset_bottom = 220.0
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_card_discovered")
+script = ExtResource("1_script")
+style_discovered = SubResource("StyleBoxFlat_card_discovered")
+style_locked = SubResource("StyleBoxFlat_card_locked")
+style_img_bg = SubResource("StyleBoxFlat_card_img_bg")
+style_img_locked_bg = SubResource("StyleBoxFlat_card_img_locked_bg")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="TagRow" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="TagPanel" type="PanelContainer" parent="VBox/TagRow"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tag_bg")
+
+[node name="TagLabel" type="Label" parent="VBox/TagRow/TagPanel"]
+layout_mode = 2
+text = "GRASS"
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
+[node name="Spacer" type="Control" parent="VBox/TagRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardNum" type="Label" parent="VBox/TagRow"]
+layout_mode = 2
+text = "#001"
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+
+[node name="ImgBg" type="PanelContainer" parent="VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 100)
+theme_override_styles/panel = SubResource("StyleBoxFlat_card_img_bg")
+
+[node name="ImgLabel" type="Label" parent="VBox/ImgBg"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "🟢"
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NameLabel" type="Label" parent="VBox"]
+layout_mode = 2
+text = "GREENIE"
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+
+[node name="StarsLabel" type="Label" parent="VBox"]
+layout_mode = 2
+text = "★★★☆☆"
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.973, 0.741, 0.133, 1)
+horizontal_alignment = 1
+
+[connection signal="gui_input" from="." method="_on_gui_input"]

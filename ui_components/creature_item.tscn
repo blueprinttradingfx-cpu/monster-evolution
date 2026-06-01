@@ -4,7 +4,7 @@
 
 [node name="CreatureItem" type="Control"]
 layout_mode = 2
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(96, 96)
 script = ExtResource("1_creature_item_script")
 
 [node name="Icon" type="Label" parent="."]

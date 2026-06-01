@@ -21,9 +21,12 @@ signal screen_changed(new_screen: Screen, extra: Dictionary)
 var current_screen: Screen = Screen.BOOT
 var session_rewards: Dictionary = {}
 var current_creature_id: String = ""  # Used for CREATURE_DETAIL
+var merge_selected_creature_id: String = ""  # Used for MERGE screen pre-selection
 
 func go_to(screen: Screen, extra: Dictionary = {}) -> void:
 	current_screen = screen
 	if screen == Screen.CREATURE_DETAIL:
 		current_creature_id = extra.get("creature_id", "")
+	elif screen == Screen.MERGE:
+		merge_selected_creature_id = extra.get("creature_id", "")
 	screen_changed.emit(screen, extra)

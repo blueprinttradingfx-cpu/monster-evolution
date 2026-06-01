@@ -16,8 +16,18 @@ extends Control
 # ---------------------------------------------------------------------------
 # CONSTANTS
 # ---------------------------------------------------------------------------
+# const CARD_SCENE = preload("res://scenes/screens/collection/CollectionCard.tscn")
 const SYMBOLS: Array = ["🥚", "🐣", "🦖", "🦕", "🐉", "🔥"]
 const CREATURE_IDS: Array = ["egg", "baby_dino", "raptor", "t_rex", "dragon", "lava_dragon"]
+
+# ---------------------------------------------------------------------------
+# EXPOSED STYLES
+# ---------------------------------------------------------------------------
+@export var style_card_discovered: StyleBoxFlat
+@export var style_card_locked: StyleBoxFlat
+@export var style_img_bg: StyleBoxFlat
+@export var style_img_locked_bg: StyleBoxFlat
+@export var style_tag_bg: StyleBoxFlat
 
 # ---------------------------------------------------------------------------
 # PRIVATE STATE
@@ -31,12 +41,12 @@ func _ready() -> void:
 	_refresh_currency_display()
 	_populate_collection()
 	_animate_progress_bar()
-	
+
 	# Connect signals
 	MergeSystem.creature_unlocked.connect(_populate_collection)
 	MergeSystem.inventory_updated.connect(_populate_collection)
 	bottom_nav.tab_changed.connect(_on_tab_pressed)
-	
+
 	bottom_nav.set_active("collection")
 	bottom_nav.start_button.visible = false
 
@@ -59,7 +69,7 @@ func _animate_progress_bar() -> void:
 	for creature_id in all_creature_ids:
 		if MergeSystem.is_unlocked(creature_id):
 			unlocked_count += 1
-	
+
 	var ratio: float = float(unlocked_count) / float(max(all_creature_ids.size(), 1))
 	var pct_int: int = int(round(ratio * 100.0))
 	completion_pct_label.text = "%d%%" % pct_int
@@ -88,58 +98,105 @@ func _update_hint_text(unlocked: int, total: int) -> void:
 # ---------------------------------------------------------------------------
 func _populate_collection() -> void:
 	var all_creature_ids: Array = MergeSystem.get_all_creature_ids()
-	
+
 	# Clear old cards
 	for child in card_grid.get_children():
 		child.queue_free()
-	
+
 	# Add new cards
 	for i in range(all_creature_ids.size()):
 		var creature_id: String = all_creature_ids[i]
 		var is_unlocked: bool = MergeSystem.is_unlocked(creature_id)
 		var creature_card: PanelContainer = _create_creature_card(creature_id, is_unlocked, i + 1)
 		card_grid.add_child(creature_card)
-	
+
 	_animate_progress_bar()
 	_refresh_currency_display()
 
 func _create_creature_card(creature_id: String, is_unlocked: bool, index: int) -> PanelContainer:
 	var card: PanelContainer = PanelContainer.new()
 	card.custom_minimum_size = Vector2(160, 200)
+	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
+	if is_unlocked:
+		if style_card_discovered:
+			card.add_theme_stylebox_override("panel", style_card_discovered)
+	else:
+		if style_card_locked:
+			card.add_theme_stylebox_override("panel", style_card_locked)
+		card.modulate = Color(1, 1, 1, 0.8)
 
 	var vbox: VBoxContainer = VBoxContainer.new()
 	vbox.layout_mode = 2
+	vbox.set("theme_override_constants/separation", 6)
 	card.add_child(vbox)
-	
-	# Add icon
+
+	# Tag Row
+	var tag_row: HBoxContainer = HBoxContainer.new()
+	tag_row.layout_mode = 2
+	vbox.add_child(tag_row)
+
+	var tag_panel: PanelContainer = PanelContainer.new()
+	if style_tag_bg:
+		tag_panel.add_theme_stylebox_override("panel", style_tag_bg)
+	tag_row.add_child(tag_panel)
+
+	var tag_label: Label = Label.new()
+	tag_label.text = "MONSTER" if is_unlocked else "???"
+	tag_label.add_theme_font_size_override("font_size", 10)
+	tag_label.add_theme_color_override("font_color", Color.WHITE if is_unlocked else Color(0.286, 0.267, 0.329, 1))
+	tag_panel.add_child(tag_label)
+
+	var spacer: Control = Control.new()
+	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	tag_row.add_child(spacer)
+
+	var num_label: Label = Label.new()
+	num_label.text = "#%03d" % index
+	num_label.add_theme_font_size_override("font_size", 11)
+	num_label.add_theme_color_override("font_color", Color(0.286, 0.267, 0.329, 1))
+	tag_row.add_child(num_label)
+
+	# Image Bg
+	var img_panel: PanelContainer = PanelContainer.new()
+	img_panel.custom_minimum_size.y = 100
+	var active_img_style = style_img_bg if is_unlocked else style_img_locked_bg
+	if active_img_style:
+		img_panel.add_theme_stylebox_override("panel", active_img_style)
+	vbox.add_child(img_panel)
+
 	var icon_label: Label = Label.new()
-	icon_label.custom_minimum_size.y = 120
 	icon_label.layout_mode = 2
-	if is_unlocked:
-		icon_label.text = _get_icon_for_creature(creature_id)
-	else:
-		icon_label.text = "❓"
-	icon_label.add_theme_font_size_override("font_size", 64)
-	icon_label.horizontal_alignment = 1
-	vbox.add_child(icon_label)
-	
-	# Add name
-	var name_label: Label = Label.new()
-	name_label.layout_mode = 2
-	if is_unlocked:
-		name_label.text = MergeSystem.get_creature_name(creature_id)
-	else:
-		name_label.text = "LOCKED"
-	name_label.add_theme_font_size_override("font_size", 16)
-	name_label.horizontal_alignment = 1
-	vbox.add_child(name_label)
-	
-	# Dim locked cards
+	icon_label.text = _get_icon_for_creature(creature_id) if is_unlocked else "❓"
+	icon_label.add_theme_font_size_override("font_size", 40)
+	icon_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	icon_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	if not is_unlocked:
-		card.modulate = Color(1, 1, 1, 0.8)
-	
+		icon_label.add_theme_color_override("font_color", Color(0.176, 0.176, 0.176, 0.4))
+	img_panel.add_child(icon_label)
+
+	# Name
+	var name_label: Label = Label.new()
+	name_label.text = MergeSystem.get_creature_name(creature_id).to_upper() if is_unlocked else "LOCKED"
+	name_label.add_theme_font_size_override("font_size", 12)
+	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	if not is_unlocked:
+		name_label.add_theme_color_override("font_color", Color(0.286, 0.267, 0.329, 1))
+	vbox.add_child(name_label)
+
+	# Stars
+	var stars_label: Label = Label.new()
+	stars_label.text = "★★★☆☆" if is_unlocked else "☆☆☆☆☆"
+	stars_label.add_theme_font_size_override("font_size", 11)
+	stars_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	if is_unlocked:
+		stars_label.add_theme_color_override("font_color", Color(0.973, 0.741, 0.133, 1))
+	else:
+		stars_label.add_theme_color_override("font_color", Color(0.851, 0.855, 0.863, 1))
+	vbox.add_child(stars_label)
+
 	card.gui_input.connect(_on_card_gui_input.bind(card, creature_id, is_unlocked))
-	
+
 	return card
 
 func _get_icon_for_creature(creature_id: String) -> String:

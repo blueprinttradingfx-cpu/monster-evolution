@@ -170,7 +170,7 @@ func _populate_evolution() -> void:
 	result_image_node.visible = false
 
 func _populate_cta() -> void:
-	cta_button.text = "🪄  Merge More!"
+	cta_button.text = "🪄  Merge This Creature"
 
 # ---------------------------------------------------------------------------
 # ANIMATIONS
@@ -249,7 +249,7 @@ func _on_cta_up() -> void:
 	tween.tween_property(cta_button, "position:y", _cta_base_y, 0.08)
 
 func _on_cta_pressed() -> void:
-	GameState.go_to(GameState.Screen.MERGE)
+	GameState.go_to(GameState.Screen.MERGE, {"creature_id": _creature_id})
 
 func _on_tab_pressed(tab_name: String) -> void:
 	bottom_nav.set_active(tab_name)

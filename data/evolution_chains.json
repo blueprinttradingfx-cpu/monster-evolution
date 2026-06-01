@@ -1,5 +1,26 @@
 {
-  "chains": [
-    ["egg", "baby_dino", "raptor", "t_rex", "dragon", "lava_dragon"]
-  ]
+  "egg": {
+    "next": "baby_dino",
+    "required": 2
+  },
+  "baby_dino": {
+    "next": "raptor",
+    "required": 2
+  },
+  "raptor": {
+    "next": "t_rex",
+    "required": 2
+  },
+  "t_rex": {
+    "next": "dragon",
+    "required": 2
+  },
+  "dragon": {
+    "next": "lava_dragon",
+    "required": 2
+  },
+  "lava_dragon": {
+    "next": null,
+    "required": 2
+  }
 }
