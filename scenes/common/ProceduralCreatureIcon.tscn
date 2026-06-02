@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://procedural_creature_icon"]
+
+[ext_resource type="Script" path="res://scenes/common/ProceduralCreatureIcon.gd" id="1_script"]
+[ext_resource type="Shader" path="res://assets/shaders/creature_palette.gdshader" id="2_shader"]
+[ext_resource type="Texture2D" uid="uid://brujbmxxuukfx" path="res://assets/sprites/dino.png" id="3_texture"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_palette"]
+shader = ExtResource("2_shader")
+shader_parameter/base_color = Color(1, 1, 1, 1)
+shader_parameter/glow_color = Color(1, 1, 1, 0)
+shader_parameter/glow_intensity = 0.0
+
+[node name="ProceduralCreatureIcon" type="Control"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Shape" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_palette")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_texture")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+position = Vector2(64, 64)
+emitting = false
+amount = 12
+lifetime = 1.5
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, -20)
+initial_velocity_min = 20.0
+initial_velocity_max = 40.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+color = Color(1, 1, 0, 1)

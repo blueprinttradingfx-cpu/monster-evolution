@@ -83,7 +83,25 @@ func _ready() -> void:
 	
 	# Setup BottomNav
 	bottom_nav.set_active("collection")
-	bottom_nav.start_button.visible = false
+	
+	# Set all label font sizes to 24px
+	monster_emoji.add_theme_font_size_override("font_size", 24)
+	rarity_label.add_theme_font_size_override("font_size", 24)
+	monster_name.add_theme_font_size_override("font_size", 24)
+	evo_stage_label.add_theme_font_size_override("font_size", 24)
+	attack_value.add_theme_font_size_override("font_size", 24)
+	energy_value.add_theme_font_size_override("font_size", 24)
+	about_body.add_theme_font_size_override("font_size", 24)
+	ingredient1_emoji.add_theme_font_size_override("font_size", 24)
+	ingredient1_label.add_theme_font_size_override("font_size", 24)
+	ingredient2_emoji.add_theme_font_size_override("font_size", 24)
+	ingredient2_label.add_theme_font_size_override("font_size", 24)
+	result_emoji_node.add_theme_font_size_override("font_size", 24)
+	result_label_node.add_theme_font_size_override("font_size", 24)
+	
+	# Set all button font sizes to 24px
+	back_button.add_theme_font_size_override("font_size", 24)
+	cta_button.add_theme_font_size_override("font_size", 24)
 
 # ---------------------------------------------------------------------------
 # UI POPULATION
@@ -111,6 +129,12 @@ func _populate_hero() -> void:
 	if idx == -1:
 		idx = 0
 	
+	var symbol: String = "?"
+	if has_node("/root/CreatureRegistry"):
+		var data = get_node("/root/CreatureRegistry").get_creature(_creature_id)
+		if data:
+			symbol = data.symbol
+	
 	monster_name.text = MergeSystem.get_creature_name(_creature_id)
 	
 	var tier: int = MergeSystem.get_evolution_level(_creature_id)
@@ -124,7 +148,7 @@ func _populate_hero() -> void:
 		rarity_pill.modulate = RARITY_COLORS[rarity]
 	
 	# For now just use emoji
-	monster_emoji.text = SYMBOLS[idx]
+	monster_emoji.text = symbol
 	monster_emoji.visible = true
 	monster_image.visible = false
 
@@ -150,12 +174,17 @@ func _populate_evolution() -> void:
 	if idx > 0:
 		var prev_id: String = CREATURE_IDS[idx - 1]
 		ingredient1_label.text = MergeSystem.get_creature_name(prev_id)
-		ingredient1_emoji.text = SYMBOLS[idx - 1]
+		var prev_symbol: String = "?"
+		if has_node("/root/CreatureRegistry"):
+			var data = get_node("/root/CreatureRegistry").get_creature(prev_id)
+			if data:
+				prev_symbol = data.symbol
+		ingredient1_emoji.text = prev_symbol
 		ingredient1_emoji.visible = true
 		ingredient1_image.visible = false
 		
 		ingredient2_label.text = MergeSystem.get_creature_name(prev_id)
-		ingredient2_emoji.text = SYMBOLS[idx - 1]
+		ingredient2_emoji.text = prev_symbol
 		ingredient2_emoji.visible = true
 		ingredient2_image.visible = false
 	else:
@@ -165,7 +194,12 @@ func _populate_evolution() -> void:
 		ingredient2_emoji.text = "🥚"
 	
 	result_label_node.text = MergeSystem.get_creature_name(_creature_id)
-	result_emoji_node.text = SYMBOLS[idx]
+	var result_symbol: String = "?"
+	if has_node("/root/CreatureRegistry"):
+		var data = get_node("/root/CreatureRegistry").get_creature(_creature_id)
+		if data:
+			result_symbol = data.symbol
+	result_emoji_node.text = result_symbol
 	result_emoji_node.visible = true
 	result_image_node.visible = false
 

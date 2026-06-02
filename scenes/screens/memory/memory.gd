@@ -11,11 +11,11 @@ const FLIP_WAIT        := 0.8    # seconds before hiding unmatched pair
 
 # Level configurations: [rows, cols, pairs, monsters_needed, card_size]
 const LEVELS := [
-	[2, 2, 2, 2, Vector2(160, 160)],  # Level 1: 2x2 grid, 2 pairs, 2 monster types, large cards
-	[2, 3, 3, 3, Vector2(140, 140)],  # Level 2: 2x3 grid, 3 pairs, 3 monster types, medium-large cards
-	[2, 4, 4, 4, Vector2(120, 120)],  # Level 3: 2x4 grid, 4 pairs, 4 monster types, medium cards
-	[3, 4, 6, 6, Vector2(100, 100)],  # Level 4: 3x4 grid, 6 pairs, 6 monster types, medium-small cards
-	[4, 4, 8, 8, Vector2(80, 80)],   # Level 5: 4x4 grid, 8 pairs, 8 monster types, small cards
+	[2, 2, 2, 2, Vector2(180, 280)],  # Level 1: 2x2 grid, 2 pairs, 2 monster types, large cards
+	[2, 3, 3, 3, Vector2(180, 280)],  # Level 2: 2x3 grid, 3 pairs, 3 monster types, medium-large cards
+	[2, 4, 4, 4, Vector2(180, 280)],  # Level 3: 2x4 grid, 4 pairs, 4 monster types, medium cards
+	[3, 4, 6, 6, Vector2(180, 280)],  # Level 4: 3x4 grid, 6 pairs, 6 monster types, medium-small cards
+	[4, 4, 8, 8, Vector2(180, 280)],   # Level 5: 4x4 grid, 8 pairs, 8 monster types, small cards
 ]
 
 # Monster emoji used as card faces (one per pair)
@@ -28,15 +28,19 @@ var turn_count   : int  = 0
 var elapsed_time : float = 0.0
 var is_timing    : bool  = true
 
-var card_values  : Array[int]  = []   # assigned monster index per card slot
-var card_matched : Array[bool] = []   # permanently revealed
-var flipped_now  : Array[int]  = []   # indices of currently face-up (unmatched) cards
-var is_locked    : bool = false       # prevent clicks during flip-back animation
+var card_values: Array[int] = []   # assigned monster index per card slot
+var card_matched: Array[bool] = []   # permanently revealed
+var flipped_now: Array[int] = []   # indices of currently face-up (unmatched) cards
+var is_locked: bool = false       # prevent clicks during flip-back animation
+var grid_pos_to_idx: Dictionary = {}  # maps Vector2i grid pos to idx
+var grid_cols: int = 0
+
+var _card_scene = preload("res://ui_components/card.tscn")
 
 # Node references (resolved in _ready)
 @onready var top_appbar        : TopAppBar     = $TopAppBar
 @onready var bottom_nav        : BottomNav     = $BottomNav
-@onready var card_grid         : GridContainer = $MainLayout/ScrollContainer/ContentArea/CardGrid
+@onready var card_grid : GridContainer = $MainLayout/ScrollContainer/ContentArea/BoardGridContainer/CenterContainer/CardGrid
 @onready var level_label       : Label         = $MainLayout/ScrollContainer/ContentArea/StatusRow/MatchesPanel/MatchesContent/LevelLabel
 @onready var matches_label     : Label         = $MainLayout/ScrollContainer/ContentArea/StatusRow/MatchesPanel/MatchesContent/MatchesValue
 @onready var timer_label       : Label         = $MainLayout/ScrollContainer/ContentArea/StatusRow/TimerTurns/TimerLabel
@@ -56,13 +60,24 @@ var is_locked    : bool = false       # prevent clicks during flip-back animatio
 
 func _ready() -> void:
 	_apply_overlay_styles()
+	# Load saved level
+	var save_data = SaveSystem.get_data()
+	current_level = save_data.get("progression", {}).get("memory_level", 1)
 	_setup_game()
 	next_button.pressed.connect(_setup_game)
 	confetti_timer.timeout.connect(_spawn_confetti_burst)
 	_update_hud()
 	_connect_bottom_nav()
 	bottom_nav.set_active("play")
-	bottom_nav.start_button.visible = false
+	
+	# Set all label font sizes to 24px
+	level_label.add_theme_font_size_override("font_size", 24)
+	matches_label.add_theme_font_size_override("font_size", 24)
+	timer_label.add_theme_font_size_override("font_size", 24)
+	turns_label.add_theme_font_size_override("font_size", 24)
+	egg_value_label.add_theme_font_size_override("font_size", 24)
+	coin_value_label.add_theme_font_size_override("font_size", 24)
+	progress_pct.add_theme_font_size_override("font_size", 24)
 
 func _process(delta: float) -> void:
 	if is_timing:
@@ -100,6 +115,9 @@ func _setup_game() -> void:
 	var monsters_needed: int = level_config[3]
 	var card_size: Vector2 = level_config[4]
 
+	# Store grid cols for position calculation
+	self.grid_cols = grid_cols
+
 	# Update grid columns and separation
 	card_grid.columns = grid_cols
 	var separation: int = int(card_size.x * 0.1)
@@ -108,13 +126,14 @@ func _setup_game() -> void:
 
 	# Reset state
 	matches_done = 0
-	turn_count   = 0
+	turn_count = 0
 	elapsed_time = 0.0
-	is_timing    = true
-	is_locked    = false
+	is_timing = true
+	is_locked = false
 	flipped_now.clear()
 	win_overlay.visible = false
 	confetti_timer.stop()
+	grid_pos_to_idx.clear()
 
 	# Clear any remaining confetti
 	for child in confetti_layer.get_children():
@@ -131,45 +150,94 @@ func _setup_game() -> void:
 		card_matched.append(false)
 
 	# Build grid
+	# Clear existing children first
 	for child in card_grid.get_children():
-		child.queue_free()
+		card_grid.remove_child(child)
+		# Disconnect the signal before returning/freeing
+		var btn = child as Button
+		if btn:
+			if btn.card_pressed.is_connected(_on_card_pressed):
+				btn.card_pressed.disconnect(_on_card_pressed)
+			# Reset card state
+			if btn.has_method("reset"):
+				btn.reset()
+		if has_node("/root/PerformanceLayer"):
+			get_node("/root/PerformanceLayer").return_to_pool("card", child)
+		else:
+			child.queue_free()
 
 	for idx in card_values.size():
 		var card := _make_card(idx, card_size)
-		card_grid.add_child(card)
+		if card:
+			card_grid.add_child(card)
 
+	_log_card_status()  # Log all card details on game start
+	# Update HUD and progress
 	_update_hud()
 	_refresh_progress(total_pairs)
+
+func _emit_juice(event_type: String, payload: Dictionary) -> void:
+	var juice_layer = get_node_or_null("/root/UIJuiceLayer")
+	if juice_layer:
+		juice_layer.on_event(event_type, payload)
 
 # ── Card Factory ──────────────────────────────
 
 func _make_card(idx: int, card_size: Vector2) -> Button:
-	var btn: Button = Button.new()
-	btn.custom_minimum_size = card_size
-	btn.name = "Card_%d" % idx
-	btn.text = "?"
-	# Scale font size based on card size
-	var font_size: int = int(card_size.x * 0.4)
-	btn.add_theme_font_size_override("font_size", font_size)
+	var card: Button
+	if has_node("/root/PerformanceLayer"):
+		card = get_node("/root/PerformanceLayer").get_from_pool("card", _card_scene) as Button
+	else:
+		card = _card_scene.instantiate() as Button
 
-	# Scale border and corner radius based on card size
-	var border_width: int = max(2, int(card_size.x * 0.03))
-	var corner_radius: int = int(card_size.x * 0.17)
+	if not card:
+		return null
 
-	# Style: face-down
-	var style_down: StyleBoxFlat = StyleBoxFlat.new()
-	style_down.bg_color        = Color(1, 1, 1, 1)
-	style_down.border_color    = Color(0.176, 0.176, 0.176, 1)
-	style_down.set_border_width_all(border_width)
-	style_down.set_corner_radius_all(corner_radius)
-	btn.add_theme_stylebox_override("normal", style_down)
+	card.custom_minimum_size = card_size
+	card.name = "Card_%d" % idx
 
-	btn.pressed.connect(_on_card_pressed.bind(idx))
-	return btn
+	# Setup the new card with our card.gd script
+	var x = idx % grid_cols
+	var y = idx / grid_cols
+	var grid_pos = Vector2i(x, y)
+	if card.has_method("setup"):
+		# Create a dummy card data object for our new card
+		var dummy_card_data: Dictionary = { "id": idx }
+		card.setup(dummy_card_data, grid_pos)
+	
+	# Set the monster text on the FrontFace NOW, not just when flipping up
+	var front_face = card.get_node_or_null("FrontFace")
+	if front_face:
+		var monster_label = front_face.get_node_or_null("MonsterLabel")
+		if monster_label:
+			var monster_idx: int = card_values[idx]
+			monster_label.text = MONSTERS[monster_idx]
+			monster_label.theme_type_variation = ""
+			monster_label.add_theme_color_override("font_color", Color.BLACK)
+	
+	# Also ensure BackFace is properly styled
+	var back_face = card.get_node_or_null("BackFace") as Label
+	if back_face:
+		back_face.theme_type_variation = ""
+		back_face.add_theme_color_override("font_color", Color.BLACK)
+		back_face.add_theme_font_size_override("font_size", 1)
+
+	# Store mapping of grid_pos to idx
+	grid_pos_to_idx[grid_pos] = idx
+
+	# Connect our own logic
+	if card.card_pressed.is_connected(_on_card_pressed):
+		card.card_pressed.disconnect(_on_card_pressed)
+	card.card_pressed.connect(_on_card_pressed)
+
+	return card
 
 # ── Input Handling ────────────────────────────
 
-func _on_card_pressed(idx: int) -> void:
+func _on_card_pressed(grid_pos: Vector2i) -> void:
+	var idx = grid_pos_to_idx.get(grid_pos, -1)
+	if idx == -1:
+		return
 	if is_locked:
 		return
 	if card_matched[idx]:
@@ -182,6 +250,8 @@ func _on_card_pressed(idx: int) -> void:
 	_flip_card_up(idx)
 	flipped_now.append(idx)
 
+	_emit_juice("card_flip", {"node": card_grid.get_child(idx)})
+
 	if flipped_now.size() == 2:
 		turn_count += 1
 		_check_match()
@@ -189,56 +259,61 @@ func _on_card_pressed(idx: int) -> void:
 # ── Flip Animations ───────────────────────────
 
 func _flip_card_up(idx: int) -> void:
-	var btn: Button = card_grid.get_child(idx) as Button
-	if not btn:
+	var card: Button = card_grid.get_child(idx) as Button
+	if not card:
 		return
-	var monster_idx: int = card_values[idx]
-	var tween: Tween = create_tween()
-	tween.tween_property(btn, "scale:x", 0.0, FLIP_DURATION)
-	tween.tween_callback(func():
-		btn.text = MONSTERS[monster_idx]
-		btn.add_theme_color_override("font_color", Color(0.176, 0.176, 0.176, 1))
-	)
-	tween.tween_property(btn, "scale:x", 1.0, FLIP_DURATION)
+
+	# Update FrontFace to show the monster emoji
+	var front_face = card.get_node_or_null("FrontFace")
+	if front_face:
+		var monster_label = front_face.get_node_or_null("MonsterLabel")
+		if monster_label:
+			var monster_idx: int = card_values[idx]
+			monster_label.text = MONSTERS[monster_idx]
+			monster_label.theme_type_variation = ""
+			monster_label.add_theme_color_override("font_color", Color.BLACK)
+	
+	# Also make sure BackFace is visible/colored
+	var back_face: Label = card.get_node("BackFace") as Label
+	if back_face:
+		back_face.theme_type_variation = ""
+		back_face.add_theme_color_override("font_color", Color.BLACK)
+
+	if card.has_method("flip_to_front"):
+		card.flip_to_front()
 
 func _flip_card_down(idx: int) -> void:
-	var btn: Button = card_grid.get_child(idx) as Button
-	if not btn:
+	var card: Button = card_grid.get_child(idx) as Button
+	if not card:
 		return
-	var tween: Tween = create_tween()
-	tween.tween_property(btn, "scale:x", 0.0, FLIP_DURATION)
-	tween.tween_callback(func():
-		btn.text = "?"
-		btn.remove_theme_color_override("font_color")
-	)
-	tween.tween_property(btn, "scale:x", 1.0, FLIP_DURATION)
+
+	if card.has_method("flip_to_back"):
+		card.flip_to_back()
 
 func _mark_card_matched(idx: int) -> void:
-	var btn: Button = card_grid.get_child(idx) as Button
-	if not btn:
+	var card: Button = card_grid.get_child(idx) as Button
+	if not card:
 		return
-	# Green border to signal a match (mirrors the HTML border-growth-green)
-	var style_matched: StyleBoxFlat = StyleBoxFlat.new()
-	style_matched.bg_color        = Color(0.878, 0.988, 0.914, 1)
-	style_matched.border_color    = Color(0.204, 0.827, 0.6, 1)
-	style_matched.set_border_width_all(6)
-	# Get corner radius from current style
-	var current_style: StyleBox = btn.get_theme_stylebox("normal")
-	if current_style:
-		style_matched.set_corner_radius_all(current_style.corner_radius_top_left)
-	else:
-		style_matched.set_corner_radius_all(20)
-	btn.add_theme_stylebox_override("normal", style_matched)
-	btn.disabled = true
+
+	if card.has_method("set_matched"):
+		card.set_matched()
+
+	if card.has_method("lock"):
+		card.lock()
 
 # ── Match Logic ───────────────────────────────
 
 func _check_match() -> void:
+	print("=== CHECKING MATCH ===")
+	print("  flipped_now: %s" % str(flipped_now))
 	is_locked = true
 	var a := flipped_now[0]
 	var b := flipped_now[1]
+	print("  a: %d, b: %d" % [a, b])
+	print("  card_values[a]: %s, card_values[b]: %s" % [MONSTERS[card_values[a]], MONSTERS[card_values[b]]])
 
 	if card_values[a] == card_values[b]:
+		print("  → MATCH FOUND!")
 		# Match found!
 		card_matched[a] = true
 		card_matched[b] = true
@@ -246,6 +321,8 @@ func _check_match() -> void:
 		_mark_card_matched(b)
 		matches_done += 1
 		_add_coins(25)
+		_emit_juice("match_success", {"a_node": card_grid.get_child(a), "b_node": card_grid.get_child(b)})
+
 		flipped_now.clear()
 		is_locked = false
 		_update_hud()
@@ -258,8 +335,12 @@ func _check_match() -> void:
 		if matches_done == total_pairs:
 			_on_win()
 	else:
+		print("  → NO MATCH, flipping back...")
 		# No match — wait, then flip back
+		_emit_juice("match_fail", {"a_node": card_grid.get_child(a), "b_node": card_grid.get_child(b)})
+		print("  Waiting for %f seconds..." % FLIP_WAIT)
 		await get_tree().create_timer(FLIP_WAIT).timeout
+		print("  Calling _flip_card_down on %d and %d..." % [a, b])
 		_flip_card_down(a)
 		_flip_card_down(b)
 		flipped_now.clear()
@@ -269,6 +350,7 @@ func _check_match() -> void:
 
 func _on_win() -> void:
 	is_timing = false
+	_emit_juice("board_complete", {"level": current_level})
 	_add_egg()
 	_add_coins(200)
 	_update_hud()
@@ -298,9 +380,11 @@ func _on_win() -> void:
 
 	win_overlay.visible = true
 
-	# Progress to next level (cap at max level)
+	# Progress to next level (cap at max level) and save!
 	if current_level < LEVELS.size():
 		current_level += 1
+		SaveSystem.set_progression_value("memory_level", current_level)
+		SaveSystem.save_game()
 
 # ── Confetti ───────────────────────────────────
 
@@ -458,6 +542,46 @@ func _refresh_progress(total_pairs: int) -> void:
 	var pct: float = float(matches_done) / float(total_pairs)
 	# Resize the fill rect by adjusting its anchor
 	progress_fill.anchor_right = pct
+
+# ── Utility: Log Card Status ─────────────────────────────
+func _log_card_status(clicked_idx: int = -1) -> void:
+	print("=== CARD STATUS ===")
+	for idx in card_values.size():
+		var grid_pos: Vector2i
+		# Find grid_pos from idx (reverse lookup of grid_pos_to_idx)
+		for pos in grid_pos_to_idx:
+			if grid_pos_to_idx[pos] == idx:
+				grid_pos = pos
+				break
+		
+		var card = card_grid.get_child(idx) as Button
+		if card:
+			var prefix = "→ " if idx == clicked_idx else "  "
+			print("%sCard %d (Grid: %s):" % [prefix, idx, str(grid_pos)])
+			print("  Value: %s" % MONSTERS[card_values[idx]])
+			print("  Flipped: %s" % str(card.is_flipped() if card.has_method("is_flipped") else false))
+			print("  Matched: %s" % str(card_matched[idx]))
+			print("  Disabled: %s" % str(card.disabled))
+			print("  Modulate: %s" % str(card.modulate))
+			# Log background states
+			var bg_node = card.get_node_or_null("Bg")
+			if bg_node:
+				print("  Bg visible: %s" % str(bg_node.visible))
+			var flipped_bg_node = card.get_node_or_null("FlippedBg")
+			if flipped_bg_node:
+				print("  FlippedBg visible: %s, color: %s" % [str(flipped_bg_node.visible), str(flipped_bg_node.color)])
+			# Log text nodes
+			var back_face = card.get_node_or_null("BackFace")
+			if back_face:
+				print("  BackFace visible: %s, text: '%s'" % [str(back_face.visible), back_face.text])
+			var front_face = card.get_node_or_null("FrontFace")
+			if front_face:
+				if front_face is Label:
+					print("  FrontFace visible: %s, text: '%s'" % [str(front_face.visible), front_face.text])
+				elif front_face is TextureRect:
+					print("  FrontFace visible: %s, texture: '%s'" % [str(front_face.visible), front_face.texture.resource_path if front_face.texture else "null"])
+				else:
+					print("  FrontFace visible: %s, type: %s" % [str(front_face.visible), front_face.get_class()])
 
 # ── Utility ───────────────────────────────────
 

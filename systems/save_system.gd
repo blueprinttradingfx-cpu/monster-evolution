@@ -4,7 +4,7 @@ signal data_updated()
 
 var _save_data: Dictionary = {}
 
-const SAVE_FILE_PATH := "user://save_v2.json"
+const SAVE_FILE_PATH := "user://save_v3.json"
 
 func _ready() -> void:
 	load_game()
@@ -25,7 +25,7 @@ func load_game() -> void:
 
 func _create_new_save() -> void:
 	_save_data = {
-		"version": 2,
+		"version": 3,
 		"meta": {
 			"created_at": Time.get_unix_time_from_system(),
 			"last_login": Time.get_unix_time_from_system()
@@ -36,12 +36,18 @@ func _create_new_save() -> void:
 		"inventory": {},
 		"progression": {
 			"total_matches": 0,
-			"boards_cleared": 0
+			"boards_cleared": 0,
+			"first_launch_date": 0,
+			"total_login_days": 0,
+			"last_login_date": "",
+			"memory_level": 1
 		},
 		"unlocks": {
 			"creatures": {
 				"egg": true
-			}
+			},
+			"card_themes": {},
+			"skins": {}
 		},
 		"settings": {
 			"sound": true,
@@ -62,9 +68,19 @@ func _migrate(old_data: Dictionary) -> Dictionary:
 
 	if version < 2:
 		old_data = _migrate_v1_to_v2(old_data)
+	
+	if version < 3:
+		old_data = _migrate_v2_to_v3(old_data)
 
-	old_data["version"] = 2
+	old_data["version"] = 3
 	return old_data
+
+func _migrate_v2_to_v3(data: Dictionary) -> Dictionary:
+	if not data.has("progression"):
+		data["progression"] = {}
+	if not data["progression"].has("memory_level"):
+		data["progression"]["memory_level"] = 1
+	return data
 
 func _migrate_v1_to_v2(data: Dictionary) -> Dictionary:
 	# Update meta
@@ -95,13 +111,13 @@ func _migrate_v1_to_v2(data: Dictionary) -> Dictionary:
 
 func save_game() -> void:
 	_save_data["meta"]["last_login"] = Time.get_unix_time_from_system()
-	
+
 	var tmp_path := SAVE_FILE_PATH + ".tmp"
 	var file := FileAccess.open(tmp_path, FileAccess.WRITE)
 	if file:
 		file.store_string(JSON.stringify(_save_data))
 		file.close()
-		
+
 		var abs_save_path := ProjectSettings.globalize_path(SAVE_FILE_PATH)
 		var abs_tmp_path := ProjectSettings.globalize_path(tmp_path)
 		var dir := DirAccess.open("user://")
@@ -109,7 +125,7 @@ func save_game() -> void:
 			if FileAccess.file_exists(SAVE_FILE_PATH):
 				dir.remove_absolute(abs_save_path)
 			dir.rename_absolute(abs_tmp_path, abs_save_path)
-		
+
 		data_updated.emit()
 	else:
 		push_error("Failed to write save file")
@@ -165,6 +181,42 @@ func unlock_creature(creature_id: String) -> void:
 		_save_data["unlocks"]["creatures"] = {}
 	_save_data["unlocks"]["creatures"][creature_id] = true
 
+func unlock_card_theme(theme_id: String) -> void:
+	if not _save_data.has("unlocks"):
+		_save_data["unlocks"] = {"card_themes": {}, "skins": {}}
+	if not _save_data["unlocks"].has("card_themes"):
+		_save_data["unlocks"]["card_themes"] = {}
+	_save_data["unlocks"]["card_themes"][theme_id] = true
+
+func unlock_skin(skin_id: String) -> void:
+	if not _save_data.has("unlocks"):
+		_save_data["unlocks"] = {"card_themes": {}, "skins": {}}
+	if not _save_data["unlocks"].has("skins"):
+		_save_data["unlocks"]["skins"] = {}
+	_save_data["unlocks"]["skins"][skin_id] = true
+
+func is_card_theme_unlocked(theme_id: String) -> bool:
+	return _save_data.get("unlocks", {}).get("card_themes", {}).get(theme_id, false)
+
+func is_skin_unlocked(skin_id: String) -> bool:
+	return _save_data.get("unlocks", {}).get("skins", {}).get(skin_id, false)
+
+func get_unlocked_card_themes() -> Array[String]:
+	var arr: Array[String] = []
+	if _save_data.has("unlocks") and _save_data["unlocks"].has("card_themes"):
+		for theme_id in _save_data["unlocks"]["card_themes"]:
+			if _save_data["unlocks"]["card_themes"][theme_id]:
+				arr.append(theme_id)
+	return arr
+
+func get_unlocked_skins() -> Array[String]:
+	var arr: Array[String] = []
+	if _save_data.has("unlocks") and _save_data["unlocks"].has("skins"):
+		for skin_id in _save_data["unlocks"]["skins"]:
+			if _save_data["unlocks"]["skins"][skin_id]:
+				arr.append(skin_id)
+	return arr
+
 func add_rewards(rewards: Dictionary) -> void:
 	add_coins(int(rewards.get("coins", 0)))
 	var egg_count = int(rewards.get("eggs", 0))
@@ -177,6 +229,11 @@ func get_setting(key: String) -> Variant:
 func set_setting(key: String, value: Variant) -> void:
 	_save_data["settings"][key] = value
 
+func set_progression_value(key: String, value: Variant) -> void:
+	if not _save_data.has("progression"):
+		_save_data["progression"] = {}
+	_save_data["progression"][key] = value
+
 func increment_progression(matches: int = 0, boards: int = 0) -> void:
 	_save_data["progression"]["total_matches"] += matches
 	_save_data["progression"]["boards_cleared"] += boards
@@ -185,7 +242,7 @@ func check_daily_reward() -> bool:
 	var date_dict: Dictionary = Time.get_date_dict_from_system()
 	var today: String = "%d-%d-%d" % [date_dict.year, date_dict.month, date_dict.day]
 	var saved_date: String = _save_data.get("daily", {}).get("last_login_date", "")
-	
+
 	if today == saved_date:
 		if _save_data["daily"]["claimed"]:
 			return false

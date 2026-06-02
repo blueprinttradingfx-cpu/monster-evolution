@@ -26,6 +26,8 @@ signal board_completed(stats: Dictionary)
 var board: Array = []
 var flipped_cards: Array[Vector2i] = []
 
+var balancing_config: Resource = preload("res://resources/balancing/game_balancing.tres")
+
 var grid_size: Vector2i = Vector2i(2, 2)
 var move_count: int = 0
 var match_count: int = 0
@@ -63,6 +65,13 @@ func build_board(deck: Array[String], grid: Vector2i) -> Array:
 	return new_board
 
 func generate_board(size: Vector2i, theme: String) -> void:
+	if has_node("/root/DebugTuner"):
+		var debug_tuner = get_node("/root/DebugTuner")
+		size = debug_tuner.get_grid_size(size)
+
+	if has_node("/root/TutorialSystem") and get_node("/root/TutorialSystem").is_active and get_node("/root/TutorialSystem").current_step <= 1:
+		size = Vector2i(2, 2) # Force 2x2 for tutorial
+
 	grid_size = size
 	var total: int = get_total_cells(size)
 	if total % 2 != 0:
@@ -129,6 +138,9 @@ func handle_match(a: Vector2i, b: Vector2i) -> void:
 	emit_signal("card_matched", a, b)
 	_emit_juice("match_success", {"a": a, "b": b})
 
+	if has_node("/root/TutorialSystem") and get_node("/root/TutorialSystem").is_active and get_node("/root/TutorialSystem").current_step == 1:
+		get_node("/root/TutorialSystem").next_step()
+
 	if is_board_cleared():
 		_finish_board()
 
@@ -163,7 +175,19 @@ func _finish_board() -> void:
 	emit_signal("board_completed", stats)
 	_emit_juice("board_complete", stats)
 
+func get_current_difficulty() -> Vector2i:
+	var boards_cleared = 0
+	var save_data = SaveSystem.get_data()
+	if save_data.has("progression") and save_data["progression"].has("boards_cleared"):
+		boards_cleared = save_data["progression"]["boards_cleared"]
+
+	return get_next_difficulty(boards_cleared)
+
 func get_next_difficulty(current_level: int) -> Vector2i:
+	if balancing_config:
+		return balancing_config.get_grid_for_level(current_level)
+
+	# Fallback if config is missing
 	match current_level:
 		0:
 			return Vector2i(2, 2)

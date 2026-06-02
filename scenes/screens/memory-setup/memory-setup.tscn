@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://calnhq8hiky5b"]
+[gd_scene format=3 uid="uid://calnhq8hiky5b"]
 
 [ext_resource type="Script" uid="uid://bwbdamu4hb823" path="res://scenes/screens/memory-setup/memory-setup.gd" id="3_script"]
-[ext_resource type="PackedScene" uid="uid://common_bottomnav" path="res://scenes/common/BottomNav.tscn" id="4_bottomnav"]
+[ext_resource type="PackedScene" uid="uid://djr1fhap8bajb" path="res://scenes/common/BottomNav.tscn" id="4_bottomnav"]
+[ext_resource type="Theme" uid="uid://dc3si0880aglo" path="res://resources/monster_morph.tres" id="5_theme"]
+[ext_resource type="Texture2D" uid="uid://6mq1u6e7ukfm" path="res://assets/sprites/bg.png" id="6_bg"]
+[ext_resource type="Texture2D" uid="uid://bsqdq2aj8n75f" path="res://assets/sprites/start.png" id="7_start"]
+[ext_resource type="PackedScene" uid="uid://card" path="res://ui_components/card.tscn" id="8_card"]
 
 [sub_resource type="StyleBoxFlat" id="topbar_style"]
 content_margin_left = 24.0
@@ -95,116 +99,6 @@ corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
 
-[sub_resource type="StyleBoxFlat" id="card_faceup_style"]
-content_margin_left = 12.0
-content_margin_top = 12.0
-content_margin_right = 12.0
-content_margin_bottom = 12.0
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.176, 0.176, 0.176, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-shadow_color = Color(0.176, 0.176, 0.176, 0.3)
-shadow_size = 4
-shadow_offset = Vector2(0, 4)
-
-[sub_resource type="StyleBoxFlat" id="card_facedown_style"]
-content_margin_left = 12.0
-content_margin_top = 12.0
-content_margin_right = 12.0
-content_margin_bottom = 12.0
-bg_color = Color(0.914, 0.867, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.176, 0.176, 0.176, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-shadow_color = Color(0.176, 0.176, 0.176, 0.3)
-shadow_size = 4
-shadow_offset = Vector2(0, 4)
-
-[sub_resource type="StyleBoxFlat" id="card_question_circle"]
-content_margin_left = 12.0
-content_margin_top = 8.0
-content_margin_right = 12.0
-content_margin_bottom = 8.0
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.176, 0.176, 0.176, 1)
-corner_radius_top_left = 999
-corner_radius_top_right = 999
-corner_radius_bottom_right = 999
-corner_radius_bottom_left = 999
-
-[sub_resource type="StyleBoxFlat" id="start_btn_normal"]
-content_margin_left = 24.0
-content_margin_top = 18.0
-content_margin_right = 24.0
-content_margin_bottom = 18.0
-bg_color = Color(0.42, 0.22, 0.831, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.176, 0.176, 0.176, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-shadow_color = Color(0.333, 0.086, 0.745, 1)
-shadow_size = 4
-shadow_offset = Vector2(0, 4)
-
-[sub_resource type="StyleBoxFlat" id="start_btn_pressed"]
-content_margin_left = 24.0
-content_margin_top = 22.0
-content_margin_right = 24.0
-content_margin_bottom = 14.0
-bg_color = Color(0.42, 0.22, 0.831, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.176, 0.176, 0.176, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-
-[sub_resource type="StyleBoxFlat" id="start_btn_hover"]
-content_margin_left = 24.0
-content_margin_top = 18.0
-content_margin_right = 24.0
-content_margin_bottom = 18.0
-bg_color = Color(0.49, 0.27, 0.9, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.176, 0.176, 0.176, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-shadow_color = Color(0.333, 0.086, 0.745, 1)
-shadow_size = 4
-shadow_offset = Vector2(0, 4)
-
-
-
 [node name="MemoryChallengeScreen" type="Control" unique_id=1100399990]
 layout_mode = 3
 anchors_preset = 15
@@ -212,7 +106,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("5_theme")
 script = ExtResource("3_script")
+
+[node name="BgTexture" type="TextureRect" parent="." unique_id=1895754616]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_bg")
+expand_mode = 1
 
 [node name="TopBar" type="PanelContainer" parent="." unique_id=311213813]
 z_index = 10
@@ -238,7 +143,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.42, 0.22, 0.831, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 24
 text = "Memory Challenge"
 vertical_alignment = 1
 
@@ -253,8 +158,8 @@ theme_override_styles/panel = SubResource("badge_style")
 [node name="CurrencyLabel" type="Label" parent="TopBar/TopBarHBox/CurrencyBadge" unique_id=1485265049]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.098, 0.11, 0.114, 1)
-theme_override_font_sizes/font_size = 13
-text = "0 🪙  0 🥚"
+theme_override_font_sizes/font_size = 24
+text = "0 $  0 🥚"
 vertical_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1057205916]
@@ -262,8 +167,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 56.0
-offset_bottom = -148.0
+offset_left = 40.0
+offset_top = 135.0
+offset_right = -40.0
+offset_bottom = -505.0
 grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
@@ -292,12 +199,13 @@ autowrap_mode = 2
 [node name="HeroSubtitle" type="Label" parent="ScrollContainer/ContentVBox/HeroSection" unique_id=185144721]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 24
 text = "Unlock new monsters by proving your memory skills!"
 horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="LevelCard" type="PanelContainer" parent="ScrollContainer/ContentVBox" unique_id=1027007527]
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 theme_override_styles/panel = SubResource("level_card_style")
 
@@ -315,7 +223,7 @@ size_flags_horizontal = 3
 [node name="ThemeLabel" type="Label" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/ThemeRow/ThemeInfo" unique_id=1716550117]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.482, 0.455, 0.525, 1)
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 24
 text = "THEME"
 
 [node name="ThemeValue" type="Label" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/ThemeRow/ThemeInfo" unique_id=1571268737]
@@ -346,6 +254,7 @@ theme_override_constants/v_separation = 12
 columns = 2
 
 [node name="GridSizeCard" type="PanelContainer" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid" unique_id=459729828]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("stat_card_style")
 
@@ -356,15 +265,16 @@ theme_override_constants/separation = 4
 [node name="GridSizeLabel" type="Label" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid/GridSizeCard/GridSizeVBox" unique_id=1736794227]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.482, 0.455, 0.525, 1)
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 24
 text = "GRID SIZE"
 
 [node name="GridSizeValue" type="Label" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid/GridSizeCard/GridSizeVBox" unique_id=12349992]
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 36
 text = "2x2"
 
 [node name="DifficultyCard" type="PanelContainer" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid" unique_id=500493568]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("stat_card_style")
 
@@ -375,7 +285,7 @@ theme_override_constants/separation = 4
 [node name="DiffLabel" type="Label" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid/DifficultyCard/DifficultyVBox" unique_id=2039407216]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.482, 0.455, 0.525, 1)
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 24
 text = "DIFFICULTY"
 
 [node name="DiffHBox" type="HBoxContainer" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid/DifficultyCard/DifficultyVBox" unique_id=536996747]
@@ -390,10 +300,11 @@ color = Color(0.204, 0.831, 0.6, 1)
 
 [node name="DiffValue" type="Label" parent="ScrollContainer/ContentVBox/LevelCard/LevelCardVBox/StatsGrid/DifficultyCard/DifficultyVBox/DiffHBox" unique_id=70567550]
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 36
 text = "Easy"
 
 [node name="PreviewSection" type="VBoxContainer" parent="ScrollContainer/ContentVBox" unique_id=257517776]
+custom_minimum_size = Vector2(0, 500)
 layout_mode = 2
 theme_override_constants/separation = 12
 
@@ -408,8 +319,8 @@ text = "👁"
 
 [node name="PreviewLabel" type="Label" parent="ScrollContainer/ContentVBox/PreviewSection/PreviewHeader" unique_id=1012759979]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
-theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.61352384, 0.58757144, 0.672817, 1)
+theme_override_font_sizes/font_size = 24
 text = "BOARD PREVIEW"
 vertical_alignment = 1
 
@@ -417,84 +328,55 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_styles/panel = SubResource("board_bg_style")
 
-[node name="BoardGrid" type="GridContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer" unique_id=1254499910]
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer" unique_id=1254499911]
 layout_mode = 2
-theme_override_constants/h_separation = 12
-theme_override_constants/v_separation = 12
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BoardGrid" type="GridContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/CenterContainer" unique_id=1254499910]
+layout_mode = 2
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="PreviewCard1" type="PanelContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid" unique_id=1386044040]
-custom_minimum_size = Vector2(120, 120)
+[node name="PreviewCard1" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/CenterContainer/BoardGrid" unique_id=1386044040 instance=ExtResource("8_card")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("card_faceup_style")
 
-[node name="Card1Label" type="Label" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid/PreviewCard1" unique_id=1531891406]
+[node name="PreviewCard2" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/CenterContainer/BoardGrid" unique_id=1956362878 instance=ExtResource("8_card")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 52
-text = "🟢"
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="PreviewCard2" type="PanelContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid" unique_id=1956362878]
-custom_minimum_size = Vector2(120, 120)
+[node name="PreviewCard3" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/CenterContainer/BoardGrid" unique_id=1148599886 instance=ExtResource("8_card")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("card_facedown_style")
 
-[node name="Card2Center" type="PanelContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid/PreviewCard2" unique_id=2004979296]
+[node name="PreviewCard4" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/CenterContainer/BoardGrid" unique_id=1635897970 instance=ExtResource("8_card")]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("card_question_circle")
 
-[node name="Card2Icon" type="Label" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid/PreviewCard2/Card2Center" unique_id=1802940410]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.42, 0.22, 0.831, 1)
-theme_override_font_sizes/font_size = 28
-text = "?"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PreviewCard3" type="PanelContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid" unique_id=1148599886]
-custom_minimum_size = Vector2(120, 120)
-layout_mode = 2
-theme_override_styles/panel = SubResource("card_facedown_style")
-
-[node name="Card3Center" type="PanelContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid/PreviewCard3" unique_id=1311027111]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("card_question_circle")
-
-[node name="Card3Icon" type="Label" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid/PreviewCard3/Card3Center" unique_id=1095225852]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.42, 0.22, 0.831, 1)
-theme_override_font_sizes/font_size = 28
-text = "?"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PreviewCard4" type="PanelContainer" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid" unique_id=1635897970]
-custom_minimum_size = Vector2(120, 120)
-layout_mode = 2
-theme_override_styles/panel = SubResource("card_faceup_style")
-
-[node name="Card4Label" type="Label" parent="ScrollContainer/ContentVBox/PreviewSection/BoardGridContainer/BoardGrid/PreviewCard4" unique_id=1878347362]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 52
-text = "🦕"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="BottomNav" parent="." instance=ExtResource("4_bottomnav")]
+[node name="StartButton" type="Button" parent="." unique_id=999888777]
+custom_minimum_size = Vector2(400, 120)
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -148.0
+offset_left = 50.0
+offset_top = -280.0
+offset_right = -50.0
 grow_horizontal = 2
 grow_vertical = 0
+flat = true
+
+[node name="StartTexture" type="TextureRect" parent="StartButton" unique_id=999888776]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -192.0
+offset_bottom = -192.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_start")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="BottomNav" parent="." unique_id=1961255477 instance=ExtResource("4_bottomnav")]
+layout_mode = 1

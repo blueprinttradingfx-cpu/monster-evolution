@@ -1,0 +1,187 @@
+[gd_scene load_steps=2 format=3 uid="uid://debug_panel"]
+
+[ext_resource type="Script" path="res://scenes/debug/DebugPanel.gd" id="1_script"]
+
+[node name="DebugPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.129, 0.129, 0.129, 0.941)
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 80
+
+[node name="Panel" type="PanelContainer" parent="Margin"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="Margin/Panel"]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="Margin/Panel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="Margin/Panel/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "LIVE TUNING CONSOLE"
+horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="Margin/Panel/VBox/Header"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "X"
+
+[node name="TabContainer" type="TabContainer" parent="Margin/Panel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Memory" type="VBoxContainer" parent="Margin/Panel/VBox/TabContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="GridLabel" type="Label" parent="Margin/Panel/VBox/TabContainer/Memory"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Grid Size: 2x2"
+
+[node name="HBoxX" type="HBoxContainer" parent="Margin/Panel/VBox/TabContainer/Memory"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Panel/VBox/TabContainer/Memory/HBoxX"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "X:"
+
+[node name="GridXSlider" type="HSlider" parent="Margin/Panel/VBox/TabContainer/Memory/HBoxX"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 2.0
+max_value = 6.0
+value = 2.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="HBoxY" type="HBoxContainer" parent="Margin/Panel/VBox/TabContainer/Memory"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Panel/VBox/TabContainer/Memory/HBoxY"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Y:"
+
+[node name="GridYSlider" type="HSlider" parent="Margin/Panel/VBox/TabContainer/Memory/HBoxY"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 2.0
+max_value = 6.0
+value = 2.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="Rewards" type="VBoxContainer" parent="Margin/Panel/VBox/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="CoinMulLabel" type="Label" parent="Margin/Panel/VBox/TabContainer/Rewards"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reward Multiplier: 1.0x"
+
+[node name="CoinMulSlider" type="HSlider" parent="Margin/Panel/VBox/TabContainer/Rewards"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 0.1
+max_value = 5.0
+step = 0.1
+value = 1.0
+
+[node name="Merge" type="VBoxContainer" parent="Margin/Panel/VBox/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxEgg" type="HBoxContainer" parent="Margin/Panel/VBox/TabContainer/Merge"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Panel/VBox/TabContainer/Merge/HBoxEgg"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Egg Merge Cost:"
+
+[node name="MergeEggInput" type="SpinBox" parent="Margin/Panel/VBox/TabContainer/Merge/HBoxEgg"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 2.0
+
+[node name="HBoxBlob" type="HBoxContainer" parent="Margin/Panel/VBox/TabContainer/Merge"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Panel/VBox/TabContainer/Merge/HBoxBlob"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Blob Merge Cost:"
+
+[node name="MergeBlobInput" type="SpinBox" parent="Margin/Panel/VBox/TabContainer/Merge/HBoxBlob"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 2.0
+
+[node name="Simulation" type="VBoxContainer" parent="Margin/Panel/VBox/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBox" type="HBoxContainer" parent="Margin/Panel/VBox/TabContainer/Simulation"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Panel/VBox/TabContainer/Simulation/HBox"]
+layout_mode = 2
+text = "Runs (Days):"
+
+[node name="SimRunsInput" type="LineEdit" parent="Margin/Panel/VBox/TabContainer/Simulation/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "7"
+placeholder_text = "Days"
+
+[node name="RunSimButton" type="Button" parent="Margin/Panel/VBox/TabContainer/Simulation"]
+layout_mode = 2
+text = "RUN 7-DAY PROJECTION"
+
+[node name="SimOutput" type="TextEdit" parent="Margin/Panel/VBox/TabContainer/Simulation"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+editable = false
+
+[connection signal="pressed" from="Margin/Panel/VBox/Header/CloseButton" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Margin/Panel/VBox/TabContainer/Simulation/RunSimButton" to="." method="_on_run_sim_pressed"]

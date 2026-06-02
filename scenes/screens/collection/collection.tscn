@@ -1,211 +1,117 @@
-[gd_scene load_steps=4 format=3 uid="uid://merge_memory_collection"]
+[gd_scene format=3 uid="uid://bvrxy22qyr4xp"]
 
-[ext_resource type="Script" path="res://scenes/screens/collection/collection.gd" id="Script_collection"]
-[ext_resource type="PackedScene" uid="uid://common_topappbar" path="res://scenes/common/TopAppBar.tscn" id="TopAppBar"]
-[ext_resource type="PackedScene" uid="uid://common_bottomnav" path="res://scenes/common/BottomNav.tscn" id="BottomNav"]
+[ext_resource type="Texture2D" uid="uid://6mq1u6e7ukfm" path="res://assets/sprites/bg.png" id="BgTexture"]
+[ext_resource type="PackedScene" uid="uid://djr1fhap8bajb" path="res://scenes/common/BottomNav.tscn" id="BottomNav"]
+[ext_resource type="Script" uid="uid://mdscp1ohf7ig" path="res://scenes/screens/collection/collection.gd" id="Script_collection"]
+[ext_resource type="Theme" uid="uid://dc3si0880aglo" path="res://resources/monster_morph.tres" id="Script_collection_theme"]
+[ext_resource type="PackedScene" path="res://scenes/common/TopAppBar.tscn" id="TopAppBar"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_discovered"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.176, 0.176, 0.176, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_locked"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.882, 0.886, 0.894, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.176, 0.176, 0.176, 1)
+border_blend = true
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_img_bg"]
+bg_color = Color(0.953, 0.957, 0.965, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_img_locked_bg"]
+bg_color = Color(0.851, 0.855, 0.863, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tag_bg"]
+content_margin_left = 8.0
+content_margin_top = 2.0
+content_margin_right = 8.0
+content_margin_bottom = 2.0
+bg_color = Color(0.204, 0.827, 0.6, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.176, 0.176, 0.176, 1)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_completion_panel"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.953, 0.957, 0.965, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.176, 0.176, 0.176, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_progress_bg"]
 bg_color = Color(0.953, 0.957, 0.965, 1)
 border_width_left = 2
-border_width_right = 2
 border_width_top = 2
+border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.176, 0.176, 0.176, 1)
 corner_radius_top_left = 999
 corner_radius_top_right = 999
-corner_radius_bottom_left = 999
 corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_progress_fill"]
-bg_color = Color(0.204, 0.827, 0.600, 1)
+bg_color = Color(0.204, 0.827, 0.6, 1)
 corner_radius_top_left = 999
 corner_radius_top_right = 999
-corner_radius_bottom_left = 999
 corner_radius_bottom_right = 999
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tag_bg"]
-bg_color = Color(0.204, 0.827, 0.600, 1)
-border_width_left = 2
-border_width_right = 2
-border_width_top = 2
-border_width_bottom = 2
-border_color = Color(0.176, 0.176, 0.176, 1)
-corner_radius_top_left = 999
-corner_radius_top_right = 999
 corner_radius_bottom_left = 999
-corner_radius_bottom_right = 999
-content_margin_left = 8
-content_margin_right = 8
-content_margin_top = 2
-content_margin_bottom = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_completion_panel"]
-bg_color = Color(0.953, 0.957, 0.965, 1)
-border_width_left = 4
-border_width_right = 4
-border_width_top = 4
-border_width_bottom = 4
-border_color = Color(0.176, 0.176, 0.176, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_left = 12
-corner_radius_bottom_right = 12
-content_margin_left = 16
-content_margin_right = 16
-content_margin_top = 16
-content_margin_bottom = 16
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_discovered"]
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 4
-border_width_right = 4
-border_width_top = 4
-border_width_bottom = 4
-border_color = Color(0.176, 0.176, 0.176, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_left = 16
-corner_radius_bottom_right = 16
-content_margin_left = 12
-content_margin_right = 12
-content_margin_top = 12
-content_margin_bottom = 12
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_locked"]
-bg_color = Color(0.882, 0.886, 0.894, 1)
-border_width_left = 4
-border_width_right = 4
-border_width_top = 4
-border_width_bottom = 4
-border_color = Color(0.176, 0.176, 0.176, 1)
-border_blend = true
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_left = 16
-corner_radius_bottom_right = 16
-content_margin_left = 12
-content_margin_right = 12
-content_margin_top = 12
-content_margin_bottom = 12
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tag_grass"]
-bg_color = Color(0.204, 0.827, 0.600, 1)
-border_width_left = 2
-border_width_right = 2
-border_width_top = 2
-border_width_bottom = 2
-border_color = Color(0.176, 0.176, 0.176, 1)
-corner_radius_top_left = 999
-corner_radius_top_right = 999
-corner_radius_bottom_left = 999
-corner_radius_bottom_right = 999
-content_margin_left = 8
-content_margin_right = 8
-content_margin_top = 2
-content_margin_bottom = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tag_magic"]
-bg_color = Color(0.655, 0.545, 0.980, 1)
-border_width_left = 2
-border_width_right = 2
-border_width_top = 2
-border_width_bottom = 2
-border_color = Color(0.176, 0.176, 0.176, 1)
-corner_radius_top_left = 999
-corner_radius_top_right = 999
-corner_radius_bottom_left = 999
-corner_radius_bottom_right = 999
-content_margin_left = 8
-content_margin_right = 8
-content_margin_top = 2
-content_margin_bottom = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tag_locked"]
-bg_color = Color(0.851, 0.855, 0.863, 1)
-border_width_left = 2
-border_width_right = 2
-border_width_top = 2
-border_width_bottom = 2
-border_color = Color(0.176, 0.176, 0.176, 1)
-corner_radius_top_left = 999
-corner_radius_top_right = 999
-corner_radius_bottom_left = 999
-corner_radius_bottom_right = 999
-content_margin_left = 8
-content_margin_right = 8
-content_margin_top = 2
-content_margin_bottom = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_img_bg"]
-bg_color = Color(0.953, 0.957, 0.965, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_left = 12
-corner_radius_bottom_right = 12
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_img_locked_bg"]
-bg_color = Color(0.851, 0.855, 0.863, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_left = 12
-corner_radius_bottom_right = 12
-
-; ============================================================
-; ROOT
-; ============================================================
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_discovered"]
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 4
-border_width_right = 4
-border_width_top = 4
-border_width_bottom = 4
-border_color = Color(0.176, 0.176, 0.176, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_left = 16
-corner_radius_bottom_right = 16
-content_margin_left = 12
-content_margin_right = 12
-content_margin_top = 12
-content_margin_bottom = 12
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_locked"]
-bg_color = Color(0.882, 0.886, 0.894, 1)
-border_width_left = 4
-border_width_right = 4
-border_width_top = 4
-border_width_bottom = 4
-border_color = Color(0.176, 0.176, 0.176, 1)
-border_blend = true
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_left = 16
-corner_radius_bottom_right = 16
-content_margin_left = 12
-content_margin_right = 12
-content_margin_top = 12
-content_margin_bottom = 12
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_img_bg"]
-bg_color = Color(0.953, 0.957, 0.965, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_left = 12
-corner_radius_bottom_right = 12
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card_img_locked_bg"]
-bg_color = Color(0.851, 0.855, 0.863, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_left = 12
-corner_radius_bottom_right = 12
-
-[node name="CollectionScreen" type="Control"]
+[node name="CollectionScreen" type="Control" unique_id=998881746]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-layout_mode = 3
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("Script_collection_theme")
 script = ExtResource("Script_collection")
 style_card_discovered = SubResource("StyleBoxFlat_card_discovered")
 style_card_locked = SubResource("StyleBoxFlat_card_locked")
@@ -213,164 +119,137 @@ style_img_bg = SubResource("StyleBoxFlat_card_img_bg")
 style_img_locked_bg = SubResource("StyleBoxFlat_card_img_locked_bg")
 style_tag_bg = SubResource("StyleBoxFlat_tag_bg")
 
-; ---- Background ----
-[node name="Background" type="ColorRect" parent="."]
+[node name="BgTexture" type="TextureRect" parent="." unique_id=179800849]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.973, 0.976, 0.980, 1)
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("BgTexture")
+expand_mode = 1
 
-; ============================================================
-; TOP APP BAR
-; ============================================================
-[node name="TopAppBar" parent="." instance=ExtResource("TopAppBar")]
+[node name="TopAppBar" parent="." unique_id=526425230 instance=ExtResource("TopAppBar")]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 
-; ============================================================
-; MAIN LAYOUT (VBoxContainer fills screen minus top/bottom bars)
-; ============================================================
-[node name="MainLayout" type="VBoxContainer" parent="."]
+[node name="MainLayout" type="VBoxContainer" parent="." unique_id=642948139]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 72
-offset_bottom = -148
-layout_mode = 1
+offset_top = 72.0
+offset_bottom = -148.0
 grow_horizontal = 2
 grow_vertical = 2
 
-; ============================================================
-; SCROLL AREA
-; ============================================================
-[node name="ScrollContainer" type="ScrollContainer" parent="MainLayout"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainLayout" unique_id=988306840]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ContentVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer"]
+[node name="ContentVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer" unique_id=1600119857]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 24
 
-; ---- Margin padding ----
-[node name="TopPadding" type="Control" parent="MainLayout/ScrollContainer/ContentVBox"]
-layout_mode = 2
+[node name="TopPadding" type="Control" parent="MainLayout/ScrollContainer/ContentVBox" unique_id=977584909]
 custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
 
-[node name="SidePadding" type="MarginContainer" parent="MainLayout/ScrollContainer/ContentVBox"]
+[node name="SidePadding" type="MarginContainer" parent="MainLayout/ScrollContainer/ContentVBox" unique_id=1447890871]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_right = 24
 
-[node name="InnerContent" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding"]
+[node name="InnerContent" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding" unique_id=211796983]
 layout_mode = 2
 theme_override_constants/separation = 24
 
-; ============================================================
-; TITLE SECTION
-; ============================================================
-[node name="TitleSection" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent"]
+[node name="TitleSection" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent" unique_id=1534208019]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="ScreenTitle" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TitleSection"]
+[node name="ScreenTitle" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TitleSection" unique_id=250436244]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.42, 0.22, 0.831, 1)
+theme_override_font_sizes/font_size = 50
 text = "COLLECTION"
-theme_override_font_sizes/font_size = 36
-theme_override_colors/font_color = Color(0.420, 0.220, 0.831, 1)
 uppercase = true
 
-; ---- Completion Panel ----
-[node name="CompletionPanel" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TitleSection"]
+[node name="CompletionPanel" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TitleSection" unique_id=229639155]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_completion_panel")
 
-[node name="CompletionVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TitleSection/CompletionPanel"]
+[node name="CompletionVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TitleSection/CompletionPanel" unique_id=597180414]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="CompletionRow" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TitleSection/CompletionPanel/CompletionVBox"]
+[node name="CompletionRow" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TitleSection/CompletionPanel/CompletionVBox" unique_id=1990961017]
 layout_mode = 2
 
-[node name="CompletionLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TitleSection/CompletionPanel/CompletionVBox/CompletionRow"]
+[node name="CompletionLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TitleSection/CompletionPanel/CompletionVBox/CompletionRow" unique_id=1478796412]
 layout_mode = 2
-text = "COMPLETION"
-theme_override_font_sizes/font_size = 12
 theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+theme_override_font_sizes/font_size = 36
+text = "COMPLETION"
 
-[node name="CompletionSpacer" type="Control" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TitleSection/CompletionPanel/CompletionVBox/CompletionRow"]
+[node name="CompletionSpacer" type="Control" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TitleSection/CompletionPanel/CompletionVBox/CompletionRow" unique_id=1112662786]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CompletionPct" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TitleSection/CompletionPanel/CompletionVBox/CompletionRow"]
+[node name="CompletionPct" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TitleSection/CompletionPanel/CompletionVBox/CompletionRow" unique_id=1538812264]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.42, 0.22, 0.831, 1)
+theme_override_font_sizes/font_size = 24
 text = "35%"
-theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.420, 0.220, 0.831, 1)
 
-; Progress Bar
-[node name="ProgressBarBg" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TitleSection/CompletionPanel/CompletionVBox"]
-layout_mode = 2
+[node name="ProgressBarBg" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TitleSection/CompletionPanel/CompletionVBox" unique_id=1062128862]
 custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_progress_bg")
 
-[node name="ProgressFill" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TitleSection/CompletionPanel/CompletionVBox/ProgressBarBg"]
+[node name="ProgressFill" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TitleSection/CompletionPanel/CompletionVBox/ProgressBarBg" unique_id=1760034158]
 layout_mode = 2
-anchor_right = 0.35
-anchor_bottom = 1.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_progress_fill")
 
-[node name="CompletionHint" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TitleSection/CompletionPanel/CompletionVBox"]
+[node name="CompletionHint" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TitleSection/CompletionPanel/CompletionVBox" unique_id=944520482]
 layout_mode = 2
-text = "Find 12 more monsters to unlock the 'Mystic Forest' biome!"
-theme_override_font_sizes/font_size = 13
 theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+theme_override_font_sizes/font_size = 24
+text = "Find 12 more monsters to unlock the 'Mystic Forest' biome!"
 autowrap_mode = 3
 
-; ============================================================
-; CARD GRID (2 columns via GridContainer)
-; ============================================================
-[node name="CardGrid" type="GridContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent"]
+[node name="CardGrid" type="GridContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent" unique_id=666089143]
 layout_mode = 2
-columns = 2
 theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
+columns = 2
 
-; ============================================================
-; TAP HINT
-; ============================================================
-[node name="TapHint" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent"]
-layout_mode = 2
-alignment = 1
-theme_override_constants/separation = 4
+[node name="TapHint" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent" unique_id=1591096662]
 modulate = Color(1, 1, 1, 0.6)
-
-[node name="TapIcon" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TapHint"]
 layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="TapIcon" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TapHint" unique_id=1492686841]
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
 text = "👆"
-theme_override_font_sizes/font_size = 22
 horizontal_alignment = 1
 
-[node name="TapLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TapHint"]
+[node name="TapLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SidePadding/InnerContent/TapHint" unique_id=282639872]
 layout_mode = 2
-text = "TAP FOR DETAILS"
-theme_override_font_sizes/font_size = 11
 theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+theme_override_font_sizes/font_size = 24
+text = "TAP FOR DETAILS"
 horizontal_alignment = 1
 
-[node name="BottomPadding" type="Control" parent="MainLayout/ScrollContainer/ContentVBox"]
-layout_mode = 2
+[node name="BottomPadding" type="Control" parent="MainLayout/ScrollContainer/ContentVBox" unique_id=135933619]
 custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
 
-; ============================================================
-; BOTTOM NAVIGATION
-; ============================================================
-[node name="BottomNav" parent="." instance=ExtResource("BottomNav")]
+[node name="BottomNav" parent="." unique_id=116774067 instance=ExtResource("BottomNav")]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -148
-grow_horizontal = 2
-grow_vertical = 0
+offset_bottom = 2.0

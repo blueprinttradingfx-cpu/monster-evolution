@@ -2,34 +2,10 @@
 
 [ext_resource type="Script" uid="uid://k0vk8rrrqx11" path="res://scenes/screens/home/home.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://brujbmxxuukfx" path="res://assets/sprites/dino.png" id="2_dino"]
-[ext_resource type="Texture2D" uid="uid://rjwelh2didqw" path="res://assets/sprites/merge_memory_monsters_game_logo.png" id="3_logo"]
-[ext_resource type="PackedScene" uid="uid://common_bottomnav" path="res://scenes/common/BottomNav.tscn" id="4_bottomnav"]
-[ext_resource type="PackedScene" uid="uid://common_topappbar" path="res://scenes/common/TopAppBar.tscn" id="5_topappbar"]
-
-[sub_resource type="StyleBoxFlat" id="TopAppBarStyle"]
-content_margin_left = 24.0
-content_margin_top = 8.0
-content_margin_right = 24.0
-content_margin_bottom = 8.0
-bg_color = Color(0.972549, 0.976471, 0.980392, 1)
-border_width_bottom = 4
-border_color = Color(0.176471, 0.176471, 0.176471, 1)
-
-[sub_resource type="StyleBoxFlat" id="CurrencyPanelStyle"]
-content_margin_left = 16.0
-content_margin_top = 6.0
-content_margin_right = 16.0
-content_margin_bottom = 6.0
-bg_color = Color(0.952941, 0.956863, 0.960784, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.176471, 0.176471, 0.176471, 1)
-corner_radius_top_left = 9999
-corner_radius_top_right = 9999
-corner_radius_bottom_right = 9999
-corner_radius_bottom_left = 9999
+[ext_resource type="PackedScene" uid="uid://djr1fhap8bajb" path="res://scenes/common/BottomNav.tscn" id="4_bottomnav"]
+[ext_resource type="PackedScene" path="res://scenes/common/TopAppBar.tscn" id="5_topappbar"]
+[ext_resource type="Theme" uid="uid://dc3si0880aglo" path="res://resources/monster_morph.tres" id="6_theme"]
+[ext_resource type="Texture2D" uid="uid://6mq1u6e7ukfm" path="res://assets/sprites/bg.png" id="7_bg_texture"]
 
 [sub_resource type="StyleBoxFlat" id="BarPanelStyle"]
 content_margin_left = 4.0
@@ -177,28 +153,6 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id="BottomNavPanelStyle"]
-content_margin_left = 16.0
-content_margin_top = 8.0
-content_margin_right = 16.0
-content_margin_bottom = 24.0
-bg_color = Color(1, 1, 1, 1)
-border_width_top = 4
-border_color = Color(0.176471, 0.176471, 0.176471, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-
-[sub_resource type="StyleBoxFlat" id="ActiveTabStyle"]
-content_margin_left = 16.0
-content_margin_top = 4.0
-content_margin_right = 16.0
-content_margin_bottom = 4.0
-bg_color = Color(0.517647, 0.333333, 0.937255, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
 [node name="Home" type="Control" unique_id=1380412029]
 layout_mode = 3
 anchors_preset = 15
@@ -206,9 +160,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_theme")
 script = ExtResource("1_script")
 
+[node name="BgTexture" type="TextureRect" parent="." unique_id=2052456339]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_bg_texture")
+expand_mode = 1
+
 [node name="Background" type="ColorRect" parent="." unique_id=854192006]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -229,13 +195,6 @@ grow_vertical = 2
 custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 theme_override_constants/separation = 32
-offset_top = 72
-
-[node name="TopAppBar" parent="." instance=ExtResource("5_topappbar")]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-grow_horizontal = 2
 
 [node name="CreatureSection" type="VBoxContainer" parent="SafeArea/Main" unique_id=1650775178]
 layout_mode = 2
@@ -268,7 +227,7 @@ offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_dino")
-expand_mode = 1
+stretch_mode = 3
 
 [node name="ProgressSection" type="VBoxContainer" parent="SafeArea/Main/CreatureSection" unique_id=1074394544]
 layout_mode = 2
@@ -283,6 +242,7 @@ layout_mode = 2
 size_flags_vertical = 0
 text = "Evolution Progress"
 vertical_alignment = 2
+theme_override_font_sizes/font_size = 24
 
 [node name="ProgressValue" type="Label" parent="SafeArea/Main/CreatureSection/ProgressSection/ProgressHeader" unique_id=722476362]
 modulate = Color(0.0035191667, 0.0035191681, 0.0035191672, 1)
@@ -292,6 +252,7 @@ size_flags_vertical = 0
 text = "LVL 4 · 7/10"
 horizontal_alignment = 1
 vertical_alignment = 2
+theme_override_font_sizes/font_size = 24
 
 [node name="EvolutionBar" type="PanelContainer" parent="SafeArea/Main/CreatureSection/ProgressSection" unique_id=1183610676]
 custom_minimum_size = Vector2(0, 32)
@@ -332,23 +293,27 @@ layout_mode = 2
 [node name="PlayIcon" type="Label" parent="SafeArea/Main/ActionButtons/PlayButton/PlayButtonContent/PlayLeftGroup" unique_id=1445352287]
 layout_mode = 2
 text = "▶️"
+theme_override_font_sizes/font_size = 24
 
 [node name="PlayTextGroup" type="VBoxContainer" parent="SafeArea/Main/ActionButtons/PlayButton/PlayButtonContent/PlayLeftGroup" unique_id=1630802293]
 layout_mode = 2
 
 [node name="PlayTitle" type="Label" parent="SafeArea/Main/ActionButtons/PlayButton/PlayButtonContent/PlayLeftGroup/PlayTextGroup" unique_id=1006975551]
 layout_mode = 2
-text = "PLAY"
+text = "START"
+theme_override_font_sizes/font_size = 24
 
 [node name="PlaySubtitle" type="Label" parent="SafeArea/Main/ActionButtons/PlayButton/PlayButtonContent/PlayLeftGroup/PlayTextGroup" unique_id=111958891]
 layout_mode = 2
 text = "Find matches & level up!"
+theme_override_font_sizes/font_size = 24
 
 [node name="PlayRightIcon" type="Label" parent="SafeArea/Main/ActionButtons/PlayButton/PlayButtonContent" unique_id=643902436]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "→"
 horizontal_alignment = 1
+theme_override_font_sizes/font_size = 24
 
 [node name="GridButtons" type="GridContainer" parent="SafeArea/Main/ActionButtons" unique_id=280370219]
 layout_mode = 2
@@ -371,11 +336,13 @@ grow_vertical = 2
 [node name="MergeIcon" type="Label" parent="SafeArea/Main/ActionButtons/GridButtons/MergeButton/MergeButtonContent" unique_id=1157876299]
 layout_mode = 2
 text = "🧩"
+theme_override_font_sizes/font_size = 24
 
 [node name="MergeLabel" type="Label" parent="SafeArea/Main/ActionButtons/GridButtons/MergeButton/MergeButtonContent" unique_id=2088257401]
 layout_mode = 2
 text = "MERGE"
 horizontal_alignment = 1
+theme_override_font_sizes/font_size = 24
 
 [node name="CollectionButton" type="Button" parent="SafeArea/Main/ActionButtons/GridButtons" unique_id=694433556]
 custom_minimum_size = Vector2(0, 80)
@@ -383,6 +350,7 @@ layout_mode = 2
 theme_override_styles/normal = SubResource("CollectionButtonNormal")
 theme_override_styles/pressed = SubResource("CollectionButtonPressed")
 text = "COLLECTION"
+theme_override_font_sizes/font_size = 24
 
 [node name="CollectionButtonContent" type="VBoxContainer" parent="SafeArea/Main/ActionButtons/GridButtons/CollectionButton" unique_id=1595827131]
 layout_mode = 0
@@ -394,12 +362,14 @@ grow_vertical = 2
 [node name="CollectionIcon" type="Label" parent="SafeArea/Main/ActionButtons/GridButtons/CollectionButton/CollectionButtonContent" unique_id=729763913]
 layout_mode = 2
 text = "📚"
+theme_override_font_sizes/font_size = 24
 
 [node name="CollectionLabel" type="Label" parent="SafeArea/Main/ActionButtons/GridButtons/CollectionButton/CollectionButtonContent" unique_id=1239643656]
 modulate = Color(0.0142752165, 0.014275218, 0.014275218, 1)
 layout_mode = 2
 text = "COLLECTION"
 horizontal_alignment = 1
+theme_override_font_sizes/font_size = 24
 
 [node name="DailyQuest" type="PanelContainer" parent="SafeArea/Main" unique_id=554021186]
 layout_mode = 2
@@ -418,6 +388,7 @@ layout_mode = 2
 text = "💡"
 horizontal_alignment = 1
 vertical_alignment = 1
+theme_override_font_sizes/font_size = 24
 
 [node name="QuestText" type="VBoxContainer" parent="SafeArea/Main/DailyQuest/QuestContent" unique_id=1329740412]
 layout_mode = 2
@@ -426,18 +397,21 @@ layout_mode = 2
 modulate = Color(0.019925633, 0.019925632, 0.019925632, 1)
 layout_mode = 2
 text = "Daily Quest"
+theme_override_font_sizes/font_size = 24
 
 [node name="QuestDesc" type="Label" parent="SafeArea/Main/DailyQuest/QuestContent/QuestText" unique_id=1095490248]
 modulate = Color(0.0142752165, 0.014275218, 0.014275218, 1)
 layout_mode = 2
 text = "Merge 5 slime monsters today to earn a Rare Egg!"
+theme_override_font_sizes/font_size = 24
 
-[node name="BottomNav" parent="." instance=ExtResource("4_bottomnav")]
+[node name="TopAppBar" parent="." unique_id=650333811 instance=ExtResource("5_topappbar")]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -148
 grow_horizontal = 2
-grow_vertical = 0
+
+[node name="BottomNav" parent="." unique_id=712187510 instance=ExtResource("4_bottomnav")]
+custom_minimum_size = Vector2(1080, 150)
+layout_mode = 1
+offset_bottom = 2.0

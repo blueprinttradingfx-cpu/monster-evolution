@@ -1,40 +1,51 @@
-extends Control
+extends Button
 
 signal card_pressed(grid_pos: Vector2i)
 
-var _card_data: Object
+var _card_data
 var _grid_pos: Vector2i = Vector2i(0, 0)
 var _is_flipped: bool = false
 var _is_matched: bool = false
 var _is_animating: bool = false
 
 func _ready() -> void:
-	InputManager.tap.connect(_on_tap)
+	pressed.connect(_on_self_pressed)
 
-func _on_tap(tap_pos: Vector2) -> void:
+func is_flipped() -> bool:
+	return _is_flipped
+
+func _on_self_pressed() -> void:
+	print("Card (name: %s) pressed!" % self.name)
+	print("  _is_animating: %s, _is_flipped: %s, _is_matched: %s" % [str(_is_animating), str(_is_flipped), str(_is_matched)])
 	if _is_animating:
-		return
-	if MemorySystem.input_locked:
+		print("  → Skipping - animating")
 		return
 	if _is_flipped:
+		print("  → Skipping - already flipped")
 		return
 	if _is_matched:
+		print("  → Skipping - matched")
 		return
 
-	var is_tapped: bool = get_global_rect().has_point(tap_pos)
-	if is_tapped:
-		flip_to_front()
-		MemorySystem.flip_card(_grid_pos)
-		card_pressed.emit(_grid_pos)
+	card_pressed.emit(_grid_pos)
 
-func setup(card_data: Object, grid_pos: Vector2i) -> void:
+func setup(card_data, grid_pos: Vector2i) -> void:
 	_card_data = card_data
 	_grid_pos = grid_pos
 	_is_flipped = false
 	_is_matched = false
 	_is_animating = false
 	$BackFace.visible = true
+	$BackFace.text = "?"
+	$BackFace.theme_type_variation = ""
+	$BackFace.add_theme_color_override("font_color", Color.BLACK)
+	$BackFace.add_theme_font_size_override("font_size", 24)
 	$FrontFace.visible = false
+	var monster_label = $FrontFace.get_node_or_null("MonsterLabel")
+	if monster_label:
+		monster_label.text = ""
+	$Bg.visible = true
+	$FlippedBg.visible = false
 	self.modulate = Color.WHITE
 	self.scale = Vector2(1,1)
 
@@ -47,14 +58,10 @@ func flip_to_front() -> void:
 	tween.tween_property(self, "scale:x", 0.01, 0.15)
 	await tween.finished
 
-	var symbols: Array[String] = ["🦖", "🦕", "🐣", "🥚", "🦎", "🐊"]
-	var creature_ids: Array[String] = ["egg", "baby_dino", "raptor", "t_rex", "dragon", "lava_dragon"]
-	var idx: int = creature_ids.find(_card_data.id)
-	if idx == -1:
-		idx = _card_data.id.hash() % symbols.size()
-	$FrontFace.text = symbols[idx]
 	$FrontFace.visible = true
 	$BackFace.visible = false
+	$Bg.visible = false
+	$FlippedBg.visible = true
 
 	tween = create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT)
@@ -63,6 +70,7 @@ func flip_to_front() -> void:
 	_is_animating = false
 
 func flip_to_back() -> void:
+	print("Card (name: %s) flipping back" % self.name)
 	_is_animating = true
 	_is_flipped = false
 
@@ -70,14 +78,19 @@ func flip_to_back() -> void:
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(self, "scale:x", 0.01, 0.15)
 	await tween.finished
+	print("  Finished first tween 1")
 
 	$FrontFace.visible = false
 	$BackFace.visible = true
+	$Bg.visible = true
+	$FlippedBg.visible = false
+	print("  Updated node visibilities")
 
 	tween = create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(self, "scale:x", 1.0, 0.15)
 	await tween.finished
+	print("  Finished second tween")
 	_is_animating = false
 
 func set_matched() -> void:
@@ -88,7 +101,7 @@ func set_matched() -> void:
 	lock()
 
 func lock() -> void:
-	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	disabled = true
 
 func play_match_fx() -> void:
 	var tween = create_tween()
@@ -105,11 +118,15 @@ func play_mismatch_fx() -> void:
 
 func reset() -> void:
 	set_process(false)
+	_card_data = null
+	_grid_pos = Vector2i(0, 0)
 	_is_flipped = false
 	_is_matched = false
 	_is_animating = false
 	$FrontFace.visible = false
 	$BackFace.visible = true
+	$Bg.visible = true
+	$FlippedBg.visible = false
 	self.scale = Vector2(1, 1)
 	self.modulate = Color.WHITE
-	mouse_filter = Control.MOUSE_FILTER_STOP
+	disabled = false  # Ensure card is clickable again

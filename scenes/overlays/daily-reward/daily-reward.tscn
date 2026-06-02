@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://daily_reward_scene"]
 
 [ext_resource type="Script" path="res://scenes/overlays/daily-reward/daily-reward.gd" id="3_script"]
+[ext_resource type="Theme" uid="uid://monster_morph_theme" path="res://resources/monster_morph.tres" id="4_theme"]
 
 [sub_resource type="StyleBoxFlat" id="topbar_style"]
 bg_color = Color(0.973, 0.976, 0.980, 1.0)
@@ -125,6 +126,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_theme")
 script = ExtResource("3_script")
 
 [node name="BackgroundBlur" type="ColorRect" parent="."]
@@ -169,7 +171,7 @@ theme_override_styles/panel = SubResource("badge_style")
 
 [node name="CurrencyLabel" type="Label" parent="TopBar/TopBarHBox/CurrencyBadge"]
 layout_mode = 2
-text = "0 🪙  0 🥚"
+text = "0 $  0 🥚"
 theme_override_font_sizes/font_size = 13
 theme_override_colors/font_color = Color(0.098, 0.110, 0.114, 1.0)
 vertical_alignment = 1
@@ -240,7 +242,7 @@ size_flags_vertical = 3
 
 [node name="CoinIcon" type="Label" parent="ModalCard/CardVBox/RewardsGrid/CoinCard/CoinVBox"]
 layout_mode = 2
-text = "🪙"
+text = "$"
 theme_override_font_sizes/font_size = 40
 horizontal_alignment = 1
 

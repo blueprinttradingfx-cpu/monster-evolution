@@ -16,7 +16,7 @@ var _creature_id: String = ""
 @export var style_img_bg: StyleBoxFlat
 @export var style_img_locked_bg: StyleBoxFlat
 
-func setup(creature_id: String, is_unlocked: bool, index: int, symbol: String, name_text: String) -> void:
+func setup(creature_id: String, is_unlocked: bool, index: int, symbol: String, name_text: String, tier: int = 1) -> void:
 	_creature_id = creature_id
 	_is_unlocked = is_unlocked
 
@@ -33,7 +33,13 @@ func setup(creature_id: String, is_unlocked: bool, index: int, symbol: String, n
 
 		# Flavor tags - could be data driven later
 		tag_label.text = "MONSTER"
-		stars_label.text = "★★★☆☆"
+		var stars_text := ""
+		for s_idx in range(5):
+			if s_idx < tier:
+				stars_text += "★"
+			else:
+				stars_text += "☆"
+		stars_label.text = stars_text
 		stars_label.modulate = Color(1, 1, 1, 1)
 	else:
 		name_label.text = "LOCKED"

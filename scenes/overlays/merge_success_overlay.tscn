@@ -4,11 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://common_topappbar" path="res://scenes/common/TopAppBar.tscn" id="2_topappbar"]
 [ext_resource type="PackedScene" uid="uid://common_bottomnav" path="res://scenes/common/BottomNav.tscn" id="3_bottomnav"]
 
+[ext_resource type="Theme" uid="uid://monster_morph_theme" path="res://resources/monster_morph.tres" id="Theme_Morph"]
+
 [node name="EvolutionScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource("Theme_Morph")
 script = ExtResource("1")
 
 [node name="Background" type="ColorRect" parent="."]

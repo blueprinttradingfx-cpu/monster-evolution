@@ -250,6 +250,7 @@ stretch_mode = 7
 [node name="Title" type="Label" parent="SafeArea/Main/TopAppBar/TopBarContent/LeftGroup" unique_id=418478467]
 modulate = Color(0.019925633, 0.019925632, 0.019925632, 1)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Merge Memory Monsters"
 
 [node name="CurrencyContainer" type="PanelContainer" parent="SafeArea/Main/TopAppBar/TopBarContent" unique_id=915738003]
@@ -265,11 +266,13 @@ layout_mode = 2
 
 [node name="CoinsLabel" type="Label" parent="SafeArea/Main/TopAppBar/TopBarContent/CurrencyContainer/CurrencyContent/Coins" unique_id=2043936824]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "120"
 
 [node name="CoinIcon" type="Label" parent="SafeArea/Main/TopAppBar/TopBarContent/CurrencyContainer/CurrencyContent/Coins" unique_id=1996331786]
 layout_mode = 2
-text = "🪙"
+theme_override_font_sizes/font_size = 24
+text = "$"
 
 [node name="Separator" type="ColorRect" parent="SafeArea/Main/TopAppBar/TopBarContent/CurrencyContainer/CurrencyContent" unique_id=122639629]
 custom_minimum_size = Vector2(1, 16)
@@ -282,10 +285,12 @@ layout_mode = 2
 [node name="EggsLabel" type="Label" parent="SafeArea/Main/TopAppBar/TopBarContent/CurrencyContainer/CurrencyContent/Eggs" unique_id=1069317375]
 modulate = Color(0.0142752165, 0.014275218, 0.014275218, 1)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "3"
 
 [node name="EggIcon" type="Label" parent="SafeArea/Main/TopAppBar/TopBarContent/CurrencyContainer/CurrencyContent/Eggs" unique_id=1158279494]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "🥚"
 
 [node name="CreatureSection" type="VBoxContainer" parent="SafeArea/Main" unique_id=1650775178]
@@ -332,6 +337,7 @@ layout_mode = 2
 modulate = Color(0.0142752165, 0.014275218, 0.014275218, 1)
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_font_sizes/font_size = 24
 text = "Evolution Progress"
 vertical_alignment = 2
 
@@ -340,6 +346,7 @@ modulate = Color(0.0035191667, 0.0035191681, 0.0035191672, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+theme_override_font_sizes/font_size = 24
 text = "LVL 4 · 7/10"
 horizontal_alignment = 1
 vertical_alignment = 2
@@ -382,6 +389,7 @@ layout_mode = 2
 
 [node name="PlayIcon" type="Label" parent="SafeArea/Main/ActionButtons/PlayButton/PlayButtonContent/PlayLeftGroup" unique_id=1445352287]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "▶️"
 
 [node name="PlayTextGroup" type="VBoxContainer" parent="SafeArea/Main/ActionButtons/PlayButton/PlayButtonContent/PlayLeftGroup" unique_id=1630802293]
@@ -389,15 +397,18 @@ layout_mode = 2
 
 [node name="PlayTitle" type="Label" parent="SafeArea/Main/ActionButtons/PlayButton/PlayButtonContent/PlayLeftGroup/PlayTextGroup" unique_id=1006975551]
 layout_mode = 2
-text = "PLAY"
+theme_override_font_sizes/font_size = 24
+text = "START"
 
 [node name="PlaySubtitle" type="Label" parent="SafeArea/Main/ActionButtons/PlayButton/PlayButtonContent/PlayLeftGroup/PlayTextGroup" unique_id=111958891]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Find matches & level up!"
 
 [node name="PlayRightIcon" type="Label" parent="SafeArea/Main/ActionButtons/PlayButton/PlayButtonContent" unique_id=643902436]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
 text = "→"
 horizontal_alignment = 1
 
@@ -408,6 +419,7 @@ columns = 2
 [node name="MergeButton" type="Button" parent="SafeArea/Main/ActionButtons/GridButtons" unique_id=1645251102]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("MergeButtonNormal")
 theme_override_styles/pressed = SubResource("MergeButtonPressed")
 text = "MERGE"
@@ -421,16 +433,19 @@ grow_vertical = 2
 
 [node name="MergeIcon" type="Label" parent="SafeArea/Main/ActionButtons/GridButtons/MergeButton/MergeButtonContent" unique_id=1157876299]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "🧩"
 
 [node name="MergeLabel" type="Label" parent="SafeArea/Main/ActionButtons/GridButtons/MergeButton/MergeButtonContent" unique_id=2088257401]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "MERGE"
 horizontal_alignment = 1
 
 [node name="CollectionButton" type="Button" parent="SafeArea/Main/ActionButtons/GridButtons" unique_id=694433556]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("CollectionButtonNormal")
 theme_override_styles/pressed = SubResource("CollectionButtonPressed")
 text = "COLLECTION"
@@ -444,11 +459,13 @@ grow_vertical = 2
 
 [node name="CollectionIcon" type="Label" parent="SafeArea/Main/ActionButtons/GridButtons/CollectionButton/CollectionButtonContent" unique_id=729763913]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "📚"
 
 [node name="CollectionLabel" type="Label" parent="SafeArea/Main/ActionButtons/GridButtons/CollectionButton/CollectionButtonContent" unique_id=1239643656]
 modulate = Color(0.0142752165, 0.014275218, 0.014275218, 1)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "COLLECTION"
 horizontal_alignment = 1
 
@@ -466,6 +483,7 @@ theme_override_styles/panel = SubResource("QuestIconPanelStyle")
 
 [node name="QuestIcon" type="Label" parent="SafeArea/Main/DailyQuest/QuestContent/QuestIconPanel" unique_id=1021137390]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "💡"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -476,11 +494,13 @@ layout_mode = 2
 [node name="QuestTitle" type="Label" parent="SafeArea/Main/DailyQuest/QuestContent/QuestText" unique_id=1468919612]
 modulate = Color(0.019925633, 0.019925632, 0.019925632, 1)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Daily Quest"
 
 [node name="QuestDesc" type="Label" parent="SafeArea/Main/DailyQuest/QuestContent/QuestText" unique_id=1095490248]
 modulate = Color(0.0142752165, 0.014275218, 0.014275218, 1)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Merge 5 slime monsters today to earn a Rare Egg!"
 
 [node name="BottomNav" type="PanelContainer" parent="SafeArea/Main" unique_id=2135673487]
@@ -494,6 +514,7 @@ alignment = 3
 
 [node name="PlayTab" type="Button" parent="SafeArea/Main/BottomNav/BottomNavContent" unique_id=422278224]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("ActiveTabStyle")
 toggle_mode = true
 button_pressed = true
@@ -508,10 +529,12 @@ grow_vertical = 2
 
 [node name="PlayTabIcon" type="Label" parent="SafeArea/Main/BottomNav/BottomNavContent/PlayTab/PlayTabContent" unique_id=1087429641]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "🎮"
 
 [node name="MergeTab" type="Button" parent="SafeArea/Main/BottomNav/BottomNavContent" unique_id=1544247330]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 toggle_mode = true
 text = "Merge"
 
@@ -524,10 +547,12 @@ grow_vertical = 2
 
 [node name="MergeTabIcon" type="Label" parent="SafeArea/Main/BottomNav/BottomNavContent/MergeTab/MergeTabContent" unique_id=156635776]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "🧩"
 
 [node name="CollectionTab" type="Button" parent="SafeArea/Main/BottomNav/BottomNavContent" unique_id=401829251]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 toggle_mode = true
 text = "Collection"
 
@@ -540,10 +565,12 @@ grow_vertical = 2
 
 [node name="CollectionTabIcon" type="Label" parent="SafeArea/Main/BottomNav/BottomNavContent/CollectionTab/CollectionTabContent" unique_id=2122218336]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "📚"
 
 [node name="ShopTab" type="Button" parent="SafeArea/Main/BottomNav/BottomNavContent" unique_id=1084571313]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 toggle_mode = true
 text = "Shop"
 
@@ -556,4 +583,5 @@ grow_vertical = 2
 
 [node name="ShopTabIcon" type="Label" parent="SafeArea/Main/BottomNav/BottomNavContent/ShopTab/ShopTabContent" unique_id=487659005]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "🛒"

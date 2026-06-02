@@ -1,209 +1,117 @@
-[gd_scene load_steps=2 format=3 uid="uid://common_bottomnav"]
+[gd_scene format=3 uid="uid://djr1fhap8bajb"]
 
-[ext_resource type="Script" path="res://scenes/common/BottomNav.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://cdptcwdhsxaf" path="res://scenes/common/BottomNav.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://duxyvh5p7woux" path="res://assets/sprites/nav/play.png" id="2_play"]
+[ext_resource type="Texture2D" uid="uid://c42ejgp3nfbkm" path="res://assets/sprites/nav/merge.png" id="3_merge"]
+[ext_resource type="Texture2D" uid="uid://c7nn50yvp6yru" path="res://assets/sprites/nav/collection.png" id="4_collection"]
+[ext_resource type="Texture2D" uid="uid://cv26slychaevq" path="res://assets/sprites/nav/shop.png" id="5_shop"]
 
-[sub_resource type="StyleBoxFlat" id="start_btn_normal"]
-content_margin_left = 24.0
-content_margin_top = 18.0
-content_margin_right = 24.0
-content_margin_bottom = 18.0
-bg_color = Color(0.42, 0.22, 0.831, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.176, 0.176, 0.176, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-shadow_color = Color(0.333, 0.086, 0.745, 1)
-shadow_size = 4
-shadow_offset = Vector2(0, 4)
-
-[sub_resource type="StyleBoxFlat" id="start_btn_pressed"]
-content_margin_left = 24.0
-content_margin_top = 22.0
-content_margin_right = 24.0
-content_margin_bottom = 14.0
-bg_color = Color(0.42, 0.22, 0.831, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.176, 0.176, 0.176, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-
-[sub_resource type="StyleBoxFlat" id="start_btn_hover"]
-content_margin_left = 24.0
-content_margin_top = 18.0
-content_margin_right = 24.0
-content_margin_bottom = 18.0
-bg_color = Color(0.49, 0.27, 0.9, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.176, 0.176, 0.176, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-shadow_color = Color(0.333, 0.086, 0.745, 1)
-shadow_size = 4
-shadow_offset = Vector2(0, 4)
-
-[sub_resource type="StyleBoxFlat" id="bottomnav_style"]
-content_margin_left = 16.0
-content_margin_top = 8.0
-content_margin_right = 16.0
-content_margin_bottom = 16.0
-bg_color = Color(1, 1, 1, 1)
-border_width_top = 4
-border_color = Color(0.176, 0.176, 0.176, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-
-[node name="BottomNav" type="Control"]
+[node name="BottomNav" type="Control" unique_id=834252458]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -148.0
+grow_horizontal = 2
+grow_vertical = 0
 script = ExtResource("1_script")
 
-[node name="StartButton" type="Button" parent="."]
-custom_minimum_size = Vector2(0, 65)
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = -44.0
-offset_bottom = 24.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = SubResource("start_btn_normal")
-theme_override_styles/pressed = SubResource("start_btn_pressed")
-theme_override_styles/hover = SubResource("start_btn_hover")
-text = "▶  START"
-
-[node name="BottomNavPanel" type="PanelContainer" parent="."]
+[node name="BottomNavPanel" type="PanelContainer" parent="." unique_id=320160388]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 28.0
-offset_bottom = -11.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("bottomnav_style")
 
-[node name="NavHBox" type="HBoxContainer" parent="BottomNavPanel"]
+[node name="NavHBox" type="HBoxContainer" parent="BottomNavPanel" unique_id=593426545]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="PlayNav" type="PanelContainer" parent="BottomNavPanel/NavHBox"]
+[node name="PlayNav" type="PanelContainer" parent="BottomNavPanel/NavHBox" unique_id=1054250626]
+custom_minimum_size = Vector2(250, 180)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="PlayVBox" type="VBoxContainer" parent="BottomNavPanel/NavHBox/PlayNav"]
+[node name="PlayVBox" type="VBoxContainer" parent="BottomNavPanel/NavHBox/PlayNav" unique_id=1054250627]
+custom_minimum_size = Vector2(0, 180)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 4
 alignment = 1
 
-[node name="PlayIcon" type="Label" parent="BottomNavPanel/NavHBox/PlayNav/PlayVBox"]
+[node name="PlayTexture" type="TextureRect" parent="BottomNavPanel/NavHBox/PlayNav/PlayVBox" unique_id=139405012]
+custom_minimum_size = Vector2(0, 180)
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "🎮"
-horizontal_alignment = 1
+texture = ExtResource("2_play")
+expand_mode = 1
+stretch_mode = 3
 
-[node name="PlayLabel" type="Label" parent="BottomNavPanel/NavHBox/PlayNav/PlayVBox"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Play"
-horizontal_alignment = 1
-
-[node name="MergeNav" type="PanelContainer" parent="BottomNavPanel/NavHBox"]
+[node name="MergeNav" type="PanelContainer" parent="BottomNavPanel/NavHBox" unique_id=796306789]
 modulate = Color(1, 1, 1, 0.55)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="MergeVBox" type="VBoxContainer" parent="BottomNavPanel/NavHBox/MergeNav"]
+[node name="MergeVBox" type="VBoxContainer" parent="BottomNavPanel/NavHBox/MergeNav" unique_id=796306790]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 4
 alignment = 1
 
-[node name="MergeIcon" type="Label" parent="BottomNavPanel/NavHBox/MergeNav/MergeVBox"]
+[node name="MergeTexture" type="TextureRect" parent="BottomNavPanel/NavHBox/MergeNav/MergeVBox" unique_id=1521478710]
+custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "🧩"
-horizontal_alignment = 1
+texture = ExtResource("3_merge")
+expand_mode = 1
+stretch_mode = 3
 
-[node name="MergeLabel" type="Label" parent="BottomNavPanel/NavHBox/MergeNav/MergeVBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.022979883, 0.022979883, 0.022979883, 1)
-theme_override_font_sizes/font_size = 30
-text = "Merge"
-horizontal_alignment = 1
-
-[node name="CollectionNav" type="PanelContainer" parent="BottomNavPanel/NavHBox"]
+[node name="CollectionNav" type="PanelContainer" parent="BottomNavPanel/NavHBox" unique_id=335023473]
 modulate = Color(1, 1, 1, 0.55)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="CollectionVBox" type="VBoxContainer" parent="BottomNavPanel/NavHBox/CollectionNav"]
+[node name="CollectionVBox" type="VBoxContainer" parent="BottomNavPanel/NavHBox/CollectionNav" unique_id=335023474]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 4
 alignment = 1
 
-[node name="CollectionIcon" type="Label" parent="BottomNavPanel/NavHBox/CollectionNav/CollectionVBox"]
+[node name="CollectionTexture" type="TextureRect" parent="BottomNavPanel/NavHBox/CollectionNav/CollectionVBox" unique_id=1403816772]
+custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "📚"
-horizontal_alignment = 1
+texture = ExtResource("4_collection")
+expand_mode = 1
+stretch_mode = 3
 
-[node name="CollectionLabel" type="Label" parent="BottomNavPanel/NavHBox/CollectionNav/CollectionVBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.04395193, 0.04395193, 0.04395192, 1)
-theme_override_font_sizes/font_size = 30
-text = "Collection"
-horizontal_alignment = 1
-
-[node name="ShopNav" type="PanelContainer" parent="BottomNavPanel/NavHBox"]
+[node name="ShopNav" type="PanelContainer" parent="BottomNavPanel/NavHBox" unique_id=1163856196]
 modulate = Color(1, 1, 1, 0.55)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="ShopVBox" type="VBoxContainer" parent="BottomNavPanel/NavHBox/ShopNav"]
-layout_mode = 2
-alignment = 1
-
-[node name="ShopIcon" type="Label" parent="BottomNavPanel/NavHBox/ShopNav/ShopVBox"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "🛒"
-horizontal_alignment = 1
-
-[node name="ShopLabel" type="Label" parent="BottomNavPanel/NavHBox/ShopNav/ShopVBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.002136234, 0.002136234, 0.0021362337, 1)
-theme_override_font_sizes/font_size = 30
-text = "Shop"
-horizontal_alignment = 1
-
-[node name="SettingsNav" type="PanelContainer" parent="BottomNavPanel/NavHBox"]
-modulate = Color(1, 1, 1, 0.55)
+[node name="ShopVBox" type="VBoxContainer" parent="BottomNavPanel/NavHBox/ShopNav" unique_id=1163856197]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="SettingsVBox" type="VBoxContainer" parent="BottomNavPanel/NavHBox/SettingsNav"]
-layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 4
 alignment = 1
 
-[node name="SettingsIcon" type="Label" parent="BottomNavPanel/NavHBox/SettingsNav/SettingsVBox"]
+[node name="ShopTexture" type="TextureRect" parent="BottomNavPanel/NavHBox/ShopNav/ShopVBox" unique_id=848379714]
+custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "⚙️"
-horizontal_alignment = 1
+texture = ExtResource("5_shop")
+expand_mode = 1
+stretch_mode = 3
 
-[node name="SettingsLabel" type="Label" parent="BottomNavPanel/NavHBox/SettingsNav/SettingsVBox"]
+[node name="SettingsNav" type="PanelContainer" parent="BottomNavPanel/NavHBox" unique_id=1594833350]
+visible = false
 layout_mode = 2
-theme_override_colors/font_color = Color(0.032967977, 0.032967992, 0.03296798, 1)
-theme_override_font_sizes/font_size = 30
-text = "Settings"
-horizontal_alignment = 1

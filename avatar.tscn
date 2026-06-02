@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bsxcpjito8ix4"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tklf8"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_702cj"]
+
+[node name="Avatar" type="Node3D" unique_id=559415180]
+
+[node name="EGG" type="CharacterBody3D" parent="." unique_id=291737925]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EGG" unique_id=213008445]
+transform = Transform3D(0.8, 0, 0, 0, 1.2, 0, 0, 0, 0.8, 0, 0, 0)
+shape = SubResource("SphereShape3D_tklf8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EGG/CollisionShape3D" unique_id=1522783643]
+transform = Transform3D(0.8, 0, 0, 0, 1.2, 0, 0, 0, 0.8, 0, 0, 0)
+mesh = SubResource("SphereMesh_702cj")
+skeleton = NodePath("../..")

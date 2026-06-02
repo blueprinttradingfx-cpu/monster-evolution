@@ -5,6 +5,8 @@ signal merge_failed(reason: String)
 signal creature_unlocked(creature_id: String)
 signal inventory_updated(inventory: Dictionary)
 
+var balancing_config: Resource = preload("res://resources/balancing/game_balancing.tres")
+
 var evolution_data: Dictionary = {}
 var unlocked: Dictionary = {}
 
@@ -12,6 +14,10 @@ func _ready() -> void:
 	load_evolution_data()
 
 	# Load unlocked creatures from save
+	refresh_unlocked()
+
+func refresh_unlocked() -> void:
+	unlocked = {}
 	for creature_id in SaveSystem.get_unlocked_creatures():
 		unlocked[creature_id] = true
 
@@ -43,21 +49,20 @@ func remove_creature(id: String, amount: int = 1) -> bool:
 # ── 3. CORE MERGE LOGIC ───────────────────────────────────────────────
 
 func can_merge(id: String) -> bool:
-	if not evolution_data.has(id):
+	if get_next_evolution(id) == "":
 		return false
 
-	var required: int = evolution_data[id]["required"]
+	var required: int = get_merge_required(id)
 
 	return SaveSystem.get_inventory_count(id) >= required
 
 func merge(id: String) -> String:
-	if not evolution_data.has(id):
-		emit_signal("merge_failed", "Invalid creature")
+	var next_id: String = get_next_evolution(id)
+	if next_id == "":
+		emit_signal("merge_failed", "No further evolution")
 		return ""
 
-	var data: Dictionary = evolution_data[id]
-	var required: int = data["required"]
-	var next_id: String = data["next"]
+	var required: int = get_merge_required(id)
 
 	if SaveSystem.get_inventory_count(id) < required:
 		emit_signal("merge_failed", "Not enough items")
@@ -82,6 +87,9 @@ func merge(id: String) -> String:
 	emit_signal("creature_unlocked", next_id)
 	emit_signal("merge_success", next_id, get_evolution_level(next_id))
 
+	if has_node("/root/TutorialSystem") and get_node("/root/TutorialSystem").is_active and get_node("/root/TutorialSystem").current_step == 5:
+		get_node("/root/TutorialSystem").next_step()
+
 	# UI feedback
 	_emit_juice("merge_success", {"result_id": next_id, "level": get_evolution_level(next_id)})
 
@@ -94,9 +102,34 @@ func merge(id: String) -> String:
 
 	return next_id
 
+func get_merge_required(creature_id: String) -> int:
+	var base_required = 2
+	var stage = get_evolution_level(creature_id)
+
+	if balancing_config:
+		base_required = balancing_config.get_merge_required(stage)
+	elif evolution_data.has(creature_id):
+		base_required = evolution_data[creature_id].get("required", 2)
+
+	if has_node("/root/DebugTuner"):
+		var debug_tuner = get_node("/root/DebugTuner")
+		return debug_tuner.get_merge_cost(stage, base_required)
+
+	if has_node("/root/RetentionSystem"):
+		var day = get_node("/root/RetentionSystem").get_day_number()
+		if day == 1 and creature_id == "egg":
+			return 1
+
+	return base_required
+
 # ── 4. EVOLUTION LEVEL TRACKING ───────────────────────────────────────
 
 func get_evolution_level(id: String) -> int:
+	if has_node("/root/CreatureRegistry"):
+		var data = get_node("/root/CreatureRegistry").get_creature(id)
+		if data:
+			return data.evolution_level
+
 	var level: int = 0
 	var current: String = id
 
@@ -132,15 +165,44 @@ func get_next_evolution(id: String) -> String:
 	if evolution_data.has(id):
 		return evolution_data[id]["next"]
 
+	# Procedural Fallback (Task 17: Content Scaling)
+	if has_node("/root/CreatureRegistry"):
+		var registry = get_node("/root/CreatureRegistry")
+		var data = registry.get_creature(id)
+		if data:
+			# Simple rule: same archetype, next tier
+			var next_tier_id = (data.archetype + "_" + str(data.tier + 1)).to_lower()
+			if registry.get_creature(next_tier_id):
+				return next_tier_id
+
+			# Branching rule: Slime Tier 3 evolves to Beast Tier 1
+			if data.archetype == "Slime" and data.tier >= 3:
+				return "beast_1"
+
 	return ""
 
 func get_all_creature_ids() -> Array[String]:
 	var ids: Array[String] = []
+
+	# Add base creatures from JSON
 	for id in evolution_data.keys():
-		ids.append(id)
+		if not ids.has(id):
+			ids.append(id)
+
+	# Add procedural creatures from registry (Task 17)
+	if has_node("/root/CreatureRegistry"):
+		for id in get_node("/root/CreatureRegistry").get_all_ids():
+			if not ids.has(id):
+				ids.append(id)
+
 	return ids
 
 func get_creature_name(creature_id: String) -> String:
+	if has_node("/root/CreatureRegistry"):
+		var data = get_node("/root/CreatureRegistry").get_creature(creature_id)
+		if data:
+			return data.name
+
 	# For now, return capitalized ID as fallback
 	# In future, this could load from creatures.json for display names
 	return creature_id.capitalize()
@@ -149,6 +211,13 @@ func get_creature_name(creature_id: String) -> String:
 
 func is_unlocked(id: String) -> bool:
 	return unlocked.get(id, false)
+
+func get_unlocked_creatures() -> Array[String]:
+	var result: Array[String] = []
+	for creature_id in unlocked:
+		if unlocked[creature_id]:
+			result.append(creature_id)
+	return result
 
 # ── PRIVATE HELPERS ───────────────────────────────────────────────────
 

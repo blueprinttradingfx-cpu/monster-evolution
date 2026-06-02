@@ -43,7 +43,6 @@ func _ready() -> void:
 
 	# Set bottom nav active tab to merge and hide start button
 	bottom_nav.set_active("merge")
-	bottom_nav.start_button.visible = false
 
 
 # ── Data Population ─────────────────────────────────────────────────────────────
@@ -261,3 +260,7 @@ func _spawn_confetti_burst() -> void:
 # ── CONTINUE handler ───────────────────────────────────────────────────────────
 func _on_continue_pressed() -> void:
 	NavigationManager.pop_overlay()
+
+	# After a successful merge (evolution), the best UX is returning to Home
+	# so the user can see their new creature in the main hub.
+	GameState.go_to(GameState.Screen.MENU)

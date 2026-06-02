@@ -45,13 +45,37 @@ const RARITY_COLORS: Dictionary = {
 
 var float_targets: Array[Label] = []
 
-func _ready():
+func _ready() -> void:
 	_apply_all_styles()
 	_connect_signals()
 	_refresh_currency_display()
+	_refresh_shop_ui()
 	_collect_float_targets()
 	bottom_nav.set_active("shop")
-	bottom_nav.start_button.visible = false
+	
+	# Set all label font sizes to 24px
+	rare_badge_1.add_theme_font_size_override("font_size", 24)
+	epic_badge.add_theme_font_size_override("font_size", 24)
+	rare_badge_2.add_theme_font_size_override("font_size", 24)
+	
+	# Update price labels
+	for path in [
+		"MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/DinoCard/DinoCardVBox/DinoPriceHBox/DinoPriceLabel",
+		"MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/SpaceCard/SpaceCardVBox/SpacePriceHBox/SpacePriceLabel",
+		"MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/JungleCard/JungleCardVBox/JunglePriceHBox/JunglePriceLabel",
+	]:
+		var label = get_node_or_null(path) as Label
+		if label:
+			label.add_theme_font_size_override("font_size", 24)
+	
+	# Update all button font sizes
+	for btn in [
+		watch_now_btn, golden_pass_btn,
+		dino_buy_btn, space_buy_btn, jungle_buy_btn,
+		fire_dragon_btn, frost_blob_btn, zapling_btn, gloom_spirit_btn
+	]:
+		if btn:
+			btn.add_theme_font_size_override("font_size", 24)
 
 func _process(delta: float):
 	if float_targets.is_empty():
@@ -79,28 +103,38 @@ func _connect_signals():
 func _on_watch_now_pressed():
 	_show_popup("📺 Loading ad...")
 
-func _on_theme_buy(theme_id: String):
+func _on_theme_buy(theme_id: String) -> void:
 	var data: Dictionary = CARD_THEMES.filter(func(d): return d["id"] == theme_id).front()
-	_attempt_purchase(data["id"], data["name"], data["price"])
+	_attempt_purchase(data["id"], data["name"], data["price"], "theme")
 
-func _on_skin_buy(skin_id: String):
+func _on_skin_buy(skin_id: String) -> void:
 	var data: Dictionary = CREATURE_SKINS.filter(func(d): return d["id"] == skin_id).front()
-	_attempt_purchase(data["id"], data["name"], data["price"])
+	_attempt_purchase(data["id"], data["name"], data["price"], "skin")
 
-func _on_golden_pass_pressed():
+func _on_golden_pass_pressed() -> void:
 	_show_popup("💳 Redirecting to store for Golden Pass ($4.99)...")
 
-func _attempt_purchase(item_id: String, item_name: String, price: int):
+func _attempt_purchase(item_id: String, item_name: String, price: int, item_type: String) -> void:
 	var save_data: Dictionary = SaveSystem.get_data()
 	var coins: int = save_data.get("economy", {}).get("coins", 0)
 	
 	if coins >= price:
 		SaveSystem.add_coins(-price)
+		match item_type:
+			"theme":
+				SaveSystem.unlock_card_theme(item_id)
+			"skin":
+				SaveSystem.unlock_skin(item_id)
+				# Also unlock the creature if it's a creature skin
+				SaveSystem.unlock_creature(item_id)
+				if has_node("/root/MergeSystem"):
+					get_node("/root/MergeSystem").refresh_unlocked()
 		SaveSystem.save_game()
 		_refresh_currency_display()
+		_refresh_shop_ui()
 		_show_popup("✅ Purchased %s!" % item_name)
 	else:
-		_show_popup("❌ Not enough coins!\nYou need %d 🪙 but only have %d." % [price, coins])
+		_show_popup("❌ Not enough coins!\nYou need %d $ but only have %d." % [price, coins])
 
 func _refresh_currency_display():
 	var save_data: Dictionary = SaveSystem.get_data()
@@ -108,6 +142,32 @@ func _refresh_currency_display():
 	var eggs: int = save_data.get("inventory", {}).get("egg", 0)
 	top_appbar.set_coins(coins)
 	top_appbar.set_eggs(eggs)
+
+func _refresh_shop_ui():
+	# Update theme buttons
+	if SaveSystem.is_card_theme_unlocked("dino"):
+		dino_buy_btn.text = "✓ OWNED"
+		dino_buy_btn.disabled = true
+	if SaveSystem.is_card_theme_unlocked("space"):
+		space_buy_btn.text = "✓ OWNED"
+		space_buy_btn.disabled = true
+	if SaveSystem.is_card_theme_unlocked("jungle"):
+		jungle_buy_btn.text = "✓ OWNED"
+		jungle_buy_btn.disabled = true
+	
+	# Update skin buttons
+	if SaveSystem.is_skin_unlocked("fire_dragon"):
+		fire_dragon_btn.text = "✓ OWNED"
+		fire_dragon_btn.disabled = true
+	if SaveSystem.is_skin_unlocked("frost_blob"):
+		frost_blob_btn.text = "✓ OWNED"
+		frost_blob_btn.disabled = true
+	if SaveSystem.is_skin_unlocked("zapling"):
+		zapling_btn.text = "✓ OWNED"
+		zapling_btn.disabled = true
+	if SaveSystem.is_skin_unlocked("gloom_spirit"):
+		gloom_spirit_btn.text = "✓ OWNED"
+		gloom_spirit_btn.disabled = true
 
 func _show_popup(message: String):
 	purchase_popup.dialog_text = message

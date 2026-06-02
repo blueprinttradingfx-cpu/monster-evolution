@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://tutorial_overlay"]
+
+[ext_resource type="Script" path="res://scenes/overlays/tutorial/TutorialOverlay.gd" id="1_script"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_spotlight"]
+blend_mode = 2
+
+[node name="TutorialOverlay" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_script")
+
+[node name="Spotlight" type="ColorRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("CanvasItemMaterial_spotlight")
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Dimmer" type="ColorRect" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="InstructionLabel" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Instruction text here"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

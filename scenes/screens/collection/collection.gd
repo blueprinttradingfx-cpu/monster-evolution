@@ -48,7 +48,10 @@ func _ready() -> void:
 	bottom_nav.tab_changed.connect(_on_tab_pressed)
 
 	bottom_nav.set_active("collection")
-	bottom_nav.start_button.visible = false
+	
+	# Set all label font sizes to 24px
+	completion_pct_label.add_theme_font_size_override("font_size", 24)
+	completion_hint.add_theme_font_size_override("font_size", 24)
 
 # ---------------------------------------------------------------------------
 # HEADER
@@ -115,7 +118,7 @@ func _populate_collection() -> void:
 
 func _create_creature_card(creature_id: String, is_unlocked: bool, index: int) -> PanelContainer:
 	var card: PanelContainer = PanelContainer.new()
-	card.custom_minimum_size = Vector2(160, 200)
+	card.custom_minimum_size = Vector2(200, 280)
 	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 	if is_unlocked:
@@ -143,7 +146,7 @@ func _create_creature_card(creature_id: String, is_unlocked: bool, index: int) -
 
 	var tag_label: Label = Label.new()
 	tag_label.text = "MONSTER" if is_unlocked else "???"
-	tag_label.add_theme_font_size_override("font_size", 10)
+	tag_label.add_theme_font_size_override("font_size", 24)
 	tag_label.add_theme_color_override("font_color", Color.WHITE if is_unlocked else Color(0.286, 0.267, 0.329, 1))
 	tag_panel.add_child(tag_label)
 
@@ -153,41 +156,76 @@ func _create_creature_card(creature_id: String, is_unlocked: bool, index: int) -
 
 	var num_label: Label = Label.new()
 	num_label.text = "#%03d" % index
-	num_label.add_theme_font_size_override("font_size", 11)
+	num_label.add_theme_font_size_override("font_size", 24)
 	num_label.add_theme_color_override("font_color", Color(0.286, 0.267, 0.329, 1))
 	tag_row.add_child(num_label)
 
 	# Image Bg
 	var img_panel: PanelContainer = PanelContainer.new()
-	img_panel.custom_minimum_size.y = 100
+	img_panel.custom_minimum_size.y = 140
 	var active_img_style = style_img_bg if is_unlocked else style_img_locked_bg
 	if active_img_style:
 		img_panel.add_theme_stylebox_override("panel", active_img_style)
 	vbox.add_child(img_panel)
 
-	var icon_label: Label = Label.new()
-	icon_label.layout_mode = 2
-	icon_label.text = _get_icon_for_creature(creature_id) if is_unlocked else "❓"
-	icon_label.add_theme_font_size_override("font_size", 40)
-	icon_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	icon_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	if not is_unlocked:
-		icon_label.add_theme_color_override("font_color", Color(0.176, 0.176, 0.176, 0.4))
-	img_panel.add_child(icon_label)
+	var icon_instance: Control = null
+	var creature_data: Resource = null
+	if has_node("/root/CreatureRegistry"):
+		creature_data = get_node("/root/CreatureRegistry").get_creature(creature_id)
+
+	if creature_data and is_unlocked:
+		var icon_scene = load("res://scenes/common/ProceduralCreatureIcon.tscn")
+		icon_instance = icon_scene.instantiate()
+		icon_instance.setup(creature_data)
+		img_panel.add_child(icon_instance)
+	else:
+		var icon_label: Label = Label.new()
+		icon_label.layout_mode = 2
+
+		var is_silhouette = false
+		if not is_unlocked and has_node("/root/RetentionSystem"):
+			if get_node("/root/RetentionSystem").get_day_number() >= 7:
+				is_silhouette = true
+
+		if is_unlocked:
+			icon_label.text = _get_icon_for_creature(creature_id)
+		elif is_silhouette:
+			icon_label.text = _get_icon_for_creature(creature_id)
+			icon_label.add_theme_color_override("font_color", Color(0, 0, 0, 1)) # Black silhouette
+		else:
+			icon_label.text = "❓"
+
+		icon_label.add_theme_font_size_override("font_size", 40)
+		icon_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		icon_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		if not is_unlocked and not is_silhouette:
+			icon_label.add_theme_color_override("font_color", Color(0.176, 0.176, 0.176, 0.4))
+		img_panel.add_child(icon_label)
 
 	# Name
 	var name_label: Label = Label.new()
 	name_label.text = MergeSystem.get_creature_name(creature_id).to_upper() if is_unlocked else "LOCKED"
-	name_label.add_theme_font_size_override("font_size", 12)
+	name_label.add_theme_font_size_override("font_size", 24)
 	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	if not is_unlocked:
 		name_label.add_theme_color_override("font_color", Color(0.286, 0.267, 0.329, 1))
 	vbox.add_child(name_label)
 
-	# Stars
+	# Stars (Dynamic based on Tier)
 	var stars_label: Label = Label.new()
-	stars_label.text = "★★★☆☆" if is_unlocked else "☆☆☆☆☆"
-	stars_label.add_theme_font_size_override("font_size", 11)
+	var tier: int = 1
+	if creature_data:
+		tier = creature_data.tier
+
+	var stars_text := ""
+	for s_idx in range(5):
+		if s_idx < tier:
+			stars_text += "★"
+		else:
+			stars_text += "☆"
+
+	stars_label.text = stars_text if is_unlocked else "☆☆☆☆☆"
+	stars_label.add_theme_font_size_override("font_size", 24)
 	stars_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	if is_unlocked:
 		stars_label.add_theme_color_override("font_color", Color(0.973, 0.741, 0.133, 1))
@@ -200,6 +238,11 @@ func _create_creature_card(creature_id: String, is_unlocked: bool, index: int) -
 	return card
 
 func _get_icon_for_creature(creature_id: String) -> String:
+	if has_node("/root/CreatureRegistry"):
+		var data = get_node("/root/CreatureRegistry").get_creature(creature_id)
+		if data and data.symbol:
+			return data.symbol
+
 	var idx: int = CREATURE_IDS.find(creature_id)
 	if idx != -1:
 		return SYMBOLS[idx]

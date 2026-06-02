@@ -23,6 +23,10 @@ func _ready() -> void:
 	await get_tree().create_timer(5.0).timeout
 	is_loading = false
 	GameState.go_to(GameState.Screen.TAP_TO_START)
+	
+	# Set all label font sizes to 24px
+	subtitle.add_theme_font_size_override("font_size", 24)
+	status_label.add_theme_font_size_override("font_size", 24)
 
 func _play_intro_animation() -> void:
 	main_vbox.modulate = Color(1,1,1,0)

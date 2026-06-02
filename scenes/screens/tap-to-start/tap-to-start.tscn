@@ -3,52 +3,11 @@
 [ext_resource type="Script" uid="uid://dwqyms5dvnde0" path="res://scenes/screens/tap-to-start/tap-to-start.gd" id="1_tap_script"]
 [ext_resource type="Texture2D" uid="uid://brujbmxxuukfx" path="res://assets/sprites/dino.png" id="2_dino"]
 [ext_resource type="Texture2D" uid="uid://rjwelh2didqw" path="res://assets/sprites/merge_memory_monsters_game_logo.png" id="3_logo"]
+[ext_resource type="Theme" uid="uid://dc3si0880aglo" path="res://resources/monster_morph.tres" id="4_theme"]
+[ext_resource type="Texture2D" uid="uid://6mq1u6e7ukfm" path="res://assets/sprites/bg.png" id="5_bg_texture"]
+[ext_resource type="Texture2D" uid="uid://bsqdq2aj8n75f" path="res://assets/sprites/start.png" id="6_start_btn"]
 
-[sub_resource type="StyleBoxFlat" id="merge_btn_normal"]
-content_margin_left = 48.0
-content_margin_top = 16.0
-content_margin_right = 48.0
-content_margin_bottom = 16.0
-bg_color = Color(0.419608, 0.219608, 0.831373, 1.0)
-border_width_bottom = 4
-border_color = Color(0.333333, 0.0862745, 0.745098, 1.0)
-corner_radius_top_left = 999
-corner_radius_top_right = 999
-corner_radius_bottom_right = 999
-corner_radius_bottom_left = 999
-shadow_color = Color(0.333333, 0.0862745, 0.745098, 1.0)
-shadow_size = 4
-shadow_offset = Vector2(0, 4)
-
-[sub_resource type="StyleBoxFlat" id="merge_btn_hover"]
-content_margin_left = 48.0
-content_margin_top = 16.0
-content_margin_right = 48.0
-content_margin_bottom = 16.0
-bg_color = Color(0.490196, 0.270588, 0.901961, 1.0)
-border_width_bottom = 4
-border_color = Color(0.333333, 0.0862745, 0.745098, 1.0)
-corner_radius_top_left = 999
-corner_radius_top_right = 999
-corner_radius_bottom_right = 999
-corner_radius_bottom_left = 999
-shadow_color = Color(0.333333, 0.0862745, 0.745098, 1.0)
-shadow_size = 4
-shadow_offset = Vector2(0, 4)
-
-[sub_resource type="StyleBoxFlat" id="merge_btn_pressed"]
-content_margin_left = 48.0
-content_margin_top = 20.0
-content_margin_right = 48.0
-content_margin_bottom = 12.0
-bg_color = Color(0.419608, 0.219608, 0.831373, 1.0)
-border_width_bottom = 0
-border_color = Color(0.333333, 0.0862745, 0.745098, 1.0)
-corner_radius_top_left = 999
-corner_radius_top_right = 999
-corner_radius_bottom_right = 999
-corner_radius_bottom_left = 999
-shadow_size = 0
+[sub_resource type="Theme" id="Theme_shfrl"]
 
 [node name="TitleScreen" type="Control" unique_id=62147707]
 layout_mode = 3
@@ -57,7 +16,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_theme")
 script = ExtResource("1_tap_script")
+
+[node name="BgTexture" type="TextureRect" parent="." unique_id=960888207]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_bg_texture")
+expand_mode = 1
 
 [node name="BackgroundLayer" type="Control" parent="." unique_id=760333987]
 layout_mode = 1
@@ -66,8 +36,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_shfrl")
 
 [node name="PurpleBlob" type="ColorRect" parent="BackgroundLayer" unique_id=1866755224]
+visible = false
 layout_mode = 0
 offset_left = -80.0
 offset_top = 300.0
@@ -76,6 +48,7 @@ offset_bottom = 620.0
 color = Color(0.655, 0.545, 0.98, 0.2)
 
 [node name="GreenBlob" type="ColorRect" parent="BackgroundLayer" unique_id=1594111471]
+visible = false
 layout_mode = 0
 offset_left = 900.0
 offset_top = 1000.0
@@ -84,6 +57,7 @@ offset_bottom = 1300.0
 color = Color(0.204, 0.827, 0.6, 0.2)
 
 [node name="YellowBlob" type="ColorRect" parent="BackgroundLayer" unique_id=258362877]
+visible = false
 layout_mode = 0
 offset_left = 300.0
 offset_top = 1500.0
@@ -112,7 +86,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="Logo" type="TextureRect" parent="MainContainer/RootVBox/HeaderSection" unique_id=898056081]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 texture = ExtResource("3_logo")
 expand_mode = 1
@@ -133,55 +107,58 @@ layout_mode = 0
 layout_mode = 0
 
 [node name="MonsterImage" type="TextureRect" parent="MainContainer/RootVBox/CenterSection/CreatureContainer" unique_id=118118615]
-layout_mode = 0
+custom_minimum_size = Vector2(600, 600)
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -128.0
-offset_right = 128.0
-offset_bottom = 128.0
+offset_left = -295.0
+offset_top = -496.0
+offset_right = 305.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_dino")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="FloorShadow" type="ColorRect" parent="MainContainer/RootVBox/CenterSection/CreatureContainer" unique_id=1875494922]
 layout_mode = 0
-offset_left = 50.0
-offset_top = 280.0
-offset_right = 270.0
-offset_bottom = 304.0
+offset_left = 34.0
+offset_top = 519.0
+offset_right = 254.0
+offset_bottom = 543.0
 color = Color(0, 0, 0, 0.05)
 
 [node name="FooterSection" type="VBoxContainer" parent="MainContainer/RootVBox" unique_id=182925888]
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
+theme = ExtResource("4_theme")
 alignment = 1
 
 [node name="PlayButton" type="Button" parent="MainContainer/RootVBox/FooterSection" unique_id=108581381]
-custom_minimum_size = Vector2(280, 60)
 layout_mode = 2
-text = "PLAY"
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = SubResource("merge_btn_normal")
-theme_override_styles/hover = SubResource("merge_btn_hover")
-theme_override_styles/pressed = SubResource("merge_btn_pressed")
+flat = true
+
+[node name="BtnTexture" type="TextureRect" parent="MainContainer/RootVBox/FooterSection/PlayButton" unique_id=123456789]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -258.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_start_btn")
+stretch_mode = 3
 
 [node name="TapLabel" type="Label" parent="MainContainer/RootVBox/FooterSection" unique_id=1322875894]
 layout_mode = 2
-text = "Tap to begin"
+theme = ExtResource("4_theme")
+theme_override_font_sizes/font_size = 34
+text = "Tap to start"
 horizontal_alignment = 1
-
-[node name="BottomButtons" type="HBoxContainer" parent="MainContainer/RootVBox/FooterSection" unique_id=1437041195]
-layout_mode = 2
-alignment = 1
-
-[node name="SettingsButton" type="Button" parent="MainContainer/RootVBox/FooterSection/BottomButtons" unique_id=61051174]
-layout_mode = 2
-text = "⚙"
-
-[node name="AudioButton" type="Button" parent="MainContainer/RootVBox/FooterSection/BottomButtons" unique_id=285696380]
-layout_mode = 2
-text = "🔊"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1584302689]

@@ -27,6 +27,11 @@ SaveSystem="*res://systems/save_system.gd"
 RewardSystem="*res://systems/reward_system.gd"
 MergeSystem="*res://systems/merge_system.gd"
 MemorySystem="*res://systems/memory_system.gd"
+DebugTuner="*res://systems/debug_tuner.gd"
+TutorialSystem="*res://systems/tutorial_manager.gd"
+RetentionSystem="*res://systems/retention_manager.gd"
+CreatureRegistry="*res://systems/creature_registry.gd"
+PerformanceLayer="*res://systems/performance_layer.gd"
 
 [display]
 

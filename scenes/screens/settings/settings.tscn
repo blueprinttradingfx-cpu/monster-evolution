@@ -1,14 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://settings_screen"]
+[gd_scene format=3 uid="uid://cyqhrfuilebvb"]
 
-[ext_resource type="Script" path="res://scenes/screens/settings/settings.gd" id="1_script"]
-[ext_resource type="PackedScene" uid="uid://common_topappbar" path="res://scenes/common/TopAppBar.tscn" id="2_topappbar"]
-[ext_resource type="PackedScene" uid="uid://common_bottomnav" path="res://scenes/common/BottomNav.tscn" id="3_bottomnav"]
+[ext_resource type="Script" uid="uid://dnk8ruworchpm" path="res://scenes/screens/settings/settings.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/common/TopAppBar.tscn" id="2_topappbar"]
+[ext_resource type="PackedScene" path="res://scenes/common/BottomNav.tscn" id="3_bottomnav"]
+[ext_resource type="Theme" uid="uid://dc3si0880aglo" path="res://resources/monster_morph.tres" id="4_theme"]
+[ext_resource type="Texture2D" uid="uid://6mq1u6e7ukfm" path="res://assets/sprites/bg.png" id="5_bg"]
 
 [sub_resource type="StyleBoxFlat" id="SB_card"]
-content_margin_left = 16
-content_margin_top = 16
-content_margin_right = 16
-content_margin_bottom = 16
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
 bg_color = Color(0.973, 0.976, 0.98, 1)
 border_width_left = 4
 border_width_top = 4
@@ -17,36 +19,17 @@ border_width_bottom = 4
 border_color = Color(0.176, 0.176, 0.176, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
-corner_radius_bottom_left = 16
 corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 shadow_color = Color(0.176, 0.176, 0.176, 1)
 shadow_size = 4
 shadow_offset = Vector2(0, 4)
 
-[sub_resource type="StyleBoxFlat" id="SB_close"]
-content_margin_left = 24
-content_margin_top = 16
-content_margin_right = 24
-content_margin_bottom = 16
-bg_color = Color(0.42, 0.22, 0.831, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.176, 0.176, 0.176, 1)
-corner_radius_top_left = 999
-corner_radius_top_right = 999
-corner_radius_bottom_left = 999
-corner_radius_bottom_right = 999
-shadow_color = Color(0.333, 0.086, 0.745, 1)
-shadow_size = 4
-shadow_offset = Vector2(0, 4)
-
 [sub_resource type="StyleBoxFlat" id="SB_reset"]
-content_margin_left = 24
-content_margin_top = 16
-content_margin_right = 24
-content_margin_bottom = 16
+content_margin_left = 24.0
+content_margin_top = 16.0
+content_margin_right = 24.0
+content_margin_bottom = 16.0
 bg_color = Color(0.973, 0.976, 0.98, 1)
 border_width_left = 4
 border_width_top = 4
@@ -55,234 +38,256 @@ border_width_bottom = 4
 border_color = Color(0.729, 0.102, 0.102, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
-corner_radius_bottom_left = 12
 corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
-[node name="SettingsScreen" type="Control"]
+[sub_resource type="StyleBoxFlat" id="SB_close"]
+content_margin_left = 24.0
+content_margin_top = 16.0
+content_margin_right = 24.0
+content_margin_bottom = 16.0
+bg_color = Color(0.42, 0.22, 0.831, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.176, 0.176, 0.176, 1)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+shadow_color = Color(0.333, 0.086, 0.745, 1)
+shadow_size = 4
+shadow_offset = Vector2(0, 4)
+
+[node name="SettingsScreen" type="Control" unique_id=698294632]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_theme")
 script = ExtResource("1_script")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="BgTexture" type="TextureRect" parent="." unique_id=1313821180]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.973, 0.976, 0.98, 1)
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_bg")
+expand_mode = 1
 
-[node name="TopAppBar" parent="." instance=ExtResource("2_topappbar")]
+[node name="TopAppBar" parent="." unique_id=253023877 instance=ExtResource("2_topappbar")]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 
-[node name="MainLayout" type="VBoxContainer" parent="."]
+[node name="MainLayout" type="VBoxContainer" parent="." unique_id=793501195]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 72
-offset_bottom = -148
+offset_top = 72.0
+offset_bottom = -148.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MainLayout"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainLayout" unique_id=1469025532]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ContentVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer"]
+[node name="ContentVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer" unique_id=1412118606]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 24
 
-[node name="TopPad" type="Control" parent="MainLayout/ScrollContainer/ContentVBox"]
-layout_mode = 2
+[node name="TopPad" type="Control" parent="MainLayout/ScrollContainer/ContentVBox" unique_id=1966568967]
 custom_minimum_size = Vector2(0, 16)
-
-[node name="TitleSection" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox"]
 layout_mode = 2
 
-[node name="SettingsTitle" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/TitleSection"]
+[node name="TitleSection" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox" unique_id=1743099125]
 layout_mode = 2
+
+[node name="SettingsTitle" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/TitleSection" unique_id=1282909123]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.098, 0.11, 0.114, 1)
+theme_override_font_sizes/font_size = 36
 text = "SETTINGS"
 horizontal_alignment = 1
-theme_override_font_sizes/font_size = 36
-theme_override_colors/font_color = Color(0.098, 0.11, 0.114, 1)
 
-[node name="TitleUnderline" type="ColorRect" parent="MainLayout/ScrollContainer/ContentVBox/TitleSection"]
-layout_mode = 2
+[node name="TitleUnderline" type="ColorRect" parent="MainLayout/ScrollContainer/ContentVBox/TitleSection" unique_id=1281782208]
 custom_minimum_size = Vector2(96, 8)
+layout_mode = 2
 size_flags_horizontal = 4
 color = Color(0.42, 0.22, 0.831, 1)
 
-[node name="SideMargin" type="MarginContainer" parent="MainLayout/ScrollContainer/ContentVBox"]
+[node name="SideMargin" type="MarginContainer" parent="MainLayout/ScrollContainer/ContentVBox" unique_id=1887629593]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_right = 24
 
-[node name="CardsVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin"]
+[node name="CardsVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin" unique_id=1498231018]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="SoundCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox"]
+[node name="SoundCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox" unique_id=668065958]
 layout_mode = 2
 theme_override_styles/panel = SubResource("SB_card")
 
-[node name="SoundHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard"]
+[node name="SoundHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard" unique_id=445237057]
 layout_mode = 2
-alignment = 1
 theme_override_constants/separation = 16
+alignment = 1
 
-[node name="SoundIcon" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox"]
+[node name="SoundIcon" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox" unique_id=1759236513]
 layout_mode = 2
+theme_override_font_sizes/font_size = 28
 text = "🔊"
-theme_override_font_sizes/font_size = 28
 
-[node name="SoundTextVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox"]
+[node name="SoundTextVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox" unique_id=739894132]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SoundLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox/SoundTextVBox"]
+[node name="SoundLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox/SoundTextVBox" unique_id=1994847539]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.098, 0.11, 0.114, 1)
+theme_override_font_sizes/font_size = 24
 text = "Sound"
-theme_override_font_sizes/font_size = 14
-theme_override_colors/font_color = Color(0.098, 0.11, 0.114, 1)
 
-[node name="SoundSubLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox/SoundTextVBox"]
+[node name="SoundSubLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox/SoundTextVBox" unique_id=861868730]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+theme_override_font_sizes/font_size = 24
 text = "Sfx and feedback"
-theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
 
-[node name="SoundToggle" type="CheckButton" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox"]
+[node name="SoundToggle" type="CheckButton" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox" unique_id=695062385]
 layout_mode = 2
 button_pressed = true
 
-[node name="MusicCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox"]
+[node name="MusicCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox" unique_id=691780154]
 layout_mode = 2
 theme_override_styles/panel = SubResource("SB_card")
 
-[node name="MusicHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard"]
+[node name="MusicHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard" unique_id=1451339952]
 layout_mode = 2
-alignment = 1
 theme_override_constants/separation = 16
+alignment = 1
 
-[node name="MusicIcon" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox"]
+[node name="MusicIcon" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox" unique_id=795917259]
 layout_mode = 2
+theme_override_font_sizes/font_size = 28
 text = "🎵"
-theme_override_font_sizes/font_size = 28
 
-[node name="MusicTextVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox"]
+[node name="MusicTextVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox" unique_id=1141179061]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MusicLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox/MusicTextVBox"]
+[node name="MusicLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox/MusicTextVBox" unique_id=58874679]
 layout_mode = 2
-text = "Music"
-theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.098, 0.11, 0.114, 1)
+theme_override_font_sizes/font_size = 24
+text = "Music"
 
-[node name="MusicSubLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox/MusicTextVBox"]
+[node name="MusicSubLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox/MusicTextVBox" unique_id=1482960305]
 layout_mode = 2
-text = "Background melodies"
-theme_override_font_sizes/font_size = 12
 theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+theme_override_font_sizes/font_size = 24
+text = "Background melodies"
 
-[node name="MusicToggle" type="CheckButton" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox"]
+[node name="MusicToggle" type="CheckButton" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox" unique_id=1662481483]
 layout_mode = 2
 button_pressed = true
 
-[node name="LanguageCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox"]
+[node name="LanguageCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox" unique_id=701019289]
 layout_mode = 2
 theme_override_styles/panel = SubResource("SB_card")
 
-[node name="LanguageHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard"]
+[node name="LanguageHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard" unique_id=4533691]
 layout_mode = 2
-alignment = 1
 theme_override_constants/separation = 16
+alignment = 1
 
-[node name="LangIcon" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox"]
+[node name="LangIcon" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox" unique_id=1284453008]
 layout_mode = 2
-text = "🌐"
 theme_override_font_sizes/font_size = 28
+text = "🌐"
 
-[node name="LangTextVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox"]
+[node name="LangTextVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox" unique_id=1293497875]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LangLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox/LangTextVBox"]
+[node name="LangLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox/LangTextVBox" unique_id=2064098091]
 layout_mode = 2
-text = "Language"
-theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.098, 0.11, 0.114, 1)
+theme_override_font_sizes/font_size = 24
+text = "Language"
 
-[node name="LangSubLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox/LangTextVBox"]
+[node name="LangSubLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox/LangTextVBox" unique_id=263356841]
 layout_mode = 2
-text = "Selected: English"
-theme_override_font_sizes/font_size = 12
 theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+theme_override_font_sizes/font_size = 24
+text = "Selected: English"
 
-[node name="LangButton" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox"]
-layout_mode = 2
-text = "EN"
+[node name="LangButton" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox" unique_id=2097294811]
 custom_minimum_size = Vector2(52, 36)
-theme_override_font_sizes/font_size = 13
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "EN"
 
-[node name="ResetSection" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox"]
+[node name="ResetSection" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox" unique_id=1451741963]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="ResetButton" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/ResetSection"]
-layout_mode = 2
-text = "🔄  Reset Progress"
+[node name="ResetButton" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/ResetSection" unique_id=1673290395]
 custom_minimum_size = Vector2(0, 64)
-theme_override_styles/normal = SubResource("SB_reset")
-theme_override_styles/hover = SubResource("SB_reset")
-theme_override_styles/pressed = SubResource("SB_reset")
-theme_override_colors/font_color = Color(0.729, 0.102, 0.102, 1)
-theme_override_font_sizes/font_size = 20
-
-[node name="ResetWarning" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/ResetSection"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.729, 0.102, 0.102, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("SB_reset")
+theme_override_styles/pressed = SubResource("SB_reset")
+theme_override_styles/hover = SubResource("SB_reset")
+text = "🔄  Reset Progress"
+
+[node name="ResetWarning" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/ResetSection" unique_id=1545924149]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
+theme_override_font_sizes/font_size = 24
 text = "Warning: This action is permanent and will delete all collected monsters and progress."
 horizontal_alignment = 1
 autowrap_mode = 3
-theme_override_font_sizes/font_size = 11
-theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
 
-[node name="CloseSection" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox"]
+[node name="CloseSection" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox" unique_id=1266344474]
 layout_mode = 2
 
-[node name="CloseButton" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/CloseSection"]
-layout_mode = 2
-text = "CLOSE"
+[node name="CloseButton" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/CloseSection" unique_id=625667899]
 custom_minimum_size = Vector2(200, 64)
-theme_override_styles/normal = SubResource("SB_close")
-theme_override_styles/hover = SubResource("SB_close")
-theme_override_styles/pressed = SubResource("SB_close")
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("SB_close")
+theme_override_styles/pressed = SubResource("SB_close")
+theme_override_styles/hover = SubResource("SB_close")
+text = "CLOSE"
 
-[node name="BottomPad" type="Control" parent="MainLayout/ScrollContainer/ContentVBox"]
-layout_mode = 2
+[node name="BottomPad" type="Control" parent="MainLayout/ScrollContainer/ContentVBox" unique_id=1610015140]
 custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
 
-[node name="ResetConfirmDialog" type="ConfirmationDialog" parent="."]
+[node name="ResetConfirmDialog" type="ConfirmationDialog" parent="." unique_id=1171888220]
 title = "Reset Progress"
-dialog_text = "This action is permanent and will delete all collected monsters and progress. Are you sure?"
 ok_button_text = "Reset"
-cancel_button_text = "Cancel"
+dialog_text = "This action is permanent and will delete all collected monsters and progress. Are you sure?"
 
-[node name="BottomNav" parent="." instance=ExtResource("3_bottomnav")]
+[node name="BottomNav" parent="." unique_id=1023654794 instance=ExtResource("3_bottomnav")]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -148
+offset_top = -148.0
 grow_horizontal = 2
 grow_vertical = 0

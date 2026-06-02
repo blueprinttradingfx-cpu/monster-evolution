@@ -23,8 +23,6 @@ func _ready() -> void:
 	bottom_nav.tab_changed.connect(_on_tab_pressed)
 	bottom_nav.set_active("merge")
 
-	# Hide StartButton in BottomNav for this screen
-	bottom_nav.start_button.visible = false
 
 	# Check if a creature was pre-selected (coming from collection)
 	var pre_selected: String = GameState.merge_selected_creature_id
@@ -108,8 +106,15 @@ func _set_slot(slot: PanelContainer, creature_id: String) -> void:
 			if creature_id == "":
 				child.text = "🧩"
 			else:
-				# For now just use emoji, but can use MergeSystem later
-				child.text = "🟢"
+				# Use actual creature symbol
+				if has_node("/root/CreatureRegistry"):
+					var data = get_node("/root/CreatureRegistry").get_creature(creature_id)
+					if data:
+						child.text = data.symbol
+					else:
+						child.text = "🟢"  # Fallback
+				else:
+					child.text = "🟢"  # Fallback
 			break
 
 func _on_merge_pressed() -> void:

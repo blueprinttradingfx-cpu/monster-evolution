@@ -30,6 +30,16 @@ func _ready():
 	_connect_signals()
 	_refresh_currency_display()
 	bottom_nav.set_active("settings")
+	
+	# Set all label font sizes to 24px
+	lang_sub_label.add_theme_font_size_override("font_size", 24)
+	
+	# Set all button font sizes to 24px
+	for btn in [
+		sound_toggle, music_toggle, lang_button, reset_button, close_button
+	]:
+		if btn:
+			btn.add_theme_font_size_override("font_size", 24)
 	bottom_nav.start_button.visible = false
 
 func _connect_signals():

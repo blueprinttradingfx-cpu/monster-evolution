@@ -24,7 +24,7 @@ func _ready() -> void:
 	footer_label.text = "Come back tomorrow for Day " + str(streak + 1) + "!"
 	var coins: int = save_data.get("economy", {}).get("coins", 0)
 	var eggs: int = save_data.get("inventory", {}).get("egg", 0)
-	currency_label.text = str(coins) + " 🪙  " + str(eggs) + " 🥚"
+	currency_label.text = str(coins) + " $  " + str(eggs) + " 🥚"
 
 func _process(delta: float) -> void:
 	_time += delta

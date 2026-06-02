@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://success_button"]
+
+[ext_resource type="Theme" uid="uid://dc3si0880aglo" path="res://resources/monster_morph.tres" id="1_theme"]
+
+[node name="SuccessButton" type="Button"]
+layout_mode = 2
+theme = ExtResource("1_theme")
+theme_type_variation = &"ButtonSuccess"
+custom_minimum_size = Vector2(0, 48)

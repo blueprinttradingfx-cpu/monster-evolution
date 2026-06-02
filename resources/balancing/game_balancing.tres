@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="BalancingConfig" load_steps=2 format=3 uid="uid://game_balancing_config"]
+
+[ext_resource type="Script" path="res://resources/balancing/balancing_config.gd" id="1_balancing_config"]
+
+[resource]
+script = ExtResource("1_balancing_config")
+grid_scaling = Array[Vector2i]([Vector2i(2, 2), Vector2i(2, 3), Vector2i(3, 3), Vector2i(4, 3), Vector2i(4, 4), Vector2i(5, 4), Vector2i(5, 5)])
+coin_multiplier = 2.5
+egg_thresholds = {
+16: 2,
+25: 3
+}
+merge_requirement_curve = {
+2: 2,
+4: 3,
+6: 4,
+99: 5
+}

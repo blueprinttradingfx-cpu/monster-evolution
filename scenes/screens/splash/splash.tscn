@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://7j6b2b8rpjlc" path="res://scenes/screens/splash/splash.gd" id="1_splash_script"]
 [ext_resource type="Texture2D" uid="uid://rjwelh2didqw" path="res://assets/sprites/merge_memory_monsters_game_logo.png" id="2_logo_texture"]
+[ext_resource type="Theme" uid="uid://dc3si0880aglo" path="res://resources/monster_morph.tres" id="3_theme"]
+[ext_resource type="Texture2D" uid="uid://6mq1u6e7ukfm" path="res://assets/sprites/bg.png" id="4_bg_texture"]
 
 [node name="SplashScene2" type="Control" unique_id=1707347729]
 layout_mode = 3
@@ -10,7 +12,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_theme")
 script = ExtResource("1_splash_script")
+
+[node name="BgTexture" type="TextureRect" parent="." unique_id=429300398]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_bg_texture")
+expand_mode = 1
 
 [node name="Background" type="Control" parent="." unique_id=1395205186]
 layout_mode = 1
@@ -22,6 +35,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="PurpleBlob" type="ColorRect" parent="Background" unique_id=514753722]
+visible = false
 layout_mode = 0
 offset_left = -80.0
 offset_top = -80.0
@@ -30,6 +44,7 @@ offset_bottom = 180.0
 color = Color(0.655, 0.545, 0.98, 0.1)
 
 [node name="GreenBlob" type="ColorRect" parent="Background" unique_id=1844059440]
+visible = false
 layout_mode = 0
 offset_left = 900.0
 offset_top = 350.0
@@ -38,6 +53,7 @@ offset_bottom = 650.0
 color = Color(0.204, 0.827, 0.6, 0.1)
 
 [node name="YellowBlob" type="ColorRect" parent="Background" unique_id=1885608786]
+visible = false
 layout_mode = 0
 offset_left = 250.0
 offset_top = 750.0
@@ -59,7 +75,7 @@ theme_override_constants/separation = 24
 alignment = 1
 
 [node name="LogoSection" type="Control" parent="CenterContainer/MainVBox" unique_id=1241824782]
-custom_minimum_size = Vector2(420, 450)
+custom_minimum_size = Vector2(600, 1000)
 layout_mode = 2
 
 [node name="BlobUnderlay" type="ColorRect" parent="CenterContainer/MainVBox/LogoSection" unique_id=1201568004]
@@ -75,17 +91,17 @@ offset_bottom = 120.0
 color = Color(0.514, 0.333, 0.937, 0.1)
 
 [node name="Logo" type="TextureRect" parent="CenterContainer/MainVBox/LogoSection" unique_id=8672221]
-custom_minimum_size = Vector2(420, 450)
+custom_minimum_size = Vector2(600, 500)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -203.0
-offset_top = -251.0
-offset_right = 217.0
-offset_bottom = 199.0
+offset_left = -430.0
+offset_top = -501.0
+offset_right = 467.0
+offset_bottom = 328.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_logo_texture")
@@ -94,6 +110,7 @@ stretch_mode = 5
 
 [node name="TitleSection" type="VBoxContainer" parent="CenterContainer/MainVBox" unique_id=1901376474]
 layout_mode = 2
+theme = ExtResource("3_theme")
 alignment = 1
 
 [node name="GameTitle" type="Label" parent="CenterContainer/MainVBox/TitleSection" unique_id=1212477278]
@@ -130,41 +147,5 @@ stretch_mode = 5
 
 [node name="StatusLabel" type="Label" parent="CenterContainer/MainVBox/LoadingSection/StatusRow" unique_id=1783474083]
 layout_mode = 2
+theme = ExtResource("3_theme")
 text = "Loading..."
-
-[node name="Footer" type="MarginContainer" parent="." unique_id=272033978]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -100.0
-offset_bottom = -40.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="FooterIcons" type="HBoxContainer" parent="Footer" unique_id=1336926664]
-layout_mode = 2
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="EggBadge" type="PanelContainer" parent="Footer/FooterIcons" unique_id=55701906]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="EggIcon" type="TextureRect" parent="Footer/FooterIcons/EggBadge" unique_id=411393700]
-layout_mode = 2
-
-[node name="MergeBadge" type="PanelContainer" parent="Footer/FooterIcons" unique_id=1203137096]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="MergeIcon" type="TextureRect" parent="Footer/FooterIcons/MergeBadge" unique_id=689230505]
-layout_mode = 2
-
-[node name="PetBadge" type="PanelContainer" parent="Footer/FooterIcons" unique_id=231688773]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="PetIcon" type="TextureRect" parent="Footer/FooterIcons/PetBadge" unique_id=1374240022]
-layout_mode = 2
