@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EvolutionConfig" load_steps=2 format=3 uid="uid://evoconfig123"]
+
+[ext_resource type="Script" path="res://data/evolution/EvolutionConfig.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+stageCosts = {
+"stage_1": 100,
+"stage_2": 500,
+"stage_3": 1500
+}
+stageDefinitions = {
+"stage_0": "egg",
+"stage_1": "baby",
+"stage_2": "kid",
+"stage_3": "adult",
+"stage_4": "elder"
+}

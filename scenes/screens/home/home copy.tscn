@@ -1,0 +1,424 @@
+[gd_scene format=3 uid="uid://b22w2xppvw0er"]
+
+[ext_resource type="Script" uid="uid://k0vk8rrrqx11" path="res://scenes/screens/home/home.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://djr1fhap8bajb" path="res://scenes/common/BottomNav.tscn" id="4_bottomnav"]
+[ext_resource type="PackedScene" path="res://scenes/common/TopAppBar.tscn" id="5_topappbar"]
+[ext_resource type="Theme" uid="uid://dc3si0880aglo" path="res://resources/monster_morph.tres" id="6_theme"]
+[ext_resource type="Texture2D" uid="uid://6mq1u6e7ukfm" path="res://assets/sprites/bg.png" id="7_bg_texture"]
+[ext_resource type="PackedScene" uid="uid://b1s0b73vi56lo" path="res://scenes/common/MonsterDisplay/MonsterDisplay.tscn" id="8_monsterdisplay"]
+
+[sub_resource type="StyleBoxFlat" id="BarPanelStyle"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.952941, 0.956863, 0.960784, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.176471, 0.176471, 0.176471, 1)
+corner_radius_top_left = 9999
+corner_radius_top_right = 9999
+corner_radius_bottom_right = 9999
+corner_radius_bottom_left = 9999
+
+[sub_resource type="StyleBoxFlat" id="EvolveButtonNormal"]
+content_margin_left = 24.0
+content_margin_top = 20.0
+content_margin_right = 24.0
+content_margin_bottom = 20.0
+bg_color = Color(1, 0.6, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.176471, 0.176471, 0.176471, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0.7, 0.3, 0, 1)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="EvolveButtonPressed"]
+content_margin_left = 24.0
+content_margin_top = 20.0
+content_margin_right = 24.0
+content_margin_bottom = 20.0
+bg_color = Color(1, 0.6, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.176471, 0.176471, 0.176471, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="PrimaryButtonNormal"]
+content_margin_left = 32.0
+content_margin_top = 24.0
+content_margin_right = 32.0
+content_margin_bottom = 24.0
+bg_color = Color(0.419608, 0.219608, 0.831373, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.176471, 0.176471, 0.176471, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0.333333, 0.0862745, 0.745098, 1)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="PrimaryButtonPressed"]
+content_margin_left = 32.0
+content_margin_top = 24.0
+content_margin_right = 32.0
+content_margin_bottom = 24.0
+bg_color = Color(0.419608, 0.219608, 0.831373, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.176471, 0.176471, 0.176471, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="CollectionButtonNormal"]
+content_margin_left = 24.0
+content_margin_top = 20.0
+content_margin_right = 24.0
+content_margin_bottom = 20.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.176471, 0.176471, 0.176471, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.1)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="CollectionButtonPressed"]
+content_margin_left = 24.0
+content_margin_top = 20.0
+content_margin_right = 24.0
+content_margin_bottom = 20.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.176471, 0.176471, 0.176471, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="QuestPanelStyle"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.952941, 0.956863, 0.960784, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.796078, 0.764706, 0.843137, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="QuestIconPanelStyle"]
+bg_color = Color(0.992157, 0.878431, 0.278431, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.176471, 0.176471, 0.176471, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Home" type="Control" unique_id=1380412029]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_theme")
+script = ExtResource("1_script")
+
+[node name="BgTexture" type="TextureRect" parent="." unique_id=2052456339]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_bg_texture")
+expand_mode = 1
+
+[node name="Background" type="ColorRect" parent="." unique_id=854192006]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.972549, 0.976471, 0.980392, 1)
+
+[node name="SafeArea" type="MarginContainer" parent="." unique_id=250164743]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Main" type="VBoxContainer" parent="SafeArea" unique_id=39138621]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="CreatureSection" type="VBoxContainer" parent="SafeArea/Main" unique_id=1650775178]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="CreatureWrapper" type="Control" parent="SafeArea/Main/CreatureSection" unique_id=1586181232]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+
+[node name="CreatureGlow" type="ColorRect" parent="SafeArea/Main/CreatureSection/CreatureWrapper" unique_id=1234291249]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.913725, 0.866667, 1, 0.2)
+
+[node name="MonsterDisplay" parent="SafeArea/Main/CreatureSection/CreatureWrapper" unique_id=614454307 instance=ExtResource("8_monsterdisplay")]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.776
+anchor_bottom = 0.776
+offset_top = -198.656
+offset_bottom = 57.343994
+
+[node name="ProgressSection" type="VBoxContainer" parent="SafeArea/Main/CreatureSection" unique_id=1074394544]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ProgressHeader" type="HBoxContainer" parent="SafeArea/Main/CreatureSection/ProgressSection" unique_id=306833117]
+layout_mode = 2
+
+[node name="ProgressTitle" type="Label" parent="SafeArea/Main/CreatureSection/ProgressSection/ProgressHeader" unique_id=407336643]
+modulate = Color(0.0142752165, 0.014275218, 0.014275218, 1)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Evolution Progress"
+vertical_alignment = 2
+
+[node name="ProgressValue" type="Label" parent="SafeArea/Main/CreatureSection/ProgressSection/ProgressHeader" unique_id=722476362]
+modulate = Color(0.0035191667, 0.0035191681, 0.0035191672, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "LVL 4 · 7/10"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="EvolutionBar" type="PanelContainer" parent="SafeArea/Main/CreatureSection/ProgressSection" unique_id=1183610676]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("BarPanelStyle")
+
+[node name="BarFill" type="ColorRect" parent="SafeArea/Main/CreatureSection/ProgressSection/EvolutionBar" unique_id=219379356]
+layout_mode = 2
+color = Color(0.517647, 0.333333, 0.937255, 1)
+
+[node name="Sparkle" type="ColorRect" parent="SafeArea/Main/CreatureSection/ProgressSection/EvolutionBar/BarFill" unique_id=1256430390]
+layout_mode = 1
+offset_left = 282.0
+offset_top = 6.0
+offset_right = 294.0
+offset_bottom = 18.0
+
+[node name="ActionButtons" type="VBoxContainer" parent="SafeArea/Main" unique_id=835448449]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="GridButtons" type="GridContainer" parent="SafeArea/Main/ActionButtons" unique_id=280370219]
+layout_mode = 2
+columns = 2
+
+[node name="EvolveButton" type="Button" parent="SafeArea/Main/ActionButtons/GridButtons" unique_id=321045876]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("EvolveButtonNormal")
+theme_override_styles/pressed = SubResource("EvolveButtonPressed")
+text = "EVOLVE"
+
+[node name="EvolveButtonContent" type="VBoxContainer" parent="SafeArea/Main/ActionButtons/GridButtons/EvolveButton" unique_id=456789012]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EvolveIcon" type="Label" parent="SafeArea/Main/ActionButtons/GridButtons/EvolveButton/EvolveButtonContent" unique_id=567890123]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "✨"
+
+[node name="EvolveLabel" type="Label" parent="SafeArea/Main/ActionButtons/GridButtons/EvolveButton/EvolveButtonContent" unique_id=678901234]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "EVOLVE"
+horizontal_alignment = 1
+
+[node name="PlayButton" type="Button" parent="SafeArea/Main/ActionButtons/GridButtons" unique_id=362789857]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("PrimaryButtonNormal")
+theme_override_styles/pressed = SubResource("PrimaryButtonPressed")
+text = "PLAY"
+
+[node name="PlayButtonContent" type="VBoxContainer" parent="SafeArea/Main/ActionButtons/GridButtons/PlayButton" unique_id=1800201500]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayIcon" type="Label" parent="SafeArea/Main/ActionButtons/GridButtons/PlayButton/PlayButtonContent" unique_id=1445350227]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "🎮"
+
+[node name="PlayLabel" type="Label" parent="SafeArea/Main/ActionButtons/GridButtons/PlayButton/PlayButtonContent" unique_id=1445350228]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "PLAY"
+horizontal_alignment = 1
+
+[node name="ShopButton" type="Button" parent="SafeArea/Main/ActionButtons/GridButtons" unique_id=694433557]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("CollectionButtonNormal")
+theme_override_styles/pressed = SubResource("CollectionButtonPressed")
+text = "SHOP"
+
+[node name="ShopButtonContent" type="VBoxContainer" parent="SafeArea/Main/ActionButtons/GridButtons/ShopButton" unique_id=1595827132]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShopIcon" type="Label" parent="SafeArea/Main/ActionButtons/GridButtons/ShopButton/ShopButtonContent" unique_id=729763914]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "🛒"
+
+[node name="ShopLabel" type="Label" parent="SafeArea/Main/ActionButtons/GridButtons/ShopButton/ShopButtonContent" unique_id=1239643657]
+modulate = Color(0.0142752165, 0.014275218, 0.014275218, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "SHOP"
+horizontal_alignment = 1
+
+[node name="CollectionButton" type="Button" parent="SafeArea/Main/ActionButtons/GridButtons" unique_id=694433556]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("CollectionButtonNormal")
+theme_override_styles/pressed = SubResource("CollectionButtonPressed")
+text = "COLLECTION"
+
+[node name="CollectionButtonContent" type="VBoxContainer" parent="SafeArea/Main/ActionButtons/GridButtons/CollectionButton" unique_id=1595827131]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CollectionIcon" type="Label" parent="SafeArea/Main/ActionButtons/GridButtons/CollectionButton/CollectionButtonContent" unique_id=729763913]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "📚"
+
+[node name="CollectionLabel" type="Label" parent="SafeArea/Main/ActionButtons/GridButtons/CollectionButton/CollectionButtonContent" unique_id=1239643656]
+modulate = Color(0.0142752165, 0.014275218, 0.014275218, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "COLLECTION"
+horizontal_alignment = 1
+
+[node name="DailyQuest" type="PanelContainer" parent="SafeArea/Main" unique_id=554021186]
+layout_mode = 2
+theme_override_styles/panel = SubResource("QuestPanelStyle")
+
+[node name="QuestContent" type="HBoxContainer" parent="SafeArea/Main/DailyQuest" unique_id=592612384]
+layout_mode = 2
+
+[node name="QuestIconPanel" type="PanelContainer" parent="SafeArea/Main/DailyQuest/QuestContent" unique_id=1234187337]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("QuestIconPanelStyle")
+
+[node name="QuestIcon" type="Label" parent="SafeArea/Main/DailyQuest/QuestContent/QuestIconPanel" unique_id=1021137390]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "💡"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuestText" type="VBoxContainer" parent="SafeArea/Main/DailyQuest/QuestContent" unique_id=1329740412]
+layout_mode = 2
+
+[node name="QuestTitle" type="Label" parent="SafeArea/Main/DailyQuest/QuestContent/QuestText" unique_id=1468919612]
+modulate = Color(0.019925633, 0.019925632, 0.019925632, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Daily Quest"
+
+[node name="QuestDesc" type="Label" parent="SafeArea/Main/DailyQuest/QuestContent/QuestText" unique_id=1095490248]
+modulate = Color(0.0142752165, 0.014275218, 0.014275218, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Merge 5 slime monsters today to earn a Rare Egg!"
+
+[node name="TopAppBar" parent="." unique_id=650333811 instance=ExtResource("5_topappbar")]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="BottomNav" parent="." unique_id=712187510 instance=ExtResource("4_bottomnav")]
+custom_minimum_size = Vector2(1080, 150)
+layout_mode = 1
+offset_bottom = 2.0

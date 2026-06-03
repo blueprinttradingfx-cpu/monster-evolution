@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://vnrnx4qd2cm8"]
+
+[ext_resource type="Script" path="res://scenes/common/BottomNav.gd" id="1"]
+
+[node name="BottomNav" type="Control"]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -80.0
+offset_bottom = 0.0
+grow_horizontal = 2
+script = ExtResource("1")
+
+[node name="SafeAreaContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeAreaContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HomeButton" type="Button" parent="SafeAreaContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(64, 64)
+text = "Home"
+
+[node name="CollectionButton" type="Button" parent="SafeAreaContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(64, 64)
+text = "Collection"
+
+[node name="ShopButton" type="Button" parent="SafeAreaContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(64, 64)
+text = "Shop"
+
+[node name="MiniGamesButton" type="Button" parent="SafeAreaContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(64, 64)
+text = "Mini Games"

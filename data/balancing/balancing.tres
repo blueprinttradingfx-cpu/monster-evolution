@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="EconomyBalancingConfig" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/balancing/BalancingConfig.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+starting_coins = 1000
+cost_baby_to_kid = 100
+cost_kid_to_adult = 500
+cost_adult_to_elder = 1500
+reward_easy_min = 10
+reward_easy_max = 20
+reward_medium_min = 20
+reward_medium_max = 40
+reward_hard_min = 40
+reward_hard_max = 80
+reward_expert_min = 80
+reward_expert_max = 150
+price_dino_egg = 500
+price_slime_egg = 500
+price_head_min = 100
+price_head_max = 200
+price_face_min = 50
+price_face_max = 100
+price_body_min = 150
+price_body_max = 300
+price_back_min = 100
+price_back_max = 200

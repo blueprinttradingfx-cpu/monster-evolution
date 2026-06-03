@@ -1,12 +1,12 @@
 extends Control
 
-@onready var top_appbar: TopAppBar = $TopAppBar
+@onready var top_appbar: Control = $TopAppBar
 @onready var inventory_grid: GridContainer = $ScrollContainer/ContentVBox/InventorySection/InventoryGrid
 @onready var slot_a: PanelContainer = $ScrollContainer/ContentVBox/MergeAreaCard/MergeAreaVBox/SlotsRow/Slot1
 @onready var slot_b: PanelContainer = $ScrollContainer/ContentVBox/MergeAreaCard/MergeAreaVBox/SlotsRow/Slot2
 @onready var merge_button: Button = $ScrollContainer/ContentVBox/MergeButton
 @onready var preview_label: Label = $ScrollContainer/ContentVBox/MergeAreaCard/MergeAreaVBox/PreviewBox/PreviewVBox/PreviewLabel
-@onready var bottom_nav: BottomNav = $BottomNav
+@onready var bottom_nav: Control = $BottomNav
 
 var _selected_creature: String = ""
 

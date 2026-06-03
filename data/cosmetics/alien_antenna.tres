@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Cosmetic" load_steps=2 format=3 uid="uid://slime_alien_antenna"]
+
+[ext_resource type="Script" path="res://data/cosmetics/Cosmetic.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "alien_antenna"
+name = "Alien Antenna"
+slot = "head"
+speciesId = "slime"
+price = 200
+spritePath = "res://assets/cosmetics/head/alien_antenna.png"

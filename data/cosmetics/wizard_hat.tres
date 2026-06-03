@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Cosmetic" load_steps=2 format=3 uid="uid://dino_wizard_hat"]
+
+[ext_resource type="Script" path="res://data/cosmetics/Cosmetic.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "wizard_hat"
+name = "Wizard Hat"
+slot = "head"
+speciesId = "dino"
+price = 175
+spritePath = "res://assets/cosmetics/head/wizard_hat.png"

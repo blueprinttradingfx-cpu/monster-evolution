@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://b1s0b73vi56lo"]
+
+[ext_resource type="Script" uid="uid://btwg26lw3c5os" path="res://scenes/common/MonsterDisplay/MonsterDisplay.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://brujbmxxuukfx" path="res://assets/sprites/dino.png" id="2_texture"]
+
+[node name="MonsterDisplay" type="Control" unique_id=405107156]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="SpriteRoot" type="Sprite2D" parent="." unique_id=1467495744]
+position = Vector2(-10, -18)
+texture = ExtResource("2_texture")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=641613485]
+
+[node name="CosmeticLayer" type="Node2D" parent="." unique_id=1600657203]
+
+[node name="HeadSlotSprite" type="Sprite2D" parent="CosmeticLayer" unique_id=155403796]
+modulate = Color(1, 1, 1, 0)
+
+[node name="FaceSlotSprite" type="Sprite2D" parent="CosmeticLayer" unique_id=1966134354]
+modulate = Color(1, 1, 1, 0)
+
+[node name="BodySlotSprite" type="Sprite2D" parent="CosmeticLayer" unique_id=1973976119]
+modulate = Color(1, 1, 1, 0)
+
+[node name="BackSlotSprite" type="Sprite2D" parent="CosmeticLayer" unique_id=638157642]
+modulate = Color(1, 1, 1, 0)

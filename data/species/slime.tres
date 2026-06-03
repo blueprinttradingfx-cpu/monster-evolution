@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Species" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/species/Species.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "slime"
+name = "Slime"
+description = "Squishy magical creatures"
+eggTypeId = "slime_egg"
+availableMorphIds = Array[String](["default", "poison", "crystal", "electric"])
+evolutionStageIds = Array[String](["stage_0", "stage_1", "stage_2", "stage_3", "stage_4"])

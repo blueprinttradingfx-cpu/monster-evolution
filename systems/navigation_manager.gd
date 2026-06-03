@@ -17,7 +17,10 @@ func _ready() -> void:
 		GameState.Screen.CREATURE_DETAIL: "res://scenes/screens/creature-detail/creature-detail.tscn",
 		GameState.Screen.SHOP: "res://scenes/screens/shop/shop.tscn",
 		GameState.Screen.SETTINGS: "res://scenes/screens/settings/settings.tscn",
-		GameState.Screen.DAILY_REWARD: "res://scenes/overlays/daily-reward/daily-reward.tscn"
+		GameState.Screen.DAILY_REWARD: "res://scenes/overlays/daily-reward/daily-reward.tscn",
+		GameState.Screen.HATCH: "res://scenes/screens/hatch/HatchScene.tscn",
+		GameState.Screen.EVOLUTION: "res://scenes/screens/evolution/EvolutionConfirmation.tscn",
+		GameState.Screen.MINI_GAME_HUB: "res://scenes/screens/mini_game_hub/MiniGameHub.tscn"
 	}
 	GameState.screen_changed.connect(_on_screen_changed)
 

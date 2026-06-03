@@ -2,19 +2,24 @@ extends Control
 class_name BottomNav
 
 signal tab_changed(tab: String)
-signal start_pressed()
 
-@onready var start_button: Button = $StartButton if has_node("StartButton") else null
-@onready var play_nav: PanelContainer = $BottomNavPanel/NavHBox/PlayNav
-@onready var merge_nav: PanelContainer = $BottomNavPanel/NavHBox/MergeNav
-@onready var collection_nav: PanelContainer = $BottomNavPanel/NavHBox/CollectionNav
-@onready var shop_nav: PanelContainer = $BottomNavPanel/NavHBox/ShopNav
-@onready var settings_nav: PanelContainer = $BottomNavPanel/NavHBox/SettingsNav if has_node("BottomNavPanel/NavHBox/SettingsNav") else null
+var play_nav: PanelContainer
+var minigames_nav: PanelContainer
+var collection_nav: PanelContainer
+var shop_nav: PanelContainer
 
 var navs: Dictionary = {}
 var active_style: StyleBoxFlat
 
 func _ready():
+	print("[BottomNav] _ready() called")
+	play_nav = _find_nav_panel("PlayNav")
+	minigames_nav = _find_nav_panel("MinigamesNav")
+	collection_nav = _find_nav_panel("CollectionNav")
+	shop_nav = _find_nav_panel("ShopNav")
+	if not play_nav or not minigames_nav or not collection_nav or not shop_nav:
+		push_warning("BottomNav: one or more nav nodes are missing")
+		return
 	# Create the active style programmatically
 	active_style = StyleBoxFlat.new()
 	active_style.content_margin_left = 0.0
@@ -28,32 +33,43 @@ func _ready():
 	active_style.corner_radius_bottom_left = 0
 
 	navs = {
-		"play": play_nav,
-		"merge": merge_nav,
-		"collection": collection_nav,
-		"shop": shop_nav
+		"Home": play_nav,
+		"Minigames": minigames_nav,
+		"Collection": collection_nav,
+		"Shop": shop_nav
 	}
-	
-	if settings_nav:
-		navs["settings"] = settings_nav
+	print("[BottomNav] Navs initialized: ", navs)
 	
 	# Connect gui_input to each nav
 	for tab_name in navs:
 		var nav = navs[tab_name]
 		if nav:
+			print("[BottomNav] Connecting gui_input for: ", tab_name)
 			nav.gui_input.connect(func(event, tn=tab_name): _on_nav_gui_input(event, tn))
 	
-	# Connect start button if it exists
-	if start_button:
-		start_button.pressed.connect(func(): start_pressed.emit())
-	
-	set_active("play")
+	set_active("Home")
 
 func _on_nav_gui_input(event: InputEvent, tab_name: String) -> void:
+	print("[BottomNav] _on_nav_gui_input() called with tab_name: ", tab_name, ", event: ", event)
 	if event is InputEventMouseButton and event.pressed:
+		print("[BottomNav] Mouse pressed on: ", tab_name)
 		tab_changed.emit(tab_name)
+		match tab_name:
+			"Home":
+				print("[BottomNav] Calling GameState.go_to(GameState.Screen.MENU)")
+				GameState.go_to(GameState.Screen.MENU)
+			"Minigames":
+				print("[BottomNav] Calling GameState.go_to(GameState.Screen.MINI_GAME_HUB)")
+				GameState.go_to(GameState.Screen.MINI_GAME_HUB)
+			"Collection":
+				print("[BottomNav] Calling GameState.go_to(GameState.Screen.COLLECTION)")
+				GameState.go_to(GameState.Screen.COLLECTION)
+			"Shop":
+				print("[BottomNav] Calling GameState.go_to(GameState.Screen.SHOP)")
+				GameState.go_to(GameState.Screen.SHOP)
 
 func set_active(tab: String) -> void:
+	print("[BottomNav] set_active() called with tab: ", tab)
 	for tab_name in navs:
 		var nav = navs[tab_name]
 		if not nav:
@@ -64,3 +80,20 @@ func set_active(tab: String) -> void:
 		else:
 			nav.modulate = Color(1, 1, 1, 0.55)
 			nav.remove_theme_stylebox_override("panel")
+
+func _find_nav_panel(nav_name: String) -> PanelContainer:
+	var node: Node = get_node_or_null("BottomNavPanel/NavHBox/%s" % nav_name)
+	if node and node is PanelContainer:
+		return node
+
+	node = get_node_or_null(nav_name)
+	if node and node is PanelContainer:
+		return node
+
+	var bottom_panel: Node = get_node_or_null("BottomNavPanel")
+	if bottom_panel:
+		node = bottom_panel.find_child(nav_name, true, false)
+		if node and node is PanelContainer:
+			return node
+
+	return null

@@ -38,8 +38,8 @@ var grid_cols: int = 0
 var _card_scene = preload("res://ui_components/card.tscn")
 
 # Node references (resolved in _ready)
-@onready var top_appbar        : TopAppBar     = $TopAppBar
-@onready var bottom_nav        : BottomNav     = $BottomNav
+@onready var top_appbar        : Control     = $TopAppBar
+@onready var bottom_nav        : Control     = $BottomNav
 @onready var card_grid : GridContainer = $MainLayout/ScrollContainer/ContentArea/BoardGridContainer/CenterContainer/CardGrid
 @onready var level_label       : Label         = $MainLayout/ScrollContainer/ContentArea/StatusRow/MatchesPanel/MatchesContent/LevelLabel
 @onready var matches_label     : Label         = $MainLayout/ScrollContainer/ContentArea/StatusRow/MatchesPanel/MatchesContent/MatchesValue
@@ -61,14 +61,19 @@ var _card_scene = preload("res://ui_components/card.tscn")
 func _ready() -> void:
 	_apply_overlay_styles()
 	# Load saved level
-	var save_data = SaveSystem.get_data()
-	current_level = save_data.get("progression", {}).get("memory_level", 1)
+	current_level = GameManager.totalMiniGamesPlayed + 1 if GameManager else 1
 	_setup_game()
 	next_button.pressed.connect(_setup_game)
 	confetti_timer.timeout.connect(_spawn_confetti_burst)
 	_update_hud()
 	_connect_bottom_nav()
-	bottom_nav.set_active("play")
+	bottom_nav.set_active("Home")
+	
+	# Increment total mini games played
+	if GameManager:
+		GameManager.totalMiniGamesPlayed += 1
+		if SaveManager:
+			SaveManager.save_game()
 	
 	# Set all label font sizes to 24px
 	level_label.add_theme_font_size_override("font_size", 24)
@@ -91,17 +96,8 @@ func _connect_bottom_nav() -> void:
 
 func _on_tab_pressed(tab_name: String):
 	bottom_nav.set_active(tab_name)
-	match tab_name:
-		"play":
-			GameState.go_to(GameState.Screen.MENU)
-		"merge":
-			GameState.go_to(GameState.Screen.MERGE)
-		"collection":
-			GameState.go_to(GameState.Screen.COLLECTION)
-		"shop":
-			GameState.go_to(GameState.Screen.SHOP)
-		"settings":
-			GameState.go_to(GameState.Screen.SETTINGS)
+	if GameManager:
+		GameManager.change_screen(tab_name)
 
 # ── Game Setup ────────────────────────────────
 
@@ -383,8 +379,8 @@ func _on_win() -> void:
 	# Progress to next level (cap at max level) and save!
 	if current_level < LEVELS.size():
 		current_level += 1
-		SaveSystem.set_progression_value("memory_level", current_level)
-		SaveSystem.save_game()
+		if SaveManager:
+			SaveManager.save_game()
 
 # ── Confetti ───────────────────────────────────
 
@@ -509,21 +505,30 @@ func _style_next_button() -> void:
 # ── Save/Load Helpers ──────────────────────────
 
 func _add_coins(amount: int) -> void:
-	SaveSystem.add_coins(amount)
-	SaveSystem.save_game()
+	if EconomyManager:
+		EconomyManager.add_coins(amount)
+	if GameManager:
+		GameManager.totalCoinsEarned += amount
+	if SaveManager:
+		SaveManager.save_game()
 	_refresh_currency_display()
 
 func _add_egg() -> void:
-	SaveSystem.add_eggs(1)
-	SaveSystem.save_game()
+	if MonsterManager:
+		var new_egg_id: String = "egg_" + str(Time.get_ticks_msec())
+		MonsterManager.add_egg(new_egg_id, "dino_egg")
+	if SaveManager:
+		SaveManager.save_game()
 	_refresh_currency_display()
 
 func _refresh_currency_display() -> void:
-	var save_data: Dictionary = SaveSystem.get_data()
-	var coins: int = save_data.get("economy", {}).get("coins", 0)
-	var eggs: int = save_data.get("inventory", {}).get("egg", 0)
-	top_appbar.set_coins(coins)
-	top_appbar.set_eggs(eggs)
+	var coins: int = EconomyManager.get_coins() if EconomyManager else 0
+	var eggs_count: int = MonsterManager.get_owned_egg_count() if MonsterManager else 0
+	if top_appbar:
+		if top_appbar.has_method("set_coins"):
+			top_appbar.set_coins(coins)
+		if top_appbar.has_method("set_eggs"):
+			top_appbar.set_eggs(eggs_count)
 
 # ── HUD Helpers ───────────────────────────────
 

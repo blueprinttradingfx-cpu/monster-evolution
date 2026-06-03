@@ -1,0 +1,93 @@
+; ============================================================
+; SCREEN TEMPLATE — MonsterMorph
+; ============================================================
+; Replace every occurrence of:
+;   - "ScreenName"  → your actual screen name (e.g. "Shop", "Battle")
+;   - "screen_name" → snake_case version        (e.g. "shop", "battle")
+;   - uid values    → generate fresh UIDs in the Godot editor
+; ============================================================
+
+[gd_scene format=3 uid="uid://REPLACE_ME"]
+
+; ── External Resources ──────────────────────────────────────
+[ext_resource type="Script"      uid="uid://REPLACE_ME" path="res://scenes/screens/screen_name/screen_name.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://REPLACE_ME" path="res://scenes/common/TopAppBar.tscn"              id="2_topappbar"]
+[ext_resource type="PackedScene" uid="uid://REPLACE_ME" path="res://scenes/common/BottomNav.tscn"              id="3_bottomnav"]
+[ext_resource type="Theme"       uid="uid://REPLACE_ME" path="res://resources/monster_morph.tres"              id="4_theme"]
+[ext_resource type="Texture2D"   uid="uid://REPLACE_ME" path="res://assets/sprites/bg.png"                    id="5_bg"]
+
+; ── DO NOT add sub_resource StyleBoxFlat blocks here. ───────
+; ── All styles belong in res://resources/monster_morph.tres. ─
+
+; ============================================================
+; ROOT — fills the entire viewport
+; ============================================================
+[node name="ScreenName" type="Control" unique_id=REPLACE_ME]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_theme")
+script = ExtResource("1_script")
+
+; ── Background (behind everything, ignores mouse) ───────────
+[node name="BgTexture" type="TextureRect" parent="." unique_id=REPLACE_ME]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_bg")
+expand_mode = 1
+
+; ============================================================
+; ROOT LAYOUT — VBoxContainer that stacks Header / Body / Footer
+; This is the single source of truth for the screen layout.
+; ============================================================
+[node name="RootLayout" type="VBoxContainer" parent="." unique_id=REPLACE_ME]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+; ── HEADER ──────────────────────────────────────────────────
+[node name="TopAppBar" parent="RootLayout" unique_id=REPLACE_ME instance=ExtResource("2_topappbar")]
+layout_mode = 2
+
+; ── BODY (scrollable safe area) ─────────────────────────────
+; ScrollContainer lets content overflow safely on small screens.
+; Remove it and use MarginContainer directly if the screen has no scrolling.
+[node name="ScrollContainer" type="ScrollContainer" parent="RootLayout" unique_id=REPLACE_ME]
+layout_mode = 2
+size_flags_vertical = 3          ; EXPAND | FILL — takes all remaining space
+scroll_horizontal_enabled = false
+
+[node name="SafeArea" type="MarginContainer" parent="RootLayout/ScrollContainer" unique_id=REPLACE_ME]
+layout_mode = 2
+size_flags_horizontal = 3        ; EXPAND | FILL
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+; ── MAIN CONTENT — put your screen-specific nodes here ──────
+[node name="Main" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea" unique_id=REPLACE_ME]
+layout_mode = 2
+size_flags_horizontal = 3        ; EXPAND | FILL
+theme_override_constants/separation = 24
+
+; ... add your screen content as children of Main ...
+
+; ── FOOTER ──────────────────────────────────────────────────
+[node name="BottomNav" parent="RootLayout" unique_id=REPLACE_ME instance=ExtResource("3_bottomnav")]
+layout_mode = 2
+; NOTE: Do NOT set a hardcoded width here.
+; Only override the height minimum if your design requires it:
+; custom_minimum_size = Vector2(0, 150)

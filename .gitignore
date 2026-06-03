@@ -1,4 +1,6 @@
 .godot/
+.import/
+export/
 *.backup
 *.tmp
 *.swp
@@ -6,3 +8,11 @@
 *~
 .DS_Store
 Thumbs.db
+
+# Secrets and environment files
+secrets.cfg
+*.env
+
+# IDE
+.vscode/
+.idea/

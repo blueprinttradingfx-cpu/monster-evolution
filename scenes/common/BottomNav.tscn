@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cdptcwdhsxaf" path="res://scenes/common/BottomNav.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://duxyvh5p7woux" path="res://assets/sprites/nav/play.png" id="2_play"]
-[ext_resource type="Texture2D" uid="uid://c42ejgp3nfbkm" path="res://assets/sprites/nav/merge.png" id="3_merge"]
+[ext_resource type="Texture2D" uid="uid://c42ejgp3nfbkm" path="res://assets/sprites/nav/merge.png" id="3_minigames"]
 [ext_resource type="Texture2D" uid="uid://c7nn50yvp6yru" path="res://assets/sprites/nav/collection.png" id="4_collection"]
 [ext_resource type="Texture2D" uid="uid://cv26slychaevq" path="res://assets/sprites/nav/shop.png" id="5_shop"]
 
@@ -51,26 +51,28 @@ layout_mode = 2
 texture = ExtResource("2_play")
 expand_mode = 1
 stretch_mode = 3
+mouse_filter = 2
 
-[node name="MergeNav" type="PanelContainer" parent="BottomNavPanel/NavHBox" unique_id=796306789]
+[node name="MinigamesNav" type="PanelContainer" parent="BottomNavPanel/NavHBox" unique_id=796306789]
 modulate = Color(1, 1, 1, 0.55)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="MergeVBox" type="VBoxContainer" parent="BottomNavPanel/NavHBox/MergeNav" unique_id=796306790]
+[node name="MinigamesVBox" type="VBoxContainer" parent="BottomNavPanel/NavHBox/MinigamesNav" unique_id=796306790]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 4
 alignment = 1
 
-[node name="MergeTexture" type="TextureRect" parent="BottomNavPanel/NavHBox/MergeNav/MergeVBox" unique_id=1521478710]
+[node name="MinigamesTexture" type="TextureRect" parent="BottomNavPanel/NavHBox/MinigamesNav/MinigamesVBox" unique_id=1521478710]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
-texture = ExtResource("3_merge")
+texture = ExtResource("3_minigames")
 expand_mode = 1
 stretch_mode = 3
+mouse_filter = 2
 
 [node name="CollectionNav" type="PanelContainer" parent="BottomNavPanel/NavHBox" unique_id=335023473]
 modulate = Color(1, 1, 1, 0.55)
@@ -91,6 +93,7 @@ layout_mode = 2
 texture = ExtResource("4_collection")
 expand_mode = 1
 stretch_mode = 3
+mouse_filter = 2
 
 [node name="ShopNav" type="PanelContainer" parent="BottomNavPanel/NavHBox" unique_id=1163856196]
 modulate = Color(1, 1, 1, 0.55)
@@ -111,6 +114,7 @@ layout_mode = 2
 texture = ExtResource("5_shop")
 expand_mode = 1
 stretch_mode = 3
+mouse_filter = 2
 
 [node name="SettingsNav" type="PanelContainer" parent="BottomNavPanel/NavHBox" unique_id=1594833350]
 visible = false

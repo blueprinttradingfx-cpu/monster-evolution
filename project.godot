@@ -14,35 +14,53 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="Merge Memory Monsters"
-run/main_scene="res://scenes/boot/boot.tscn"
-config/features=PackedStringArray("4.6", "Mobile")
+config/name="Monster Morph"
+config/description="A cute mobile virtual pet game with monster evolution"
+run/main_scene="res://scenes/Main/Main.tscn"
+config/features=PackedStringArray("4.6", "Forward Plus")
+config/icon="res://icon.svg"
 
 [autoload]
 
-InputManager="*res://systems/input_manager.gd"
-NavigationManager="*res://systems/navigation_manager.gd"
+GameManager="*res://autoload/GameManager.gd"
+SaveManager="*res://autoload/SaveManager.gd"
+EconomyManager="*res://autoload/EconomyManager.gd"
+MonsterManager="*res://autoload/MonsterManager.gd"
 GameState="*res://systems/game_state.gd"
 SaveSystem="*res://systems/save_system.gd"
-RewardSystem="*res://systems/reward_system.gd"
 MergeSystem="*res://systems/merge_system.gd"
 MemorySystem="*res://systems/memory_system.gd"
-DebugTuner="*res://systems/debug_tuner.gd"
-TutorialSystem="*res://systems/tutorial_manager.gd"
-RetentionSystem="*res://systems/retention_manager.gd"
+RewardSystem="*res://systems/reward_system.gd"
+NavigationManager="*res://systems/navigation_manager.gd"
+InputManager="*res://systems/input_manager.gd"
 CreatureRegistry="*res://systems/creature_registry.gd"
+TutorialManager="*res://systems/tutorial_manager.gd"
+RetentionManager="*res://systems/retention_manager.gd"
+DebugTuner="*res://systems/debug_tuner.gd"
 PerformanceLayer="*res://systems/performance_layer.gd"
 
 [display]
 
 window/size/viewport_width=1080
 window/size/viewport_height=1920
-window/size/window_width_override=540
-window/size/window_height_override=960
+window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/handheld/orientation=1
+
+[input]
+
+ui_touch_emulate_mouse_from_touch=true
+
+[layer_names]
+
+2d_render/layer_1="background"
+2d_render/layer_2="game"
+2d_render/layer_3="ui"
+2d_physics/layer_1="player"
+2d_physics/layer_2="enemy"
+2d_physics/layer_3="ui"
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"

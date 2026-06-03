@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://common_topappbar"]
 
 [ext_resource type="Script" path="res://scenes/common/TopAppBar.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://logo" path="res://assets/sprites/merge_memory_monsters_game_logo.png" id="2_logo"]
+[ext_resource type="Texture2D" path="res://assets/sprites/merge_memory_monsters_game_logo.png" id="2_logo"]
 
 [node name="TopAppBar" type="PanelContainer"]
 custom_minimum_size = Vector2(0, 72)
@@ -18,53 +18,27 @@ grow_vertical = 2
 [node name="LeftGroup" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 12
 
-[node name="Logo" type="TextureRect" parent="HBoxContainer/LeftGroup"]
+[node name="CoinDisplay" type="HBoxContainer" parent="HBoxContainer/LeftGroup"]
 layout_mode = 2
-custom_minimum_size = Vector2(0, 40)
-expand_mode = 1
-stretch_mode = 5
-texture = ExtResource("2_logo")
+theme_override_constants/separation = 8
 
-[node name="Title" type="Label" parent="HBoxContainer/LeftGroup"]
+[node name="CoinIcon" type="Label" parent="HBoxContainer/LeftGroup/CoinDisplay"]
 layout_mode = 2
-text = "Merge Monsters"
-horizontal_alignment = 0
+text = "🪙"
+theme_override_font_sizes/font_size = 24
 
-[node name="CurrencyContainer" type="PanelContainer" parent="HBoxContainer"]
-layout_mode = 2
-
-[node name="CurrencyHBox" type="HBoxContainer" parent="HBoxContainer/CurrencyContainer"]
-layout_mode = 2
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Coins" type="HBoxContainer" parent="HBoxContainer/CurrencyContainer/CurrencyHBox"]
-layout_mode = 2
-
-[node name="CoinIcon" type="Label" parent="HBoxContainer/CurrencyContainer/CurrencyHBox/Coins"]
-layout_mode = 2
-text = "$"
-
-[node name="CoinsLabel" type="Label" parent="HBoxContainer/CurrencyContainer/CurrencyHBox/Coins"]
+[node name="CoinsLabel" type="Label" parent="HBoxContainer/LeftGroup/CoinDisplay"]
 layout_mode = 2
 text = "0"
+theme_override_font_sizes/font_size = 24
 
-[node name="Separator" type="ColorRect" parent="HBoxContainer/CurrencyContainer/CurrencyHBox"]
-layout_mode = 2
-custom_minimum_size = Vector2(1, 0)
-color = Color(0.5, 0.5, 0.5, 1.0)
-
-[node name="Eggs" type="HBoxContainer" parent="HBoxContainer/CurrencyContainer/CurrencyHBox"]
+[node name="RightGroup" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="EggIcon" type="Label" parent="HBoxContainer/CurrencyContainer/CurrencyHBox/Eggs"]
+[node name="SettingsButton" type="Button" parent="HBoxContainer/RightGroup"]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-text = "🥚"
-
-[node name="EggsLabel" type="Label" parent="HBoxContainer/CurrencyContainer/CurrencyHBox/Eggs"]
-layout_mode = 2
-text = "0"
+text = "⚙️"
+theme_override_font_sizes/font_size = 24

@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://d1e2f3a4b5c6"]
+
+[ext_resource type="Script" path="res://scenes/deprecated/ui/TopAppBar.gd" id="1"]
+
+[node name="TopAppBar" type="Control"]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 80.0
+grow_horizontal = 2
+script = ExtResource("1")
+
+[node name="SafeAreaContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeAreaContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CoinContainer" type="HBoxContainer" parent="SafeAreaContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CoinIcon" type="Label" parent="SafeAreaContainer/HBoxContainer/CoinContainer"]
+layout_mode = 2
+text = "🪙"
+
+[node name="CoinLabel" type="Label" parent="SafeAreaContainer/HBoxContainer/CoinContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="Spacer" type="Control" parent="SafeAreaContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SettingsButton" type="Button" parent="SafeAreaContainer/HBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(64, 64)
+text = "⚙️"

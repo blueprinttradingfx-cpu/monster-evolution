@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Cosmetic" load_steps=2 format=3 uid="uid://slime_chef_hat"]
+
+[ext_resource type="Script" path="res://data/cosmetics/Cosmetic.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "chef_hat"
+name = "Chef Hat"
+slot = "head"
+speciesId = "slime"
+price = 175
+spritePath = "res://assets/cosmetics/head/chef_hat.png"

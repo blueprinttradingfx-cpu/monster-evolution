@@ -1,37 +1,23 @@
 extends Control
 ## creature-detail.gd
 ## Controller for creature-detail.tscn
-## Uses common TopAppBar and BottomNav, GameState for navigation, MergeSystem for creature data
+## Uses common TopAppBar and BottomNav, GameManager for navigation, MonsterManager for data
 
 # ---------------------------------------------------------------------------
 # CONSTANTS
 # ---------------------------------------------------------------------------
-const SYMBOLS: Array = ["🥚", "🐣", "🦖", "🦕", "🐉", "🔥"]
-const CREATURE_IDS: Array = ["egg", "baby_dino", "raptor", "t_rex", "dragon", "lava_dragon"]
-const RARITIES: Array = ["Common", "Common", "Uncommon", "Rare", "Epic", "Legendary"]
-const RARITY_COLORS: Dictionary = {
-	"Common": Color(0.4, 0.4, 0.4, 1),
-	"Uncommon": Color(0.204, 0.827, 0.6, 1),
-	"Rare": Color(0.584, 0.431, 0, 1),
-	"Epic": Color(0.518, 0.208, 0.831, 1),
-	"Legendary": Color(0.937, 0.455, 0.067, 1),
-}
+const STAGE_NAMES: Array = ["Egg", "Baby", "Kid", "Adult", "Elder"]
 const DESCRIPTIONS: Dictionary = {
-	"egg": "The start of your adventure!",
-	"baby_dino": "A cute, curious baby dinosaur.",
-	"raptor": "Fast and clever, loves to run.",
-	"t_rex": "A mighty king of the dinosaurs!",
-	"dragon": "Breathes fire and soars high.",
-	"lava_dragon": "A powerful lava-dwelling beast."
+	"dino": "A mighty dinosaur companion!",
+	"slime": "A cute and squishy slime friend!"
 }
 
 # ---------------------------------------------------------------------------
 # NODE REFS
 # ---------------------------------------------------------------------------
 @onready var back_button: Button = $BackButton
-@onready var top_appbar: TopAppBar = $TopAppBar
-@onready var monster_image: TextureRect = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/ImageContainer/MonsterImage
-@onready var monster_emoji: Label = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/ImageContainer/MonsterEmoji
+@onready var top_appbar: Control = $TopAppBar
+@onready var monster_display: Control = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/ImageContainer/MonsterDisplay
 @onready var rarity_label: Label = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/HeroInfoVBox/RarityCenter/RarityPill/RarityLabel
 @onready var rarity_pill: PanelContainer = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/HeroInfoVBox/RarityCenter/RarityPill
 @onready var monster_name: Label = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/HeroInfoVBox/MonsterNameCenter/MonsterName
@@ -39,23 +25,14 @@ const DESCRIPTIONS: Dictionary = {
 @onready var attack_value: Label = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/StatsSection/AttackCard/AttackVBox/AttackValue
 @onready var energy_value: Label = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/StatsSection/EnergyCard/EnergyVBox/EnergyValue
 @onready var about_body: Label = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/AboutSection/AboutVBox/AboutBody
-@onready var ingredient1_emoji: Label = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox/Ingredient1VBox/Ingredient1Bubble/Ingredient1Emoji
-@onready var ingredient1_image: TextureRect = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox/Ingredient1VBox/Ingredient1Bubble/Ingredient1Image
-@onready var ingredient1_label: Label = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox/Ingredient1VBox/Ingredient1Label
-@onready var ingredient2_emoji: Label = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox/Ingredient2VBox/Ingredient2Bubble/Ingredient2Emoji
-@onready var ingredient2_image: TextureRect = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox/Ingredient2VBox/Ingredient2Bubble/Ingredient2Image
-@onready var ingredient2_label: Label = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox/Ingredient2VBox/Ingredient2Label
-@onready var result_emoji_node: Label = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox/ResultVBox/ResultBubble/ResultEmoji
-@onready var result_image_node: TextureRect = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox/ResultVBox/ResultBubble/ResultImage
-@onready var result_label_node: Label = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox/ResultVBox/ResultLabel
 @onready var cta_button: Button = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/CtaButton
 @onready var sparkle_layer: Control = $SparkleLayer
-@onready var bottom_nav: BottomNav = $BottomNav
+@onready var bottom_nav: Control = $BottomNav
 
 # ---------------------------------------------------------------------------
 # PRIVATE STATE
 # ---------------------------------------------------------------------------
-var _creature_id: String = ""
+var _monster_id: String = ""
 var _float_tween: Tween = null
 var _float_base_y: float = 0.0
 var _cta_base_y: float = 0.0
@@ -64,8 +41,8 @@ var _cta_base_y: float = 0.0
 # LIFECYCLE
 # ---------------------------------------------------------------------------
 func _ready() -> void:
-	# Get creature_id from GameState
-	_creature_id = GameState.current_creature_id
+	# Get monster_id from GameState
+	_monster_id = GameState.current_creature_id
 	
 	# Populate UI
 	_populate_ui()
@@ -82,22 +59,15 @@ func _ready() -> void:
 	bottom_nav.tab_changed.connect(_on_tab_pressed)
 	
 	# Setup BottomNav
-	bottom_nav.set_active("collection")
+	bottom_nav.set_active("Collection")
 	
 	# Set all label font sizes to 24px
-	monster_emoji.add_theme_font_size_override("font_size", 24)
 	rarity_label.add_theme_font_size_override("font_size", 24)
 	monster_name.add_theme_font_size_override("font_size", 24)
 	evo_stage_label.add_theme_font_size_override("font_size", 24)
 	attack_value.add_theme_font_size_override("font_size", 24)
 	energy_value.add_theme_font_size_override("font_size", 24)
 	about_body.add_theme_font_size_override("font_size", 24)
-	ingredient1_emoji.add_theme_font_size_override("font_size", 24)
-	ingredient1_label.add_theme_font_size_override("font_size", 24)
-	ingredient2_emoji.add_theme_font_size_override("font_size", 24)
-	ingredient2_label.add_theme_font_size_override("font_size", 24)
-	result_emoji_node.add_theme_font_size_override("font_size", 24)
-	result_label_node.add_theme_font_size_override("font_size", 24)
 	
 	# Set all button font sizes to 24px
 	back_button.add_theme_font_size_override("font_size", 24)
@@ -107,104 +77,92 @@ func _ready() -> void:
 # UI POPULATION
 # ---------------------------------------------------------------------------
 func _populate_ui() -> void:
-	if _creature_id == "":
+	if _monster_id == "":
 		return
 	
 	_populate_header()
 	_populate_hero()
 	_populate_stats()
 	_populate_about()
-	_populate_evolution()
 	_populate_cta()
 
 func _populate_header() -> void:
-	var save_data: Dictionary = SaveSystem.get_data()
-	var coins: int = save_data.get("economy", {}).get("coins", 0)
-	var eggs: int = save_data.get("inventory", {}).get("egg", 0)
-	top_appbar.set_coins(coins)
-	top_appbar.set_eggs(eggs)
+	if top_appbar:
+		if EconomyManager:
+			top_appbar.set_coins(EconomyManager.get_coins())
 
 func _populate_hero() -> void:
-	var idx: int = CREATURE_IDS.find(_creature_id)
-	if idx == -1:
-		idx = 0
+	if not MonsterManager:
+		return
 	
-	var symbol: String = "?"
-	if has_node("/root/CreatureRegistry"):
-		var data = get_node("/root/CreatureRegistry").get_creature(_creature_id)
-		if data:
-			symbol = data.symbol
+	var monster_data: Dictionary = MonsterManager.get_monster(_monster_id)
+	if monster_data.is_empty():
+		return
 	
-	monster_name.text = MergeSystem.get_creature_name(_creature_id)
+	var species_id: String = monster_data.get("speciesId", "dino")
+	var stage_id: String = monster_data.get("stageId", "stage_1")
+	var stage_num: int = _get_stage_number(stage_id)
 	
-	var tier: int = MergeSystem.get_evolution_level(_creature_id)
-	evo_stage_label.text = "Evolution Stage: %d" % tier
+	# Update monster display
+	if monster_display:
+		monster_display.set_monster(monster_data)
 	
-	var rarity: String = RARITIES[idx]
+	# Update monster name
+	var species_path: String = "res://data/species/%s.tres" % species_id
+	var species: Resource = load(species_path)
+	if species:
+		monster_name.text = species.name
+	else:
+		monster_name.text = species_id.capitalize()
+	
+	# Update evolution stage
+	evo_stage_label.text = "Stage: %s" % STAGE_NAMES[stage_num]
+	
+	# Update rarity
+	var rarity: String = "Common"
+	if stage_num >= 3:
+		rarity = "Rare"
+	elif stage_num >= 2:
+		rarity = "Uncommon"
 	rarity_label.text = rarity.to_upper()
 	
-	if RARITY_COLORS.has(rarity):
-		# For now we can just set modulate, or use theme override
-		rarity_pill.modulate = RARITY_COLORS[rarity]
-	
-	# For now just use emoji
-	monster_emoji.text = symbol
-	monster_emoji.visible = true
-	monster_image.visible = false
+	# Update rarity pill color
+	var rarity_colors: Dictionary = {
+		"Common": Color(0.4, 0.4, 0.4, 1),
+		"Uncommon": Color(0.204, 0.827, 0.6, 1),
+		"Rare": Color(0.518, 0.208, 0.831, 1),
+	}
+	if rarity_colors.has(rarity):
+		rarity_pill.modulate = rarity_colors[rarity]
 
 func _populate_stats() -> void:
-	var idx: int = CREATURE_IDS.find(_creature_id)
-	if idx == -1:
-		idx = 0
+	if not MonsterManager:
+		return
 	
-	# Simple attack and energy based on tier
-	var tier: int = MergeSystem.get_evolution_level(_creature_id)
-	attack_value.text = str(tier * 42)
-	energy_value.text = str(tier * 31)
+	var monster_data: Dictionary = MonsterManager.get_monster(_monster_id)
+	if monster_data.is_empty():
+		return
+	
+	var stage_id: String = monster_data.get("stageId", "stage_1")
+	var stage_num: int = _get_stage_number(stage_id)
+	
+	# Simple attack and energy based on stage
+	attack_value.text = str(stage_num * 50)
+	energy_value.text = str(stage_num * 40)
 
 func _populate_about() -> void:
-	about_body.text = DESCRIPTIONS.get(_creature_id, "A mysterious creature!")
-
-func _populate_evolution() -> void:
-	var idx: int = CREATURE_IDS.find(_creature_id)
-	if idx == -1:
-		idx = 0
+	if not MonsterManager:
+		return
 	
-	# Find previous creature (the ingredient)
-	if idx > 0:
-		var prev_id: String = CREATURE_IDS[idx - 1]
-		ingredient1_label.text = MergeSystem.get_creature_name(prev_id)
-		var prev_symbol: String = "?"
-		if has_node("/root/CreatureRegistry"):
-			var data = get_node("/root/CreatureRegistry").get_creature(prev_id)
-			if data:
-				prev_symbol = data.symbol
-		ingredient1_emoji.text = prev_symbol
-		ingredient1_emoji.visible = true
-		ingredient1_image.visible = false
-		
-		ingredient2_label.text = MergeSystem.get_creature_name(prev_id)
-		ingredient2_emoji.text = prev_symbol
-		ingredient2_emoji.visible = true
-		ingredient2_image.visible = false
-	else:
-		ingredient1_label.text = "Egg"
-		ingredient1_emoji.text = "🥚"
-		ingredient2_label.text = "Egg"
-		ingredient2_emoji.text = "🥚"
+	var monster_data: Dictionary = MonsterManager.get_monster(_monster_id)
+	if monster_data.is_empty():
+		return
 	
-	result_label_node.text = MergeSystem.get_creature_name(_creature_id)
-	var result_symbol: String = "?"
-	if has_node("/root/CreatureRegistry"):
-		var data = get_node("/root/CreatureRegistry").get_creature(_creature_id)
-		if data:
-			result_symbol = data.symbol
-	result_emoji_node.text = result_symbol
-	result_emoji_node.visible = true
-	result_image_node.visible = false
+	var species_id: String = monster_data.get("speciesId", "dino")
+	about_body.text = DESCRIPTIONS.get(species_id, "A wonderful companion!")
 
 func _populate_cta() -> void:
-	cta_button.text = "🪄  Merge This Creature"
+	cta_button.text = "✨  Evolve This Creature"
 
 # ---------------------------------------------------------------------------
 # ANIMATIONS
@@ -268,10 +226,29 @@ func _burst_sparkles(origin: Vector2) -> void:
 		tween.chain().tween_callback(lbl.queue_free)
 
 # ---------------------------------------------------------------------------
+# HELPERS
+# ---------------------------------------------------------------------------
+func _get_stage_number(stage_id: String) -> int:
+	match stage_id:
+		"stage_0":
+			return 0
+		"stage_1":
+			return 1
+		"stage_2":
+			return 2
+		"stage_3":
+			return 3
+		"stage_4":
+			return 4
+		_:
+			return 1
+
+# ---------------------------------------------------------------------------
 # SIGNAL HANDLERS
 # ---------------------------------------------------------------------------
 func _on_back_pressed() -> void:
-	GameState.go_to(GameState.Screen.COLLECTION)
+	if GameManager:
+		GameManager.change_screen("Collection")
 
 func _on_cta_down() -> void:
 	_cta_base_y = cta_button.position.y
@@ -283,18 +260,18 @@ func _on_cta_up() -> void:
 	tween.tween_property(cta_button, "position:y", _cta_base_y, 0.08)
 
 func _on_cta_pressed() -> void:
-	GameState.go_to(GameState.Screen.MERGE, {"creature_id": _creature_id})
+	if GameManager:
+		GameManager.change_screen("Evolution", {"creature_id": _monster_id})
 
 func _on_tab_pressed(tab_name: String) -> void:
 	bottom_nav.set_active(tab_name)
 	match tab_name:
-		"play":
-			GameState.go_to(GameState.Screen.MENU)
-		"merge":
-			GameState.go_to(GameState.Screen.MERGE)
-		"collection":
-			GameState.go_to(GameState.Screen.COLLECTION)
-		"shop":
-			GameState.go_to(GameState.Screen.SHOP)
-		"settings":
-			GameState.go_to(GameState.Screen.SETTINGS)
+		"Home":
+			if GameManager:
+				GameManager.change_screen("Home")
+		"Collection":
+			if GameManager:
+				GameManager.change_screen("Collection")
+		"Shop":
+			if GameManager:
+				GameManager.change_screen("Shop")

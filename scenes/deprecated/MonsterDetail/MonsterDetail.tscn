@@ -1,0 +1,132 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4e5f6g7h8i9"]
+
+[ext_resource type="PackedScene" uid="uid://f6g7h8i9j0k1" path="res://scenes/common/MonsterDisplay/MonsterDisplay.tscn" id="1"]
+[ext_resource type="Script" path="res://scenes/MonsterDetail/MonsterDetail.gd" id="2"]
+
+[node name="MonsterDetail" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2")
+
+[node name="SafeArea" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SafeArea"]
+layout_mode = 2
+
+[node name="TopBar" type="HBoxContainer" parent="SafeArea/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="SafeArea/VBoxContainer/TopBar"]
+layout_mode = 2
+text = "← Back"
+
+[node name="TitleLabel" type="Label" parent="SafeArea/VBoxContainer/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Monster Details"
+horizontal_alignment = 1
+
+[node name="MainContent" type="HBoxContainer" parent="SafeArea/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MonsterDisplay" parent="SafeArea/VBoxContainer/MainContent" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="InfoPanel" type="VBoxContainer" parent="SafeArea/VBoxContainer/MainContent"]
+layout_mode = 2
+custom_minimum_size = Vector2(300, 0)
+
+[node name="StatsPanel" type="VBoxContainer" parent="SafeArea/VBoxContainer/MainContent/InfoPanel"]
+layout_mode = 2
+
+[node name="StatsTitle" type="Label" parent="SafeArea/VBoxContainer/MainContent/InfoPanel/StatsPanel"]
+layout_mode = 2
+text = "Stats"
+
+[node name="NicknameLabel" type="Label" parent="SafeArea/VBoxContainer/MainContent/InfoPanel/StatsPanel"]
+layout_mode = 2
+text = "Nickname: Monster"
+
+[node name="SpeciesLabel" type="Label" parent="SafeArea/VBoxContainer/MainContent/InfoPanel/StatsPanel"]
+layout_mode = 2
+text = "Species: Dino"
+
+[node name="StageLabel" type="Label" parent="SafeArea/VBoxContainer/MainContent/InfoPanel/StatsPanel"]
+layout_mode = 2
+text = "Stage: Baby"
+
+[node name="MorphLabel" type="Label" parent="SafeArea/VBoxContainer/MainContent/InfoPanel/StatsPanel"]
+layout_mode = 2
+text = "Morph: Default"
+
+[node name="AcquiredLabel" type="Label" parent="SafeArea/VBoxContainer/MainContent/InfoPanel/StatsPanel"]
+layout_mode = 2
+text = "Acquired: 2024-01-01"
+
+[node name="CosmeticsPanel" type="VBoxContainer" parent="SafeArea/VBoxContainer/MainContent/InfoPanel"]
+layout_mode = 2
+
+[node name="CosmeticsTitle" type="Label" parent="SafeArea/VBoxContainer/MainContent/InfoPanel/CosmeticsPanel"]
+layout_mode = 2
+text = "Cosmetics"
+
+[node name="CosmeticSlots" type="GridContainer" parent="SafeArea/VBoxContainer/MainContent/InfoPanel/CosmeticsPanel"]
+layout_mode = 2
+columns = 2
+
+[node name="HeadSlot" type="Button" parent="SafeArea/VBoxContainer/MainContent/InfoPanel/CosmeticsPanel/CosmeticSlots"]
+layout_mode = 2
+text = "Head: None"
+
+[node name="FaceSlot" type="Button" parent="SafeArea/VBoxContainer/MainContent/InfoPanel/CosmeticsPanel/CosmeticSlots"]
+layout_mode = 2
+text = "Face: None"
+
+[node name="BodySlot" type="Button" parent="SafeArea/VBoxContainer/MainContent/InfoPanel/CosmeticsPanel/CosmeticSlots"]
+layout_mode = 2
+text = "Body: None"
+
+[node name="BackSlot" type="Button" parent="SafeArea/VBoxContainer/MainContent/InfoPanel/CosmeticsPanel/CosmeticSlots"]
+layout_mode = 2
+text = "Back: None"
+
+[node name="EvolutionPanel" type="VBoxContainer" parent="SafeArea/VBoxContainer/MainContent/InfoPanel"]
+layout_mode = 2
+
+[node name="EvolutionTitle" type="Label" parent="SafeArea/VBoxContainer/MainContent/InfoPanel/EvolutionPanel"]
+layout_mode = 2
+text = "Evolution"
+
+[node name="NextStageLabel" type="Label" parent="SafeArea/VBoxContainer/MainContent/InfoPanel/EvolutionPanel"]
+layout_mode = 2
+text = "Next Stage: Kid"
+
+[node name="EvolutionCostLabel" type="Label" parent="SafeArea/VBoxContainer/MainContent/InfoPanel/EvolutionPanel"]
+layout_mode = 2
+text = "Cost: 100 coins"
+
+[node name="ActionButtons" type="VBoxContainer" parent="SafeArea/VBoxContainer/MainContent/InfoPanel"]
+layout_mode = 2
+
+[node name="SetActiveButton" type="Button" parent="SafeArea/VBoxContainer/MainContent/InfoPanel/ActionButtons"]
+layout_mode = 2
+text = "Set Active"
+
+[node name="EvolveButton" type="Button" parent="SafeArea/VBoxContainer/MainContent/InfoPanel/ActionButtons"]
+layout_mode = 2
+text = "Evolve"
+
+[node name="RenameButton" type="Button" parent="SafeArea/VBoxContainer/MainContent/InfoPanel/ActionButtons"]
+layout_mode = 2
+text = "Rename"

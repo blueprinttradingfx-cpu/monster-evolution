@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Species" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/species/Species.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "dino"
+name = "Dino"
+description = "Cute prehistoric creatures"
+eggTypeId = "dino_egg"
+availableMorphIds = Array[String](["default", "fire", "ice", "rock"])
+evolutionStageIds = Array[String](["stage_0", "stage_1", "stage_2", "stage_3", "stage_4"])

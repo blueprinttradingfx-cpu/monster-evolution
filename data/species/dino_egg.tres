@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EvolutionStage" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/species/EvolutionStage.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "dino_egg"
+stageNumber = 0
+name = "Egg"
+spritePath = "res://assets/monsters/dino/default_egg.png"
+evolutionCost = 0

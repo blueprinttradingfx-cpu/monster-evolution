@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://6mq1u6e7ukfm" path="res://assets/sprites/bg.png" id="BgTexture"]
 [ext_resource type="PackedScene" path="res://scenes/common/BottomNav.tscn" id="BottomNav"]
+[ext_resource type="PackedScene" path="res://scenes/common/MonsterDisplay/MonsterDisplay.tscn" id="MonsterDisplay"]
 [ext_resource type="Script" uid="uid://boyvw2ol458r4" path="res://scenes/screens/creature-detail/creature-detail.gd" id="Script_detail"]
 [ext_resource type="Theme" uid="uid://dc3si0880aglo" path="res://resources/monster_morph.tres" id="Theme_Morph"]
 [ext_resource type="PackedScene" path="res://scenes/common/TopAppBar.tscn" id="TopAppBar"]
@@ -234,18 +235,8 @@ alignment = 1
 custom_minimum_size = Vector2(0, 224)
 layout_mode = 2
 
-[node name="MonsterImage" type="TextureRect" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/ImageContainer" unique_id=227157090]
-custom_minimum_size = Vector2(224, 224)
+[node name="MonsterDisplay" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/ImageContainer" unique_id=777777777 instance=ExtResource("MonsterDisplay")]
 layout_mode = 2
-expand_mode = 3
-stretch_mode = 6
-
-[node name="MonsterEmoji" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/ImageContainer" unique_id=1724676106]
-layout_mode = 2
-theme_override_font_sizes/font_size = 96
-text = "✨"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="HeroInfoVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox" unique_id=249093294]
 layout_mode = 2

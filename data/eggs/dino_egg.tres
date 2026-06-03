@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EggType" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/eggs/EggType.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "dino_egg"
+name = "Dino Egg"
+speciesId = "dino"
+price = 500
+eggSprite = "res://assets/eggs/dino_egg_closed.png"

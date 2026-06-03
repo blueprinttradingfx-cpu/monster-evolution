@@ -1,430 +1,90 @@
-[gd_scene format=3 uid="uid://cqm6qvjwmy5ft"]
+[gd_scene format=3 uid="uid://n3h5011yxdjj"]
 
-[ext_resource type="Script" uid="uid://bw3ebvxydipd2" path="res://scenes/screens/shop/shop.gd" id="1_script"]
-[ext_resource type="PackedScene" path="res://scenes/common/TopAppBar.tscn" id="2_topappbar"]
-[ext_resource type="PackedScene" uid="uid://djr1fhap8bajb" path="res://scenes/common/BottomNav.tscn" id="3_bottomnav"]
-[ext_resource type="Theme" uid="uid://dc3si0880aglo" path="res://resources/monster_morph.tres" id="4_theme"]
-[ext_resource type="Texture2D" uid="uid://6mq1u6e7ukfm" path="res://assets/sprites/bg.png" id="5_bg"]
+[ext_resource type="Script" uid="uid://bw3ebvxydipd2" path="res://scenes/screens/shop/shop.gd" id="1_shop"]
+[ext_resource type="PackedScene" path="res://scenes/common/TopAppBar.tscn" id="2_13s6r"]
+[ext_resource type="PackedScene" uid="uid://djr1fhap8bajb" path="res://scenes/common/BottomNav.tscn" id="2_gdsw7"]
 
-[node name="ShopScreen" type="Control" unique_id=1380898027]
+[node name="Shop" type="Control" unique_id=1410443100]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4_theme")
-script = ExtResource("1_script")
+script = ExtResource("1_shop")
 
-[node name="BgTexture" type="TextureRect" parent="." unique_id=88135190]
+[node name="Background" type="ColorRect" parent="." unique_id=1548518472]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("5_bg")
-expand_mode = 1
+color = Color(0.9, 0.95, 1, 1)
 
-[node name="TopAppBar" parent="." unique_id=1931047096 instance=ExtResource("2_topappbar")]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-grow_horizontal = 2
-
-[node name="MainLayout" type="VBoxContainer" parent="." unique_id=402638933]
+[node name="SafeArea" type="MarginContainer" parent="." unique_id=959481267]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 72.0
-offset_bottom = -148.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MainLayout" unique_id=1549316719]
+[node name="Control" type="Control" parent="SafeArea" unique_id=1719189274]
+layout_mode = 2
+
+[node name="TopAppBar" parent="SafeArea/Control" unique_id=985227930 instance=ExtResource("2_13s6r")]
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 72.0
+
+[node name="MainContent" type="VBoxContainer" parent="SafeArea" unique_id=1981112954]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="TabContainer" type="TabContainer" parent="SafeArea/MainContent" unique_id=681093935]
 layout_mode = 2
 size_flags_vertical = 3
+current_tab = 0
 
-[node name="ContentVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer" unique_id=805171969]
+[node name="EggsTab" type="Control" parent="SafeArea/MainContent/TabContainer" unique_id=203863138]
 layout_mode = 2
-size_flags_horizontal = 3
+metadata/_tab_index = 0
 
-[node name="TopPad" type="Control" parent="MainLayout/ScrollContainer/ContentVBox" unique_id=69771775]
-custom_minimum_size = Vector2(0, 8)
-layout_mode = 2
-
-[node name="FreeBonusSection" type="MarginContainer" parent="MainLayout/ScrollContainer/ContentVBox" unique_id=1602109100]
-layout_mode = 2
-
-[node name="FreeBonusCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/FreeBonusSection" unique_id=2084338122]
-custom_minimum_size = Vector2(0, 220)
-layout_mode = 2
-
-[node name="FreeBonusHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/FreeBonusSection/FreeBonusCard" unique_id=1607569729]
-layout_mode = 2
-alignment = 1
-
-[node name="FreeBonusTextVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/FreeBonusSection/FreeBonusCard/FreeBonusHBox" unique_id=1535137578]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FreeBonusTitle" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/FreeBonusSection/FreeBonusCard/FreeBonusHBox/FreeBonusTextVBox" unique_id=1059695502]
-layout_mode = 2
-theme_override_font_sizes/font_size = 36
-text = "FREE BONUS!"
-horizontal_alignment = 1
-
-[node name="FreeBonusSubtitle" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/FreeBonusSection/FreeBonusCard/FreeBonusHBox/FreeBonusTextVBox" unique_id=1482327813]
-layout_mode = 2
-theme_override_font_sizes/font_size = 28
-text = "Watch an ad for 50 Coins"
-horizontal_alignment = 1
-
-[node name="WatchNowBtn" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/FreeBonusSection/FreeBonusCard/FreeBonusHBox/FreeBonusTextVBox" unique_id=1786902504]
-custom_minimum_size = Vector2(600, 80)
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "▶  WATCH NOW"
-
-[node name="BonusIconLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/FreeBonusSection/FreeBonusCard/FreeBonusHBox" unique_id=1768112291]
-modulate = Color(1, 1, 1, 0.35)
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-theme_override_font_sizes/font_size = 80
-text = "🎁"
-horizontal_alignment = 1
-
-[node name="CardThemesSection" type="MarginContainer" parent="MainLayout/ScrollContainer/ContentVBox" unique_id=1512337985]
-layout_mode = 2
-
-[node name="CardThemesVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection" unique_id=1494488066]
-layout_mode = 2
-
-[node name="CardThemesHeaderHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox" unique_id=1016476296]
-layout_mode = 2
-
-[node name="CardThemesTitle" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/CardThemesHeaderHBox" unique_id=381553927]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 24
-text = "CARD THEMES"
-
-[node name="SeeAllBtn" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/CardThemesHeaderHBox" unique_id=458102008]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.0035191667, 0.0035191681, 0.0035191672, 1)
-theme_override_font_sizes/font_size = 24
-text = "SEE ALL"
-flat = true
-
-[node name="ThemeScroll" type="ScrollContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox" unique_id=1691538843]
-custom_minimum_size = Vector2(0, 200)
-layout_mode = 2
-vertical_scroll_mode = 0
-
-[node name="ThemeHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll" unique_id=285339407]
-layout_mode = 2
-
-[node name="DinoCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox" unique_id=1522938034]
-custom_minimum_size = Vector2(350, 180)
-layout_mode = 2
-
-[node name="DinoCardVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/DinoCard" unique_id=1973741788]
-layout_mode = 2
-
-[node name="DinoPreview" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/DinoCard/DinoCardVBox" unique_id=875558555]
-custom_minimum_size = Vector2(0, 90)
-layout_mode = 2
-
-[node name="DinoLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/DinoCard/DinoCardVBox/DinoPreview" unique_id=1151152865]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "🦕  Dino Pack"
-vertical_alignment = 2
-
-[node name="DinoPriceHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/DinoCard/DinoCardVBox" unique_id=1651862001]
-layout_mode = 2
-alignment = 1
-
-[node name="DinoPriceLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/DinoCard/DinoCardVBox/DinoPriceHBox" unique_id=1293954094]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 24
-text = "$ 500"
-
-[node name="DinoBuyBtn" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/DinoCard/DinoCardVBox/DinoPriceHBox" unique_id=626018599]
-custom_minimum_size = Vector2(40, 36)
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "🛒"
-
-[node name="SpaceCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox" unique_id=1251230693]
-custom_minimum_size = Vector2(350, 180)
-layout_mode = 2
-
-[node name="SpaceCardVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/SpaceCard" unique_id=434382776]
-layout_mode = 2
-
-[node name="SpacePreview" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/SpaceCard/SpaceCardVBox" unique_id=1735794028]
-custom_minimum_size = Vector2(0, 90)
-layout_mode = 2
-
-[node name="SpaceLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/SpaceCard/SpaceCardVBox/SpacePreview" unique_id=912174890]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "🚀  Space Pack"
-vertical_alignment = 2
-
-[node name="SpacePriceHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/SpaceCard/SpaceCardVBox" unique_id=883259071]
-layout_mode = 2
-alignment = 1
-
-[node name="SpacePriceLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/SpaceCard/SpaceCardVBox/SpacePriceHBox" unique_id=1344988337]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 24
-text = "$ 800"
-
-[node name="SpaceBuyBtn" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/SpaceCard/SpaceCardVBox/SpacePriceHBox" unique_id=2083362733]
-custom_minimum_size = Vector2(40, 36)
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "🛒"
-
-[node name="JungleCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox" unique_id=688914495]
-custom_minimum_size = Vector2(350, 180)
-layout_mode = 2
-
-[node name="JungleCardVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/JungleCard" unique_id=1361960042]
-layout_mode = 2
-
-[node name="JunglePreview" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/JungleCard/JungleCardVBox" unique_id=1665342875]
-custom_minimum_size = Vector2(0, 90)
-layout_mode = 2
-
-[node name="JungleLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/JungleCard/JungleCardVBox/JunglePreview" unique_id=555318105]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "🌿  Jungle Pack"
-vertical_alignment = 2
-
-[node name="JunglePriceHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/JungleCard/JungleCardVBox" unique_id=2061678925]
-layout_mode = 2
-alignment = 1
-
-[node name="JunglePriceLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/JungleCard/JungleCardVBox/JunglePriceHBox" unique_id=1799134552]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 24
-text = "$ 650"
-
-[node name="JungleBuyBtn" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/CardThemesSection/CardThemesVBox/ThemeScroll/ThemeHBox/JungleCard/JungleCardVBox/JunglePriceHBox" unique_id=496025877]
-custom_minimum_size = Vector2(40, 36)
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "🛒"
-
-[node name="SkinsSection" type="MarginContainer" parent="MainLayout/ScrollContainer/ContentVBox" unique_id=1380482426]
-layout_mode = 2
-
-[node name="SkinsVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection" unique_id=231018835]
-layout_mode = 2
-
-[node name="SkinsTitle" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox" unique_id=1949986460]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "CREATURE SKINS"
-
-[node name="SkinsGrid" type="GridContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox" unique_id=655964598]
-layout_mode = 2
-columns = 4
-
-[node name="FireDragonCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid" unique_id=1829673943]
-custom_minimum_size = Vector2(265, 180)
-layout_mode = 2
-
-[node name="FireDragonVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FireDragonCard" unique_id=1632293505]
-layout_mode = 2
-alignment = 1
-
-[node name="FireDragonPreview" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FireDragonCard/FireDragonVBox" unique_id=974844695]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="FireDragonEmoji" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FireDragonCard/FireDragonVBox/FireDragonPreview" unique_id=590901387]
-layout_mode = 2
-text = "🐉"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="RareBadge1" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FireDragonCard/FireDragonVBox/FireDragonPreview" unique_id=2146096014]
-layout_mode = 2
-text = "RARE"
-
-[node name="FireDragonName" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FireDragonCard/FireDragonVBox" unique_id=1428373091]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Fire Dragon"
-horizontal_alignment = 1
-
-[node name="FireDragonBuyBtn" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FireDragonCard/FireDragonVBox" unique_id=1448290566]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "$ 1.5K"
-
-[node name="FrostBlobCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid" unique_id=1975713532]
-custom_minimum_size = Vector2(265, 180)
-layout_mode = 2
-
-[node name="FrostBlobVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FrostBlobCard" unique_id=1575275644]
-layout_mode = 2
-alignment = 1
-
-[node name="FrostBlobPreview" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FrostBlobCard/FrostBlobVBox" unique_id=142584022]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="FrostBlobEmoji" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FrostBlobCard/FrostBlobVBox/FrostBlobPreview" unique_id=1693257059]
-layout_mode = 2
-text = "🧊"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="EpicBadge" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FrostBlobCard/FrostBlobVBox/FrostBlobPreview" unique_id=1719316253]
-layout_mode = 2
-text = "EPIC"
-
-[node name="FrostBlobName" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FrostBlobCard/FrostBlobVBox" unique_id=392873886]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Frost Blob"
-horizontal_alignment = 1
-
-[node name="FrostBlobBuyBtn" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/FrostBlobCard/FrostBlobVBox" unique_id=1402271632]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "$ 2.2K"
-
-[node name="ZaplingCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid" unique_id=1125473369]
-custom_minimum_size = Vector2(265, 180)
-layout_mode = 2
-
-[node name="ZaplingVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/ZaplingCard" unique_id=600536083]
-layout_mode = 2
-alignment = 1
-
-[node name="ZaplingPreview" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/ZaplingCard/ZaplingVBox" unique_id=712233262]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ZaplingEmoji" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/ZaplingCard/ZaplingVBox/ZaplingPreview" unique_id=800528683]
-layout_mode = 2
-text = "⚡"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ZaplingName" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/ZaplingCard/ZaplingVBox" unique_id=1263426724]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Zapling"
-horizontal_alignment = 1
-
-[node name="ZaplingBuyBtn" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/ZaplingCard/ZaplingVBox" unique_id=831414378]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "$ 1.2K"
-
-[node name="GloomSpiritCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid" unique_id=461094821]
-custom_minimum_size = Vector2(265, 180)
-layout_mode = 2
-
-[node name="GloomSpiritVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/GloomSpiritCard" unique_id=303223357]
-layout_mode = 2
-alignment = 1
-
-[node name="GloomSpiritPreview" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/GloomSpiritCard/GloomSpiritVBox" unique_id=227430863]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="GloomSpiritEmoji" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/GloomSpiritCard/GloomSpiritVBox/GloomSpiritPreview" unique_id=874552529]
-layout_mode = 2
-text = "👻"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="RareBadge2" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/GloomSpiritCard/GloomSpiritVBox/GloomSpiritPreview" unique_id=827377047]
-layout_mode = 2
-text = "RARE"
-
-[node name="GloomSpiritName" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/GloomSpiritCard/GloomSpiritVBox" unique_id=635369990]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Gloom Spirit"
-horizontal_alignment = 1
-
-[node name="GloomSpiritBuyBtn" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/SkinsSection/SkinsVBox/SkinsGrid/GloomSpiritCard/GloomSpiritVBox" unique_id=1805929415]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "$ 1.8K"
-
-[node name="PremiumSection" type="MarginContainer" parent="MainLayout/ScrollContainer/ContentVBox" unique_id=1925200547]
-layout_mode = 2
-
-[node name="PremiumVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/PremiumSection" unique_id=1826649354]
-layout_mode = 2
-
-[node name="PremiumTitle" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/PremiumSection/PremiumVBox" unique_id=903092538]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "PREMIUM DEALS"
-
-[node name="GoldenPassCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/PremiumSection/PremiumVBox" unique_id=2017583238]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 2
-
-[node name="GoldenPassHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/PremiumSection/PremiumVBox/GoldenPassCard" unique_id=1928207773]
-layout_mode = 2
-alignment = 1
-
-[node name="GoldenPassIcon" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/PremiumSection/PremiumVBox/GoldenPassCard/GoldenPassHBox" unique_id=1151724124]
-custom_minimum_size = Vector2(56, 56)
-layout_mode = 2
-
-[node name="GoldenPassEmoji" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/PremiumSection/PremiumVBox/GoldenPassCard/GoldenPassHBox/GoldenPassIcon" unique_id=107758508]
-layout_mode = 2
-text = "✨"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="GoldenPassTextVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/PremiumSection/PremiumVBox/GoldenPassCard/GoldenPassHBox" unique_id=1224578582]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="GoldenPassName" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/PremiumSection/PremiumVBox/GoldenPassCard/GoldenPassHBox/GoldenPassTextVBox" unique_id=629944576]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Golden Pass"
-
-[node name="GoldenPassDesc" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/PremiumSection/PremiumVBox/GoldenPassCard/GoldenPassHBox/GoldenPassTextVBox" unique_id=813474234]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Unlock exclusive monsters and skins daily!"
-autowrap_mode = 3
-
-[node name="GoldenPassBuyBtn" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/PremiumSection/PremiumVBox/GoldenPassCard/GoldenPassHBox" unique_id=951652052]
-custom_minimum_size = Vector2(72, 40)
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "$4.99"
-
-[node name="BottomPad" type="Control" parent="MainLayout/ScrollContainer/ContentVBox" unique_id=1206778265]
-custom_minimum_size = Vector2(0, 96)
-layout_mode = 2
-
-[node name="PurchasePopup" type="AcceptDialog" parent="." unique_id=1890529507]
-title = "Purchase"
-ok_button_text = "OK"
-
-[node name="BottomNav" parent="." unique_id=538735213 instance=ExtResource("3_bottomnav")]
+[node name="ScrollContainer" type="ScrollContainer" parent="SafeArea/MainContent/TabContainer/EggsTab" unique_id=1184699826]
 layout_mode = 1
-offset_bottom = 2.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="VBoxContainer" parent="SafeArea/MainContent/TabContainer/EggsTab/ScrollContainer" unique_id=85310677]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CosmeticsTab" type="Control" parent="SafeArea/MainContent/TabContainer" unique_id=1037976094]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SafeArea/MainContent/TabContainer/CosmeticsTab" unique_id=460621979]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="VBoxContainer" parent="SafeArea/MainContent/TabContainer/CosmeticsTab/ScrollContainer" unique_id=1148449474]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BottomNav" parent="." unique_id=834252458 instance=ExtResource("2_gdsw7")]
+layout_mode = 1
+offset_top = -160.0
+offset_bottom = -12.0

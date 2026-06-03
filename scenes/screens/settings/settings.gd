@@ -1,7 +1,7 @@
 extends Control
 
-@onready var top_appbar: TopAppBar = $TopAppBar
-@onready var bottom_nav: BottomNav = $BottomNav
+@onready var top_appbar: Control = $TopAppBar
+@onready var bottom_nav: Control = $BottomNav
 
 @onready var sound_toggle: CheckButton = $MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox/SoundToggle
 @onready var music_toggle: CheckButton = $MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox/MusicToggle
@@ -29,7 +29,7 @@ func _ready():
 	_load_settings()
 	_connect_signals()
 	_refresh_currency_display()
-	bottom_nav.set_active("settings")
+	bottom_nav.set_active("Settings")
 	
 	# Set all label font sizes to 24px
 	lang_sub_label.add_theme_font_size_override("font_size", 24)
@@ -40,7 +40,6 @@ func _ready():
 	]:
 		if btn:
 			btn.add_theme_font_size_override("font_size", 24)
-	bottom_nav.start_button.visible = false
 
 func _connect_signals():
 	sound_toggle.toggled.connect(_on_sound_toggled)
@@ -52,11 +51,8 @@ func _connect_signals():
 	bottom_nav.tab_changed.connect(_on_tab_pressed)
 
 func _refresh_currency_display():
-	var save_data: Dictionary = SaveSystem.get_data()
-	var coins: int = save_data.get("economy", {}).get("coins", 0)
-	var eggs: int = save_data.get("inventory", {}).get("egg", 0)
-	top_appbar.set_coins(coins)
-	top_appbar.set_eggs(eggs)
+	if EconomyManager:
+		top_appbar.set_coins(EconomyManager.get_coins())
 
 func _on_sound_toggled(pressed: bool):
 	_save_setting(SAVE_KEY_SOUND, pressed)
@@ -85,20 +81,25 @@ func _on_reset_confirmed():
 	_refresh_currency_display()
 
 func _on_close_pressed():
-	GameState.go_to(GameState.Screen.MENU)
+	if GameManager:
+		GameManager.change_screen("Home")
 
 func _on_tab_pressed(tab: String):
 	match tab:
 		"play":
-			GameState.go_to(GameState.Screen.MENU)
+			if GameManager:
+				GameManager.change_screen("Home")
 		"merge":
 			GameState.go_to(GameState.Screen.MERGE)
 		"collection":
-			GameState.go_to(GameState.Screen.COLLECTION)
+			if GameManager:
+				GameManager.change_screen("Collection")
 		"shop":
-			GameState.go_to(GameState.Screen.SHOP)
+			if GameManager:
+				GameManager.change_screen("Shop")
 		"settings":
-			GameState.go_to(GameState.Screen.SETTINGS)
+			if GameManager:
+				GameManager.change_screen("Settings")
 
 func _save_setting(key: String, value: Variant):
 	SaveSystem.set_setting(key, value)

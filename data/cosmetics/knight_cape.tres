@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Cosmetic" load_steps=2 format=3 uid="uid://dino_knight_cape"]
+
+[ext_resource type="Script" path="res://data/cosmetics/Cosmetic.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "knight_cape"
+name = "Knight Cape"
+slot = "back"
+speciesId = "dino"
+price = 150
+spritePath = "res://assets/cosmetics/back/knight_cape.png"

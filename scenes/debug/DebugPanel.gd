@@ -5,6 +5,7 @@ extends Control
 @onready var grid_x_slider: HSlider = %GridXSlider
 @onready var grid_y_slider: HSlider = %GridYSlider
 @onready var grid_label: Label = %GridLabel
+@onready var navigation_state_label: Label = %NavigationStateLabel
 
 @onready var coin_mul_slider: HSlider = %CoinMulSlider
 @onready var coin_mul_label: Label = %CoinMulLabel
@@ -33,6 +34,10 @@ func _ready() -> void:
 	# Initial UI update
 	_on_grid_changed(0)
 	_on_reward_mul_changed(1.0)
+	_update_navigation_state()
+
+	if GameManager:
+		GameManager.debug_state_changed.connect(_on_debug_state_changed)
 
 func _on_grid_changed(_val: float) -> void:
 	var x = int(grid_x_slider.value)
@@ -66,3 +71,15 @@ func _on_run_sim_pressed() -> void:
 
 func _on_close_pressed() -> void:
 	hide()
+
+func _on_debug_state_changed(debug_text: String) -> void:
+	if navigation_state_label:
+		navigation_state_label.text = debug_text
+
+func _update_navigation_state() -> void:
+	if not navigation_state_label:
+		return
+	if GameManager:
+		navigation_state_label.text = GameManager.get_debug_state_text()
+	else:
+		navigation_state_label.text = "Current State: Unknown"
