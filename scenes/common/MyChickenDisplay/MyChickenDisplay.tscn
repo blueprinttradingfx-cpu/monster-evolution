@@ -62,7 +62,7 @@ _data = {
 &"breath": SubResource("Animation_breath")
 }
 
-[node name="MyChickenDisplay" type="SubViewportContainer" unique_id=418820279]
+[node name="MyChickenDisplay" type="SubViewportContainer" unique_id=1718189427]
 custom_minimum_size = Vector2(540, 960)
 offset_right = 1080.0
 offset_bottom = 1920.0
@@ -70,7 +70,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_chicken_script")
 
-[node name="SubViewport" type="SubViewport" parent="." unique_id=1052587651]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1973412168]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1024, 1024)
@@ -78,79 +78,81 @@ size_2d_override = Vector2i(512, 512)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
-[node name="Monster2DScene" type="Node2D" parent="SubViewport" unique_id=1829056057]
+[node name="Monster2DScene" type="Node2D" parent="SubViewport" unique_id=1507375952]
 
-[node name="Skeleton2D" type="Skeleton2D" parent="SubViewport/Monster2DScene" unique_id=719722290]
+[node name="Skeleton2D" type="Skeleton2D" parent="SubViewport/Monster2DScene" unique_id=1225965878]
 
-[node name="Body" type="Bone2D" parent="SubViewport/Monster2DScene/Skeleton2D" unique_id=568663595]
+[node name="Body" type="Bone2D" parent="SubViewport/Monster2DScene/Skeleton2D" unique_id=1405667019]
 position = Vector2(256, 300)
 
-[node name="body" type="Sprite2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body" unique_id=481051681]
+[node name="body" type="Sprite2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body" unique_id=1559222293]
 z_index = 1
-position = Vector2(6.1249905, -4.750002)
+position = Vector2(6.12499, -4.75)
 scale = Vector2(0.45, 0.524)
 texture = ExtResource("2_oem68")
 
-[node name="Head" type="Bone2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body" unique_id=1881172869]
+[node name="Head" type="Bone2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body" unique_id=1332416593]
 position = Vector2(0, -120)
 
-[node name="head" type="Sprite2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body/Head" unique_id=564032219]
+[node name="head" type="Sprite2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body/Head" unique_id=1000155418]
 z_index = 1
-position = Vector2(6.000004, -29.5)
+position = Vector2(6, -29.5)
 scale = Vector2(0.5, 0.478)
 texture = ExtResource("3_f2sne")
 
-[node name="Hair" type="Bone2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body/Head" unique_id=640925027]
+[node name="Hair" type="Bone2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body/Head" unique_id=785208236]
 position = Vector2(0, -110)
 
-[node name="hair" type="Sprite2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body/Head/Hair" unique_id=1808137532]
+[node name="hair" type="Sprite2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body/Head/Hair" unique_id=1881951791]
 z_index = 1
-position = Vector2(10.999985, -23)
+position = Vector2(11, -23)
 scale = Vector2(0.2, 0.181)
 texture = ExtResource("4_h01t5")
 
-[node name="Face" type="Bone2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body/Head" unique_id=249216164]
+[node name="Face" type="Bone2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body/Head" unique_id=154674534]
 position = Vector2(0, 15)
 
-[node name="face" type="Sprite2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body/Head/Face" unique_id=155472543]
+[node name="face" type="Sprite2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body/Head/Face" unique_id=1102797749]
 z_index = 1
-position = Vector2(6.499998, -44.999992)
+position = Vector2(6.5, -45)
 scale = Vector2(0.35, 0.306)
 texture = ExtResource("5_mgi08")
 
-[node name="left_wingBone2D" type="Bone2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body" unique_id=921154475]
-position = Vector2(-140, 10)
+[node name="left_wingBone2D" type="Bone2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body" unique_id=1599717128]
+position = Vector2(-140, 35)
 
-[node name="left_wing" type="Sprite2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body/left_wingBone2D" unique_id=1926214351]
+[node name="left_wing" type="Sprite2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body/left_wingBone2D" unique_id=1286629163]
 show_behind_parent = true
+position = Vector2(20, -25)
 scale = Vector2(0.25, 0.326)
 texture = ExtResource("6_6i2wc")
 
-[node name="right_wingBone2D" type="Bone2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body" unique_id=2053081458]
-position = Vector2(140, 10)
+[node name="right_wingBone2D" type="Bone2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body" unique_id=1898309160]
+position = Vector2(140, 35)
 
-[node name="right_wing" type="Sprite2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body/right_wingBone2D" unique_id=1889920379]
+[node name="right_wing" type="Sprite2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body/right_wingBone2D" unique_id=1330346669]
 show_behind_parent = true
+position = Vector2(-10, -22.5)
 scale = Vector2(0.25, 0.357)
 texture = ExtResource("7_6ih64")
 
-[node name="left_footBone2D" type="Bone2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body" unique_id=172565100]
+[node name="left_footBone2D" type="Bone2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body" unique_id=518859423]
 position = Vector2(-60, 150)
 
-[node name="left_foot" type="Sprite2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body/left_footBone2D" unique_id=1787296491]
+[node name="left_foot" type="Sprite2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body/left_footBone2D" unique_id=1872162779]
 show_behind_parent = true
 position = Vector2(1.5, -30)
 scale = Vector2(0.2, 0.18)
 texture = ExtResource("8_kw4vd")
 
-[node name="right_footBone2D" type="Bone2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body" unique_id=777495490]
+[node name="right_footBone2D" type="Bone2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body" unique_id=2145994977]
 position = Vector2(60, 150)
 
-[node name="right_foot" type="Sprite2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body/right_footBone2D" unique_id=1772564218]
+[node name="right_foot" type="Sprite2D" parent="SubViewport/Monster2DScene/Skeleton2D/Body/right_footBone2D" unique_id=731649302]
 show_behind_parent = true
 position = Vector2(1.5, -30)
 scale = Vector2(0.2, 0.195)
 texture = ExtResource("9_jpk5p")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1232738680]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1078072560]
 libraries/ = SubResource("AnimationLibrary_chicken")
