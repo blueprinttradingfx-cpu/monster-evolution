@@ -2,10 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://6mq1u6e7ukfm" path="res://assets/sprites/bg.png" id="BgTexture"]
 [ext_resource type="PackedScene" uid="uid://djr1fhap8bajb" path="res://scenes/common/BottomNav.tscn" id="BottomNav"]
-[ext_resource type="PackedScene" uid="uid://b1s0b73vi56lo" path="res://scenes/common/MonsterDisplay/MonsterDisplay.tscn" id="MonsterDisplay"]
 [ext_resource type="Script" uid="uid://mdscp1ohf7ig" path="res://scenes/screens/collection/collection.gd" id="Script_collection"]
 [ext_resource type="Theme" uid="uid://dc3si0880aglo" path="res://resources/monster_morph.tres" id="Script_collection_theme"]
-[ext_resource type="PackedScene" path="res://scenes/common/TopAppBar.tscn" id="TopAppBar"]
+[ext_resource type="PackedScene" uid="uid://7wc2813v2yq2" path="res://scenes/common/TopAppBar.tscn" id="TopAppBar"]
 
 [node name="CollectionScreen" type="Control" unique_id=998881746]
 layout_mode = 3
@@ -24,102 +23,124 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("BgTexture")
 expand_mode = 1
 
-[node name="SafeArea" type="MarginContainer" parent="." unique_id=250164743]
+[node name="RootLayout" type="VBoxContainer" parent="." unique_id=999999001]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="SafeArea" unique_id=39138621]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="TopAppBar" parent="SafeArea/VBoxContainer" unique_id=526425230 instance=ExtResource("TopAppBar")]
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="TopAppBar" parent="RootLayout" unique_id=526425230 instance=ExtResource("TopAppBar")]
 
-[node name="MainContent" type="HBoxContainer" parent="SafeArea/VBoxContainer" unique_id=1534208019]
+[node name="ScrollContainer" type="ScrollContainer" parent="RootLayout" unique_id=999999002]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SafeArea" type="MarginContainer" parent="RootLayout/ScrollContainer" unique_id=250164743]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Main" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea" unique_id=39138621]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 24
 
-[node name="MonsterGridScroll" type="ScrollContainer" parent="SafeArea/VBoxContainer/MainContent" unique_id=988306840]
+[node name="MonsterGridScroll" type="ScrollContainer" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=988306840]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 450)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="MonsterGrid" type="GridContainer" parent="SafeArea/VBoxContainer/MainContent/MonsterGridScroll" unique_id=666089143]
+[node name="MonsterGrid" type="GridContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/MonsterGridScroll" unique_id=666089143]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
 columns = 3
 
-[node name="EmptyStateLabel" type="Label" parent="SafeArea/VBoxContainer/MainContent/MonsterGridScroll/MonsterGrid" unique_id=282639872]
+[node name="EmptyStateLabel" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=282639872]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
+size_flags_horizontal = 3
 text = "No monsters yet! Hatch an egg to start your collection."
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="DetailPanel" type="VBoxContainer" parent="SafeArea/VBoxContainer/MainContent" unique_id=608113787]
-custom_minimum_size = Vector2(300, 0)
+[node name="DetailPanel" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=608113787]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 12
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
 
-[node name="MonsterDisplay" parent="SafeArea/VBoxContainer/MainContent/DetailPanel" unique_id=854515452 instance=ExtResource("MonsterDisplay")]
-layout_mode = 2
-
-[node name="InfoLabels" type="VBoxContainer" parent="SafeArea/VBoxContainer/MainContent/DetailPanel" unique_id=597180414]
+[node name="InfoLabels" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/DetailPanel" unique_id=597180414]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="NameLabel" type="Label" parent="SafeArea/VBoxContainer/MainContent/DetailPanel/InfoLabels" unique_id=250436244]
-visible = false
+[node name="NameLabel" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/DetailPanel/InfoLabels" unique_id=250436244]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Monster Name"
-horizontal_alignment = 1
 
-[node name="SpeciesLabel" type="Label" parent="SafeArea/VBoxContainer/MainContent/DetailPanel/InfoLabels" unique_id=1990961017]
+[node name="SpeciesLabel" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/DetailPanel/InfoLabels" unique_id=1990961017]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Species: Dino"
-horizontal_alignment = 1
 
-[node name="StageLabel" type="Label" parent="SafeArea/VBoxContainer/MainContent/DetailPanel/InfoLabels" unique_id=1062128862]
+[node name="StageLabel" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/DetailPanel/InfoLabels" unique_id=1062128862]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Stage: Baby"
-horizontal_alignment = 1
 
-[node name="MorphLabel" type="Label" parent="SafeArea/VBoxContainer/MainContent/DetailPanel/InfoLabels" unique_id=1062128863]
+[node name="MorphLabel" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/DetailPanel/InfoLabels" unique_id=1062128863]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Morph: None"
-horizontal_alignment = 1
 
-[node name="ActionButtons" type="VBoxContainer" parent="SafeArea/VBoxContainer/MainContent/DetailPanel" unique_id=1447890871]
+[node name="ActionButtons" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/DetailPanel" unique_id=1447890871]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 12
 
-[node name="SetActiveButton" type="Button" parent="SafeArea/VBoxContainer/MainContent/DetailPanel/ActionButtons" unique_id=211796983]
+[node name="SetActiveButton" type="Button" parent="RootLayout/ScrollContainer/SafeArea/Main/DetailPanel/ActionButtons" unique_id=211796983]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Set Active"
 
-[node name="RenameButton" type="Button" parent="SafeArea/VBoxContainer/MainContent/DetailPanel/ActionButtons" unique_id=1760034158]
+[node name="ViewDetailsButton" type="Button" parent="RootLayout/ScrollContainer/SafeArea/Main/DetailPanel/ActionButtons" unique_id=1478796412]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Rename"
-
-[node name="ViewDetailsButton" type="Button" parent="SafeArea/VBoxContainer/MainContent/DetailPanel/ActionButtons" unique_id=1478796412]
-layout_mode = 2
+size_flags_horizontal = 3
 text = "View Details"
 
-[node name="BottomNav" parent="SafeArea/VBoxContainer" unique_id=116774067 instance=ExtResource("BottomNav")]
-custom_minimum_size = Vector2(1080, 150)
-layout_mode = 1
-offset_bottom = 2.0
+[node name="RenameButton" type="Button" parent="RootLayout/ScrollContainer/SafeArea/Main/DetailPanel/ActionButtons" unique_id=1760034158]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Rename"
+
+[node name="Hatch" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=1803967259]
+layout_mode = 2
+
+[node name="HatchButton" type="Button" parent="RootLayout/ScrollContainer/SafeArea/Main/Hatch" unique_id=999999003]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Hatch Egg"
+
+[node name="BottomNav" parent="RootLayout" unique_id=116774067 instance=ExtResource("BottomNav")]

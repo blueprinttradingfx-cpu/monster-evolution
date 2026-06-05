@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://k0vk8rrrqx11" path="res://scenes/screens/home/home.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://djr1fhap8bajb" path="res://scenes/common/BottomNav.tscn" id="4_bottomnav"]
-[ext_resource type="PackedScene" path="res://scenes/common/TopAppBar.tscn" id="5_topappbar"]
+[ext_resource type="PackedScene" uid="uid://7wc2813v2yq2" path="res://scenes/common/TopAppBar.tscn" id="5_topappbar"]
 [ext_resource type="Theme" uid="uid://dc3si0880aglo" path="res://resources/monster_morph.tres" id="6_theme"]
 [ext_resource type="Texture2D" uid="uid://6mq1u6e7ukfm" path="res://assets/sprites/bg.png" id="7_bg_texture"]
-[ext_resource type="PackedScene" uid="uid://b1s0b73vi56lo" path="res://scenes/common/MonsterDisplay/MonsterDisplay.tscn" id="8_monsterdisplay"]
+[ext_resource type="PackedScene" uid="uid://b1wgbaaevx21g" path="res://scenes/common/PetDisplay/PetDisplay.tscn" id="8_petdisplay"]
 
 [sub_resource type="StyleBoxFlat" id="BarPanelStyle"]
 content_margin_left = 4.0
@@ -190,13 +190,12 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
 [node name="TopAppBar" parent="RootLayout" unique_id=650333811 instance=ExtResource("5_topappbar")]
-layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="RootLayout" unique_id=999999002]
 layout_mode = 2
@@ -215,14 +214,17 @@ layout_mode = 2
 theme_override_constants/separation = 32
 
 [node name="CreatureSection" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=1650775178]
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 theme_override_constants/separation = 24
 
 [node name="CreatureWrapper" type="Control" parent="RootLayout/ScrollContainer/SafeArea/Main/CreatureSection" unique_id=1586181232]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="CreatureGlow" type="ColorRect" parent="RootLayout/ScrollContainer/SafeArea/Main/CreatureSection/CreatureWrapper" unique_id=1234291249]
+custom_minimum_size = Vector2(250, 500)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -232,17 +234,14 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.913725, 0.866667, 1, 0.2)
 
-[node name="MonsterDisplay" parent="RootLayout/ScrollContainer/SafeArea/Main/CreatureSection/CreatureWrapper" unique_id=614454307 instance=ExtResource("8_monsterdisplay")]
+[node name="PetDisplay" parent="RootLayout/ScrollContainer/SafeArea/Main/CreatureSection/CreatureWrapper" unique_id=614454307 instance=ExtResource("8_petdisplay")]
+custom_minimum_size = Vector2(250, 250)
 layout_mode = 1
 anchors_preset = 15
-anchor_left = 0.0
-anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ProgressSection" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/CreatureSection" unique_id=1074394544]
 layout_mode = 2
@@ -287,7 +286,7 @@ offset_bottom = 18.0
 
 [node name="ActionButtons" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=835448449]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 32
 
 [node name="GridButtons" type="GridContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/ActionButtons" unique_id=280370219]
 layout_mode = 2
@@ -395,40 +394,40 @@ theme_override_font_sizes/font_size = 24
 text = "COLLECTION"
 horizontal_alignment = 1
 
-[node name="DailyQuest" type="PanelContainer" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=554021186]
+[node name="DailyQuest" type="PanelContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/ActionButtons" unique_id=554021186]
 layout_mode = 2
 theme_override_styles/panel = SubResource("QuestPanelStyle")
 
-[node name="QuestContent" type="HBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/DailyQuest" unique_id=592612384]
+[node name="QuestContent" type="HBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/ActionButtons/DailyQuest" unique_id=592612384]
 layout_mode = 2
 
-[node name="QuestIconPanel" type="PanelContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/DailyQuest/QuestContent" unique_id=1234187337]
+[node name="QuestIconPanel" type="PanelContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/ActionButtons/DailyQuest/QuestContent" unique_id=1234187337]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 theme_override_styles/panel = SubResource("QuestIconPanelStyle")
 
-[node name="QuestIcon" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/DailyQuest/QuestContent/QuestIconPanel" unique_id=1021137390]
+[node name="QuestIcon" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/ActionButtons/DailyQuest/QuestContent/QuestIconPanel" unique_id=1021137390]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "💡"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="QuestText" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/DailyQuest/QuestContent" unique_id=1329740412]
+[node name="QuestText" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/ActionButtons/DailyQuest/QuestContent" unique_id=1329740412]
 layout_mode = 2
 
-[node name="QuestTitle" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/DailyQuest/QuestContent/QuestText" unique_id=1468919612]
+[node name="QuestTitle" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/ActionButtons/DailyQuest/QuestContent/QuestText" unique_id=1468919612]
 modulate = Color(0.019925633, 0.019925632, 0.019925632, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Daily Quest"
 
-[node name="QuestDesc" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/DailyQuest/QuestContent/QuestText" unique_id=1095490248]
+[node name="QuestDesc" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/ActionButtons/DailyQuest/QuestContent/QuestText" unique_id=1095490248]
 modulate = Color(0.0142752165, 0.014275218, 0.014275218, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Merge 5 slime monsters today to earn a Rare Egg!"
 
 [node name="BottomNav" parent="RootLayout" unique_id=712187510 instance=ExtResource("4_bottomnav")]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-size_flags_horizontal = 3

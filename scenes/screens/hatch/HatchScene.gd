@@ -13,7 +13,7 @@ const REVEAL_DURATION: float = 0.5
 
 # --- NODES ---
 @onready var _egg_sprite: Sprite2D = $MainContent/EggContainer/EggSprite
-@onready var _monster_display: Control = $MainContent/MonsterContainer/MonsterDisplay
+@onready var _monster_display: MonsterDisplay = $MainContent/MonsterContainer/MonsterDisplay
 @onready var _monster_name_label: Label = $MainContent/MonsterInfo/MonsterNameLabel
 @onready var _species_label: Label = $MainContent/MonsterInfo/SpeciesLabel
 @onready var _add_to_collection_label: Label = $MainContent/AddToCollectionLabel

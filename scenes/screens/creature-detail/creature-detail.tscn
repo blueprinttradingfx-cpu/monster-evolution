@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://cl16jk32nh4sp"]
 
 [ext_resource type="Texture2D" uid="uid://6mq1u6e7ukfm" path="res://assets/sprites/bg.png" id="BgTexture"]
-[ext_resource type="PackedScene" path="res://scenes/common/BottomNav.tscn" id="BottomNav"]
-[ext_resource type="PackedScene" path="res://scenes/common/MonsterDisplay/MonsterDisplay.tscn" id="MonsterDisplay"]
+[ext_resource type="PackedScene" uid="uid://djr1fhap8bajb" path="res://scenes/common/BottomNav.tscn" id="BottomNav"]
+[ext_resource type="PackedScene" uid="uid://b1wgbaaevx21g" path="res://scenes/common/PetDisplay/PetDisplay.tscn" id="MonsterDisplay"]
 [ext_resource type="Script" uid="uid://boyvw2ol458r4" path="res://scenes/screens/creature-detail/creature-detail.gd" id="Script_detail"]
 [ext_resource type="Theme" uid="uid://dc3si0880aglo" path="res://resources/monster_morph.tres" id="Theme_Morph"]
-[ext_resource type="PackedScene" path="res://scenes/common/TopAppBar.tscn" id="TopAppBar"]
+[ext_resource type="PackedScene" uid="uid://7wc2813v2yq2" path="res://scenes/common/TopAppBar.tscn" id="TopAppBar"]
 
 [sub_resource type="StyleBoxFlat" id="SB_hero_card"]
 content_margin_left = 24.0
@@ -58,6 +58,22 @@ corner_radius_top_right = 999
 corner_radius_bottom_right = 999
 corner_radius_bottom_left = 999
 
+[sub_resource type="StyleBoxFlat" id="SB_about_panel"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.953, 0.957, 0.965, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.176, 0.176, 0.176, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
 [sub_resource type="StyleBoxFlat" id="SB_stat_card"]
 content_margin_left = 16.0
 content_margin_top = 16.0
@@ -76,22 +92,6 @@ corner_radius_bottom_left = 16
 shadow_color = Color(0.176, 0.176, 0.176, 1)
 shadow_size = 4
 shadow_offset = Vector2(0, 4)
-
-[sub_resource type="StyleBoxFlat" id="SB_about_panel"]
-content_margin_left = 24.0
-content_margin_top = 24.0
-content_margin_right = 24.0
-content_margin_bottom = 24.0
-bg_color = Color(0.953, 0.957, 0.965, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.176, 0.176, 0.176, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
 
 [sub_resource type="StyleBoxFlat" id="SB_evo_panel"]
 content_margin_left = 24.0
@@ -175,331 +175,397 @@ grow_vertical = 2
 texture = ExtResource("BgTexture")
 expand_mode = 1
 
-[node name="TopAppBar" parent="." unique_id=651072158 instance=ExtResource("TopAppBar")]
+[node name="RootLayout" type="VBoxContainer" parent="." unique_id=999999001]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
 
-[node name="BackButton" type="Button" parent="." unique_id=1356908684]
-layout_mode = 1
-offset_left = 16.0
-offset_top = 16.0
+[node name="TopAppBar" parent="RootLayout" unique_id=651072158 instance=ExtResource("TopAppBar")]
+
+[node name="ScrollContainer" type="ScrollContainer" parent="RootLayout" unique_id=999999002]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SafeArea" type="MarginContainer" parent="RootLayout/ScrollContainer" unique_id=999999003]
+custom_minimum_size = Vector2(1070, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Main" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea" unique_id=999999004]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 32
+
+[node name="BackButton" type="Button" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=1356908684]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.42, 0.22, 0.831, 1)
 theme_override_font_sizes/font_size = 24
 text = "←"
 flat = true
 
-[node name="MainLayout" type="VBoxContainer" parent="." unique_id=159776225]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 72.0
-offset_bottom = -148.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="MainLayout" unique_id=1690484695]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ContentVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer" unique_id=1450249833]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 32
-
-[node name="TopPad" type="Control" parent="MainLayout/ScrollContainer/ContentVBox" unique_id=315963437]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-
-[node name="SideMargin" type="MarginContainer" parent="MainLayout/ScrollContainer/ContentVBox" unique_id=665211203]
-layout_mode = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_right = 24
-
-[node name="InnerVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin" unique_id=844321537]
-layout_mode = 2
-theme_override_constants/separation = 32
-
-[node name="HeroSection" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox" unique_id=341460778]
+[node name="HeroSection" type="PanelContainer" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=341460778]
 layout_mode = 2
 theme_override_styles/panel = SubResource("SB_hero_card")
 
-[node name="HeroVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection" unique_id=1365167896]
+[node name="HeroVBox" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/HeroSection" unique_id=1365167896]
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="ImageContainer" type="CenterContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox" unique_id=1504655042]
-custom_minimum_size = Vector2(0, 224)
+[node name="ImageContainer" type="CenterContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/HeroSection/HeroVBox" unique_id=1504655042]
+custom_minimum_size = Vector2(0, 256)
 layout_mode = 2
 
-[node name="MonsterDisplay" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/ImageContainer" unique_id=777777777 instance=ExtResource("MonsterDisplay")]
+[node name="MonsterDisplay" parent="RootLayout/ScrollContainer/SafeArea/Main/HeroSection/HeroVBox/ImageContainer" unique_id=777777777 instance=ExtResource("MonsterDisplay")]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="HeroInfoVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox" unique_id=249093294]
+[node name="HeroInfoVBox" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/HeroSection/HeroVBox" unique_id=249093294]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="RarityCenter" type="CenterContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/HeroInfoVBox" unique_id=288770280]
+[node name="RarityCenter" type="CenterContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/HeroSection/HeroVBox/HeroInfoVBox" unique_id=288770280]
 layout_mode = 2
 
-[node name="RarityPill" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/HeroInfoVBox/RarityCenter" unique_id=1817920699]
+[node name="RarityPill" type="PanelContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/HeroSection/HeroVBox/HeroInfoVBox/RarityCenter" unique_id=1817920699]
 layout_mode = 2
 theme_override_styles/panel = SubResource("SB_rarity_pill")
 
-[node name="RarityLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/HeroInfoVBox/RarityCenter/RarityPill" unique_id=1829912407]
+[node name="RarityLabel" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/HeroSection/HeroVBox/HeroInfoVBox/RarityCenter/RarityPill" unique_id=1829912407]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 24
 text = "RARE"
 
-[node name="MonsterNameCenter" type="CenterContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/HeroInfoVBox" unique_id=863434412]
+[node name="MonsterNameCenter" type="CenterContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/HeroSection/HeroVBox/HeroInfoVBox" unique_id=863434412]
 layout_mode = 2
 
-[node name="MonsterName" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/HeroInfoVBox/MonsterNameCenter" unique_id=1807394007]
+[node name="MonsterName" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/HeroSection/HeroVBox/HeroInfoVBox/MonsterNameCenter" unique_id=1807394007]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.098, 0.11, 0.114, 1)
 theme_override_font_sizes/font_size = 28
 text = "Sparkle Blob"
 
-[node name="EvoPillCenter" type="CenterContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/HeroInfoVBox" unique_id=1849034740]
+[node name="EvoPillCenter" type="CenterContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/HeroSection/HeroVBox/HeroInfoVBox" unique_id=1849034740]
 layout_mode = 2
 
-[node name="EvoPill" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/HeroInfoVBox/EvoPillCenter" unique_id=208973385]
+[node name="EvoPill" type="PanelContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/HeroSection/HeroVBox/HeroInfoVBox/EvoPillCenter" unique_id=208973385]
 layout_mode = 2
 theme_override_styles/panel = SubResource("SB_evo_pill")
 
-[node name="EvoPillHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/HeroInfoVBox/EvoPillCenter/EvoPill" unique_id=605305447]
+[node name="EvoPillHBox" type="HBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/HeroSection/HeroVBox/HeroInfoVBox/EvoPillCenter/EvoPill" unique_id=605305447]
 layout_mode = 2
 theme_override_constants/separation = 6
 alignment = 1
 
-[node name="EvoIcon" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/HeroInfoVBox/EvoPillCenter/EvoPill/EvoPillHBox" unique_id=344770551]
+[node name="EvoIcon" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/HeroSection/HeroVBox/HeroInfoVBox/EvoPillCenter/EvoPill/EvoPillHBox" unique_id=344770551]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "📈"
 
-[node name="EvoStageLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/HeroInfoVBox/EvoPillCenter/EvoPill/EvoPillHBox" unique_id=497386862]
+[node name="EvoStageLabel" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/HeroSection/HeroVBox/HeroInfoVBox/EvoPillCenter/EvoPill/EvoPillHBox" unique_id=497386862]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.137, 0.02, 0.361, 1)
 theme_override_font_sizes/font_size = 24
 text = "Evolution Stage: 2"
 
-[node name="StatsSection" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox" unique_id=1035594654]
+[node name="CosmeticSlotsSection" type="PanelContainer" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=34717295]
+layout_mode = 2
+theme_override_styles/panel = SubResource("SB_about_panel")
+
+[node name="CosmeticSlotsVBox" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/CosmeticSlotsSection" unique_id=123418246]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="AttackCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/StatsSection" unique_id=1846732145]
+[node name="SectionTitle" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/CosmeticSlotsSection/CosmeticSlotsVBox" unique_id=221091757]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.098, 0.11, 0.114, 1)
+theme_override_font_sizes/font_size = 24
+text = "Cosmetics"
+
+[node name="SlotList" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/CosmeticSlotsSection/CosmeticSlotsVBox" unique_id=1916573408]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HeadSlot" type="HBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/CosmeticSlotsSection/CosmeticSlotsVBox/SlotList" unique_id=999999005]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HeadLabel" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/CosmeticSlotsSection/CosmeticSlotsVBox/SlotList/HeadSlot" unique_id=999999006]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 20
+text = "Head:"
+
+[node name="HeadValue" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/CosmeticSlotsSection/CosmeticSlotsVBox/SlotList/HeadSlot" unique_id=999999007]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Empty"
+
+[node name="FaceSlot" type="HBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/CosmeticSlotsSection/CosmeticSlotsVBox/SlotList" unique_id=999999008]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FaceLabel" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/CosmeticSlotsSection/CosmeticSlotsVBox/SlotList/FaceSlot" unique_id=999999009]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 20
+text = "Face:"
+
+[node name="FaceValue" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/CosmeticSlotsSection/CosmeticSlotsVBox/SlotList/FaceSlot" unique_id=999999010]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Empty"
+
+[node name="BodySlot" type="HBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/CosmeticSlotsSection/CosmeticSlotsVBox/SlotList" unique_id=999999011]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="BodyLabel" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/CosmeticSlotsSection/CosmeticSlotsVBox/SlotList/BodySlot" unique_id=999999012]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 20
+text = "Body:"
+
+[node name="BodyValue" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/CosmeticSlotsSection/CosmeticSlotsVBox/SlotList/BodySlot" unique_id=999999013]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Empty"
+
+
+
+[node name="EquipButton" type="Button" parent="RootLayout/ScrollContainer/SafeArea/Main/CosmeticSlotsSection/CosmeticSlotsVBox" unique_id=999999017]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Equip Items"
+
+[node name="StatsSection" type="HBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=1035594654]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="AttackCard" type="PanelContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/StatsSection" unique_id=1846732145]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("SB_stat_card")
 
-[node name="AttackVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/StatsSection/AttackCard" unique_id=409086678]
+[node name="AttackVBox" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/StatsSection/AttackCard" unique_id=409086678]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="AttackIcon" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/StatsSection/AttackCard/AttackVBox" unique_id=1990368156]
+[node name="AttackIcon" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/StatsSection/AttackCard/AttackVBox" unique_id=1990368156]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "⚔️"
 horizontal_alignment = 1
 
-[node name="AttackLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/StatsSection/AttackCard/AttackVBox" unique_id=441818673]
+[node name="AttackLabel" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/StatsSection/AttackCard/AttackVBox" unique_id=441818673]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
 theme_override_font_sizes/font_size = 24
 text = "ATTACK"
 horizontal_alignment = 1
 
-[node name="AttackValue" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/StatsSection/AttackCard/AttackVBox" unique_id=265114149]
+[node name="AttackValue" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/StatsSection/AttackCard/AttackVBox" unique_id=265114149]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "124"
 horizontal_alignment = 1
 
-[node name="EnergyCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/StatsSection" unique_id=479751967]
+[node name="EnergyCard" type="PanelContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/StatsSection" unique_id=479751967]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("SB_stat_card")
 
-[node name="EnergyVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/StatsSection/EnergyCard" unique_id=1250189875]
+[node name="EnergyVBox" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/StatsSection/EnergyCard" unique_id=1250189875]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="EnergyIcon" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/StatsSection/EnergyCard/EnergyVBox" unique_id=914676341]
+[node name="EnergyIcon" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/StatsSection/EnergyCard/EnergyVBox" unique_id=914676341]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.925, 0.286, 0.6, 1)
 theme_override_font_sizes/font_size = 28
 text = "⚡"
 horizontal_alignment = 1
 
-[node name="EnergyLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/StatsSection/EnergyCard/EnergyVBox" unique_id=1966663350]
+[node name="EnergyLabel" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/StatsSection/EnergyCard/EnergyVBox" unique_id=1966663350]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
 theme_override_font_sizes/font_size = 24
 text = "ENERGY"
 horizontal_alignment = 1
 
-[node name="EnergyValue" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/StatsSection/EnergyCard/EnergyVBox" unique_id=151713110]
+[node name="EnergyValue" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/StatsSection/EnergyCard/EnergyVBox" unique_id=151713110]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "89"
 horizontal_alignment = 1
 
-[node name="AboutSection" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox" unique_id=608113787]
+[node name="AboutSection" type="PanelContainer" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=608113787]
 layout_mode = 2
 theme_override_styles/panel = SubResource("SB_about_panel")
 
-[node name="AboutVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/AboutSection" unique_id=1635228323]
+[node name="AboutVBox" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/AboutSection" unique_id=1635228323]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="AboutHeader" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/AboutSection/AboutVBox" unique_id=20406081]
+[node name="AboutHeader" type="HBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/AboutSection/AboutVBox" unique_id=20406081]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="AboutIcon" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/AboutSection/AboutVBox/AboutHeader" unique_id=318898728]
+[node name="AboutIcon" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/AboutSection/AboutVBox/AboutHeader" unique_id=318898728]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "✨"
 
-[node name="AboutTitle" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/AboutSection/AboutVBox/AboutHeader" unique_id=619645444]
+[node name="AboutTitle" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/AboutSection/AboutVBox/AboutHeader" unique_id=619645444]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.42, 0.22, 0.831, 1)
 theme_override_font_sizes/font_size = 24
 text = "About"
 
-[node name="AboutBody" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/AboutSection/AboutVBox" unique_id=153891185]
+[node name="AboutBody" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/AboutSection/AboutVBox" unique_id=153891185]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
 theme_override_font_sizes/font_size = 24
 text = "A shimmering slime that glows brighter when it's happy. It loves to bounce and leave a trail of glitter wherever it goes."
 autowrap_mode = 3
 
-[node name="EvoSection" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox" unique_id=906704848]
+[node name="EvoSection" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=906704848]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="EvoTitle" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection" unique_id=753070416]
+[node name="EvoTitle" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/EvoSection" unique_id=753070416]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "How to Unlock"
 
-[node name="EvoPanel" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection" unique_id=2076014003]
+[node name="EvoPanel" type="PanelContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/EvoSection" unique_id=2076014003]
 layout_mode = 2
 theme_override_styles/panel = SubResource("SB_evo_panel")
 
-[node name="EvoHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel" unique_id=1494733055]
+[node name="EvoHBox" type="HBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/EvoSection/EvoPanel" unique_id=1494733055]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="Ingredient1VBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox" unique_id=652623876]
+[node name="Ingredient1VBox" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/EvoSection/EvoPanel/EvoHBox" unique_id=652623876]
 layout_mode = 2
 theme_override_constants/separation = 6
 alignment = 1
 
-[node name="Ingredient1Bubble" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox/Ingredient1VBox" unique_id=345582667]
+[node name="Ingredient1Bubble" type="PanelContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/EvoSection/EvoPanel/EvoHBox/Ingredient1VBox" unique_id=345582667]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 theme_override_styles/panel = SubResource("SB_evo_bubble")
 
-[node name="Ingredient1Image" type="TextureRect" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox/Ingredient1VBox/Ingredient1Bubble" unique_id=1867806637]
+[node name="Ingredient1Image" type="TextureRect" parent="RootLayout/ScrollContainer/SafeArea/Main/EvoSection/EvoPanel/EvoHBox/Ingredient1VBox/Ingredient1Bubble" unique_id=1867806637]
 layout_mode = 2
 expand_mode = 3
 stretch_mode = 6
 
-[node name="Ingredient1Emoji" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox/Ingredient1VBox/Ingredient1Bubble" unique_id=910324921]
+[node name="Ingredient1Emoji" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/EvoSection/EvoPanel/EvoHBox/Ingredient1VBox/Ingredient1Bubble" unique_id=910324921]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "🟢"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Ingredient1Label" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox/Ingredient1VBox" unique_id=505390208]
+[node name="Ingredient1Label" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/EvoSection/EvoPanel/EvoHBox/Ingredient1VBox" unique_id=505390208]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Blob"
 horizontal_alignment = 1
 
-[node name="PlusLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox" unique_id=481529701]
+[node name="PlusLabel" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/EvoSection/EvoPanel/EvoHBox" unique_id=481529701]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.42, 0.22, 0.831, 1)
 theme_override_font_sizes/font_size = 28
 text = "＋"
 vertical_alignment = 1
 
-[node name="Ingredient2VBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox" unique_id=1605328401]
+[node name="Ingredient2VBox" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/EvoSection/EvoPanel/EvoHBox" unique_id=1605328401]
 layout_mode = 2
 theme_override_constants/separation = 6
 alignment = 1
 
-[node name="Ingredient2Bubble" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox/Ingredient2VBox" unique_id=1467860343]
+[node name="Ingredient2Bubble" type="PanelContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/EvoSection/EvoPanel/EvoHBox/Ingredient2VBox" unique_id=1467860343]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 theme_override_styles/panel = SubResource("SB_evo_bubble")
 
-[node name="Ingredient2Image" type="TextureRect" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox/Ingredient2VBox/Ingredient2Bubble" unique_id=1830396072]
+[node name="Ingredient2Image" type="TextureRect" parent="RootLayout/ScrollContainer/SafeArea/Main/EvoSection/EvoPanel/EvoHBox/Ingredient2VBox/Ingredient2Bubble" unique_id=1830396072]
 layout_mode = 2
 expand_mode = 3
 stretch_mode = 6
 
-[node name="Ingredient2Emoji" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox/Ingredient2VBox/Ingredient2Bubble" unique_id=510839360]
+[node name="Ingredient2Emoji" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/EvoSection/EvoPanel/EvoHBox/Ingredient2VBox/Ingredient2Bubble" unique_id=510839360]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "🟢"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Ingredient2Label" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox/Ingredient2VBox" unique_id=15185533]
+[node name="Ingredient2Label" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/EvoSection/EvoPanel/EvoHBox/Ingredient2VBox" unique_id=15185533]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Blob"
 horizontal_alignment = 1
 
-[node name="ArrowLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox" unique_id=43567190]
+[node name="ArrowLabel" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/EvoSection/EvoPanel/EvoHBox" unique_id=43567190]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.42, 0.22, 0.831, 1)
 theme_override_font_sizes/font_size = 28
 text = "→"
 vertical_alignment = 1
 
-[node name="ResultVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox" unique_id=1031853685]
+[node name="ResultVBox" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/EvoSection/EvoPanel/EvoHBox" unique_id=1031853685]
 layout_mode = 2
 theme_override_constants/separation = 6
 alignment = 1
 
-[node name="ResultBubble" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox/ResultVBox" unique_id=832025979]
+[node name="ResultBubble" type="PanelContainer" parent="RootLayout/ScrollContainer/SafeArea/Main/EvoSection/EvoPanel/EvoHBox/ResultVBox" unique_id=832025979]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_styles/panel = SubResource("SB_evo_bubble_result")
 
-[node name="ResultImage" type="TextureRect" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox/ResultVBox/ResultBubble" unique_id=116131346]
+[node name="ResultImage" type="TextureRect" parent="RootLayout/ScrollContainer/SafeArea/Main/EvoSection/EvoPanel/EvoHBox/ResultVBox/ResultBubble" unique_id=116131346]
 layout_mode = 2
 expand_mode = 3
 stretch_mode = 6
 
-[node name="ResultEmoji" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox/ResultVBox/ResultBubble" unique_id=1966531866]
+[node name="ResultEmoji" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/EvoSection/EvoPanel/EvoHBox/ResultVBox/ResultBubble" unique_id=1966531866]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "✨"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ResultLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/EvoSection/EvoPanel/EvoHBox/ResultVBox" unique_id=218213602]
+[node name="ResultLabel" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main/EvoSection/EvoPanel/EvoHBox/ResultVBox" unique_id=218213602]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.42, 0.22, 0.831, 1)
 theme_override_font_sizes/font_size = 24
 text = "Result"
 horizontal_alignment = 1
 
-[node name="CtaButton" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox" unique_id=324211625]
+[node name="CtaButton" type="Button" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=324211625]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 24
@@ -508,22 +574,11 @@ theme_override_styles/pressed = SubResource("SB_cta_btn")
 theme_override_styles/hover = SubResource("SB_cta_btn")
 text = "🪄  Merge More Blobs"
 
-[node name="BottomPad" type="Control" parent="MainLayout/ScrollContainer/ContentVBox" unique_id=236449852]
-custom_minimum_size = Vector2(0, 16)
-layout_mode = 2
+[node name="BottomNav" parent="RootLayout" unique_id=1010539065 instance=ExtResource("BottomNav")]
 
 [node name="SparkleLayer" type="Control" parent="." unique_id=1452535104]
+visible = false
 anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-
-[node name="BottomNav" parent="." unique_id=1010539065 instance=ExtResource("BottomNav")]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -148.0
-grow_horizontal = 2
-grow_vertical = 0

@@ -38,14 +38,14 @@ var grid_cols: int = 0
 var _card_scene = preload("res://ui_components/card.tscn")
 
 # Node references (resolved in _ready)
-@onready var top_appbar        : Control     = $TopAppBar
-@onready var bottom_nav        : Control     = $BottomNav
-@onready var card_grid : GridContainer = $MainLayout/ScrollContainer/ContentArea/BoardGridContainer/CenterContainer/CardGrid
-@onready var level_label       : Label         = $MainLayout/ScrollContainer/ContentArea/StatusRow/MatchesPanel/MatchesContent/LevelLabel
-@onready var matches_label     : Label         = $MainLayout/ScrollContainer/ContentArea/StatusRow/MatchesPanel/MatchesContent/MatchesValue
-@onready var timer_label       : Label         = $MainLayout/ScrollContainer/ContentArea/StatusRow/TimerTurns/TimerLabel
-@onready var turns_label       : Label         = $MainLayout/ScrollContainer/ContentArea/StatusRow/TimerTurns/TurnsLabel
-@onready var progress_fill     : ColorRect     = $MainLayout/ScrollContainer/ContentArea/BonusProgressBg/BonusProgressFill
+@onready var top_appbar        : Control     = $RootLayout/TopAppBar
+@onready var bottom_nav        : Control     = $RootLayout/BottomNav
+@onready var card_grid : GridContainer = $RootLayout/ScrollContainer/SafeArea/Main/BoardGridContainer/CenterContainer/CardGrid
+@onready var level_label       : Label         = $RootLayout/ScrollContainer/SafeArea/Main/MatchesPanel/MatchesContent/LevelLabel
+@onready var matches_label     : Label         = $RootLayout/ScrollContainer/SafeArea/Main/MatchesPanel/MatchesContent/MatchesValue
+@onready var timer_label       : Label         = $RootLayout/ScrollContainer/SafeArea/Main/TimerTurns/TimerLabel
+@onready var turns_label       : Label         = $RootLayout/ScrollContainer/SafeArea/Main/TimerTurns/TurnsLabel
+@onready var progress_fill     : ColorRect     = $RootLayout/ScrollContainer/SafeArea/Main/BonusProgressBg/BonusProgressFill
 @onready var win_overlay       : CanvasLayer   = $WinOverlay
 @onready var win_control       : Control       = $WinOverlay/WinControl
 @onready var confetti_layer    : Node2D        = $WinOverlay/WinControl/ConfettiLayer

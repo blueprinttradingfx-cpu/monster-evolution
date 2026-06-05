@@ -1,14 +1,14 @@
 extends Control
 
-@onready var top_appbar: Control = $TopAppBar
-@onready var bottom_nav: Control = $BottomNav
+@onready var top_appbar: Control = $RootLayout/TopAppBar
+@onready var bottom_nav: Control = $RootLayout/BottomNav
 
-@onready var sound_toggle: CheckButton = $MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox/SoundToggle
-@onready var music_toggle: CheckButton = $MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox/MusicToggle
-@onready var lang_sub_label: Label = $MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox/LangTextVBox/LangSubLabel
-@onready var lang_button: Button = $MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox/LangButton
-@onready var reset_button: Button = $MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/ResetSection/ResetButton
-@onready var close_button: Button = $MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/CloseSection/CloseButton
+@onready var sound_toggle: CheckButton = $RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox/SoundToggle
+@onready var music_toggle: CheckButton = $RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox/MusicToggle
+@onready var lang_sub_label: Label = $RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox/LangTextVBox/LangSubLabel
+@onready var lang_button: Button = $RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox/LangButton
+@onready var reset_button: Button = $RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/ResetSection/ResetButton
+@onready var close_button: Button = $RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/CloseSection/CloseButton
 @onready var reset_dialog: ConfirmationDialog = $ResetConfirmDialog
 
 const LANGUAGES: Array[Dictionary] = [
@@ -77,8 +77,9 @@ func _on_reset_pressed():
 
 func _on_reset_confirmed():
 	print("Progress RESET confirmed.")
-	SaveSystem.reset_save()
+	SaveManager.reset_game()
 	_refresh_currency_display()
+	_load_settings() # Reload settings after reset
 
 func _on_close_pressed():
 	if GameManager:

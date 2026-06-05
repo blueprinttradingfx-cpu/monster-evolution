@@ -4,6 +4,7 @@ class_name TopAppBar
 signal settings_clicked()
 
 @onready var coins_label = $HBoxContainer/LeftGroup/CoinDisplay/CoinsLabel
+@onready var eggs_label = $HBoxContainer/LeftGroup/EggDisplay/EggsLabel
 @onready var settings_button = $HBoxContainer/RightGroup/SettingsButton
 
 func _ready() -> void:
@@ -11,12 +12,19 @@ func _ready() -> void:
 	_load_from_save_data()
 	if EconomyManager:
 		EconomyManager.coins_changed.connect(_on_coins_changed)
+	if MonsterManager:
+		MonsterManager.egg_count_changed.connect(_on_egg_count_changed)
 	print("[TopAppBar] Connecting settings button pressed")
 	settings_button.pressed.connect(_on_settings_clicked)
 
 func _on_coins_changed(new_coins: int) -> void:
 	print("[TopAppBar] _on_coins_changed() called with coins: ", new_coins)
 	coins_label.text = str(new_coins)
+
+func _on_egg_count_changed() -> void:
+	print("[TopAppBar] _on_egg_count_changed() called")
+	if MonsterManager:
+		set_eggs(MonsterManager.get_owned_egg_count())
 
 func _on_settings_clicked() -> void:
 	print("[TopAppBar] Settings button clicked! Emitting settings_clicked")
@@ -26,7 +34,13 @@ func _load_from_save_data() -> void:
 	print("[TopAppBar] _load_from_save_data() called")
 	if EconomyManager:
 		set_coins(EconomyManager.get_coins())
+	if MonsterManager:
+		set_eggs(MonsterManager.get_owned_egg_count())
 
 func set_coins(amount: int) -> void:
 	print("[TopAppBar] set_coins() called with amount: ", amount)
 	coins_label.text = str(amount)
+
+func set_eggs(amount: int) -> void:
+	print("[TopAppBar] set_eggs() called with amount: ", amount)
+	eggs_label.text = str(amount)

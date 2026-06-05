@@ -80,169 +80,160 @@ grow_vertical = 2
 texture = ExtResource("5_bg")
 expand_mode = 1
 
-[node name="TopAppBar" parent="." unique_id=253023877 instance=ExtResource("2_topappbar")]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-grow_horizontal = 2
-
-[node name="MainLayout" type="VBoxContainer" parent="." unique_id=793501195]
+[node name="RootLayout" type="VBoxContainer" parent="." unique_id=999999001]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 72.0
-offset_bottom = -148.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MainLayout" unique_id=1469025532]
+[node name="TopAppBar" parent="RootLayout" unique_id=253023877 instance=ExtResource("2_topappbar")]
+
+[node name="ScrollContainer" type="ScrollContainer" parent="RootLayout" unique_id=999999002]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ContentVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer" unique_id=1412118606]
+[node name="ContentVBox" type="VBoxContainer" parent="RootLayout/ScrollContainer" unique_id=1412118606]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 24
 
-[node name="TopPad" type="Control" parent="MainLayout/ScrollContainer/ContentVBox" unique_id=1966568967]
-custom_minimum_size = Vector2(0, 16)
+[node name="TitleSection" type="VBoxContainer" parent="RootLayout/ScrollContainer/ContentVBox" unique_id=1743099125]
 layout_mode = 2
 
-[node name="TitleSection" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox" unique_id=1743099125]
-layout_mode = 2
-
-[node name="SettingsTitle" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/TitleSection" unique_id=1282909123]
+[node name="SettingsTitle" type="Label" parent="RootLayout/ScrollContainer/ContentVBox/TitleSection" unique_id=1282909123]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.098, 0.11, 0.114, 1)
 theme_override_font_sizes/font_size = 36
 text = "SETTINGS"
 horizontal_alignment = 1
 
-[node name="TitleUnderline" type="ColorRect" parent="MainLayout/ScrollContainer/ContentVBox/TitleSection" unique_id=1281782208]
+[node name="TitleUnderline" type="ColorRect" parent="RootLayout/ScrollContainer/ContentVBox/TitleSection" unique_id=1281782208]
 custom_minimum_size = Vector2(96, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 color = Color(0.42, 0.22, 0.831, 1)
 
-[node name="SideMargin" type="MarginContainer" parent="MainLayout/ScrollContainer/ContentVBox" unique_id=1887629593]
+[node name="SideMargin" type="MarginContainer" parent="RootLayout/ScrollContainer/ContentVBox" unique_id=1887629593]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_right = 24
 
-[node name="CardsVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin" unique_id=1498231018]
+[node name="CardsVBox" type="VBoxContainer" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin" unique_id=1498231018]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="SoundCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox" unique_id=668065958]
+[node name="SoundCard" type="PanelContainer" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox" unique_id=668065958]
 layout_mode = 2
 theme_override_styles/panel = SubResource("SB_card")
 
-[node name="SoundHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard" unique_id=445237057]
+[node name="SoundHBox" type="HBoxContainer" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard" unique_id=445237057]
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="SoundIcon" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox" unique_id=1759236513]
+[node name="SoundIcon" type="Label" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox" unique_id=1759236513]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "🔊"
 
-[node name="SoundTextVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox" unique_id=739894132]
+[node name="SoundTextVBox" type="VBoxContainer" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox" unique_id=739894132]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SoundLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox/SoundTextVBox" unique_id=1994847539]
+[node name="SoundLabel" type="Label" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox/SoundTextVBox" unique_id=1994847539]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.098, 0.11, 0.114, 1)
 theme_override_font_sizes/font_size = 24
 text = "Sound"
 
-[node name="SoundSubLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox/SoundTextVBox" unique_id=861868730]
+[node name="SoundSubLabel" type="Label" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox/SoundTextVBox" unique_id=861868730]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
 theme_override_font_sizes/font_size = 24
 text = "Sfx and feedback"
 
-[node name="SoundToggle" type="CheckButton" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox" unique_id=695062385]
+[node name="SoundToggle" type="CheckButton" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/SoundCard/SoundHBox" unique_id=695062385]
 layout_mode = 2
 button_pressed = true
 
-[node name="MusicCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox" unique_id=691780154]
+[node name="MusicCard" type="PanelContainer" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox" unique_id=691780154]
 layout_mode = 2
 theme_override_styles/panel = SubResource("SB_card")
 
-[node name="MusicHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard" unique_id=1451339952]
+[node name="MusicHBox" type="HBoxContainer" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard" unique_id=1451339952]
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="MusicIcon" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox" unique_id=795917259]
+[node name="MusicIcon" type="Label" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox" unique_id=795917259]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "🎵"
 
-[node name="MusicTextVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox" unique_id=1141179061]
+[node name="MusicTextVBox" type="VBoxContainer" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox" unique_id=1141179061]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MusicLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox/MusicTextVBox" unique_id=58874679]
+[node name="MusicLabel" type="Label" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox/MusicTextVBox" unique_id=58874679]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.098, 0.11, 0.114, 1)
 theme_override_font_sizes/font_size = 24
 text = "Music"
 
-[node name="MusicSubLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox/MusicTextVBox" unique_id=1482960305]
+[node name="MusicSubLabel" type="Label" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox/MusicTextVBox" unique_id=1482960305]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
 theme_override_font_sizes/font_size = 24
 text = "Background melodies"
 
-[node name="MusicToggle" type="CheckButton" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox" unique_id=1662481483]
+[node name="MusicToggle" type="CheckButton" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/MusicCard/MusicHBox" unique_id=1662481483]
 layout_mode = 2
 button_pressed = true
 
-[node name="LanguageCard" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox" unique_id=701019289]
+[node name="LanguageCard" type="PanelContainer" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox" unique_id=701019289]
 layout_mode = 2
 theme_override_styles/panel = SubResource("SB_card")
 
-[node name="LanguageHBox" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard" unique_id=4533691]
+[node name="LanguageHBox" type="HBoxContainer" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard" unique_id=4533691]
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="LangIcon" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox" unique_id=1284453008]
+[node name="LangIcon" type="Label" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox" unique_id=1284453008]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "🌐"
 
-[node name="LangTextVBox" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox" unique_id=1293497875]
+[node name="LangTextVBox" type="VBoxContainer" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox" unique_id=1293497875]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LangLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox/LangTextVBox" unique_id=2064098091]
+[node name="LangLabel" type="Label" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox/LangTextVBox" unique_id=2064098091]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.098, 0.11, 0.114, 1)
 theme_override_font_sizes/font_size = 24
 text = "Language"
 
-[node name="LangSubLabel" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox/LangTextVBox" unique_id=263356841]
+[node name="LangSubLabel" type="Label" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox/LangTextVBox" unique_id=263356841]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
 theme_override_font_sizes/font_size = 24
 text = "Selected: English"
 
-[node name="LangButton" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox" unique_id=2097294811]
+[node name="LangButton" type="Button" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/LanguageCard/LanguageHBox" unique_id=2097294811]
 custom_minimum_size = Vector2(52, 36)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "EN"
 
-[node name="ResetSection" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox" unique_id=1451741963]
+[node name="ResetSection" type="VBoxContainer" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox" unique_id=1451741963]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="ResetButton" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/ResetSection" unique_id=1673290395]
+[node name="ResetButton" type="Button" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/ResetSection" unique_id=1673290395]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.729, 0.102, 0.102, 1)
@@ -252,7 +243,7 @@ theme_override_styles/pressed = SubResource("SB_reset")
 theme_override_styles/hover = SubResource("SB_reset")
 text = "🔄  Reset Progress"
 
-[node name="ResetWarning" type="Label" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/ResetSection" unique_id=1545924149]
+[node name="ResetWarning" type="Label" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/ResetSection" unique_id=1545924149]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.286, 0.267, 0.329, 1)
 theme_override_font_sizes/font_size = 24
@@ -260,10 +251,10 @@ text = "Warning: This action is permanent and will delete all collected monsters
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="CloseSection" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox" unique_id=1266344474]
+[node name="CloseSection" type="VBoxContainer" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox" unique_id=1266344474]
 layout_mode = 2
 
-[node name="CloseButton" type="Button" parent="MainLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/CloseSection" unique_id=625667899]
+[node name="CloseButton" type="Button" parent="RootLayout/ScrollContainer/ContentVBox/SideMargin/CardsVBox/CloseSection" unique_id=625667899]
 custom_minimum_size = Vector2(200, 64)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -273,21 +264,9 @@ theme_override_styles/pressed = SubResource("SB_close")
 theme_override_styles/hover = SubResource("SB_close")
 text = "CLOSE"
 
-[node name="BottomPad" type="Control" parent="MainLayout/ScrollContainer/ContentVBox" unique_id=1610015140]
-custom_minimum_size = Vector2(0, 16)
-layout_mode = 2
-
 [node name="ResetConfirmDialog" type="ConfirmationDialog" parent="." unique_id=1171888220]
 title = "Reset Progress"
 ok_button_text = "Reset"
 dialog_text = "This action is permanent and will delete all collected monsters and progress. Are you sure?"
 
-[node name="BottomNav" parent="." unique_id=1023654794 instance=ExtResource("3_bottomnav")]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -148.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="BottomNav" parent="RootLayout" unique_id=1023654794 instance=ExtResource("3_bottomnav")]

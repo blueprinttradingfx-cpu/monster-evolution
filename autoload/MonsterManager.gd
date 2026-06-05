@@ -8,6 +8,7 @@ signal monster_hatched(monsterId: String)
 signal monster_evolved(monsterId: String)
 signal monster_updated(monsterId: String)
 signal egg_hatched(monsterId: String)  # New signal for egg hatching
+signal egg_count_changed()  # New signal for egg count changes
 signal morph_changed(monsterId: String, morphId: String)
 signal egg_purchased(eggTypeId: String)
 signal cosmetic_purchased(cosmeticId: String)
@@ -236,6 +237,9 @@ func add_egg(egg_id_or_type: String, egg_type_id: String = "") -> String:
 	owned_eggs[egg_id] = egg_data
 	owned_egg_ids.append(egg_id)
 	
+	# Emit signal that egg count changed
+	egg_count_changed.emit()
+	
 	# Trigger save
 	if SaveManager:
 		SaveManager.save_game()
@@ -276,6 +280,9 @@ func hatch_egg(owned_egg_id: String) -> String:
 	var index: int = owned_egg_ids.find(owned_egg_id)
 	if index != -1:
 		owned_egg_ids.remove_at(index)
+	
+	# Emit signal that egg count changed
+	egg_count_changed.emit()
 	
 	# Create monster
 	var monster_id: String = create_monster(species_id, egg_type_id)

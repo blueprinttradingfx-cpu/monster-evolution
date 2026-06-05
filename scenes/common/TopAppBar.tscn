@@ -1,44 +1,57 @@
-[gd_scene load_steps=3 format=3 uid="uid://common_topappbar"]
+[gd_scene format=3 uid="uid://7wc2813v2yq2"]
 
-[ext_resource type="Script" path="res://scenes/common/TopAppBar.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/sprites/merge_memory_monsters_game_logo.png" id="2_logo"]
+[ext_resource type="Script" uid="uid://dyjyt0x6c8sb0" path="res://scenes/common/TopAppBar.gd" id="1_script"]
 
-[node name="TopAppBar" type="PanelContainer"]
+[node name="TopAppBar" type="PanelContainer" unique_id=1580894871]
+layout_mode = 2
 custom_minimum_size = Vector2(0, 72)
+size_flags_horizontal = 3
 script = ExtResource("1_script")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1356982719]
 layout_mode = 2
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="LeftGroup" type="HBoxContainer" parent="HBoxContainer"]
+[node name="LeftGroup" type="HBoxContainer" parent="HBoxContainer" unique_id=819290156]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 12
 
-[node name="CoinDisplay" type="HBoxContainer" parent="HBoxContainer/LeftGroup"]
+[node name="CoinDisplay" type="HBoxContainer" parent="HBoxContainer/LeftGroup" unique_id=1481705682]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="CoinIcon" type="Label" parent="HBoxContainer/LeftGroup/CoinDisplay"]
+[node name="CoinIcon" type="Label" parent="HBoxContainer/LeftGroup/CoinDisplay" unique_id=1708628183]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "🪙"
-theme_override_font_sizes/font_size = 24
 
-[node name="CoinsLabel" type="Label" parent="HBoxContainer/LeftGroup/CoinDisplay"]
+[node name="CoinsLabel" type="Label" parent="HBoxContainer/LeftGroup/CoinDisplay" unique_id=929896373]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "0"
-theme_override_font_sizes/font_size = 24
 
-[node name="RightGroup" type="HBoxContainer" parent="HBoxContainer"]
+[node name="EggDisplay" type="HBoxContainer" parent="HBoxContainer/LeftGroup" unique_id=1234567890]
 layout_mode = 2
+theme_override_constants/separation = 8
 
-[node name="SettingsButton" type="Button" parent="HBoxContainer/RightGroup"]
+[node name="EggIcon" type="Label" parent="HBoxContainer/LeftGroup/EggDisplay" unique_id=1234567891]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "🥚"
+
+[node name="EggsLabel" type="Label" parent="HBoxContainer/LeftGroup/EggDisplay" unique_id=1234567892]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="RightGroup" type="HBoxContainer" parent="HBoxContainer" unique_id=1136286838]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="SettingsButton" type="Button" parent="HBoxContainer/RightGroup" unique_id=1846835564]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-text = "⚙️"
 theme_override_font_sizes/font_size = 24
+text = "⚙️"

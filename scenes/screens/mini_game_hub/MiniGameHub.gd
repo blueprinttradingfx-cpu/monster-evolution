@@ -4,10 +4,10 @@ extends Control
 signal mini_game_selected(game_id: String)
 
 # --- NODES ---
-@onready var _top_app_bar: Control = $TopAppBar
-@onready var _bottom_nav: BottomNav = $BottomNav
-@onready var _game_list: VBoxContainer = $SafeArea/MainContent/GameList
-@onready var _empty_label: Label = $SafeArea/MainContent/EmptyLabel
+@onready var _top_app_bar: Control = $RootLayout/TopAppBar
+@onready var _bottom_nav: BottomNav = $RootLayout/BottomNav
+@onready var _game_list: VBoxContainer = $RootLayout/ScrollContainer/SafeArea/MainContent/GameList
+@onready var _empty_label: Label = $RootLayout/ScrollContainer/SafeArea/MainContent/EmptyLabel
 
 # --- CONSTANTS ---
 const AVAILABLE_GAMES: Array[Dictionary] = [

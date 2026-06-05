@@ -42,119 +42,117 @@ grow_vertical = 2
 texture = ExtResource("5_bg")
 expand_mode = 1
 
-[node name="TopAppBar" parent="." unique_id=1148533656 instance=ExtResource("2_topappbar")]
-layout_mode = 1
-offset_right = 1072.0
-offset_bottom = 72.0
-
-[node name="MainLayout" type="VBoxContainer" parent="." unique_id=2064620432]
+[node name="RootLayout" type="VBoxContainer" parent="." unique_id=999999001]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 40.0
-offset_top = 135.0
-offset_right = -40.0
-offset_bottom = -271.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MainLayout" unique_id=338473728]
+[node name="TopAppBar" parent="RootLayout" unique_id=1148533656 instance=ExtResource("2_topappbar")]
+
+[node name="ScrollContainer" type="ScrollContainer" parent="RootLayout" unique_id=999999002]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ContentArea" type="VBoxContainer" parent="MainLayout/ScrollContainer" unique_id=79350501]
-custom_minimum_size = Vector2(0, 1500)
+[node name="SafeArea" type="MarginContainer" parent="RootLayout/ScrollContainer" unique_id=999999003]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Main" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea" unique_id=999999004]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 16
 
-[node name="StatusRow" type="HBoxContainer" parent="MainLayout/ScrollContainer/ContentArea" unique_id=687216401]
+[node name="StatusRow" type="HBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=687216401]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="MatchesPanel" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentArea/StatusRow" unique_id=2124252903]
+[node name="MatchesPanel" type="PanelContainer" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=2124252903]
 layout_mode = 2
 
-[node name="MatchesContent" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentArea/StatusRow/MatchesPanel" unique_id=545373995]
+[node name="MatchesContent" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=545373995]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="LevelLabel" type="Label" parent="MainLayout/ScrollContainer/ContentArea/StatusRow/MatchesPanel/MatchesContent" unique_id=1100037691]
+[node name="LevelLabel" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=1100037691]
 layout_mode = 2
 theme = ExtResource("4_theme")
 theme_type_variation = &"GraphFrameTitleLabel"
 theme_override_font_sizes/font_size = 50
 text = "LEVEL 1"
 
-[node name="MatchesTitle" type="Label" parent="MainLayout/ScrollContainer/ContentArea/StatusRow/MatchesPanel/MatchesContent" unique_id=595227859]
+[node name="MatchesTitle" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=595227859]
 layout_mode = 2
 theme = ExtResource("4_theme")
 theme_type_variation = &"HeaderLarge"
 theme_override_font_sizes/font_size = 50
 text = "MATCHES"
 
-[node name="MatchesValue" type="Label" parent="MainLayout/ScrollContainer/ContentArea/StatusRow/MatchesPanel/MatchesContent" unique_id=326842768]
+[node name="MatchesValue" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=326842768]
 layout_mode = 2
 theme = ExtResource("4_theme")
 theme_type_variation = &"HeaderMedium"
 text = "0 / 2"
 
-[node name="TimerTurns" type="VBoxContainer" parent="MainLayout/ScrollContainer/ContentArea/StatusRow" unique_id=146657991]
+[node name="TimerTurns" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=146657991]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 4
 alignment = 2
 
-[node name="TimerLabel" type="Label" parent="MainLayout/ScrollContainer/ContentArea/StatusRow/TimerTurns" unique_id=856842124]
+[node name="TimerLabel" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=856842124]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "⏱ 00:00"
 
-[node name="TurnsLabel" type="Label" parent="MainLayout/ScrollContainer/ContentArea/StatusRow/TimerTurns" unique_id=912732196]
+[node name="TurnsLabel" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=912732196]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "⇄ 0 Turns"
 
-[node name="BoardGridContainer" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentArea" unique_id=87582944]
+[node name="BoardGridContainer" type="PanelContainer" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=87582944]
 custom_minimum_size = Vector2(0, 650)
 layout_mode = 2
 theme_override_styles/panel = SubResource("board_bg_style")
 
-[node name="CenterContainer" type="CenterContainer" parent="MainLayout/ScrollContainer/ContentArea/BoardGridContainer" unique_id=1254499911]
+[node name="CenterContainer" type="CenterContainer" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=1254499911]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="CardGrid" type="GridContainer" parent="MainLayout/ScrollContainer/ContentArea/BoardGridContainer/CenterContainer" unique_id=1254499910]
+[node name="CardGrid" type="GridContainer" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=1254499910]
 layout_mode = 2
 theme_override_constants/h_separation = 40
 theme_override_constants/v_separation = 40
 columns = 2
 
-[node name="InstructionLabel" type="Label" parent="MainLayout/ScrollContainer/ContentArea" unique_id=712441941]
+[node name="InstructionLabel" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=712441941]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Find all matching pairs!"
 horizontal_alignment = 1
 
-[node name="InstructionSub" type="Label" parent="MainLayout/ScrollContainer/ContentArea" unique_id=30201263]
+[node name="InstructionSub" type="Label" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=30201263]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Tap a card to reveal its monster"
 horizontal_alignment = 1
 
-[node name="BonusProgressBg" type="PanelContainer" parent="MainLayout/ScrollContainer/ContentArea" unique_id=1853384278]
+[node name="BonusProgressBg" type="PanelContainer" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=1853384278]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 
-[node name="BonusProgressFill" type="ColorRect" parent="MainLayout/ScrollContainer/ContentArea/BonusProgressBg" unique_id=538301304]
+[node name="BonusProgressFill" type="ColorRect" parent="RootLayout/ScrollContainer/SafeArea/Main" unique_id=538301304]
 layout_mode = 2
 color = Color(0.204, 0.827, 0.6, 1)
 
-[node name="BottomNav" parent="." unique_id=791983171 instance=ExtResource("3_bottomnav")]
-layout_mode = 1
+[node name="BottomNav" parent="RootLayout" unique_id=791983171 instance=ExtResource("3_bottomnav")]
 
 [node name="WinOverlay" type="CanvasLayer" parent="." unique_id=2088039919]
 visible = false

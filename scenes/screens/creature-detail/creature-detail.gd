@@ -1,7 +1,8 @@
 extends Control
-## creature-detail.gd
-## Controller for creature-detail.tscn
-## Uses common TopAppBar and BottomNav, GameManager for navigation, MonsterManager for data
+# Creature Detail - Shows monster details and allows cosmetic equipping
+# Per TICKET-26
+
+signal cosmetic_equipped(monster_id: String, slot: String, cosmetic_id: String)
 
 # ---------------------------------------------------------------------------
 # CONSTANTS
@@ -15,19 +16,23 @@ const DESCRIPTIONS: Dictionary = {
 # ---------------------------------------------------------------------------
 # NODE REFS
 # ---------------------------------------------------------------------------
-@onready var back_button: Button = $BackButton
-@onready var top_appbar: Control = $TopAppBar
-@onready var monster_display: Control = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/ImageContainer/MonsterDisplay
-@onready var rarity_label: Label = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/HeroInfoVBox/RarityCenter/RarityPill/RarityLabel
-@onready var rarity_pill: PanelContainer = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/HeroInfoVBox/RarityCenter/RarityPill
-@onready var monster_name: Label = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/HeroInfoVBox/MonsterNameCenter/MonsterName
-@onready var evo_stage_label: Label = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/HeroInfoVBox/EvoPillCenter/EvoPill/EvoPillHBox/EvoStageLabel
-@onready var attack_value: Label = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/StatsSection/AttackCard/AttackVBox/AttackValue
-@onready var energy_value: Label = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/StatsSection/EnergyCard/EnergyVBox/EnergyValue
-@onready var about_body: Label = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/AboutSection/AboutVBox/AboutBody
-@onready var cta_button: Button = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/CtaButton
+@onready var back_button: Button = $RootLayout/ScrollContainer/SafeArea/Main/BackButton
+@onready var top_appbar: Control = $RootLayout/TopAppBar
+@onready var monster_display: PetDisplay = $RootLayout/ScrollContainer/SafeArea/Main/HeroSection/HeroVBox/ImageContainer/MonsterDisplay
+@onready var rarity_label: Label = $RootLayout/ScrollContainer/SafeArea/Main/HeroSection/HeroVBox/HeroInfoVBox/RarityCenter/RarityPill/RarityLabel
+@onready var rarity_pill: PanelContainer = $RootLayout/ScrollContainer/SafeArea/Main/HeroSection/HeroVBox/HeroInfoVBox/RarityCenter/RarityPill
+@onready var monster_name: Label = $RootLayout/ScrollContainer/SafeArea/Main/HeroSection/HeroVBox/HeroInfoVBox/MonsterNameCenter/MonsterName
+@onready var evo_stage_label: Label = $RootLayout/ScrollContainer/SafeArea/Main/HeroSection/HeroVBox/HeroInfoVBox/EvoPillCenter/EvoPill/EvoPillHBox/EvoStageLabel
+@onready var attack_value: Label = $RootLayout/ScrollContainer/SafeArea/Main/StatsSection/AttackCard/AttackVBox/AttackValue
+@onready var energy_value: Label = $RootLayout/ScrollContainer/SafeArea/Main/StatsSection/EnergyCard/EnergyVBox/EnergyValue
+@onready var about_body: Label = $RootLayout/ScrollContainer/SafeArea/Main/AboutSection/AboutVBox/AboutBody
+@onready var cta_button: Button = $RootLayout/ScrollContainer/SafeArea/Main/CtaButton
+@onready var head_value: Label = $RootLayout/ScrollContainer/SafeArea/Main/CosmeticSlotsSection/CosmeticSlotsVBox/SlotList/HeadSlot/HeadValue
+@onready var face_value: Label = $RootLayout/ScrollContainer/SafeArea/Main/CosmeticSlotsSection/CosmeticSlotsVBox/SlotList/FaceSlot/FaceValue
+@onready var body_value: Label = $RootLayout/ScrollContainer/SafeArea/Main/CosmeticSlotsSection/CosmeticSlotsVBox/SlotList/BodySlot/BodyValue
+@onready var equip_button: Button = $RootLayout/ScrollContainer/SafeArea/Main/CosmeticSlotsSection/CosmeticSlotsVBox/EquipButton
 @onready var sparkle_layer: Control = $SparkleLayer
-@onready var bottom_nav: Control = $BottomNav
+@onready var bottom_nav: Control = $RootLayout/BottomNav
 
 # ---------------------------------------------------------------------------
 # PRIVATE STATE
@@ -52,26 +57,38 @@ func _ready() -> void:
 	_start_float_animation()
 	
 	# Connect signals
-	back_button.pressed.connect(_on_back_pressed)
-	cta_button.pressed.connect(_on_cta_pressed)
-	cta_button.button_down.connect(_on_cta_down)
-	cta_button.button_up.connect(_on_cta_up)
-	bottom_nav.tab_changed.connect(_on_tab_pressed)
+	if back_button:
+		back_button.pressed.connect(_on_back_pressed)
+	if cta_button:
+		cta_button.pressed.connect(_on_cta_pressed)
+	if equip_button:
+		equip_button.pressed.connect(_on_equip_pressed)
+	if bottom_nav:
+		bottom_nav.tab_changed.connect(_on_tab_pressed)
 	
 	# Setup BottomNav
-	bottom_nav.set_active("Collection")
+	if bottom_nav:
+		bottom_nav.set_active("Collection")
 	
 	# Set all label font sizes to 24px
-	rarity_label.add_theme_font_size_override("font_size", 24)
-	monster_name.add_theme_font_size_override("font_size", 24)
-	evo_stage_label.add_theme_font_size_override("font_size", 24)
-	attack_value.add_theme_font_size_override("font_size", 24)
-	energy_value.add_theme_font_size_override("font_size", 24)
-	about_body.add_theme_font_size_override("font_size", 24)
+	if rarity_label:
+		rarity_label.add_theme_font_size_override("font_size", 24)
+	if monster_name:
+		monster_name.add_theme_font_size_override("font_size", 24)
+	if evo_stage_label:
+		evo_stage_label.add_theme_font_size_override("font_size", 24)
+	if attack_value:
+		attack_value.add_theme_font_size_override("font_size", 24)
+	if energy_value:
+		energy_value.add_theme_font_size_override("font_size", 24)
+	if about_body:
+		about_body.add_theme_font_size_override("font_size", 24)
 	
 	# Set all button font sizes to 24px
-	back_button.add_theme_font_size_override("font_size", 24)
-	cta_button.add_theme_font_size_override("font_size", 24)
+	if back_button:
+		back_button.add_theme_font_size_override("font_size", 24)
+	if cta_button:
+		cta_button.add_theme_font_size_override("font_size", 24)
 
 # ---------------------------------------------------------------------------
 # UI POPULATION
@@ -82,6 +99,7 @@ func _populate_ui() -> void:
 	
 	_populate_header()
 	_populate_hero()
+	_populate_cosmetics()
 	_populate_stats()
 	_populate_about()
 	_populate_cta()
@@ -110,13 +128,14 @@ func _populate_hero() -> void:
 	# Update monster name
 	var species_path: String = "res://data/species/%s.tres" % species_id
 	var species: Resource = load(species_path)
-	if species:
+	if species and monster_name:
 		monster_name.text = species.name
-	else:
+	elif monster_name:
 		monster_name.text = species_id.capitalize()
 	
 	# Update evolution stage
-	evo_stage_label.text = "Stage: %s" % STAGE_NAMES[stage_num]
+	if evo_stage_label:
+		evo_stage_label.text = "Stage: %s" % STAGE_NAMES[stage_num]
 	
 	# Update rarity
 	var rarity: String = "Common"
@@ -124,7 +143,8 @@ func _populate_hero() -> void:
 		rarity = "Rare"
 	elif stage_num >= 2:
 		rarity = "Uncommon"
-	rarity_label.text = rarity.to_upper()
+	if rarity_label:
+		rarity_label.text = rarity.to_upper()
 	
 	# Update rarity pill color
 	var rarity_colors: Dictionary = {
@@ -132,8 +152,38 @@ func _populate_hero() -> void:
 		"Uncommon": Color(0.204, 0.827, 0.6, 1),
 		"Rare": Color(0.518, 0.208, 0.831, 1),
 	}
-	if rarity_colors.has(rarity):
+	if rarity_colors.has(rarity) and rarity_pill:
 		rarity_pill.modulate = rarity_colors[rarity]
+
+func _populate_cosmetics() -> void:
+	if not MonsterManager:
+		return
+	
+	var monster_data: Dictionary = MonsterManager.get_monster(_monster_id)
+	if monster_data.is_empty():
+		return
+	
+	if head_value:
+		var head_id: String = monster_data.get("equippedHeadId", "")
+		head_value.text = _get_cosmetic_name(head_id)
+	
+	if face_value:
+		var face_id: String = monster_data.get("equippedFaceId", "")
+		face_value.text = _get_cosmetic_name(face_id)
+	
+	if body_value:
+		var body_id: String = monster_data.get("equippedBodyId", "")
+		body_value.text = _get_cosmetic_name(body_id)
+
+func _get_cosmetic_name(cosmetic_id: String) -> String:
+	if cosmetic_id.is_empty():
+		return "Empty"
+	
+	var cosmetic_path := "res://data/cosmetics/%s.tres" % cosmetic_id
+	var cosmetic: Resource = load(cosmetic_path)
+	if cosmetic and cosmetic is Cosmetic:
+		return cosmetic.name
+	return "Unknown"
 
 func _populate_stats() -> void:
 	if not MonsterManager:
@@ -147,8 +197,10 @@ func _populate_stats() -> void:
 	var stage_num: int = _get_stage_number(stage_id)
 	
 	# Simple attack and energy based on stage
-	attack_value.text = str(stage_num * 50)
-	energy_value.text = str(stage_num * 40)
+	if attack_value:
+		attack_value.text = str(stage_num * 50)
+	if energy_value:
+		energy_value.text = str(stage_num * 40)
 
 func _populate_about() -> void:
 	if not MonsterManager:
@@ -159,16 +211,18 @@ func _populate_about() -> void:
 		return
 	
 	var species_id: String = monster_data.get("speciesId", "dino")
-	about_body.text = DESCRIPTIONS.get(species_id, "A wonderful companion!")
+	if about_body:
+		about_body.text = DESCRIPTIONS.get(species_id, "A wonderful companion!")
 
 func _populate_cta() -> void:
-	cta_button.text = "✨  Evolve This Creature"
+	if cta_button:
+		cta_button.text = "✨  Evolve This Creature"
 
 # ---------------------------------------------------------------------------
 # ANIMATIONS
 # ---------------------------------------------------------------------------
 func _play_bounce_in() -> void:
-	var hero_section: PanelContainer = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection
+	var hero_section: PanelContainer = $RootLayout/ScrollContainer/SafeArea/Main/HeroSection
 	if hero_section:
 		hero_section.scale = Vector2(0.9, 0.9)
 		hero_section.modulate.a = 0.0
@@ -178,20 +232,19 @@ func _play_bounce_in() -> void:
 		tween.tween_property(hero_section, "modulate:a", 1.0, 0.3).set_ease(Tween.EASE_OUT)
 
 func _start_float_animation() -> void:
-	var image_container: CenterContainer = $MainLayout/ScrollContainer/ContentVBox/SideMargin/InnerVBox/HeroSection/HeroVBox/ImageContainer
-	if image_container:
-		_float_base_y = image_container.position.y
+	if monster_display:
+		_float_base_y = monster_display.position.y
 		if _float_tween:
 			_float_tween.kill()
 		_float_tween = create_tween()
 		_float_tween.set_loops()
 		_float_tween.tween_property(
-			image_container, "position:y",
+			monster_display, "position:y",
 			_float_base_y - 10.0,
 			1.5
 		).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 		_float_tween.tween_property(
-			image_container, "position:y",
+			monster_display, "position:y",
 			_float_base_y,
 			1.5
 		).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
@@ -212,7 +265,8 @@ func _burst_sparkles(origin: Vector2) -> void:
 		lbl.add_theme_color_override("font_color", sparkle_colors[i % sparkle_colors.size()])
 		lbl.position = origin
 		lbl.mouse_filter = 2
-		sparkle_layer.add_child(lbl)
+		if sparkle_layer:
+			sparkle_layer.add_child(lbl)
 
 		var angle = (float(i) / 8.0) * TAU
 		var dist = 90.0 + randf() * 40.0
@@ -246,25 +300,78 @@ func _get_stage_number(stage_id: String) -> int:
 # ---------------------------------------------------------------------------
 # SIGNAL HANDLERS
 # ---------------------------------------------------------------------------
+func _play_button_press_animation(button: Button) -> void:
+	if not button:
+		return
+	
+	var tween = create_tween()
+	tween.tween_property(button, "scale", Vector2(0.95, 0.95), 0.1).set_ease(Tween.EASE_OUT)
+	tween.tween_property(button, "scale", Vector2(1.0, 1.0), 0.1).set_ease(Tween.EASE_OUT)
+
 func _on_back_pressed() -> void:
+	_play_button_press_animation(back_button)
 	if GameManager:
 		GameManager.change_screen("Collection")
 
-func _on_cta_down() -> void:
-	_cta_base_y = cta_button.position.y
-	var tween = create_tween()
-	tween.tween_property(cta_button, "position:y", _cta_base_y + 4.0, 0.06)
-
-func _on_cta_up() -> void:
-	var tween = create_tween()
-	tween.tween_property(cta_button, "position:y", _cta_base_y, 0.08)
+func _on_equip_pressed() -> void:
+	_play_button_press_animation(equip_button)
+	print("[CreatureDetail] Opening cosmetic selector")
+	var selector_scene = load("res://scenes/screens/cosmetic-selector/CosmeticSelector.tscn")
+	var selector = selector_scene.instantiate()
+	add_child(selector)
+	
+	selector.setup(_monster_id)
+	selector.cosmetic_selected.connect(_on_cosmetic_selected)
+	selector.unequip_requested.connect(_on_unequip_requested)
+	
+	# Position selector in center
+	selector.position = Vector2(size.x / 2 - selector.size.x / 2, size.y / 2 - selector.size.y / 2)
 
 func _on_cta_pressed() -> void:
+	_play_button_press_animation(cta_button)
 	if GameManager:
 		GameManager.change_screen("Evolution", {"creature_id": _monster_id})
 
+func _on_cosmetic_selected(cosmetic_id: String) -> void:
+	print("[CreatureDetail] Cosmetic selected: ", cosmetic_id)
+	if not MonsterManager:
+		return
+	
+	# Get the cosmetic to determine the slot
+	var cosmetic_path := "res://data/cosmetics/%s.tres" % cosmetic_id
+	var cosmetic: Resource = load(cosmetic_path)
+	if not cosmetic or not cosmetic is Cosmetic:
+		return
+	
+	var slot: String = cosmetic.slot
+	if MonsterManager.equip_cosmetic(_monster_id, slot, cosmetic_id):
+		print("[CreatureDetail] Cosmetic equipped successfully")
+		cosmetic_equipped.emit(_monster_id, slot, cosmetic_id)
+		_populate_cosmetics()
+		# Update monster display to show cosmetic
+		if monster_display:
+			var monster_data: Dictionary = MonsterManager.get_monster(_monster_id)
+			monster_display.set_monster(monster_data)
+
+func _on_unequip_requested() -> void:
+	print("[CreatureDetail] Unequip requested")
+	if not MonsterManager:
+		return
+	
+	# Unequip all slots
+	MonsterManager.unequip_cosmetic(_monster_id, "head")
+	MonsterManager.unequip_cosmetic(_monster_id, "face")
+	MonsterManager.unequip_cosmetic(_monster_id, "body")
+	
+	_populate_cosmetics()
+	# Update monster display
+	if monster_display:
+		var monster_data: Dictionary = MonsterManager.get_monster(_monster_id)
+		monster_display.set_monster(monster_data)
+
 func _on_tab_pressed(tab_name: String) -> void:
-	bottom_nav.set_active(tab_name)
+	if bottom_nav:
+		bottom_nav.set_active(tab_name)
 	match tab_name:
 		"Home":
 			if GameManager:

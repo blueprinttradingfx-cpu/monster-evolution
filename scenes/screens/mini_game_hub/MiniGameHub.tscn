@@ -25,45 +25,46 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.8, 0.9, 1, 1)
 
-[node name="TopAppBar" parent="." instance=ExtResource("2")]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-grow_horizontal = 2
-
-[node name="SafeArea" type="MarginContainer" parent="."]
+[node name="RootLayout" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
-[node name="MainContent" type="VBoxContainer" parent="SafeArea"]
+[node name="TopAppBar" parent="RootLayout" instance=ExtResource("2")]
+
+[node name="ScrollContainer" type="ScrollContainer" parent="RootLayout"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SafeArea" type="MarginContainer" parent="RootLayout/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
 
-[node name="TitleLabel" type="Label" parent="SafeArea/MainContent"]
+[node name="MainContent" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 24
+
+[node name="TitleLabel" type="Label" parent="RootLayout/ScrollContainer/SafeArea/MainContent"]
 layout_mode = 2
 text = "Mini Games"
 horizontal_alignment = 1
 theme_type_variation = &"HeaderLarge"
 
-[node name="GameList" type="VBoxContainer" parent="SafeArea/MainContent"]
+[node name="GameList" type="VBoxContainer" parent="RootLayout/ScrollContainer/SafeArea/MainContent"]
 layout_mode = 2
 
-[node name="EmptyLabel" type="Label" parent="SafeArea/MainContent"]
+[node name="EmptyLabel" type="Label" parent="RootLayout/ScrollContainer/SafeArea/MainContent"]
 layout_mode = 2
 text = "No mini-games available yet!"
 horizontal_alignment = 1
 visible = false
 
-[node name="BottomNav" parent="." instance=ExtResource("3")]
-layout_mode = 3
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -80.0
-grow_horizontal = 2
+[node name="BottomNav" parent="RootLayout" instance=ExtResource("3")]

@@ -6,116 +6,50 @@
 [ext_resource type="Texture2D" uid="uid://c7nn50yvp6yru" path="res://assets/sprites/nav/collection.png" id="4_collection"]
 [ext_resource type="Texture2D" uid="uid://cv26slychaevq" path="res://assets/sprites/nav/shop.png" id="5_shop"]
 
-[node name="BottomNav" type="Control" unique_id=834252458]
-layout_mode = 3
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -148.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="BottomNav" type="PanelContainer" unique_id=834252458]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 120)
+size_flags_horizontal = 3
 script = ExtResource("1_script")
 
-[node name="BottomNavPanel" type="PanelContainer" parent="." unique_id=320160388]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="NavHBox" type="HBoxContainer" parent="BottomNavPanel" unique_id=593426545]
+[node name="NavHBox" type="HBoxContainer" parent="." unique_id=593426545]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="PlayNav" type="PanelContainer" parent="BottomNavPanel/NavHBox" unique_id=1054250626]
-custom_minimum_size = Vector2(250, 180)
+[node name="PlayNav" type="Button" parent="NavHBox" unique_id=1054250626]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_minimum_size = Vector2(80, 80)
+icon = ExtResource("2_play")
+expand_icon = true
+flat = true
 
-[node name="PlayVBox" type="VBoxContainer" parent="BottomNavPanel/NavHBox/PlayNav" unique_id=1054250627]
-custom_minimum_size = Vector2(0, 180)
+[node name="MinigamesNav" type="Button" parent="NavHBox" unique_id=796306789]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 4
-alignment = 1
+custom_minimum_size = Vector2(80, 80)
+icon = ExtResource("3_minigames")
+expand_icon = true
+flat = true
 
-[node name="PlayTexture" type="TextureRect" parent="BottomNavPanel/NavHBox/PlayNav/PlayVBox" unique_id=139405012]
-custom_minimum_size = Vector2(0, 180)
-layout_mode = 2
-texture = ExtResource("2_play")
-expand_mode = 1
-stretch_mode = 3
-mouse_filter = 2
-
-[node name="MinigamesNav" type="PanelContainer" parent="BottomNavPanel/NavHBox" unique_id=796306789]
-modulate = Color(1, 1, 1, 0.55)
+[node name="CollectionNav" type="Button" parent="NavHBox" unique_id=335023473]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_minimum_size = Vector2(80, 80)
+icon = ExtResource("4_collection")
+expand_icon = true
+flat = true
 
-[node name="MinigamesVBox" type="VBoxContainer" parent="BottomNavPanel/NavHBox/MinigamesNav" unique_id=796306790]
+[node name="ShopNav" type="Button" parent="NavHBox" unique_id=1163856196]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 4
-alignment = 1
-
-[node name="MinigamesTexture" type="TextureRect" parent="BottomNavPanel/NavHBox/MinigamesNav/MinigamesVBox" unique_id=1521478710]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-texture = ExtResource("3_minigames")
-expand_mode = 1
-stretch_mode = 3
-mouse_filter = 2
-
-[node name="CollectionNav" type="PanelContainer" parent="BottomNavPanel/NavHBox" unique_id=335023473]
-modulate = Color(1, 1, 1, 0.55)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="CollectionVBox" type="VBoxContainer" parent="BottomNavPanel/NavHBox/CollectionNav" unique_id=335023474]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/separation = 4
-alignment = 1
-
-[node name="CollectionTexture" type="TextureRect" parent="BottomNavPanel/NavHBox/CollectionNav/CollectionVBox" unique_id=1403816772]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-texture = ExtResource("4_collection")
-expand_mode = 1
-stretch_mode = 3
-mouse_filter = 2
-
-[node name="ShopNav" type="PanelContainer" parent="BottomNavPanel/NavHBox" unique_id=1163856196]
-modulate = Color(1, 1, 1, 0.55)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ShopVBox" type="VBoxContainer" parent="BottomNavPanel/NavHBox/ShopNav" unique_id=1163856197]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/separation = 4
-alignment = 1
-
-[node name="ShopTexture" type="TextureRect" parent="BottomNavPanel/NavHBox/ShopNav/ShopVBox" unique_id=848379714]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-texture = ExtResource("5_shop")
-expand_mode = 1
-stretch_mode = 3
-mouse_filter = 2
-
-[node name="SettingsNav" type="PanelContainer" parent="BottomNavPanel/NavHBox" unique_id=1594833350]
-visible = false
-layout_mode = 2
+custom_minimum_size = Vector2(80, 80)
+icon = ExtResource("5_shop")
+expand_icon = true
+flat = true

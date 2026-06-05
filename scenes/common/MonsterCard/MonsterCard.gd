@@ -50,5 +50,5 @@ func _get_stage_name(stage_id: String) -> String:
 		_: return "?"
 
 func _on_gui_input(event: InputEvent) -> void:
-	if event is InputEventScreenTouch and event.pressed:
+	if (event is InputEventScreenTouch and event.pressed) or (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
 		card_pressed.emit(monster_id)

@@ -67,7 +67,7 @@ func _gather_save_data() -> Dictionary:
 		"monsters": MonsterManager.get_all_monsters() if MonsterManager else [],
 		"ownedEggs": MonsterManager.get_owned_eggs() if MonsterManager else [],
 		"ownedCosmetics": [],  # TODO: Implement cosmetic inventory
-		"transactions": []  # Optional debug entity per Data Model
+		"transactions": EconomyManager.transactions if EconomyManager else []  # Optional debug entity per Data Model
 	}
 	return data
 
@@ -176,6 +176,9 @@ func _distribute_save_data() -> void:
 	# Distribute loaded data to managers
 	if EconomyManager and save_data.has("player"):
 		EconomyManager.set_coins(save_data.player.get("coins", 0))
+	
+	if EconomyManager and save_data.has("transactions"):
+		EconomyManager.transactions = save_data.transactions
 	
 	if GameManager and save_data.has("player"):
 		GameManager.activeMonsterId = save_data.player.get("activeMonsterId", "")

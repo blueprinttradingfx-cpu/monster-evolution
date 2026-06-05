@@ -4,12 +4,12 @@ extends Control
 # This screen renders the catalog and delegates purchases to MonsterManager.
 
 # --- NODES ---
-@onready var _safe_area: MarginContainer = $SafeArea
-@onready var _top_app_bar: Control = $TopAppBar
-@onready var _bottom_nav: BottomNav = $BottomNav
-@onready var _tab_container: TabContainer = $SafeArea/MainContent/TabContainer
-@onready var _eggs_list: VBoxContainer = $SafeArea/MainContent/TabContainer/EggsTab/ScrollContainer/Content
-@onready var _cosmetics_list: VBoxContainer = $SafeArea/MainContent/TabContainer/CosmeticsTab/ScrollContainer/Content
+@onready var _safe_area: MarginContainer = $RootLayout/ScrollContainer/SafeArea
+@onready var _top_app_bar: Control = $RootLayout/TopAppBar
+@onready var _bottom_nav: BottomNav = $RootLayout/BottomNav
+@onready var _tab_container: TabContainer = $RootLayout/ScrollContainer/SafeArea/MainContent/TabContainer
+@onready var _eggs_list: VBoxContainer = $RootLayout/ScrollContainer/SafeArea/MainContent/TabContainer/EggsTab/ScrollContainer/Content
+@onready var _cosmetics_list: VBoxContainer = $RootLayout/ScrollContainer/SafeArea/MainContent/TabContainer/CosmeticsTab/ScrollContainer/Content
 
 # --- VARIABLES ---
 var _egg_types: Array[EggType] = []

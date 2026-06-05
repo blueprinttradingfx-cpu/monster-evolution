@@ -8,7 +8,7 @@ signal play_requested()
 signal collection_requested()
 signal shop_requested()
 
-@onready var monster_display: Control = $RootLayout/ScrollContainer/SafeArea/Main/CreatureSection/CreatureWrapper/MonsterDisplay
+@onready var pet_display: PetDisplay = $RootLayout/ScrollContainer/SafeArea/Main/CreatureSection/CreatureWrapper/PetDisplay
 @onready var evolve_button: Button = $RootLayout/ScrollContainer/SafeArea/Main/ActionButtons/GridButtons/EvolveButton
 @onready var play_button: Button = $RootLayout/ScrollContainer/SafeArea/Main/ActionButtons/GridButtons/PlayButton
 @onready var collection_button: Button = $RootLayout/ScrollContainer/SafeArea/Main/ActionButtons/GridButtons/CollectionButton
@@ -21,7 +21,8 @@ func _ready() -> void:
 	_connect_signals()
 	_load_active_monster()
 	
-	bottom_nav.set_active("Home")
+	if bottom_nav:
+		bottom_nav.set_active("Home")
 
 func _connect_signals() -> void:
 	print("[Home] _connect_signals() called")
@@ -46,9 +47,9 @@ func _connect_signals() -> void:
 		GameManager.active_monster_changed.connect(_on_active_monster_changed)
 	
 	# Listen for monster tap
-	if monster_display:
-		print("[Home] Connecting MonsterDisplay monster_tapped")
-		monster_display.monster_tapped.connect(_on_monster_tapped)
+	if pet_display:
+		print("[Home] Connecting PetDisplay monster_tapped")
+		pet_display.monster_tapped.connect(_on_monster_tapped)
 
 func _load_active_monster() -> void:
 	print("[Home] _load_active_monster() called")
@@ -76,13 +77,13 @@ func _load_active_monster() -> void:
 
 func _display_monster(monster_data: Dictionary) -> void:
 	print("[Home] _display_monster() called")
-	if monster_display:
-		monster_display.set_monster(monster_data)
+	if pet_display:
+		pet_display.set_monster(monster_data)
 
 func _show_no_monster_state() -> void:
 	print("[Home] _show_no_monster_state() called")
-	if monster_display:
-		monster_display.modulate = Color.TRANSPARENT
+	if pet_display:
+		pet_display.modulate = Color.TRANSPARENT
 	
 	# Disable action buttons
 	if evolve_button:

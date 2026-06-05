@@ -266,4 +266,7 @@ func claim_daily_reward() -> void:
 	save_game()
 
 func reset_save() -> void:
+	# Use SaveManager.reset_game() as the primary reset
+	if SaveManager:
+		SaveManager.reset_game()
 	_create_new_save()

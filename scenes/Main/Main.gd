@@ -100,4 +100,3 @@ func _update_progress(value: float, text: String) -> void:
 		_progress_bar.value = value
 	if _loading_label:
 		_loading_label.text = text
-

@@ -8,8 +8,8 @@ signal evolution_confirmed(monsterId: String)
 signal evolution_cancelled()
 
 # --- NODES ---
-@onready var _current_monster_display: Control = $MainContent/MonsterComparison/CurrentMonsterContainer/MonsterDisplay
-@onready var _next_monster_display: Control = $MainContent/MonsterComparison/NextMonsterContainer/MonsterDisplay
+@onready var _current_monster_display: MonsterDisplay = $MainContent/MonsterComparison/CurrentMonsterContainer/MonsterDisplay
+@onready var _next_monster_display: MonsterDisplay = $MainContent/MonsterComparison/NextMonsterContainer/MonsterDisplay
 @onready var _current_stage_label: Label = $MainContent/MonsterComparison/CurrentMonsterContainer/StageLabel
 @onready var _next_stage_label: Label = $MainContent/MonsterComparison/NextMonsterContainer/StageLabel
 @onready var _cost_label: Label = $MainContent/CostDisplay/CostLabel
