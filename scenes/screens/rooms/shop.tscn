@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://c7y8v4ex3bpb1"]
+
+[ext_resource type="Script" uid="uid://c7y8v4ex3bpb2" path="res://scenes/screens/rooms/shop.gd" id="1_room_script"]
+[ext_resource type="PackedScene" uid="uid://dbicy4ex3bpga" path="res://scenes/screens/blob_creature/blob_creature.tscn" id="2_blob_scene"]
+
+[node name="ShopRoom" type="Node2D"]
+script = ExtResource("1_room_script")
+
+[node name="Background" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(1152, 648)
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+color = Color(0.44, 0.34, 0.22, 1)
+
+[node name="RoomLabel" type="Label" parent="."]
+offset_left = 40.0
+offset_top = 100.0
+offset_right = 260.0
+offset_bottom = 142.0
+theme_override_font_sizes/font_size = 28
+text = "Item Shop"
+
+[node name="Interactives" type="Node2D" parent="."]
+
+[node name="BuyAppleButton" type="Button" parent="Interactives"]
+offset_left = 220.0
+offset_top = 380.0
+offset_right = 420.0
+offset_bottom = 470.0
+text = "Buy Red Apple 🍎
+(Cost: 30 🪙)"
+
+[node name="BrowseButton" type="Button" parent="Interactives"]
+offset_left = 740.0
+offset_top = 380.0
+offset_right = 940.0
+offset_bottom = 470.0
+text = "Window Shop 👀"
+
+[node name="BlobSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(576, 460)
+
+[node name="BlobCreature" parent="." instance=ExtResource("2_blob_scene")]
+position = Vector2(576, 460)

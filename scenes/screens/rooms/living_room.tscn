@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://nqoldxep162h"]
+
+[ext_resource type="Script" uid="uid://2t3g6jywaenl" path="res://scenes/screens/rooms/living_room.gd" id="1_room_script"]
+[ext_resource type="Texture2D" uid="uid://coqagn2whe4ff" path="res://home.png" id="2_2v6ow"]
+[ext_resource type="PackedScene" uid="uid://dbicy4ex3bpga" path="res://scenes/screens/blob_creature/blob_creature.tscn" id="2_blob_scene"]
+
+[node name="LivingRoom" type="Node2D" unique_id=362585695]
+script = ExtResource("1_room_script")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=610922702]
+offset_right = 1075.0
+offset_bottom = 1915.0
+texture = ExtResource("2_2v6ow")
+
+[node name="RoomLabel" type="Label" parent="." unique_id=967731580]
+offset_left = 40.0
+offset_top = 100.0
+offset_right = 250.0
+theme_override_font_sizes/font_size = 28
+text = "Living Room"
+
+[node name="Interactives" type="Node2D" parent="." unique_id=396126593]
+
+[node name="FeedButton" type="Button" parent="Interactives" unique_id=2097387488]
+offset_left = 220.0
+offset_top = 420.0
+offset_right = 380.0
+offset_bottom = 490.0
+text = "Give Snack
+(Cost: 10 🪙)"
+
+[node name="CouchButton" type="Button" parent="Interactives" unique_id=1323102505]
+offset_left = 760.0
+offset_top = 380.0
+offset_right = 960.0
+offset_bottom = 490.0
+text = "Sit on Couch"
+
+[node name="BlobSpawnPoint" type="Marker2D" parent="." unique_id=148228224]
+position = Vector2(576, 460)
+
+[node name="BlobCreature" parent="." unique_id=1566287803 instance=ExtResource("2_blob_scene")]
+position = Vector2(576, 460)

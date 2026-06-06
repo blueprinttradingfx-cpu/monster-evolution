@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://dbicy4ex3bpgb"]
+
+[ext_resource type="Script" uid="uid://bd0cipmaow8tk" path="res://scenes/screens/gundam/gundam.gd" id="1_vbpaa"]
+[ext_resource type="Texture2D" uid="uid://c74y10dxfbo06" path="res://assets/gundam/base.png" id="2_vbpaa"]
+[ext_resource type="Texture2D" uid="uid://bjt88a0y58rrc" path="res://assets/ui/RReyes.png" id="3_ctydi"]
+[ext_resource type="Texture2D" uid="uid://bn3s3tnrq6mvo" path="res://assets/ui/Rmouth.png" id="4_axn6p"]
+
+[node name="GundamMecha" type="Node2D" unique_id=345964155]
+position = Vector2(509, 1423)
+script = ExtResource("1_vbpaa")
+
+[node name="Skeleton2D" type="Skeleton2D" parent="." unique_id=1203613340]
+position = Vector2(-5, -7)
+
+[node name="BodyBone2D" type="Bone2D" parent="Skeleton2D" unique_id=18457508]
+position = Vector2(3, -15)
+
+[node name="Body" type="Sprite2D" parent="Skeleton2D/BodyBone2D" unique_id=2043133575]
+position = Vector2(5, 7)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("2_vbpaa")
+region_enabled = true
+region_rect = Rect2(555.0581, 77.053024, 267.74133, 275.2544)
+
+[node name="HeadBone" type="Bone2D" parent="Skeleton2D/BodyBone2D" unique_id=83554510]
+position = Vector2(3, -63)
+
+[node name="Head" type="Sprite2D" parent="Skeleton2D/BodyBone2D/HeadBone" unique_id=1540892724]
+z_index = 1
+position = Vector2(2, -34)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_vbpaa")
+region_enabled = true
+region_rect = Rect2(111.41698, 78.488365, 291.90503, 260.0116)
+
+[node name="LeftEye" type="Sprite2D" parent="Skeleton2D/BodyBone2D/HeadBone" unique_id=958962696]
+z_index = 2
+position = Vector2(-30, -42)
+scale = Vector2(0.35, 0.43)
+texture = ExtResource("3_ctydi")
+region_enabled = true
+region_rect = Rect2(725.7516, 615.5506, 157.91296, 126.76752)
+
+[node name="RightEye" type="Sprite2D" parent="Skeleton2D/BodyBone2D/HeadBone" unique_id=824314884]
+z_index = 2
+position = Vector2(34, -42)
+scale = Vector2(0.35, 0.43)
+texture = ExtResource("3_ctydi")
+region_enabled = true
+region_rect = Rect2(248.60371, 62.622795, 160.18437, 72.995415)
+
+[node name="Mouth" type="Sprite2D" parent="Skeleton2D/BodyBone2D/HeadBone" unique_id=541090811]
+z_index = 2
+position = Vector2(2, 6)
+scale = Vector2(0.177, 0.127)
+texture = ExtResource("4_axn6p")
+region_enabled = true
+region_rect = Rect2(554.4376, 609.7994, 299.98016, 130.04608)
+
+[node name="LeftLegBone2D" type="Bone2D" parent="Skeleton2D/BodyBone2D" unique_id=399950637]
+position = Vector2(-21, 41)
+
+[node name="FrontLeftFoot" type="Sprite2D" parent="Skeleton2D/BodyBone2D/LeftLegBone2D" unique_id=1331885455]
+z_index = -1
+position = Vector2(-2, 14)
+scale = Vector2(0.2, 0.18)
+texture = ExtResource("2_vbpaa")
+region_enabled = true
+region_rect = Rect2(578.6991, 473.21698, 188.1452, 185.35645)
+
+[node name="RightLegBone2D" type="Bone2D" parent="Skeleton2D/BodyBone2D" unique_id=1646741954]
+position = Vector2(20, 40)
+
+[node name="FrontRightFoot" type="Sprite2D" parent="Skeleton2D/BodyBone2D/RightLegBone2D" unique_id=844305450]
+z_index = -1
+position = Vector2(16, 14)
+scale = Vector2(0.2, 0.18)
+texture = ExtResource("2_vbpaa")
+region_enabled = true
+region_rect = Rect2(1057.8589, 472.56622, 188.8424, 186.78973)
+
+[node name="ArmLeftBone" type="Bone2D" parent="Skeleton2D/BodyBone2D" unique_id=1731380466]
+position = Vector2(-45, -7)
+
+[node name="LeftArm" type="Sprite2D" parent="Skeleton2D/BodyBone2D/ArmLeftBone" unique_id=104859160]
+position = Vector2(-4, 24)
+scale = Vector2(0.28, 0.31)
+texture = ExtResource("2_vbpaa")
+region_enabled = true
+region_rect = Rect2(201.23695, 445.90796, 103.14488, 212.44763)
+
+[node name="ArmRightBone" type="Bone2D" parent="Skeleton2D/BodyBone2D" unique_id=1126134300]
+position = Vector2(35, -7)
+
+[node name="RightArm" type="Sprite2D" parent="Skeleton2D/BodyBone2D/ArmRightBone" unique_id=2123218286]
+position = Vector2(18, 22)
+scale = Vector2(0.28, 0.31)
+texture = ExtResource("2_vbpaa")
+region_enabled = true
+region_rect = Rect2(1067.1719, 103.90791, 107.25, 221.17134)

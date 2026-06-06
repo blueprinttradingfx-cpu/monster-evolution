@@ -4,61 +4,62 @@
 [ext_resource type="Texture2D" uid="uid://qtmvh852vhh0" path="res://eyes.png" id="2_dauy6"]
 [ext_resource type="Texture2D" uid="uid://dn6khw16ivahx" path="res://blob_sprite_sheet.png" id="2_spritesheet"]
 [ext_resource type="Texture2D" uid="uid://coo052gii0o8m" path="res://mouth.png" id="3_e6l3x"]
-[ext_resource type="Texture2D" uid="uid://coqagn2whe4ff" path="res://home.png" id="4_bu1aw"]
 
 [node name="BlobCreature" type="Node2D" unique_id=345964155]
 position = Vector2(501, 1423)
 script = ExtResource("1_pr136")
-current_emotion = 9
+idle_speed = 2.0
+breath_amplitude = 0.02
+foot_bob_amplitude = 2.0
 
-[node name="Body" type="Sprite2D" parent="." unique_id=2043133575]
-position = Vector2(-1, 0)
+[node name="Skeleton2D" type="Skeleton2D" parent="." unique_id=1203613340]
+
+[node name="BodyBone2D" type="Bone2D" parent="Skeleton2D" unique_id=18457508]
+
+[node name="Body" type="Sprite2D" parent="Skeleton2D/BodyBone2D" unique_id=2043133575]
+position = Vector2(-1, 2)
 texture = ExtResource("2_spritesheet")
 region_enabled = true
 region_rect = Rect2(531, 28.5, 348, 311)
 
-[node name="LeftEye" type="Sprite2D" parent="Body" unique_id=958962696]
+[node name="LeftEye" type="Sprite2D" parent="Skeleton2D/BodyBone2D/Body" unique_id=958962696]
 position = Vector2(-60, -15.237)
 scale = Vector2(0.5, 0.604)
 texture = ExtResource("2_dauy6")
 region_enabled = true
 region_rect = Rect2(808.88354, 591.9773, 191.54456, 114.74628)
 
-[node name="RightEye" type="Sprite2D" parent="Body" unique_id=824314884]
+[node name="RightEye" type="Sprite2D" parent="Skeleton2D/BodyBone2D/Body" unique_id=824314884]
 position = Vector2(60, -12.75)
 scale = Vector2(0.5, 0.568)
 texture = ExtResource("2_dauy6")
 region_enabled = true
 region_rect = Rect2(1139.6221, 566.05273, 182.48865, 166.68878)
 
-[node name="Mouth" type="Sprite2D" parent="Body" unique_id=541090811]
+[node name="Mouth" type="Sprite2D" parent="Skeleton2D/BodyBone2D/Body" unique_id=541090811]
 position = Vector2(1, 52.999996)
 scale = Vector2(0.25, 0.254)
 texture = ExtResource("3_e6l3x")
 region_enabled = true
 region_rect = Rect2(1114.5796, 517.5603, 238.91846, 118.707886)
 
-[node name="FrontLeftFoot" type="Sprite2D" parent="." unique_id=1331885455]
-position = Vector2(-70.00001, 127.999985)
-rotation = 0.06981317
+[node name="FLLegBone2D" type="Bone2D" parent="Skeleton2D/BodyBone2D" unique_id=399950637]
+position = Vector2(-1, 2)
+
+[node name="FrontLeftFoot" type="Sprite2D" parent="Skeleton2D/BodyBone2D/FLLegBone2D" unique_id=1331885455]
+position = Vector2(-59, 133)
+rotation = 0.017453292
 scale = Vector2(0.5, 0.453)
 texture = ExtResource("2_spritesheet")
 region_enabled = true
 region_rect = Rect2(439, 573.5, 209, 157)
 
-[node name="FrontRightFoot" type="Sprite2D" parent="." unique_id=844305450]
-position = Vector2(59, 133)
+[node name="FRLegBone2D" type="Bone2D" parent="Skeleton2D/BodyBone2D" unique_id=1646741954]
+
+[node name="FrontRightFoot" type="Sprite2D" parent="Skeleton2D/BodyBone2D/FRLegBone2D" unique_id=844305450]
+position = Vector2(60, 135)
 rotation = -0.017453292
 scale = Vector2(0.5, 0.443)
 texture = ExtResource("2_spritesheet")
 region_enabled = true
 region_rect = Rect2(766, 576.5, 206, 155)
-
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1376971894]
-z_index = -1
-offset_left = -499.0
-offset_top = -1429.0
-offset_right = 579.0
-offset_bottom = 505.0
-texture = ExtResource("4_bu1aw")
-expand_mode = 1

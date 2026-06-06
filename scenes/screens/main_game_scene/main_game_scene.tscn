@@ -1,0 +1,309 @@
+[gd_scene format=3 uid="uid://c1x8v4ex3bpa1"]
+
+[ext_resource type="Script" uid="uid://dkbx8evnepf0p" path="res://scenes/screens/main_game_scene/main_game_scene.gd" id="1_main_script"]
+[ext_resource type="Texture2D" uid="uid://b3fb7rn76t0xe" path="res://assets/ui/icons.png" id="2_7movt"]
+[ext_resource type="Texture2D" uid="uid://dr5yrx2fpkw81" path="res://assets/ui/living_room_icon.png" id="2_f8i8r"]
+[ext_resource type="Texture2D" uid="uid://cymdaws8m8tvf" path="res://assets/ui/bath_room_icon.png" id="3_qk1xp"]
+[ext_resource type="Texture2D" uid="uid://ntb414y64rdu" path="res://assets/ui/bed_room_icon.png" id="4_ylj46"]
+[ext_resource type="Texture2D" uid="uid://c5w5swfqe32nt" path="res://assets/ui/play_room_icon.png" id="5_7movt"]
+[ext_resource type="Texture2D" uid="uid://dlimtcx0sxo3s" path="res://assets/ui/shop_room_icon.png" id="7_pbuld"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5lua1"]
+atlas = ExtResource("2_7movt")
+region = Rect2(727.24036, 404.37036, 305.9901, 323.06543)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7movt"]
+atlas = ExtResource("2_7movt")
+region = Rect2(376.15308, 404.83163, 306.67316, 324.4315)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oo0wm"]
+atlas = ExtResource("2_7movt")
+region = Rect2(1076.242, 406.19766, 308.72217, 321.69943)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sx0c3"]
+atlas = ExtResource("2_f8i8r")
+region = Rect2(22.557007, 151.46802, 432.0064, 435.01166)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rg1mq"]
+atlas = ExtResource("2_f8i8r")
+region = Rect2(486.87, 150.7167, 434.26038, 433.50906)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8i8r"]
+atlas = ExtResource("2_f8i8r")
+region = Rect2(953.10785, 150.78232, 434.07013, 435.20114)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pbuld"]
+atlas = ExtResource("3_qk1xp")
+region = Rect2(23.247437, 152.31583, 429.56464, 432.38705)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fyo3m"]
+atlas = ExtResource("3_qk1xp")
+region = Rect2(490.06525, 150.58974, 430.6936, 432.95148)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trtuf"]
+atlas = ExtResource("3_qk1xp")
+region = Rect2(955.19183, 152.84763, 428.43573, 431.2581)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7m3ra"]
+atlas = ExtResource("4_ylj46")
+region = Rect2(22.680878, 149.46078, 429.56467, 433.51596)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihtt3"]
+atlas = ExtResource("4_ylj46")
+region = Rect2(489.83084, 152.65468, 428.3386, 430.88318)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exsos"]
+atlas = ExtResource("4_ylj46")
+region = Rect2(954.45337, 151.39871, 429.5647, 432.9515)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7mhe"]
+atlas = ExtResource("5_7movt")
+region = Rect2(22.680664, 153.41205, 429.00024, 430.12915)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wyq2i"]
+atlas = ExtResource("5_7movt")
+region = Rect2(489.50064, 152.84758, 429.0002, 431.25812)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xlyj"]
+atlas = ExtResource("5_7movt")
+region = Rect2(955.1918, 151.71863, 430.12915, 432.3871)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvuhb"]
+atlas = ExtResource("7_pbuld")
+region = Rect2(22.680664, 151.15416, 430.1292, 432.38702)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dk1jf"]
+atlas = ExtResource("7_pbuld")
+region = Rect2(487.24277, 152.84758, 432.38712, 430.6936)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwdcs"]
+atlas = ExtResource("7_pbuld")
+region = Rect2(956.3207, 153.41205, 427.30676, 432.3871)
+
+[node name="MainGameScene" type="Control" unique_id=1912565171]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_main_script")
+
+[node name="RoomContainer" type="Node2D" parent="." unique_id=1861822883]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1425076965]
+
+[node name="UIControl" type="Control" parent="CanvasLayer" unique_id=1890204020]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Header" type="PanelContainer" parent="CanvasLayer/UIControl" unique_id=1985782313]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 70.0
+grow_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UIControl/Header" unique_id=707721173]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="HeaderLayout" type="HBoxContainer" parent="CanvasLayer/UIControl/Header/MarginContainer" unique_id=68626416]
+layout_mode = 2
+
+[node name="CoinIcon" type="TextureRect" parent="CanvasLayer/UIControl/Header/MarginContainer/HeaderLayout" unique_id=480506580]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 4
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CoinLabel" type="Label" parent="CanvasLayer/UIControl/Header/MarginContainer/HeaderLayout" unique_id=1764435726]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "100"
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="CanvasLayer/UIControl/Header/MarginContainer/HeaderLayout" unique_id=1884515361]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="StatusLabel" type="Label" parent="CanvasLayer/UIControl/Header/MarginContainer/HeaderLayout" unique_id=423680798]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "Status: Happy"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="FloatingDrawer" type="Control" parent="CanvasLayer/UIControl" unique_id=1297823755]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -163.0
+offset_top = -248.0
+offset_right = -13.0
+offset_bottom = -178.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ToggleDrawerButton" type="Button" parent="CanvasLayer/UIControl/FloatingDrawer" unique_id=925977000]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -120.0
+offset_right = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+icon = SubResource("AtlasTexture_5lua1")
+icon_alignment = 1
+expand_icon = true
+
+[node name="DrawerContent" type="VBoxContainer" parent="CanvasLayer/UIControl/FloatingDrawer" unique_id=154023144]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 9.0
+offset_top = -420.0
+offset_right = -21.0
+offset_bottom = -60.0
+grow_horizontal = 2
+theme_override_constants/separation = 8
+
+[node name="SettingsButton" type="Button" parent="CanvasLayer/UIControl/FloatingDrawer/DrawerContent" unique_id=425854438]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_vertical = 3
+text = " Settngs"
+icon = SubResource("AtlasTexture_7movt")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Inventory" type="Button" parent="CanvasLayer/UIControl/FloatingDrawer/DrawerContent" unique_id=2057512979]
+layout_mode = 2
+size_flags_vertical = 3
+text = " "
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/UIControl/FloatingDrawer/DrawerContent/Inventory" unique_id=1067939037]
+layout_mode = 0
+offset_left = 4.0
+offset_right = 117.0
+offset_bottom = 157.0
+texture_normal = SubResource("AtlasTexture_oo0wm")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Nav2Button" type="Button" parent="CanvasLayer/UIControl/FloatingDrawer/DrawerContent" unique_id=2070456302]
+layout_mode = 2
+text = "Stats"
+
+[node name="Footer" type="PanelContainer" parent="CanvasLayer/UIControl" unique_id=1103134144]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -164.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UIControl/Footer" unique_id=627957050]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="FooterLayout" type="HBoxContainer" parent="CanvasLayer/UIControl/Footer/MarginContainer" unique_id=1474041501]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="LivingRoomButton" type="Button" parent="CanvasLayer/UIControl/Footer/MarginContainer/FooterLayout" unique_id=977151431]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Living Room"
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/UIControl/Footer/MarginContainer/FooterLayout/LivingRoomButton" unique_id=2143779577]
+z_as_relative = false
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 145.0
+texture_normal = SubResource("AtlasTexture_sx0c3")
+texture_pressed = SubResource("AtlasTexture_rg1mq")
+texture_disabled = SubResource("AtlasTexture_f8i8r")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BathroomButton" type="Button" parent="CanvasLayer/UIControl/Footer/MarginContainer/FooterLayout" unique_id=67559435]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Bathroom"
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/UIControl/Footer/MarginContainer/FooterLayout/BathroomButton" unique_id=1063418402]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 145.0
+texture_normal = SubResource("AtlasTexture_pbuld")
+texture_pressed = SubResource("AtlasTexture_fyo3m")
+texture_disabled = SubResource("AtlasTexture_trtuf")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BedroomButton" type="Button" parent="CanvasLayer/UIControl/Footer/MarginContainer/FooterLayout" unique_id=745218397]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Bedroom"
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/UIControl/Footer/MarginContainer/FooterLayout/BedroomButton" unique_id=1931910885]
+layout_mode = 0
+offset_right = 201.0
+offset_bottom = 145.0
+texture_normal = SubResource("AtlasTexture_7m3ra")
+texture_pressed = SubResource("AtlasTexture_ihtt3")
+texture_disabled = SubResource("AtlasTexture_exsos")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="PlayButton" type="Button" parent="CanvasLayer/UIControl/Footer/MarginContainer/FooterLayout" unique_id=730949044]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Play"
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/UIControl/Footer/MarginContainer/FooterLayout/PlayButton" unique_id=603003195]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 145.0
+texture_normal = SubResource("AtlasTexture_n7mhe")
+texture_pressed = SubResource("AtlasTexture_wyq2i")
+texture_disabled = SubResource("AtlasTexture_7xlyj")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ShopButton" type="Button" parent="CanvasLayer/UIControl/Footer/MarginContainer/FooterLayout" unique_id=1432548161]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Shop"
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/UIControl/Footer/MarginContainer/FooterLayout/ShopButton" unique_id=788193814]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 145.0
+texture_normal = SubResource("AtlasTexture_cvuhb")
+texture_pressed = SubResource("AtlasTexture_dk1jf")
+texture_disabled = SubResource("AtlasTexture_xwdcs")
+ignore_texture_size = true
+stretch_mode = 5

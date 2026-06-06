@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://b8qfuyffs02jo"]
+
+[ext_resource type="Script" uid="uid://c8v5sal8amx8" path="res://scenes/screens/rooms/bedroom.gd" id="1_room_script"]
+[ext_resource type="PackedScene" uid="uid://dbicy4ex3bpga" path="res://scenes/screens/blob_creature/blob_creature.tscn" id="2_blob_scene"]
+[ext_resource type="Texture2D" uid="uid://c3ekmtujdqhsp" path="res://bed.png" id="3_wgonw"]
+
+[node name="Bedroom" type="Node2D" unique_id=1795317192]
+script = ExtResource("1_room_script")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1354211939]
+offset_right = 1087.0
+offset_bottom = 1917.0
+texture = ExtResource("3_wgonw")
+
+[node name="RoomLabel" type="Label" parent="." unique_id=71936631]
+offset_left = 40.0
+offset_top = 100.0
+offset_right = 260.0
+offset_bottom = 142.0
+theme_override_font_sizes/font_size = 28
+text = "Bedroom"
+
+[node name="Interactives" type="Node2D" parent="." unique_id=1859038469]
+
+[node name="SleepButton" type="Button" parent="Interactives" unique_id=527191190]
+offset_left = 476.0
+offset_top = 530.0
+offset_right = 676.0
+offset_bottom = 600.0
+toggle_mode = true
+text = "Turn Off Lights 💤"
+
+[node name="BlobSpawnPoint" type="Marker2D" parent="." unique_id=1796935058]
+position = Vector2(576, 460)
+
+[node name="BlobCreature" parent="." unique_id=1168503891 instance=ExtResource("2_blob_scene")]
+position = Vector2(576, 460)

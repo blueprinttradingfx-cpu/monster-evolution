@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dw1sku5qwxumi"]
+
+[ext_resource type="Script" uid="uid://mphgi6ci71rv" path="res://scenes/screens/rooms/play.gd" id="1_room_script"]
+[ext_resource type="PackedScene" uid="uid://dbicy4ex3bpga" path="res://scenes/screens/blob_creature/blob_creature.tscn" id="2_blob_scene"]
+[ext_resource type="Texture2D" uid="uid://bwfch3v0m52xf" path="res://play.png" id="2_ieaq7"]
+
+[node name="PlayPark" type="Node2D" unique_id=1263025648]
+script = ExtResource("1_room_script")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2034457510]
+offset_right = 1097.0
+offset_bottom = 1913.0
+texture = ExtResource("2_ieaq7")
+
+[node name="RoomLabel" type="Label" parent="." unique_id=1159353164]
+offset_left = 40.0
+offset_top = 100.0
+offset_right = 260.0
+offset_bottom = 142.0
+theme_override_font_sizes/font_size = 28
+text = "Play Park"
+
+[node name="Interactives" type="Node2D" parent="." unique_id=413305434]
+
+[node name="SwingButton" type="Button" parent="Interactives" unique_id=1700703594]
+offset_left = 180.0
+offset_top = 380.0
+offset_right = 360.0
+offset_bottom = 460.0
+text = "Ride the Swings 🪓"
+
+[node name="SlideButton" type="Button" parent="Interactives" unique_id=771918050]
+offset_left = 780.0
+offset_top = 360.0
+offset_right = 960.0
+offset_bottom = 460.0
+text = "Go Down Slide 🛝"
+
+[node name="BlobSpawnPoint" type="Marker2D" parent="." unique_id=1301548772]
+position = Vector2(576, 460)
+
+[node name="BlobCreature" parent="." unique_id=882538272 instance=ExtResource("2_blob_scene")]
+position = Vector2(576, 460)

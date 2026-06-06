@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://4b8nelsv2sjs"]
+
+[ext_resource type="Script" uid="uid://c30un1r7m2t4y" path="res://scenes/screens/rooms/bathroom.gd" id="1_room_script"]
+[ext_resource type="PackedScene" uid="uid://dbicy4ex3bpga" path="res://scenes/screens/blob_creature/blob_creature.tscn" id="2_blob_scene"]
+[ext_resource type="Texture2D" uid="uid://c168bw5yun4x1" path="res://bath.png" id="2_u5huv"]
+
+[node name="Bathroom" type="Node2D" unique_id=843799850]
+script = ExtResource("1_room_script")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=294538315]
+offset_right = 1067.0
+offset_bottom = 1912.0
+texture = ExtResource("2_u5huv")
+
+[node name="RoomLabel" type="Label" parent="." unique_id=1710175214]
+offset_left = 40.0
+offset_top = 100.0
+offset_right = 260.0
+offset_bottom = 142.0
+theme_override_font_sizes/font_size = 28
+text = "Bathroom"
+
+[node name="Interactives" type="Node2D" parent="." unique_id=2038370727]
+
+[node name="BathButton" type="Button" parent="Interactives" unique_id=536396641]
+offset_left = 200.0
+offset_top = 400.0
+offset_right = 380.0
+offset_bottom = 480.0
+text = "Give Shower 🧼
+(Restores Cleanliness)"
+
+[node name="ToiletButton" type="Button" parent="Interactives" unique_id=1301305465]
+offset_left = 780.0
+offset_top = 400.0
+offset_right = 960.0
+offset_bottom = 480.0
+text = "Use Toilet 🚽
+(Relieve Pet)"
+
+[node name="BlobSpawnPoint" type="Marker2D" parent="." unique_id=1282523173]
+position = Vector2(576, 460)
+
+[node name="BlobCreature" parent="." unique_id=1774635508 instance=ExtResource("2_blob_scene")]
+position = Vector2(576, 460)
